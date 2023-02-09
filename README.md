@@ -1,4 +1,4 @@
-# guitarsounds
+# XDATBUS
 
 [![pytest](https://github.com/olivecha/guitarsounds/actions/workflows/python-app.yml/badge.svg)](https://github.com/olivecha/guitarsounds/actions/workflows/python-app.yml) 
 

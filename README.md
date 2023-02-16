@@ -2,7 +2,7 @@
 
 [![pytest](https://github.com/olivecha/guitarsounds/actions/workflows/python-app.yml/badge.svg)](https://github.com/olivecha/guitarsounds/actions/workflows/python-app.yml) 
 
-A python package to analyze XDATCAR files generated from VASP output. Developed as a lutherie research analysis tool with the [Bruand Lutherie School](https://bruand.com/). 
+A python package to analyze XDATCAR files generated from VASP output. XDATBUS is an enhanced toolkit used to assist in the analysis of XDATCAR files. It currently includes three main functions: 1. Unfolding and merging paths, 2. Fixing specific atoms, 3. Crystal cell expansion, and 4. Real-time CV-structure transfer based on Metadynamics.Developed as a lutherie research analysis tool with the [Bruand Lutherie School](https://bruand.com/). 
 The guitarsound python package documentation is available at [documentation](https://olivecha.github.io/guitarsounds/guitarsounds.html) and a Jupyter Notebook tutorial for the API is available [here](https://github.com/olivecha/guitarsounds/blob/JOSS-Paper/docs/API_Tutorial.ipynb).
 
 ## Motivation

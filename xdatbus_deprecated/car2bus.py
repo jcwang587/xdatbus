@@ -65,22 +65,22 @@ for i in range(mdrun):
     write("./xdatcar_files_wrap/XDATCAR_" + str(i + 1), format='vasp-xdatcar', images=xdatcar)
     print("XDATCAR_" + str(i + 1) + " is wrapped, fixed and duplicated.")
 
-# Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
+# Combine the wrapped XDATCAR files into one XDATCAR file (xdatbus_deprecated) using pymatgen
 print("Combining XDATCAR files into one XDATCAR file ...")
 xdatbus = Xdatcar("./xdatcar_files_wrap/XDATCAR_1")
 
 for i in range(mdrun - 1):
     xdatbus.concatenate("./xdatcar_files_wrap/XDATCAR_" + str(i + 2))
     print("XDATCAR_" + str(i + 2) + " is concatenated.")
-xdatbus.write_file('XDATBUS')
+xdatbus.write_file('xdatbus_deprecated')
 
 # Convert the XDATCAR file to xyz format
 print("Converting XDATCAR to xyz format ...")
-xdatbusxyz = read('XDATBUS', format='vasp-xdatcar', index=':')
-write('XDATBUS.xyz', xdatbusxyz, format='xyz')
+xdatbusxyz = read('xdatbus_deprecated', format='vasp-xdatcar', index=':')
+write('xdatbus_deprecated.xyz', xdatbusxyz, format='xyz')
 
 # Unwrap the Li atoms in the xyz file
-unwrap("XDATBUS", "XDATBUS.xyz")
+unwrap("xdatbus_deprecated", "xdatbus_deprecated.xyz")
 
 # Duplicate the xyz file
 print("Duplicating the xyz file ...")

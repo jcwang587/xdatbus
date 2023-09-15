@@ -8,3 +8,6 @@ A python package to analyze XDATCAR files generated from VASP output. XDATBUS is
 
 The main goal of this project is to provide a tool to efficiently do the analysis of Ab-inito molecular dynamics results from VASP. Under most cases, we care about some certain atoms for MD simulation, while in a framework of other atoms which are supposed to be "fixed". For better visualization, we hope these atoms could be fixed but not vibrating. By applying pymatgen and ASE packages.
 analyse sound data from research projects in musical instrument design. While sound analysis packages already exist, they are more directed to feature extraction for machine learning purposes. Additionally, some features of interest, like time dependent decay, onset shape and fourier transform peaks distribution are not computable trivially or accurately with existing tools. The current release of the guitarsounds package contains usual and advanced digital signal processing tools applied to the analysis of transient harmonic sounds with easy figure generation through `matplotlib`. To allow the package functionalities to be used rapidly without learning the API, a graphic user interface is available based on jupyter lab widgets.
+
+## Update log
+`0.0.1` first upload for test

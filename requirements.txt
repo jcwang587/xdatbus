@@ -1,0 +1,8 @@
+xdatbus~=0.0.1
+numpy~=1.24.4
+ase~=3.22.1
+pymatgen~=2023.1.9
+pandas~=2.0.3
+pillow~=9.2.0
+mdanalysis~=2.4.2
+setuptools~=59.8.0

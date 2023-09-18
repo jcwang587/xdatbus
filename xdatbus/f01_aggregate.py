@@ -33,8 +33,8 @@ def f01_aggregate(
     run_list = [run for run in remote_file_list if 'RUN' in run]
     # sort run_list by the number in the run name
     run_list.sort(key=lambda x: int(x[3:]))
-    xdatcar_U1_N0_OV0_2000K = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
-    xdatcar_U1_N0_OV0_2000K_latest = aimd_path + "/XDATCAR"
+    xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
+    xdatcar_path_last = aimd_path + "/XDATCAR"
 
     local_xdatcar_files_raw = "./xdatcar_files_raw"
     local_xdatcar_files_wrap = "./xdatcar_files_wrap"
@@ -57,13 +57,13 @@ def f01_aggregate(
     print("Copying XDATCAR files to the current directory ...")
     i = 0
     if load_pre_xdatcar:
-        for i in range(len(xdatcar_U1_N0_OV0_2000K)):
-            shutil.copy(xdatcar_U1_N0_OV0_2000K[i], "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
+        for i in range(len(xdatcar_path_list)):
+            shutil.copy(xdatcar_path_list[i], "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
     if load_last_xdatcar:
         if load_pre_xdatcar:
-            shutil.copy(xdatcar_U1_N0_OV0_2000K_latest, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 2).zfill(5))
+            shutil.copy(xdatcar_path_last, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 2).zfill(5))
         else:
-            shutil.copy(xdatcar_U1_N0_OV0_2000K_latest, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
+            shutil.copy(xdatcar_path_last, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
 
     # Get the number of files in wrap directory
     raw_list = os.listdir(local_xdatcar_files_raw)

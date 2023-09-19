@@ -23,12 +23,12 @@ def f01_aggregate(
         load_last_xdatcar : bool (optional)
             If ``True``, the trajectory will contain the last frame
         min_frames : int (optional)
-            Minimum number of frames in each XDATCAR_01 file, which will be used to be appended to the trajectory
+            Minimum number of frames in each XDATCAR file, which will be used to be appended to the trajectory
         delete_intermediate_folders : bool (optional)
             If ``True``, the intermediate folders will be deleted
     """
 
-    # Define the path to the XDATCAR_01 file
+    # Define the path to the XDATCAR file
     remote_file_list = os.listdir(aimd_path)
     run_list = [run for run in remote_file_list if 'RUN' in run]
     # sort run_list by the number in the run name

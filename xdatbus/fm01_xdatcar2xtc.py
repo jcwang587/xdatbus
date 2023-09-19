@@ -53,7 +53,7 @@ def fm01_xdatcar2xtc(
     if last_frame:
         shutil.copy(xdatcar_U1_N0_OV0_2000K_latest, "./xdatcar_files_raw/XDATCAR_" + str(i + 2))
 
-    # Extract the lattice vectors from the first image of the XDATCAR_01 file
+    # Extract the lattice vectors from the first image of the XDATCAR file
     a = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.a
     b = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.b
     c = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.c

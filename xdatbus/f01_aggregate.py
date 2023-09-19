@@ -83,9 +83,9 @@ def f01_aggregate(
     wrap_list = os.listdir(local_xdatcar_files_wrap)
     wrap_list.sort()
 
-    # Combine the wrapped XDATCAR_01 files into one XDATCAR_01 file (XDATBUS) using pymatgen
-    print("Combining XDATCAR_01 files into one XDATCAR_01 file ...")
-    # Initialize the XDATCAR_01 bus with the first XDATCAR_01 file
+    # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
+    print("Combining XDATCAR files into one XDATCAR file ...")
+    # Initialize the XDATCAR_01 bus with the first XDATCAR file
     xdatbus = Xdatcar("./xdatcar_files_wrap/" + wrap_list[0])
 
     for xdatcar_wrap in wrap_list[1:]:

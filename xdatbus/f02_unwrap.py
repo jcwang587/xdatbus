@@ -9,7 +9,7 @@ from utils import unwrap_pbc_dis
 
 
 def f02_unwrap(xdatcar_path):
-    print('Loading the XDATCAR_01 file ...')
+    print('Loading the XDATCAR file ...')
     xdatcar = Xdatcar(xdatcar_path)
     # initialize an empty list to store unwrapped fractional coordinates
     unwrapped_coords = []

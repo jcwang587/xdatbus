@@ -1,6 +1,6 @@
 import numpy as np
 from pymatgen.io.vasp.outputs import Xdatcar
-from utils import unwrap_pbc_dis
+from .utils import unwrap_pbc_dis
 
 
 def f02_unwrap(xdatcar_path):

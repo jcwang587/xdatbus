@@ -23,18 +23,18 @@ def f01_aggregate(
         load_last_xdatcar : bool (optional)
             If ``True``, the trajectory will contain the last frame
         min_frames : int (optional)
-            Minimum number of frames in each XDATCAR file, which will be used to be appended to the trajectory
+            Minimum number of frames in each XDATCAR_01 file, which will be used to be appended to the trajectory
         delete_intermediate_folders : bool (optional)
             If ``True``, the intermediate folders will be deleted
     """
 
-    # Define the path to the XDATCAR file
+    # Define the path to the XDATCAR_01 file
     remote_file_list = os.listdir(aimd_path)
     run_list = [run for run in remote_file_list if 'RUN' in run]
     # sort run_list by the number in the run name
     run_list.sort(key=lambda x: int(x[3:]))
-    xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
-    xdatcar_path_last = aimd_path + "/XDATCAR"
+    xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR_01" for i in range(len(run_list))]
+    xdatcar_path_last = aimd_path + "/XDATCAR_01"
 
     local_xdatcar_files_raw = "./xdatcar_files_raw"
     local_xdatcar_files_wrap = "./xdatcar_files_wrap"
@@ -53,8 +53,8 @@ def f01_aggregate(
     if os.path.exists("XDATBUS.log"):
         os.remove("XDATBUS.log")
 
-    # Copy the XDATCAR file to the current directory
-    print("Copying XDATCAR files to the current directory ...")
+    # Copy the XDATCAR_01 file to the current directory
+    print("Copying XDATCAR_01 files to the current directory ...")
     i = 0
     if load_pre_xdatcar:
         for i in range(len(xdatcar_path_list)):
@@ -83,9 +83,9 @@ def f01_aggregate(
     wrap_list = os.listdir(local_xdatcar_files_wrap)
     wrap_list.sort()
 
-    # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-    print("Combining XDATCAR files into one XDATCAR file ...")
-    # Initialize the XDATCAR bus with the first XDATCAR file
+    # Combine the wrapped XDATCAR_01 files into one XDATCAR_01 file (XDATBUS) using pymatgen
+    print("Combining XDATCAR_01 files into one XDATCAR_01 file ...")
+    # Initialize the XDATCAR_01 bus with the first XDATCAR_01 file
     xdatbus = Xdatcar("./xdatcar_files_wrap/" + wrap_list[0])
 
     for xdatcar_wrap in wrap_list[1:]:

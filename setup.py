@@ -9,7 +9,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 # you need to change all these
 VERSION = '0.0.6'
-DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP output files'
+DESCRIPTION = 'A python package to analyze XDATCAR_01 files generated from VASP output files'
 LONG_DESCRIPTION = 'just for test'
 
 setup(

@@ -26,13 +26,13 @@ def fcom02_hillspot(aimd_path, xyz_path='XDATBUS_unwrapped.xyz', freq=100, delet
         Delete the intermediate files created by this function.
     """
     com_drift = []
-    total_frame = len(Xdatcar(aimd_path + 'XDATCAR').structures)
+    total_frame = len(Xdatcar(aimd_path + 'XDATCAR_01').structures)
     for i in range(freq, total_frame+1, freq):
         com_drift.append(fcom01_drift(xyz_path, frame_start=0, frame_end=i, save_csv=False))
         print('COM drift for frames 0 to {} is {}'.format(i, com_drift[-1]))
 
     # correct the HILLS file
-    # copy the HILLS file to the same directory as the XDATCAR file
+    # copy the HILLS file to the same directory as the XDATCAR_01 file
     shutil.copy(aimd_path + 'HILLSPOT', 'HILLSPOT')
     shutil.copy(aimd_path + 'PENALTYPOT', 'PENALTYPOT')
 

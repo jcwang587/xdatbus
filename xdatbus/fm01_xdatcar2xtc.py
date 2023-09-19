@@ -26,13 +26,13 @@ def fm01_xdatcar2xtc(
 
     """
 
-    # Define the path to the XDATCAR file
+    # Define the path to the XDATCAR_01 file
     file_list = os.listdir(aimd_path)
     run_list = [run for run in file_list if 'RUN' in run]
     # sort run_list by the number in the run name
     run_list.sort(key=lambda x: int(x[3:]))
-    xdatcar_U1_N0_OV0_2000K = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
-    xdatcar_U1_N0_OV0_2000K_latest = aimd_path + "/XDATCAR"
+    xdatcar_U1_N0_OV0_2000K = [aimd_path + "/" + run_list[i] + "/XDATCAR_01" for i in range(len(run_list))]
+    xdatcar_U1_N0_OV0_2000K_latest = aimd_path + "/XDATCAR_01"
 
     local_xdatcar_files_raw = "./xdatcar_files_raw"
     local_xdatcar_files_wrap = "./xdatcar_files_wrap"
@@ -45,15 +45,15 @@ def fm01_xdatcar2xtc(
         shutil.rmtree(local_xdatcar_files_wrap)
     os.mkdir(local_xdatcar_files_wrap)
 
-    # Copy the XDATCAR file to the current directory
-    print("Copying XDATCAR files to the current directory ...")
+    # Copy the XDATCAR_01 file to the current directory
+    print("Copying XDATCAR_01 files to the current directory ...")
     i = 0
     for i in range(len(xdatcar_U1_N0_OV0_2000K)):
         shutil.copy(xdatcar_U1_N0_OV0_2000K[i], "./xdatcar_files_raw/XDATCAR_" + str(i + 1))
     if last_frame:
         shutil.copy(xdatcar_U1_N0_OV0_2000K_latest, "./xdatcar_files_raw/XDATCAR_" + str(i + 2))
 
-    # Extract the lattice vectors from the first image of the XDATCAR file
+    # Extract the lattice vectors from the first image of the XDATCAR_01 file
     a = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.a
     b = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.b
     c = Xdatcar("./xdatcar_files_raw/XDATCAR_1").structures[0].lattice.c
@@ -69,8 +69,8 @@ def fm01_xdatcar2xtc(
         xdatcar = read("./xdatcar_files_raw/XDATCAR_" + str(i + 1), format='vasp-xdatcar', index=':')
         write("./xdatcar_files_wrap/XDATCAR_" + str(i + 1), format='vasp-xdatcar', images=xdatcar)
 
-    # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-    print("Combining XDATCAR files into one XDATCAR file ...")
+    # Combine the wrapped XDATCAR_01 files into one XDATCAR_01 file (XDATBUS) using pymatgen
+    print("Combining XDATCAR_01 files into one XDATCAR_01 file ...")
     xdatbus = Xdatcar("./xdatcar_files_wrap/XDATCAR_1")
 
     for i in range(mdrun - 1):
@@ -78,8 +78,8 @@ def fm01_xdatcar2xtc(
         print("XDATCAR_" + str(i + 2) + " is concatenated.")
     xdatbus.write_file('XDATBUS')
 
-    # Convert the XDATCAR file to xyz format
-    print("Converting XDATCAR to xyz format ...")
+    # Convert the XDATCAR_01 file to xyz format
+    print("Converting XDATCAR_01 to xyz format ...")
     xdatbusxyz_ase = read('XDATBUS', format='vasp-xdatcar', index=':')
     write('XDATBUS.xyz', xdatbusxyz_ase, format='xyz')
     u = MDa.Universe('XDATBUS.xyz')

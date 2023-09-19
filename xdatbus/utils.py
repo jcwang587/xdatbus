@@ -4,7 +4,7 @@ from ase.io import read
 
 
 def read_lat_vec(xdatcar_dir):
-    """Read the lattice vectors from the first image of the XDATCAR file."""
+    """Read the lattice vectors from the first image of the XDATCAR_01 file."""
     xdatcar = read(xdatcar_dir, format='vasp-xdatcar')
     lat_vec = np.array(xdatcar.get_cell())
     return lat_vec

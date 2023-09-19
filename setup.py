@@ -8,7 +8,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
 # you need to change all these
-VERSION = '0.0.7'
+VERSION = '0.0.8'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'just for test'
 

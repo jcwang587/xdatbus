@@ -2,7 +2,7 @@ import os
 import shutil
 import pandas as pd
 from pymatgen.io.vasp.outputs import Xdatcar
-from fcom01_drift import fcom01_drift
+from .fcom01_drift import fcom01_drift
 
 
 def fcom02_hillspot(aimd_path, xyz_path='XDATBUS_unwrapped.xyz', freq=100, delete_intermediate_files=True):

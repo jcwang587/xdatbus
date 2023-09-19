@@ -33,8 +33,8 @@ def f01_aggregate(
     run_list = [run for run in remote_file_list if 'RUN' in run]
     # sort run_list by the number in the run name
     run_list.sort(key=lambda x: int(x[3:]))
-    xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR_01" for i in range(len(run_list))]
-    xdatcar_path_last = aimd_path + "/XDATCAR_01"
+    xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
+    xdatcar_path_last = aimd_path + "/XDATCAR"
 
     local_xdatcar_files_raw = "./xdatcar_files_raw"
     local_xdatcar_files_wrap = "./xdatcar_files_wrap"
@@ -53,8 +53,8 @@ def f01_aggregate(
     if os.path.exists("XDATBUS.log"):
         os.remove("XDATBUS.log")
 
-    # Copy the XDATCAR_01 file to the current directory
-    print("Copying XDATCAR_01 files to the current directory ...")
+    # Copy the XDATCAR file to the current directory
+    print("Copying XDATCAR files to the current directory ...")
     i = 0
     if load_pre_xdatcar:
         for i in range(len(xdatcar_path_list)):
@@ -85,7 +85,7 @@ def f01_aggregate(
 
     # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
     print("Combining XDATCAR files into one XDATCAR file ...")
-    # Initialize the XDATCAR_01 bus with the first XDATCAR file
+    # Initialize the XDATCAR bus with the first XDATCAR file
     xdatbus = Xdatcar("./xdatcar_files_wrap/" + wrap_list[0])
 
     for xdatcar_wrap in wrap_list[1:]:

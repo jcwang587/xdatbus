@@ -1,10 +1,5 @@
-import os
-import sys
 import numpy as np
 from pymatgen.io.vasp.outputs import Xdatcar
-
-# append the current directory to the path
-sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from utils import unwrap_pbc_dis
 
 

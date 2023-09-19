@@ -1,6 +1,5 @@
 import os
 import shutil
-
 from ase.io import read
 from ase import Atoms
 

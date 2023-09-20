@@ -75,7 +75,7 @@ def f01_aggregate(
     log_file = open("XDATBUS.log", "w")
     for xdatcar_wrap in raw_list:
         print("Wrapping " + xdatcar_wrap + " ...")
-        xdatcar = read(local_xdatcar_files_wrap + "/" + xdatcar_wrap, format='vasp-xdatcar', index=':')
+        xdatcar = read(local_xdatcar_files_raw + "/" + xdatcar_wrap, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_wrap + ": " + str(len(xdatcar)))
         if len(xdatcar) > min_frames:
             write(local_xdatcar_files_wrap + "/" + xdatcar_wrap, format='vasp-xdatcar', images=xdatcar)

@@ -53,7 +53,23 @@ def fm03_report_loader(
         else:
             shutil.copy(report_path_last, "./report_files_raw/" + "REPORT_" + str(i + 1).zfill(5))
 
+    # Load the REPORT file
+    print("Loading REPORT files ...")
+    report_files = os.listdir(local_report_files_raw)
+
+    fic_p_values = []
+
+    # Extract the values from each line containing 'fic_p>'
+    for report_file in report_files:
+        with open(os.path.join(local_report_files_raw, report_file), 'r') as file:
+            for line in file:
+                if 'fic_p>' in line:
+                    value = float(line.split()[-1])  # assumes value is the last item in the line
+                    fic_p_values.append(value)
+
+    print(fic_p_values)
+
     if delete_intermediate_folders:
         shutil.rmtree(local_report_files_raw)
 
-    print("Done.")
+    return fic_p_values

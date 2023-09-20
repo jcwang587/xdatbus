@@ -59,14 +59,14 @@ def f01_aggregate(
     i = 0
     if load_pre_xdatcar:
         for i in range(len(xdatcar_path_list)):
-            shutil.copy(xdatcar_path_list[i], "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
+            shutil.copy(xdatcar_path_list[i], local_xdatcar_files_raw + "/XDATCAR_" + str(i + 1).zfill(5))
     if load_last_xdatcar:
         xdatcar_path_last = aimd_path + "/XDATCAR"
         print(xdatcar_path_last)
         if load_pre_xdatcar:
-            shutil.copy(xdatcar_path_last, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 2).zfill(5))
+            shutil.copy(xdatcar_path_last, local_xdatcar_files_raw + "/XDATCAR_" + str(i + 2).zfill(5))
         else:
-            shutil.copy(xdatcar_path_last, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
+            shutil.copy(xdatcar_path_last, local_xdatcar_files_raw + "/XDATCAR_" + str(i + 1).zfill(5))
 
     # Get the number of files in wrap directory
     raw_list = os.listdir(local_xdatcar_files_raw)

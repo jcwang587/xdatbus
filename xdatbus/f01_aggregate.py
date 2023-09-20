@@ -34,7 +34,8 @@ def f01_aggregate(
     # sort run_list by the number in the run name
     run_list.sort(key=lambda x: int(x[3:]))
     xdatcar_path_list = [aimd_path + "/" + run_list[i] + "/XDATCAR" for i in range(len(run_list))]
-    xdatcar_path_last = aimd_path + "/XDATCAR"
+    print('analyze the following XDATCAR files:')
+    print(xdatcar_path_list)
 
     local_xdatcar_files_raw = "./xdatcar_files_raw"
     local_xdatcar_files_wrap = "./xdatcar_files_wrap"
@@ -60,6 +61,8 @@ def f01_aggregate(
         for i in range(len(xdatcar_path_list)):
             shutil.copy(xdatcar_path_list[i], "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 1).zfill(5))
     if load_last_xdatcar:
+        xdatcar_path_last = aimd_path + "/XDATCAR"
+        print(xdatcar_path_last)
         if load_pre_xdatcar:
             shutil.copy(xdatcar_path_last, "./xdatcar_files_raw/" + "XDATCAR_" + str(i + 2).zfill(5))
         else:

@@ -2,7 +2,7 @@ import os
 import shutil
 
 
-def f03_report_loader(
+def fm03_report_loader(
         aimd_path,
         load_pre_report=True,
         load_last_report=False,

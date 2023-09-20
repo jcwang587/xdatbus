@@ -75,10 +75,10 @@ def f01_aggregate(
     log_file = open("XDATBUS.log", "w")
     for xdatcar_wrap in raw_list:
         print("Wrapping " + xdatcar_wrap + " ...")
-        xdatcar = read("./xdatcar_files_raw/" + xdatcar_wrap, format='vasp-xdatcar', index=':')
+        xdatcar = read(local_xdatcar_files_wrap + "/" + xdatcar_wrap, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_wrap + ": " + str(len(xdatcar)))
         if len(xdatcar) > min_frames:
-            write("./xdatcar_files_wrap/" + xdatcar_wrap, format='vasp-xdatcar', images=xdatcar)
+            write(local_xdatcar_files_wrap + "/" + xdatcar_wrap, format='vasp-xdatcar', images=xdatcar)
             log_file.write(xdatcar_wrap + " " + str(len(xdatcar)) + "\n")
     log_file.close()
 
@@ -89,11 +89,11 @@ def f01_aggregate(
     # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
     print("Combining XDATCAR files into one XDATCAR file ...")
     # Initialize the XDATCAR bus with the first XDATCAR file
-    xdatbus = Xdatcar("./xdatcar_files_wrap/" + wrap_list[0])
+    xdatbus = Xdatcar(local_xdatcar_files_wrap + "/" + wrap_list[0])
 
     for xdatcar_wrap in wrap_list[1:]:
         print("Appending " + xdatcar_wrap + " ...")
-        xdatcar = Xdatcar("./xdatcar_files_wrap/" + xdatcar_wrap)
+        xdatcar = Xdatcar(local_xdatcar_files_wrap + "/" + xdatcar_wrap)
         xdatbus.structures.extend(xdatcar.structures)
     xdatbus.write_file('XDATBUS')
 

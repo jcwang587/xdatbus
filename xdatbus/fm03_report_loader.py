@@ -44,14 +44,14 @@ def fm03_report_loader(
     i = 0
     if load_pre_report:
         for i in range(len(report_path_list)):
-            shutil.copy(report_path_list[i], "./report_files_raw/" + "REPORT_" + str(i + 1).zfill(5))
+            shutil.copy(report_path_list[i], local_report_files_raw + "/" + "REPORT_" + str(i + 1).zfill(5))
     if load_last_report:
         report_path_last = aimd_path + "/REPORT"
         print(report_path_last)
         if load_pre_report:
-            shutil.copy(report_path_last, "./report_files_raw/" + "REPORT_" + str(i + 2).zfill(5))
+            shutil.copy(report_path_last, local_report_files_raw + "/" + "REPORT_" + str(i + 2).zfill(5))
         else:
-            shutil.copy(report_path_last, "./report_files_raw/" + "REPORT_" + str(i + 1).zfill(5))
+            shutil.copy(report_path_last, local_report_files_raw + "/" + "REPORT_" + str(i + 1).zfill(5))
 
     # Load the REPORT file
     print("Loading REPORT files ...")
@@ -66,8 +66,6 @@ def fm03_report_loader(
                 if 'fic_p>' in line:
                     value = float(line.split()[-1])  # assumes value is the last item in the line
                     fic_p_values.append(value)
-
-    print(fic_p_values)
 
     if delete_intermediate_folders:
         shutil.rmtree(local_report_files_raw)

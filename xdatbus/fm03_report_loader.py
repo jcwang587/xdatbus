@@ -59,48 +59,15 @@ def fm03_report_loader(
 
     fic_p_values = []
 
-    all_reports_fic_p_values = []  # This will be a list of lists
-
     # Extract the values from each line containing 'fic_p>'
     for report_file in report_files:
         with open(os.path.join(local_report_files_raw, report_file), 'r') as file:
-            current_report_fic_p_values = []  # to store the fic_p values for a specific MD step
             for line in file:
                 if 'fic_p>' in line:
                     value = float(line.split()[-1])  # assumes value is the last item in the line
-                    current_report_fic_p_values.append(value)
-                if 'MD step No.' in line and current_report_fic_p_values:
-                    all_reports_fic_p_values.append(current_report_fic_p_values)
-                    current_report_fic_p_values = []
-
-            # In case the file ends and there's no more 'MD step No.' after the last 'fic_p>'
-            if current_report_fic_p_values:
-                all_reports_fic_p_values.append(current_report_fic_p_values)
-
-    # Determine the number of fic_p> lines by looking at the maximum length of sub-lists
-    num_fic_p_lines = max(map(len, all_reports_fic_p_values))
-
-    # Create a numpy array with dynamic shape based on number of fic_p> lines
-    shape = [len(all_reports_fic_p_values)] + [num_fic_p_lines]
-    fic_p_array = np.zeros(shape)
-    for i, fic_p_values in enumerate(all_reports_fic_p_values):
-        for j, value in enumerate(fic_p_values):
-            fic_p_array[i, j] = value
+                    fic_p_values.append(value)
 
     if delete_intermediate_folders:
         shutil.rmtree(local_report_files_raw)
 
-    return fic_p_array
-
-    # # Extract the values from each line containing 'fic_p>'
-    # for report_file in report_files:
-    #     with open(os.path.join(local_report_files_raw, report_file), 'r') as file:
-    #         for line in file:
-    #             if 'fic_p>' in line:
-    #                 value = float(line.split()[-1])  # assumes value is the last item in the line
-    #                 fic_p_values.append(value)
-    #
-    # if delete_intermediate_folders:
-    #     shutil.rmtree(local_report_files_raw)
-    #
-    # return fic_p_values
+    return fic_p_values

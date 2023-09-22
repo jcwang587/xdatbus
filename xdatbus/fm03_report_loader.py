@@ -72,15 +72,19 @@ def fm03_report_loader(
     # Here, the fic_p_count variable holds the number of 'fic_p>' lines in a typical report
     print(f"Number of fic_p> lines: {fic_p_count}")
 
-    fic_p_values = []
+    fic_p_values = np.zeros((len(report_files), fic_p_count))
 
     # Extract the values from each line containing 'fic_p>'
-    for report_file in report_files:
+    for idx, report_file in enumerate(report_files):
+        temp_values = []
         with open(os.path.join(local_report_files_raw, report_file), 'r') as file:
             for line in file:
                 if 'fic_p>' in line:
                     value = float(line.split()[-1])  # assumes value is the last item in the line
-                    fic_p_values.append(value)
+                    temp_values.append(value)
+
+        # Insert values into the array
+        fic_p_values[idx, :] = temp_values
 
     if delete_intermediate_folders:
         shutil.rmtree(local_report_files_raw)

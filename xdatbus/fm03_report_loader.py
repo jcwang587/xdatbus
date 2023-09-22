@@ -58,36 +58,35 @@ def fm03_report_loader(
     print("Loading REPORT files ...")
     report_files = os.listdir(local_report_files_raw)
 
-    # Extract the values from the first report file to determine the number of 'fic_p>' lines
-    fic_p_count = 0
-    with open(os.path.join(local_report_files_raw, report_files[0]), 'r') as file:
-        in_metadynamics_section = False
-        for line in file:
-            if '>Metadynamics' in line:
-                in_metadynamics_section = True
-            elif in_metadynamics_section and 'fic_p>' in line:
-                fic_p_count += 1
-            elif in_metadynamics_section and not line.strip():  # empty line, end of metadynamics section
-                break
-
-    # Here, the fic_p_count variable holds the number of 'fic_p>' lines in a typical report
-    print(f"Number of fic_p> lines: {fic_p_count}")
-
-    fic_p_values = np.zeros((len(report_files), fic_p_count))
+    all_reports_fic_p_values = []  # This will be a list of lists
 
     # Extract the values from each line containing 'fic_p>'
-    for idx, report_file in enumerate(report_files):
-        temp_values = []
+    for report_file in report_files:
         with open(os.path.join(local_report_files_raw, report_file), 'r') as file:
+            current_report_fic_p_values = []  # to store the fic_p values for a specific MD step
             for line in file:
                 if 'fic_p>' in line:
                     value = float(line.split()[-1])  # assumes value is the last item in the line
-                    temp_values.append(value)
+                    current_report_fic_p_values.append(value)
+                if 'MD step No.' in line and current_report_fic_p_values:
+                    all_reports_fic_p_values.append(current_report_fic_p_values)
+                    current_report_fic_p_values = []
 
-        # Insert values into the array
-        fic_p_values[idx, :] = temp_values
+            # In case the file ends and there's no more 'MD step No.' after the last 'fic_p>'
+            if current_report_fic_p_values:
+                all_reports_fic_p_values.append(current_report_fic_p_values)
+
+    # Determine the number of fic_p> lines by looking at the maximum length of sub-lists
+    num_fic_p_lines = max(map(len, all_reports_fic_p_values))
+
+    # Create a numpy array with dynamic shape based on number of fic_p> lines
+    shape = [len(all_reports_fic_p_values)] + [num_fic_p_lines]
+    fic_p_array = np.zeros(shape)
+    for i, fic_p_values in enumerate(all_reports_fic_p_values):
+        for j, value in enumerate(fic_p_values):
+            fic_p_array[i, j] = value
 
     if delete_intermediate_folders:
         shutil.rmtree(local_report_files_raw)
 
-    return fic_p_values
+    return fic_p_array

@@ -57,6 +57,21 @@ def fm03_report_loader(
     print("Loading REPORT files ...")
     report_files = os.listdir(local_report_files_raw)
 
+    # Extract the values from the first report file to determine the number of 'fic_p>' lines
+    fic_p_count = 0
+    with open(os.path.join(local_report_files_raw, report_files[0]), 'r') as file:
+        in_metadynamics_section = False
+        for line in file:
+            if '>Metadynamics' in line:
+                in_metadynamics_section = True
+            elif in_metadynamics_section and 'fic_p>' in line:
+                fic_p_count += 1
+            elif in_metadynamics_section and not line.strip():  # empty line, end of metadynamics section
+                break
+
+    # Here, the fic_p_count variable holds the number of 'fic_p>' lines in a typical report
+    print(f"Number of fic_p> lines: {fic_p_count}")
+
     fic_p_values = []
 
     # Extract the values from each line containing 'fic_p>'

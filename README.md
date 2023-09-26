@@ -27,7 +27,7 @@ pip install xdatbus
 or
 
 ```bash
-pip install --upgrade pactus
+pip install --upgrade xdatbus
 ```
 
 

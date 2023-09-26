@@ -1,7 +1,7 @@
 xdatbus~=0.0.17
 numpy~=1.26.0
 ase~=3.22.1
-pymatgen~=2023.9.10
+pymatgen~=2023.9.25
 pandas~=2.1.1
 mdanalysis~=2.6.1
 ovito~=3.9.2

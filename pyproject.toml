@@ -6,3 +6,5 @@ build-backend = "flit_core.buildapi"
 name = "lumache"
 authors = [{name = "Graziella", email = "graziella@lumache"}]
 dynamic = ["version", "description"]
+description = "A short summary of lumache."
+readme = "README.md"

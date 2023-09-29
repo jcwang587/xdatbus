@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 from ase.io import read, write
 from pymatgen.io.vasp.outputs import Xdatcar

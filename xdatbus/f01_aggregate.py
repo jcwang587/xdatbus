@@ -27,10 +27,10 @@ def f01_aggregate(
     raw_list = os.listdir(aimd_path)
     raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
-    xdatcar_wrap = "./xdatcar_wrap"
+    xdatcar_wrap_path = "./xdatcar_wrap"
 
     # Clear the directory
-    update_folder(xdatcar_wrap)
+    update_folder(xdatcar_wrap_path)
 
     # Remove the XDATBUS and log files
     if os.path.exists("XDATBUS"):
@@ -55,7 +55,7 @@ def f01_aggregate(
     # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
     print("Combining XDATCAR files into one XDATCAR file ...")
     # Initialize the XDATCAR bus with the first XDATCAR file
-    xdatbus = Xdatcar(xdatcar_wrap + "/" + wrap_list_sort[0])
+    xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
     for xdatcar_wrap in wrap_list_sort[1:]:
         print("Appending " + xdatcar_wrap + " ...")

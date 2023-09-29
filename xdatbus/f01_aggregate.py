@@ -59,7 +59,7 @@ def f01_aggregate(
 
     for xdatcar_wrap in wrap_list_sort[1:]:
         print("Appending " + xdatcar_wrap + " ...")
-        xdatcar = Xdatcar(xdatcar_wrap + "/" + xdatcar_wrap)
+        xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
         xdatbus.structures.extend(xdatcar.structures)
     xdatbus.write_file('XDATBUS')
 

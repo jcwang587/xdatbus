@@ -68,3 +68,4 @@ def f01_aggregate(
         os.remove("XDATBUS.log")
 
     print("xdatbus-func: f01_aggregate: Done!")
+

@@ -23,7 +23,7 @@ def f01_aggregate(
     """
 
     raw_list = os.listdir(aimd_path)
-    raw_list.sort(key=lambda x: int(x[3:]))
+    raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
     xdatcar_files_wrap = "./xdatcar_files_wrap"
 
@@ -39,7 +39,7 @@ def f01_aggregate(
         os.remove("XDATBUS.log")
 
     log_file = open("XDATBUS.log", "w")
-    for xdatcar_wrap in raw_list:
+    for xdatcar_wrap in raw_list_sort:
         print("Wrapping " + xdatcar_wrap + " ...")
         xdatcar = read(aimd_path + "/" + xdatcar_wrap, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_wrap + ": " + str(len(xdatcar)))

@@ -14,3 +14,9 @@ def unwrap_pbc_dis(coord_1, coord_2, box_length):
     displacement = coord_2 - coord_1
     nearest_int = round(displacement / box_length)
     return displacement - nearest_int * box_length
+
+
+def update_folder(folder):
+    if os.path.exists(folder):
+        shutil.rmtree(folder)
+    os.mkdir(folder)

@@ -44,12 +44,12 @@ def f01_aggregate(
         xdatcar = read(aimd_path + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
         if len(xdatcar) > min_frames:
-            write(xdatcar_wrap + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
+            write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
             log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
     log_file.close()
 
     # Get the number of files in wrap directory
-    wrap_list = os.listdir(xdatcar_wrap)
+    wrap_list = os.listdir(xdatcar_wrap_path)
     wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
     # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
@@ -64,7 +64,7 @@ def f01_aggregate(
     xdatbus.write_file('XDATBUS')
 
     if delete_temp_files:
-        shutil.rmtree(xdatcar_wrap)
+        shutil.rmtree(xdatcar_wrap_path)
         os.remove("XDATBUS.log")
 
     print("xdatbus-func: f01_aggregate: Done!")

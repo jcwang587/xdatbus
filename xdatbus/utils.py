@@ -1,3 +1,5 @@
+import os
+import shutil
 import numpy as np
 from copy import deepcopy
 from ase.io import read

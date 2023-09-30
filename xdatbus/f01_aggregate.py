@@ -8,6 +8,7 @@ from .utils import update_folder
 
 def f01_aggregate(
         aimd_path,
+        output_path,
         min_frames=1,
         delete_temp_files=True
 ):
@@ -17,7 +18,9 @@ def f01_aggregate(
         Parameters
         ----------
         aimd_path : str
-            Output filename of the trajectory; the extension determines the format.
+            Input path of the AIMD simulation, which contains the XDATCAR files
+        output_path : str
+            Output path of the aggregated XDATCAR file
         min_frames : int (optional)
             Minimum number of frames in each XDATCAR file, which will be used to be appended to the trajectory
         delete_temp_files : bool (optional)
@@ -61,7 +64,7 @@ def f01_aggregate(
         print("Appending " + xdatcar_wrap + " ...")
         xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
         xdatbus.structures.extend(xdatcar.structures)
-    xdatbus.write_file('XDATBUS')
+    xdatbus.write_file(output_path + "/XDATBUS")
 
     if delete_temp_files:
         shutil.rmtree(xdatcar_wrap_path)

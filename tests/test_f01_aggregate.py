@@ -26,14 +26,16 @@ def setup_test_environment(tmp_path):
 
 def test_f01_aggregate(setup_test_environment):
     aimd_path = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(aimd_path)
 
-    f01_aggregate(aimd_path)
+    f01_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
 
     # Assertions
-    assert os.path.exists('XDATBUS'), "XDATBUS file not created"
+    xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")
+    assert os.path.exists(xdatbus_path), "XDATBUS file not created"
 
     # Load the aggregated data
-    aggregated_data = read('XDATBUS', format='vasp-xdatcar', index=':')
+    aggregated_data = read(xdatbus_path, format='vasp-xdatcar', index=':')
 
     # Check the aggregation result against one of the files in the temporary directory
     assert len(aggregated_data) >= len(

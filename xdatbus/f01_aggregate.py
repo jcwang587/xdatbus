@@ -8,7 +8,7 @@ from .utils import update_folder
 
 def f01_aggregate(
         aimd_path,
-        output_path,
+        output_path="./",
         min_frames=1,
         delete_temp_files=True
 ):
@@ -19,8 +19,8 @@ def f01_aggregate(
         ----------
         aimd_path : str
             Input path of the AIMD simulation, which contains the XDATCAR files
-        output_path : str
-            Output path of the aggregated XDATCAR file
+        output_path : str (optional)
+            Output path of the XDATBUS file
         min_frames : int (optional)
             Minimum number of frames in each XDATCAR file, which will be used to be appended to the trajectory
         delete_temp_files : bool (optional)
@@ -30,18 +30,20 @@ def f01_aggregate(
     raw_list = os.listdir(aimd_path)
     raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
-    xdatcar_wrap_path = "./xdatcar_wrap"
+    xdatcar_wrap_path = output_path + "/xdatcar_wrap"
+    xdatbus_path = output_path + "/XDATBUS"
+    log_path = output_path + "/XDATBUS.log"
 
     # Clear the directory
     update_folder(xdatcar_wrap_path)
 
     # Remove the XDATBUS and log files
-    if os.path.exists("XDATBUS"):
-        os.remove("XDATBUS")
-    if os.path.exists("XDATBUS.log"):
-        os.remove("XDATBUS.log")
+    if os.path.exists(xdatbus_path):
+        os.remove(xdatbus_path)
+    if os.path.exists(log_path):
+        os.remove(log_path)
 
-    log_file = open("XDATBUS.log", "w")
+    log_file = open(log_path, "w")
     for xdatcar_raw in raw_list_sort:
         print("Wrapping " + xdatcar_raw + " ...")
         xdatcar = read(aimd_path + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
@@ -64,11 +66,10 @@ def f01_aggregate(
         print("Appending " + xdatcar_wrap + " ...")
         xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
         xdatbus.structures.extend(xdatcar.structures)
-    xdatbus.write_file(output_path + "/XDATBUS")
+    xdatbus.write_file(xdatbus_path)
 
     if delete_temp_files:
         shutil.rmtree(xdatcar_wrap_path)
-        os.remove("XDATBUS.log")
+        os.remove(log_path)
 
     print("xdatbus-func: f01_aggregate: Done!")
-

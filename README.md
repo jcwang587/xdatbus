@@ -1,7 +1,7 @@
 # XDATBUS
 
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/python-publish.yml)
-[![codecov](https://codecov.io/gh/jcwang587/xdatbus/branch/main/graph/badge.svg?token=57fb9b10-2712-4492-9c40-5acf5e459d83)](https://codecov.io/gh/jcwang587/xdatbus)
+[![codecov](https://codecov.io/gh/jcwang587/xdatbus/branch/main/graph/badge.svg?token=CODECOV_TOKEN)](https://codecov.io/gh/jcwang587/xdatbus)
 
 A Python package to analyze XDATCAR files generated from VASP output files. XDATBUS is an enhanced toolkit used to assist in the analysis of XDATCAR files. It currently includes three main functions: 1. Unfolding and merging paths, 2. Fixing specific atoms, 3. Crystal cell expansion, and 4. Real-time CV-structure transfer based on Metadynamics. The XDATCAR python package documentation is available at [documentation](https://github.com/jcwang587/xdatbus) and a Jupyter Notebook tutorial for the API is available [here](https://github.com/jcwang587/xdatbus).
 

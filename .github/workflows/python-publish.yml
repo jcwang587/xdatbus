@@ -36,8 +36,8 @@ jobs:
 
     - name: Run tests
       run: |
-        pip install pytest
-        pytest
+        pip install pytest coverage pytest-cov
+        pytest --cov=xdatbus
 
     - name: Build package
       run: python -m build

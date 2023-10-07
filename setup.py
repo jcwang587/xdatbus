@@ -7,7 +7,9 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-# you need to change all these
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+
 VERSION = '0.0.43'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'just for test'
@@ -22,7 +24,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=[],
+    install_requires=required,
     keywords=['python', 'vasp', 'xdatcar', 'aimd'],
     classifiers=[
         "Development Status :: 1 - Planning",

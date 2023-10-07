@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import argparse
 from ase.io import read, write
 from pymatgen.io.vasp.outputs import Xdatcar
 from .utils import update_folder
@@ -73,3 +74,24 @@ def f01_aggregate(
         os.remove(log_path)
 
     print("xdatbus-func: f01_aggregate: Done!")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Aggregate XDATCAR files from an AIMD simulation.")
+    parser.add_argument("aimd_path", type=str,
+                        help="Input path of the AIMD simulation, which contains the XDATCAR files")
+    parser.add_argument("--output_path", type=str, default="./",
+                        help="Output path of the XDATBUS file (default: current directory)")
+    parser.add_argument("--min_frames", type=int, default=1,
+                        help="Minimum number of frames in each XDATCAR file, which will be used to be appended to the "
+                             "trajectory (default: 1)")
+    parser.add_argument("--delete_temp_files", action="store_true",
+                        help="If set, the intermediate folders will be deleted (default: False)")
+
+    args = parser.parse_args()
+
+    f01_aggregate(args.aimd_path, args.output_path, args.min_frames, args.delete_temp_files)
+
+
+if __name__ == "__main__":
+    main()

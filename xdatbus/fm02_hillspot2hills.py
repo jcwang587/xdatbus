@@ -3,15 +3,15 @@ import shutil
 import pandas as pd
 
 
-def fm02_hillspot2hills(HILLSPOT_dir, analysis_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
+def fm02_hillspot2hills(HILLSPOT_dir, hills_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
     """
     Convert HILLSPOT file to HILLS file
         Parameters
         ----------
         HILLSPOT_dir : str
             Path to HILLSPOT file
-        analysis_dir : str
-            Path to the analysis directory
+        hills_dir : str
+            Path to the directory where the HILLS file will be created
         cv : str or list
             Name of the collective variable(s)
         height_conversion : float(optional)
@@ -69,10 +69,10 @@ def fm02_hillspot2hills(HILLSPOT_dir, analysis_dir, cv, height_conversion=1, sig
         file.write(line)
     file.close()
 
-    # copy the HILLS file to the analysis directory
-    if analysis_dir != 'HILLS':
-        shutil.copy('HILLS', analysis_dir)
-        print('HILLS file is copied to', analysis_dir)
+    # copy the HILLS file to the hills_dir
+    if hills_dir != 'HILLS':
+        shutil.copy('HILLS', hills_dir)
+        print('HILLS file is copied to', hills_dir)
     else:
         print('HILLS file is created in the current directory.')
 

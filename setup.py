@@ -10,7 +10,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 with open('requirements.txt') as f:
     required = f.read().splitlines()
 
-VERSION = '0.0.45'
+VERSION = '0.0.46'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'just for test'
 

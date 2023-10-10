@@ -3,12 +3,12 @@ import shutil
 import pandas as pd
 
 
-def fm02_hillspot2hills(HILLSPOT_dir, hills_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
+def fm02_hillspot2hills(hillspot_dir, hills_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
     """
     Convert HILLSPOT file to HILLS file
         Parameters
         ----------
-        HILLSPOT_dir : str
+        hillspot_dir : str
             Path to HILLSPOT file
         hills_dir : str
             Path to the directory where the HILLS file will be created
@@ -21,7 +21,7 @@ def fm02_hillspot2hills(HILLSPOT_dir, hills_dir, cv, height_conversion=1, sigma_
         del_inter : bool(optional)
             Delete the intermediate files created by this function.
     """
-    hillspot = open(HILLSPOT_dir, 'r')
+    hillspot = open(hillspot_dir, 'r')
     column_names = (cv if isinstance(cv, list) else [cv]) + ['height', 'sigma']
     hs = pd.read_csv(hillspot, sep='\s+', header=None, names=column_names)
 

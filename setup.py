@@ -12,7 +12,7 @@ with open('requirements.txt') as f:
 
 VERSION = '0.0.46'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
-LONG_DESCRIPTION = 'just for test'
+LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 
 setup(
     name="xdatbus",

@@ -2,6 +2,7 @@
 
 # -- Project information
 
+import os
 import setuptools
 
 # Function to extract project metadata from setup.py

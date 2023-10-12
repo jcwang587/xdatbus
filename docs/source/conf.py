@@ -2,12 +2,27 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+import setuptools
 
-release = '0.1'
-version = '0.1.0'
+# Function to extract project metadata from setup.py
+def get_project_metadata():
+    setup_args = {}
+    setuptools.setup = lambda *args, **kwargs: setup_args.update(kwargs)
+    exec(open('setup.py').read())
+    return setup_args
+
+# Get project metadata
+metadata = get_project_metadata()
+
+# -- Project information
+
+project = metadata['name']
+copyright = f"2023, {metadata['author']}"
+author = metadata['author']
+
+release = metadata['version']
+# Assuming version is in the format 'major.minor.patch'
+version = '.'.join(release.split('.')[:2])
 
 # -- General configuration
 

@@ -9,8 +9,20 @@ import setuptools
 def get_project_metadata():
     setup_args = {}
     setuptools.setup = lambda *args, **kwargs: setup_args.update(kwargs)
-    # Adjust the file path to point to the correct location of setup.py
-    exec(open(os.path.join(os.path.dirname(__file__), '../../setup.py')).read())
+
+    # Save the current working directory
+    cwd = os.getcwd()
+
+    # Change to the directory containing setup.py
+    setup_dir = os.path.join(os.path.dirname(__file__), '../../')
+    os.chdir(setup_dir)
+
+    # Execute setup.py
+    exec(open(os.path.join(setup_dir, 'setup.py')).read())
+
+    # Restore the original working directory
+    os.chdir(cwd)
+
     return setup_args
 
 # Get project metadata

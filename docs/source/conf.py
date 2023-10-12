@@ -10,11 +10,13 @@ def get_project_metadata():
     setup_args = {}
     setuptools.setup = lambda *args, **kwargs: setup_args.update(kwargs)
 
+    # Absolute path to the directory containing setup.py
+    setup_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
+
     # Save the current working directory
     cwd = os.getcwd()
 
     # Change to the directory containing setup.py
-    setup_dir = os.path.join(os.path.dirname(__file__), '../../')
     os.chdir(setup_dir)
 
     # Execute setup.py

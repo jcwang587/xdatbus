@@ -1,5 +1,3 @@
-.. include:: ../README.rst
-
 Welcome to Lumache's documentation!
 ===================================
 
@@ -20,6 +18,5 @@ Contents
 
 .. toctree::
 
-   Home <self>
    usage
    api

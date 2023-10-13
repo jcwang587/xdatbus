@@ -2,12 +2,32 @@ import codecs
 import os
 from setuptools import setup, find_packages
 
-here = os.path.abspath(os.path.dirname(__file__))
+def find_repo_root(start_dir):
+    """Find the root directory of the repository."""
+    current_dir = start_dir
+    while True:
+        # Check if current_dir is the repository root
+        if os.path.isdir(os.path.join(current_dir, '.git')):
+            return current_dir
+        # Check if we've reached the root of the filesystem
+        parent_dir = os.path.dirname(current_dir)
+        if parent_dir == current_dir:
+            # If so, the repository root wasn't found
+            raise FileNotFoundError("Repository root not found")
+        # Otherwise, move up the directory hierarchy
+        current_dir = parent_dir
 
-with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
+# Find the repository root
+repo_root = find_repo_root(setup_dir)
+
+# Construct the paths to README.md and requirements.txt
+readme_path = os.path.join(repo_root, "README.md")
+requirements_path = os.path.join(repo_root, 'requirements.txt')
+
+with codecs.open(readme_path), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-with open(os.path.join(here, 'requirements.txt')) as f:
+with open(requirements_path) as f:
     required = f.read().splitlines()
 
 VERSION = '0.0.51'

@@ -24,7 +24,7 @@ repo_root = find_repo_root(setup_dir)
 readme_path = os.path.join(repo_root, "README.md")
 requirements_path = os.path.join(repo_root, 'requirements.txt')
 
-with codecs.open(readme_path), encoding="utf-8") as fh:
+with codecs.open(readme_path, encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
 with open(requirements_path) as f:

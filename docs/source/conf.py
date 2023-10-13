@@ -8,20 +8,21 @@ import setuptools
 # Function to extract project metadata from setup.py
 def get_project_metadata():
     setup_args = {}
+    original_setup = setuptools.setup  # Store the original function
+    
+    # Replace setuptools.setup with a function to capture arguments
     setuptools.setup = lambda *args, **kwargs: setup_args.update(kwargs)
-
-    # Absolute path to the directory containing setup.py
+    
     setup_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
-
-    # Check if setup.py exists
     setup_path = os.path.join(setup_dir, 'setup.py')
-
-    # Change to the directory containing setup.py
-    os.chdir(setup_dir)
-
-    # Execute setup.py
-    exec(open(setup_path).read())
-
+    
+    # Using a try-finally block to ensure original setup is restored
+    try:
+        os.chdir(setup_dir)
+        exec(open(setup_path).read())
+    finally:
+        setuptools.setup = original_setup  # Restore the original function
+    
     return setup_args
 
 # Get project metadata

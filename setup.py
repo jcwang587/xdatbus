@@ -7,7 +7,7 @@ def find_repo_root(start_dir):
     current_dir = start_dir
     while True:
         # Check if current_dir is the repository root
-        if os.path.isdir(os.path.join(current_dir, '.github')):
+        if os.path.isdir(os.path.join(current_dir, 'xdatbus')):
             return current_dir
         # Check if we've reached the root of the filesystem
         parent_dir = os.path.dirname(current_dir)

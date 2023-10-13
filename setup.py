@@ -17,6 +17,9 @@ def find_repo_root(start_dir):
         # Otherwise, move up the directory hierarchy
         current_dir = parent_dir
 
+# Get the directory containing setup.py
+setup_dir = os.path.abspath(os.path.dirname(__file__))
+
 # Find the repository root
 repo_root = find_repo_root(setup_dir)
 

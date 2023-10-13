@@ -13,6 +13,11 @@ def get_project_metadata():
     # Absolute path to the directory containing setup.py
     setup_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
+    # Check if setup.py exists
+    setup_path = os.path.join(setup_dir, 'setup.py')
+    if not os.path.exists(setup_path):
+        raise FileNotFoundError(f"setup.py not found at {setup_path}")
+
     # Save the current working directory
     cwd = os.getcwd()
 
@@ -20,7 +25,10 @@ def get_project_metadata():
     os.chdir(setup_dir)
 
     # Execute setup.py
-    exec(open(os.path.join(setup_dir, 'setup.py')).read())
+    try:
+        exec(open(setup_path).read())
+    except Exception as e:
+        raise RuntimeError(f"Failed to execute setup.py: {e}")
 
     # Restore the original working directory
     os.chdir(cwd)

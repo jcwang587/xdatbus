@@ -3,7 +3,7 @@ Example-3
 
 .. _installation:
 
-Installation
+1. Installation
 ------------
 
 To use Lumache, first install it using pip:
@@ -12,7 +12,7 @@ To use Lumache, first install it using pip:
 
    (.venv) $ pip install lumache
 
-Creating recipes
+2. Creating recipes
 ----------------
 
 To retrieve a list of random ingredients,

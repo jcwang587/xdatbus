@@ -3,7 +3,7 @@ Installation
 
 .. _installation:
 
-Pip
+pip install
 ----------------
 
 Make sure you have a Python interpreter, preferably version 3.10 or higher:
@@ -26,7 +26,7 @@ To get the latest version of `xdatbus`, if you have it already installed, please
 
    (.venv) $ pip install --upgrade xdatbus
 
-Conda
+Conda install
 ------------
 
 .. note::

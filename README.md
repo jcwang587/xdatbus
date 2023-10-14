@@ -22,7 +22,7 @@ Then, you can simply install `xdatbus` from pypi using `pip`:
 
 
 ```bash
-pip install xdatbus
+❯ pip install xdatbus
 ```
 
 

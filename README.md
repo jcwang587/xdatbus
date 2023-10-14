@@ -1,4 +1,4 @@
-# XDATBUS
+# xdatbus
 
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/python-publish.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/python-publish.yml)
 [![codecov](https://codecov.io/gh/jcwang587/xdatbus/branch/main/graph/badge.svg?token=V27VIJZDAE)](https://codecov.io/gh/jcwang587/xdatbus)

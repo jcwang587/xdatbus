@@ -10,11 +10,23 @@ Check out the :doc:`installation` section to get started, and :doc:`usage` secti
 
    This project is under active development.
 
-Contents
---------
+.. toctree::
+   :maxdepth: 2
+   :caption: Getting Started
+  
+   getting_started/installation
+   getting_started/suppor
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Examples
+  
+   examples/example1
+   examples/example2
+   examples/example3
 
-   installation
-   usage
-   api reference
+.. toctree::
+   :maxdepth: 2
+   :caption: Advanced Resources
+
+   api_reference/api_reference

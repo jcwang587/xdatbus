@@ -61,6 +61,7 @@ autoapi_dirs = os.path.join(repo_dir, 'xdatbus')
 autoapi_add_toctree_entry = True
 autoapi_type = 'python'
 autoapi_keep_files = True
+autoapi_root = 'api_reference'
 
 # -- Options for HTML output
 

@@ -2,7 +2,7 @@ Welcome to xdatbus's documentation!
 ===================================
 
 **xdatbus** is a Python library for cooks and food lovers that creates recipes mixing random ingredients.
-The main file that the package will deal with is the  `XDATCAR <https://www.vasp.at/wiki/index.php/XDATCAR/>` which is the trajectories file generated from the `Vienna Ab initio Simulation Package <https://www.vasp.at/>`.
+The main file that the package will deal with is the  `XDATCAR <https://www.vasp.at/wiki/index.php/XDATCAR/>`_ which is the trajectories file generated from the `Vienna Ab initio Simulation Package <https://www.vasp.at/>`_.
 
 
 Check out the :doc:`installation` section to get started, and :doc:`usage`

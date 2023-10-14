@@ -17,4 +17,4 @@ Contents
 
    installation
    usage
-   api
+   api reference

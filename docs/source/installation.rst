@@ -31,5 +31,5 @@ Conda
 
 .. note::
 
-Conda installation will be made available with an option to install xdatbus bundled with plumed2 in the coming version.
+   Conda installation will be made available with an option to install xdatbus bundled with plumed2 in the coming version.
 

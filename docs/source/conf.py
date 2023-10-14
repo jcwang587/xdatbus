@@ -4,6 +4,7 @@
 
 import os
 import setuptools
+import subprocess
 
 # Function to extract project metadata from setup.py
 def get_project_metadata():
@@ -23,19 +24,17 @@ def get_project_metadata():
     finally:
         setuptools.setup = original_setup  # Restore the original function
     
-    return setup_args
+    return setup_args, setup_dir
 
 # Get project metadata
-metadata = get_project_metadata()
+metadata, repo_dir = get_project_metadata()
 
 # -- Project information
 
 project = metadata['name']
 copyright = f"2023, {metadata['author']}"
 author = metadata['author']
-
 release = metadata['version']
-# Assuming version is in the format 'major.minor.patch'
 version = '.'.join(release.split('.')[:2])
 
 # -- General configuration
@@ -46,6 +45,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    'autoapi.extension'
 ]
 
 intersphinx_mapping = {
@@ -53,12 +53,19 @@ intersphinx_mapping = {
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
 }
 intersphinx_disabled_domains = ['std']
-
 templates_path = ['_templates']
+
+# -- autoapi configuration
+
+autoapi_dirs = os.path.join(repo_dir, 'xdatbus')
+autoapi_add_toctree_entry = True
+autoapi_type = 'python'
+autoapi_keep_files = True
 
 # -- Options for HTML output
 
 html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
+
 epub_show_urls = 'footnote'

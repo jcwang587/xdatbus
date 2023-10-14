@@ -7,6 +7,7 @@ Pip
 ----------------
 
 Make sure you have a Python interpreter, preferably version 3.10 or higher:
+
 .. code-block:: console
 
    (.venv) $ python --version
@@ -31,3 +32,4 @@ Conda
 .. note::
 
 Conda installation will be made available with an option to install xdatbus bundled with plumed2 in the coming version.
+

@@ -25,18 +25,6 @@ Then, you can simply install `xdatbus` from pypi using `pip`:
 pip install xdatbus
 ```
 
-or
-
-```bash
-pip install --upgrade xdatbus
-```
-
-
-
-## Motivation
-
-The main goal of this project is to provide a tool to efficiently do the analysis of Ab-inito molecular dynamics results from VASP. Under most cases, we care about some certain atoms for MD simulation, while in a framework of other atoms which are supposed to be "fixed". For better visualization, we hope these atoms could be fixed but not vibrating. By applying pymatgen and ASE packages.
-
 
 
 ## Get Started

@@ -10,7 +10,7 @@
 ## Installation
 
 
-Make sure you have a Python interpreter newer than version 3.8:
+Make sure you have a Python interpreter, preferably version 3.10 or higher:
 
 
 ```bash

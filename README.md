@@ -21,6 +21,12 @@ Then, you can simply install `xdatbus` from pypi using `pip`:
 ❯ pip install xdatbus
 ```
 
+If you'd like to use the latest unreleased version on the main branch, you can install it directly from GitHub:
+
+```bash
+❯ pip install -U git+https://github.com/materialsproject/pymatgen
+```
+
 
 ## Get Started
 

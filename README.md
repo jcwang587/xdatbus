@@ -24,16 +24,17 @@ Then, you can simply install `xdatbus` from pypi using `pip`:
 
 ## Get Started
 
-This is quick example of how to test a Random Forest classifier on the Animals dataset:
+This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file.:
 
 ```python
 import os
-from xdatbus import f01_aggregate
+from xdatbus import f01_aggregate, f02_unwrap
 
 aimd_path = "./data"
 output_path = os.path.dirname(aimd_path)
 
-f01_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
+f01_aggregate(aimd_path=aimd_path, output_path=output_path)
+f02_unwrap(xdatcar_path=output_path)
 ```
 
 ## Update log

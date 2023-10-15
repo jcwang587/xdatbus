@@ -20,7 +20,7 @@ To use `xdatbus`, install it from the PyPI repository using `pip`, which will al
 
    (.venv) $ pip install xdatbus
 
-To get the latest version of `xdatbus`, if you have it already installed, please run the command with the `--upgrade` option:
+To get the latest version of `xdatbus`, if you have it already installed, please run the command with the upgrade option:
 
 .. code-block:: console
 

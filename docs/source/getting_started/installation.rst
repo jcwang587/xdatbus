@@ -3,7 +3,7 @@ Installation
 
 .. _installation:
 
-Installing with pip
+1. Installing with pip
 ----------------
 
 Make sure you have a Python interpreter, preferably version 3.10 or higher:
@@ -26,10 +26,17 @@ To get the latest version of `xdatbus`, if you have it already installed, please
 
    (.venv) $ pip install --upgrade xdatbus
 
-Installing with Conda
+If you'd like to use the latest unreleased version on the main branch, you can install it directly from GitHub:
+
+.. code-block:: console
+
+   (.venv) $ pip install -U git+https://https://github.com/jcwang587/xdatbus
+
+
+2. Installing with Conda
 ----------------
 
 .. note::
 
-   Conda installation will be made available with an option to install xdatbus bundled with plumed2 in the coming version.
+   Conda installation will be made available with an option to install `xdatbus` bundled with plumed2 in the coming version.
 

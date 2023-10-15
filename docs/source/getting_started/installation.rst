@@ -33,7 +33,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
    (.venv) $ pip install -U git+https://https://github.com/jcwang587/xdatbus
 
 
-2. Installing with Conda
+2. Installing with conda
 ----------------
 
 .. note::

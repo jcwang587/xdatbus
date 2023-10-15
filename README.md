@@ -15,7 +15,7 @@ Make sure you have a Python interpreter, preferably version 3.10 or higher:
 
 ```bash
 ❯ python --version
-Python 3.8.0
+Python 3.11.4
 ```
 
 Then, you can simply install `xdatbus` from pypi using `pip`:

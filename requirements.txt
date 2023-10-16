@@ -1,5 +1,5 @@
 xdatbus~=0.0.55
-numpy~=1.26.0
+numpy~=1.26.1
 ase~=3.22.1
 pymatgen~=2023.10.11
 pandas~=2.1.1

@@ -38,5 +38,5 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 
 .. note::
 
-   Conda installation will be made available with an option to install `xdatbus` bundled with plumed2 in the coming version.
+   Conda installation will be made available with an option to install `xdatbus` bundled with `plumed2` in the coming version.
 

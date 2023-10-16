@@ -8,23 +8,16 @@
 
 ## Installation
 
-Make sure you have a Python interpreter, preferably version 3.10 or higher:
+Make sure you have a Python interpreter, preferably version 3.10 or higher. Then, you can simply install `xdatbus` from pypi using `pip`:
 
 ```bash
-$ python --version
-Python 3.11.4
-```
-
-Then, you can simply install `xdatbus` from pypi using `pip`:
-
-```bash
-$ pip install xdatbus
+pip install xdatbus
 ```
 
 If you'd like to use the latest unreleased version on the main branch, you can install it directly from GitHub:
 
 ```bash
-$ pip install -U git+https://https://github.com/jcwang587/xdatbus
+pip install -U git+https://https://github.com/jcwang587/xdatbus
 ```
 
 

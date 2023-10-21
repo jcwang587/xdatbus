@@ -3,7 +3,7 @@ import shutil
 import pandas as pd
 
 
-def fm02_hillspot2hills(hillspot_dir, hills_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
+def hillspot2hills(hillspot_dir, hills_dir, cv, height_conversion=1, sigma_conversion=1, del_inter=False):
     """
     Convert HILLSPOT file to HILLS file
         Parameters

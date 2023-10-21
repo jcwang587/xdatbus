@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from .utils import update_folder
 
 
-def f01_aggregate(
+def xdc_aggregate(
         aimd_path,
         output_path="./",
         min_frames=1,
@@ -90,7 +90,7 @@ def main():
 
     args = parser.parse_args()
 
-    f01_aggregate(args.aimd_path, args.output_path, args.min_frames, args.delete_temp_files)
+    xdc_aggregate(args.aimd_path, args.output_path, args.min_frames, args.delete_temp_files)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ from pymatgen.io.xyz import XYZ
 from .utils import unwrap_pbc_dis
 
 
-def f03_unwrap_xyz(xyz_path, lattice):
+def xyz_unwrap(xyz_path, lattice):
     print('Loading the XYZ file ...')
     xyz = XYZ.from_file(xyz_path)
     # initialize an empty list to store unwrapped fractional coordinates

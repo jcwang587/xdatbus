@@ -1,7 +1,8 @@
 import MDAnalysis as MDa
+from ase.io import read, write
 
 
-def fm01_xdatcar2xtc(
+def xdatcar2xtc(
         aimd_path
 ):
     """
@@ -19,11 +20,10 @@ def fm01_xdatcar2xtc(
     write('XDATBUS.xyz', xdatbusxyz_ase, format='xyz')
     u = MDa.Universe('XDATBUS.xyz')
 
-    if xtc:
-        # Write out the XTC file
-        with MDa.Writer("trajectory.xtc", u.atoms.n_atoms) as w:
-            for ts in u.trajectory:
-                print("Writing frame %d" % ts.frame)
-                w.write(u.atoms)
+    # Write out the XTC file
+    with MDa.Writer("trajectory.xtc", u.atoms.n_atoms) as w:
+        for ts in u.trajectory:
+            print("Writing frame %d" % ts.frame)
+            w.write(u.atoms)
 
     print("Done.")

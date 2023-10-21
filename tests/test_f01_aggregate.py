@@ -1,6 +1,6 @@
 import os
 import shutil
-from xdatbus import f01_aggregate
+from xdatbus import xdc_aggregate
 import pytest
 from ase.io import read
 
@@ -28,7 +28,7 @@ def test_f01_aggregate(setup_test_environment):
     aimd_path = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(aimd_path)
 
-    f01_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
+    xdc_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
 
     # Assertions
     xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")

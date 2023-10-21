@@ -2,10 +2,10 @@ import os
 import shutil
 import pandas as pd
 from pymatgen.io.vasp.outputs import Xdatcar
-from .fcom01_drift import fcom01_drift
+from .fcom01_drift import com_drift
 
 
-def fcom02_hillspot(aimd_path, xyz_path='XDATBUS_unwrapped.xyz', freq=100, delete_intermediate_files=True):
+def com_hillspot(aimd_path, xyz_path='XDATBUS_unwrapped.xyz', freq=100, delete_intermediate_files=True):
     """
     Correct the HILLSPOT file by adding the COM drift to the first column of the HILLSPOT file.
     The COM drift is calculated by fcom01_drift().

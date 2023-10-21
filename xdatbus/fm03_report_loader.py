@@ -3,7 +3,7 @@ import shutil
 import numpy as np
 
 
-def fm03_report_loader(
+def report_loader(
         aimd_path,
         load_pre_report=True,
         load_last_report=False,

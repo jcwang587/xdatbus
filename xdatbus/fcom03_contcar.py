@@ -4,7 +4,7 @@ from ase.io import read
 from ase import Atoms
 
 
-def fcom03_contcar(poscar_path, contcar_path, del_inter=False):
+def com_contcar(poscar_path, contcar_path, del_inter=False):
     """
     Correct the CONTCAR file by adding the COM drift to the coordinates of the CONTCAR file.
     The COM drift is calculated by fcom01_drift().

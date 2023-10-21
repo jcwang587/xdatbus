@@ -3,7 +3,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from .utils import unwrap_pbc_dis
 
 
-def f02_unwrap(xdatcar_path):
+def xdc_unwrap(xdatcar_path):
     print('Loading the XDATCAR file ...')
     xdatcar = Xdatcar(xdatcar_path)
     # initialize an empty list to store unwrapped fractional coordinates

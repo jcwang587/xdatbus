@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 
-def fcom01_drift(xyz_path, frame_start=0, frame_end=None, save_csv=True, timestep=1):
+def com_drift(xyz_path, frame_start=0, frame_end=None, save_csv=True, timestep=1):
     """
     Calculate the center of mass (COM) drift velocity for a xyz file.
 

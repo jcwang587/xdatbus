@@ -32,8 +32,8 @@ from xdatbus import f01_aggregate, f02_unwrap
 aimd_path = "./data"
 output_path = os.path.dirname(aimd_path)
 
-f01_aggregate(aimd_path=aimd_path, output_path=output_path)
-f02_unwrap(xdatcar_path=output_path)
+xtc_aggregate(aimd_path=aimd_path, output_path=output_path)
+xtc_unwrap(xdatcar_path=output_path)
 ```
 
 ## Update log

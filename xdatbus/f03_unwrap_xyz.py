@@ -35,7 +35,7 @@ def xyz_unwrap(xyz_path, lattice):
         unwrapped_coords.append(current_unwrapped_coords)
 
     # open the output xyz file
-    with open(xyz_path + '_unwrapped.xyz', 'w') as xyz_file:
+    with open(xyz_path.split('/')[-1] + '_unwrapped.xyz', 'w') as xyz_file:
         for i, coords in enumerate(unwrapped_coords):
             # write the current structure to the xyz file
             xyz_file.write(str(len(xyz.all_molecules[i].species)) + '\n\n')

@@ -35,7 +35,7 @@ with codecs.open(readme_path, encoding="utf-8") as fh:
 with open(requirements_path) as f:
     required = f.read().splitlines()
 
-VERSION = '0.0.70'
+VERSION = '0.0.71'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 
@@ -55,7 +55,8 @@ setup(
         "Development Status :: 1 - Planning",
         "Intended Audience :: Science/Research",
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         "Operating System :: OS Independent",
     ]
 )

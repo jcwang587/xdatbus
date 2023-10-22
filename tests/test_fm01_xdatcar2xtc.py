@@ -1,8 +1,7 @@
+from xdatbus import xyz_unwrap
+import pytest
 import os
 import shutil
-from xdatbus import xdc_aggregate
-import pytest
-from ase.io import read
 
 
 @pytest.fixture
@@ -18,28 +17,27 @@ def setup_test_environment(tmp_path, request):
     test_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the test data directory
-    data_dir = os.path.join(test_dir, "data/xdatcar")
+    data_dir = os.path.join(test_dir, "data/xyz")
 
     # Copy all files from the data directory to the temporary directory
     for f in os.listdir(data_dir):
         shutil.copy(os.path.join(data_dir, f), temp_dir)
 
-    return temp_dir
+    # Assuming you have only one .xyz file (or you want to test with the first one you find)
+    xyz_file = [f for f in os.listdir(temp_dir) if f.endswith('.xyz')][0]
+
+    return os.path.join(temp_dir, xyz_file)
 
 
-def test_f01_aggregate(setup_test_environment):
-    aimd_path = str(setup_test_environment)
-    main_tmp_dir = os.path.dirname(aimd_path)
+def test_f03_unwrap(setup_test_environment):
+    xyz_path = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(xyz_path)
 
-    xdc_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
+    lattice = [13.859, 17.42, 15.114]
+
+    xyz_unwrap(xyz_path=xyz_path, lattice=lattice)
 
     # Assertions
-    xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")
-    assert os.path.exists(xdatbus_path), "XDATBUS file not created"
+    xyz_unwrap_path = os.path.join(main_tmp_dir, "trj_unwrapped.xyz")
 
-    # Load the aggregated data
-    aggregated_data = read(xdatbus_path, format='vasp-xdatcar', index=':')
-
-    # Check the aggregation result against one of the files in the temporary directory
-    assert len(aggregated_data) >= len(
-        read(os.path.join(aimd_path, "XDATCAR_01"), format='vasp-xdatcar', index=':'))
+    assert os.path.exists(xyz_unwrap_path), "unwrapped trj file not created"

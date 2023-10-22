@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from pymatgen.io.vasp.outputs import Xdatcar
 from .utils import unwrap_pbc_dis
@@ -33,7 +34,9 @@ def xdc_unwrap(xdatcar_path):
         unwrapped_coords.append(current_unwrapped_coords)
 
     # open the output xyz file
-    with open(xyz_path.split('/')[-1].replace('.xyz', '_unwrapped.xyz'), 'w') as xyz_file:
+    output_filename = os.path.basename(xdatcar_path) + '_unwrapped.xyz'
+    output_path = os.path.join(os.path.dirname(xdatcar_path), output_filename)
+    with open(output_path, 'w') as xyz_file:
         for i, coords in enumerate(unwrapped_coords):
             # write the current structure to the xyz file
             xyz_file.write(str(len(xdatcar.structures[i].species)) + '\n\n')

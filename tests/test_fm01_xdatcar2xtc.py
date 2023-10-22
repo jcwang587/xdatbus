@@ -15,7 +15,7 @@ def setup_test_environment(tmp_path):
     test_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the test data directory
-    data_dir = os.path.join(test_dir, "data")
+    data_dir = os.path.join(test_dir, "data/xdatcar")
 
     # Copy all files from the data directory to the temporary directory
     for f in os.listdir(data_dir):

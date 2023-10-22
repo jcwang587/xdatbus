@@ -27,13 +27,13 @@ This is a brief example demonstrating how to use the basic function of `xdatbus`
 
 ```python
 import os
-from xdatbus import xtc_aggregate, xtc_unwrap
+from xdatbus import xdc_aggregate, xdc_unwrap
 
 aimd_path = "./data"
 output_path = os.path.dirname(aimd_path)
 
-xtc_aggregate(aimd_path=aimd_path, output_path=output_path)
-xtc_unwrap(xdatcar_path=output_path)
+xdc_aggregate(aimd_path=aimd_path, output_path=output_path)
+xdc_unwrap(xdatcar_path=output_path)
 ```
 
 ## Update log

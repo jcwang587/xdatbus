@@ -40,4 +40,9 @@ def test_f03_unwrap(setup_test_environment):
     # Assertions
     xyz_unwrap_path = os.path.join(main_tmp_dir, "trj_unwrapped.xyz")
 
+    # Debugging prints
+    print("xyz_path:", xyz_path)
+    print("main_tmp_dir:", main_tmp_dir)
+    print("xyz_unwrap_path:", xyz_unwrap_path)
+
     assert os.path.exists(xyz_unwrap_path), "unwrapped trj file not created"

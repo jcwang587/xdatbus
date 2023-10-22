@@ -2,9 +2,7 @@ import MDAnalysis as MDa
 from ase.io import read, write
 
 
-def xdatcar2xtc(
-        aimd_path
-):
+def xdatcar2xtc(aimd_path):
     """
     Initialize a trajectory writer instance for *filename*.
 

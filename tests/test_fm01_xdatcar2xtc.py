@@ -6,9 +6,12 @@ from ase.io import read
 
 
 @pytest.fixture
-def setup_test_environment(tmp_path):
+def setup_test_environment(tmp_path, request):
+    # Get the name of the test function
+    test_name = request.node.name
+
     # Use tmp_path for the test directory
-    temp_dir = tmp_path / "test_aimd_path"
+    temp_dir = tmp_path / test_name
     temp_dir.mkdir()
 
     # Get the directory of the current test file

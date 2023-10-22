@@ -2,6 +2,7 @@ import codecs
 import os
 from setuptools import setup, find_packages
 
+
 def find_repo_root(start_dir):
     """Find the root directory of the repository."""
     current_dir = start_dir
@@ -16,6 +17,7 @@ def find_repo_root(start_dir):
             raise FileNotFoundError("Repository root not found")
         # Otherwise, move up the directory hierarchy
         current_dir = parent_dir
+
 
 # Get the directory containing setup.py
 setup_dir = os.path.abspath(os.path.dirname(__file__))
@@ -33,7 +35,7 @@ with codecs.open(readme_path, encoding="utf-8") as fh:
 with open(requirements_path) as f:
     required = f.read().splitlines()
 
-VERSION = '0.0.60'
+VERSION = '0.0.61'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 

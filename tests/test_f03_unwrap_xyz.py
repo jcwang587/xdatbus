@@ -31,8 +31,12 @@ def setup_test_environment(tmp_path, request):
 
 def test_f03_unwrap(setup_test_environment):
     xyz_path = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(xyz_path)
 
     lattice = [13.859, 17.42, 15.114]
 
     xyz_unwrap(xyz_path=xyz_path, lattice=lattice)
-    assert os.path.exists('trj_unwrapped.xyz'), "unwrapped trj file not created"
+
+    # Assertions
+    xyz_unwrap_path = os.path.join(main_tmp_dir, "trj_unwrapped.xyz")
+    assert os.path.exists(xyz_unwrap_path), "unwrapped trj file not created"

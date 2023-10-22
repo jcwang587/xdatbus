@@ -27,7 +27,7 @@ This is a brief example demonstrating how to use the basic function of `xdatbus`
 
 ```python
 import os
-from xdatbus import f01_aggregate, f02_unwrap
+from xdatbus import xtc_aggregate, xtc_unwrap
 
 aimd_path = "./data"
 output_path = os.path.dirname(aimd_path)

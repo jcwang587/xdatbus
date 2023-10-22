@@ -14,7 +14,7 @@ def setup_test_environment(tmp_path):
     test_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the test data directory
-    data_dir = os.path.join(test_dir, "data/xdatcar")
+    data_dir = os.path.join(test_dir, "data/xyz")
 
     # Copy all files from the data directory to the temporary directory
     for f in os.listdir(data_dir):
@@ -26,8 +26,8 @@ def setup_test_environment(tmp_path):
 def test_f03_unwrap(setup_test_environment):
     lattice = [13.859, 17.42, 15.114]
 
-    xyz_unwrap('data/xyz/trj.xyz', lattice)
-    assert os.path.exists('data/xyz/trj_unwrapped.xyz'), "XDATBUS file not created"
+    xyz_unwrap('trj.xyz', lattice)
+    assert os.path.exists('trj_unwrapped.xyz'), "XDATBUS file not created"
 
 
 

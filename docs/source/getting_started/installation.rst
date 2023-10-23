@@ -26,7 +26,7 @@ To get the latest version of `xdatbus`, if you have it already installed, please
 
    $ pip install --upgrade xdatbus
 
-If you'd like to use the latest unreleased version on the main branch, you can install it directly from GitHub:
+If you'd like to use the latest unreleased version on the main branch, you can install it directly from `GitHub <https://github.com/jcwang587/xdatbus>`_:
 
 .. code-block:: console
 

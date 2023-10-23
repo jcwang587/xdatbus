@@ -8,7 +8,7 @@ from .utils import update_folder
 
 
 def xdc_aggregate(
-        xdatcar_dir,
+        xdc_dir,
         output_path="./",
         min_frames=1,
         delete_temp_files=True
@@ -18,7 +18,7 @@ def xdc_aggregate(
 
         Parameters
         ----------
-        xdatcar_dir : str
+        xdc_dir : str
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_path : str (optional)
             Output path of the XDATBUS file
@@ -28,7 +28,7 @@ def xdc_aggregate(
             If ``True``, the intermediate folders will be deleted
     """
 
-    raw_list = os.listdir(xdatcar_dir)
+    raw_list = os.listdir(xdc_dir)
     raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
     xdatcar_wrap_path = output_path + "/xdatcar_wrap"
@@ -47,7 +47,7 @@ def xdc_aggregate(
     log_file = open(log_path, "w")
     for xdatcar_raw in raw_list_sort:
         print("Wrapping " + xdatcar_raw + " ...")
-        xdatcar = read(xdatcar_dir + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
+        xdatcar = read(xdc_dir + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
         if len(xdatcar) > min_frames:
             write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
@@ -73,12 +73,12 @@ def xdc_aggregate(
         shutil.rmtree(xdatcar_wrap_path)
         os.remove(log_path)
 
-    print("xdatbus-func: f01_aggregate: Done!")
+    print("xdatbus-func: f01_xdc_aggregate: Done!")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Aggregate XDATCAR files from an AIMD simulation.")
-    parser.add_argument("aimd_path", type=str,
+    parser.add_argument("--xdc_dir", type=str,
                         help="Input path of the AIMD simulation, which contains the XDATCAR files")
     parser.add_argument("--output_path", type=str, default="./",
                         help="Output path of the XDATBUS file (default: current directory)")

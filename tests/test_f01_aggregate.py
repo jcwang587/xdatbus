@@ -28,10 +28,10 @@ def setup_test_environment(tmp_path, request):
 
 
 def test_f01_aggregate(setup_test_environment):
-    aimd_path = str(setup_test_environment)
-    main_tmp_dir = os.path.dirname(aimd_path)
+    xdc_dir = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(xdc_dir)
 
-    xdc_aggregate(aimd_path=aimd_path, output_path=main_tmp_dir)
+    xdc_aggregate(xdc_dir=xdc_dir, output_path=main_tmp_dir)
 
     # Assertions
     xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")
@@ -42,4 +42,4 @@ def test_f01_aggregate(setup_test_environment):
 
     # Check the aggregation result against one of the files in the temporary directory
     assert len(aggregated_data) >= len(
-        read(os.path.join(aimd_path, "XDATCAR_01"), format='vasp-xdatcar', index=':'))
+        read(os.path.join(xdc_dir, "XDATCAR_01"), format='vasp-xdatcar', index=':'))

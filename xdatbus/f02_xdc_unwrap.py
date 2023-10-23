@@ -4,9 +4,9 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from .utils import unwrap_pbc_dis
 
 
-def xdc_unwrap(xdatcar_path):
+def xdc_unwrap(xdc_path):
     print('Loading the XDATCAR file ...')
-    xdatcar = Xdatcar(xdatcar_path)
+    xdatcar = Xdatcar(xdc_path)
     # initialize an empty list to store unwrapped fractional coordinates
     unwrapped_coords = []
 
@@ -34,8 +34,8 @@ def xdc_unwrap(xdatcar_path):
         unwrapped_coords.append(current_unwrapped_coords)
 
     # open the output xyz file
-    output_filename = os.path.basename(xdatcar_path) + '_unwrapped.xyz'
-    output_path = os.path.join(os.path.dirname(xdatcar_path), output_filename)
+    output_filename = os.path.basename(xdc_path) + '_unwrapped.xyz'
+    output_path = os.path.join(os.path.dirname(xdc_path), output_filename)
     with open(output_path, 'w') as xyz_file:
         for i, coords in enumerate(unwrapped_coords):
             # write the current structure to the xyz file

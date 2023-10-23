@@ -30,10 +30,10 @@ def setup_test_environment(tmp_path, request):
 
 
 def test_f03_unwrap(setup_test_environment):
-    xdatcar_path = str(setup_test_environment)
-    main_tmp_dir = os.path.dirname(xdatcar_path)
+    xdc_path = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(xdc_path)
 
-    xdc_unwrap(xdatcar_path=xdatcar_path)
+    xdc_unwrap(xdc_path=xdc_path)
 
     # Assertions
     xyz_unwrap_path = os.path.join(main_tmp_dir, "XDATCAR_01_unwrapped.xyz")

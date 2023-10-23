@@ -8,7 +8,7 @@ from .utils import update_folder
 
 
 def xdc_aggregate(
-        aimd_path,
+        xdatcar_dir,
         output_path="./",
         min_frames=1,
         delete_temp_files=True
@@ -18,7 +18,7 @@ def xdc_aggregate(
 
         Parameters
         ----------
-        aimd_path : str
+        xdatcar_dir : str
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_path : str (optional)
             Output path of the XDATBUS file
@@ -28,7 +28,7 @@ def xdc_aggregate(
             If ``True``, the intermediate folders will be deleted
     """
 
-    raw_list = os.listdir(aimd_path)
+    raw_list = os.listdir(xdatcar_dir)
     raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
     xdatcar_wrap_path = output_path + "/xdatcar_wrap"
@@ -47,7 +47,7 @@ def xdc_aggregate(
     log_file = open(log_path, "w")
     for xdatcar_raw in raw_list_sort:
         print("Wrapping " + xdatcar_raw + " ...")
-        xdatcar = read(aimd_path + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
+        xdatcar = read(xdatcar_dir + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
         if len(xdatcar) > min_frames:
             write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)

@@ -23,7 +23,7 @@ pip install -U git+https://https://github.com/jcwang587/xdatbus
 
 ## Get Started
 
-This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file.:
+This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file:
 
 ```python
 import os

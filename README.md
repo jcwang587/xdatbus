@@ -21,7 +21,7 @@ pip install -U git+https://https://github.com/jcwang587/xdatbus
 ```
 The package is also availabe from conda-based installation. It is generally recommended you first create a separate environment, then you can install `xdatbus` via conda as well via the xdatbus channel on Anaconda cloud:
 ```bash
-conda install -c xdatbus xdatbus
+conda install --channel xdatbus xdatbus
 ```
 
 ## Get Started

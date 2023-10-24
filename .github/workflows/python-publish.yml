@@ -22,7 +22,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.10'
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
@@ -52,6 +52,12 @@ jobs:
 
     - name: Install Conda-build
       run: conda install conda-build -y
+
+    - name: Set VERSION environment variable
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Build Conda package
+      run: conda build conda/ --output-folder conda-out --python ${{ env.VERSION }}
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3

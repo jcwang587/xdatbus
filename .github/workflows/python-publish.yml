@@ -54,7 +54,7 @@ jobs:
       run: conda install conda-build -y
 
     - name: Set VERSION environment variable
-      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Build Conda package
       run: conda build conda/ --output-folder conda-out --python ${{ env.VERSION }}

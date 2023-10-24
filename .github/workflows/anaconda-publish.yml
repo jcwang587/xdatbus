@@ -40,6 +40,11 @@ jobs:
     - name: Install conda-build and anaconda-client
       run: conda install conda-build anaconda-client -y
 
+    - name: Set version in meta.yaml
+      run: |
+        VERSION=$(git describe --tags --abbrev=0 | sed 's/v//')
+        sed -i "s/PACKAGE_VERSION/$VERSION/" conda/meta.yaml
+
     - name: Build Conda package
       run: conda build -c conda-forge conda/ --output-folder conda-out
 

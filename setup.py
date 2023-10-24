@@ -35,13 +35,12 @@ with codecs.open(readme_path, encoding="utf-8") as fh:
 with open(requirements_path) as f:
     required = f.read().splitlines()
 
-VERSION = '0.0.97'
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 
 setup(
     name="xdatbus",
-    version=VERSION,
+    version="0.0.97",
     author="Jiacheng Wang",
     author_email="jiachengwang@umass.edu",
     maintainer="Jiacheng Wang",

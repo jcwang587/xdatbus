@@ -1,4 +1,4 @@
-{% set version = subprocess.check_output(['git', 'describe', '--tags', '--abbrev=0']).strip().decode('utf-8').replace('v', '') %}
+{% set version = "PACKAGE_VERSION" %}
 
 package:
   name: xdatbus

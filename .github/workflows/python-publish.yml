@@ -57,7 +57,7 @@ jobs:
       run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
 
     - name: Build Conda package
-      run: conda build conda/ --output-folder conda-out
+      run: conda build -c conda-forge conda/ --output-folder conda-out
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3

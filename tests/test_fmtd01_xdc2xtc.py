@@ -29,7 +29,7 @@ def setup_test_environment(tmp_path, request):
     return os.path.join(temp_dir, xyz_file)
 
 
-def test_fm01_xdc2xtc(setup_test_environment):
+def test_fmtd01_xdc2xtc(setup_test_environment):
     xyz_path = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xyz_path)
 

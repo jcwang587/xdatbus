@@ -27,7 +27,7 @@ def setup_test_environment(tmp_path, request):
     return temp_dir
 
 
-def test_f01_aggregate(setup_test_environment):
+def test_f01_xdc_aggregate(setup_test_environment):
     xdc_dir = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_dir)
 

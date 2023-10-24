@@ -53,17 +53,6 @@ jobs:
     - name: Install Conda-build
       run: conda install conda-build -y
 
-    - name: Remove existing skeleton directory
-      run: rm -rf xdatbus
-
-    - name: Build Conda package from PyPI
-      run: |
-        conda skeleton pypi xdatbus
-        conda build xdatbus
-
-    - name: Upload package to Anaconda
-      run: anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload -u jcwang587 $HOME/miniconda/conda-bld/**/xdatbus*.tar.bz2
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:

@@ -1,0 +1,35 @@
+{% set version = environ['VERSION'] %}
+
+package:
+  name: xdatbus
+  version: {{ version }}
+
+source:
+  git_url: https://github.com/jcwang587/xdatbus.git
+  git_tag: v{{ version }}
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - xdatbus
+
+about:
+  home: https://xdatbus.readthedocs.io/en/latest/
+  license: MIT
+  license_file: LICENSE
+  summary: 'A python toolkit for analyzing XDATCAR'
+
+extra:
+  recipe-maintainers:
+    - jcwang587

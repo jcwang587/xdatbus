@@ -64,7 +64,7 @@ jobs:
 
     - name: Upload Conda package to Anaconda Cloud
       run: |
-        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload conda-out/linux-64/xdatbus-*.tar.bz2
+        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload conda-out/noarch/xdatbus-*.tar.bz2
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3

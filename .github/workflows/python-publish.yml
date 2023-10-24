@@ -48,6 +48,23 @@ jobs:
         user: __token__
         password: ${{ secrets.PYPI_TOKEN }}
 
+    - name: Install Conda
+      run: |
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+        bash miniconda.sh -b -p $HOME/miniconda
+        echo "$HOME/miniconda/bin" >> $GITHUB_PATH
+        conda config --set always_yes yes --set changeps1 no
+        conda update -q conda
+
+    - name: Build Conda package from PyPI
+      run: |
+        conda skeleton pypi xdatbus
+        conda build xdatbus
+
+    - name: Upload to Anaconda
+      run: |
+        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload -u jcwang587 $HOME/miniconda/conda-bld/**/xdatbus*.tar.bz2
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       env:

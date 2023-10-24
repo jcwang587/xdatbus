@@ -17,10 +17,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
@@ -33,40 +33,33 @@ jobs:
     - name: Run tests
       run: pytest --cov=xdatbus
 
-    - name: Build package
-      run: python -m build
-
-    - name: Publish package to PyPi
-      uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN }}
-
-    - name: Install Conda
-      run: |
-        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-        bash miniconda.sh -b -p $HOME/miniconda
-        echo "$HOME/miniconda/bin" >> $GITHUB_PATH
-        conda config --set always_yes yes --set changeps1 no
-        conda update -q conda
-
-    - name: Install Conda-build
-      run: conda install conda-build -y
-
-    - name: Set VERSION environment variable
-      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
-
-    - name: Build Conda package
-      run: conda build -c conda-forge conda/ --output-folder conda-out
-
-    - name: Install anaconda-client
-      run: conda install anaconda-client -y
-
-    - name: Upload Conda package to Anaconda Cloud
-      run: |
-        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload conda-out/noarch/xdatbus-*.tar.bz2
-
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Build package
+      run: python -m build
+
+    - name: Publish package to PyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}
+
+    - name: Setup Miniconda
+      run: |
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+        bash miniconda.sh -b -p $HOME/miniconda
+        echo "$HOME/miniconda/bin" >> $GITHUB_PATH
+        conda config --set always_yes yes
+
+    - name: Install conda-build and anaconda-client
+      run: conda install conda-build anaconda-client -y
+
+    - name: Build Conda package
+      run: conda build -c conda-forge conda/ --output-folder conda-out
+
+    - name: Upload Conda package to Anaconda Cloud
+      run: |
+        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload conda-out/noarch/xdatbus-*.tar.bz2

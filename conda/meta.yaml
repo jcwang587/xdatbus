@@ -23,6 +23,7 @@ requirements:
     - pymatgen
     - mdanalysis
     - ovito
+    - plumed
 
 test:
   imports:

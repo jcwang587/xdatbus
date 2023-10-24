@@ -19,11 +19,14 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 ```bash
 pip install -U git+https://https://github.com/jcwang587/xdatbus
 ```
-
+The package is also availabe from conda-based installation. It is generally recommended you first create a separate environment, then you can install `xdatbus` via conda as well via the xdatbus channel on Anaconda cloud:
+```bash
+conda install -c xdatbus xdatbus
+```
 
 ## Get Started
 
-This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file.:
+This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file:
 
 ```python
 import os

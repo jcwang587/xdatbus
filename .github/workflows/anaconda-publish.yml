@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  anaconda-publish:
     # Ensure the conditional checks the correct input.
     if: github.event.inputs.publishToAnaconda == 'yes' 
 

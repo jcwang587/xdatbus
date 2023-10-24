@@ -38,15 +38,6 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
 
-    - name: Build package
-      run: python -m build
-
-    - name: Publish package to PyPi
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN }}
-
     - name: Setup Miniconda
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -63,4 +54,13 @@ jobs:
     - name: Upload Conda package to Anaconda Cloud
       run: |
         anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload -u xdatbus conda-out/noarch/xdatbus-*.tar.bz2
+
+    - name: Build package
+      run: python -m build
+
+    - name: Publish package to PyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}
 

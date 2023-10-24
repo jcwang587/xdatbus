@@ -1,0 +1,65 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+name: build
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install build pytest coverage pytest-cov
+
+    - name: Run tests
+      run: pytest --cov=xdatbus
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Setup Miniconda
+      run: |
+        wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+        bash miniconda.sh -b -p $HOME/miniconda
+        echo "$HOME/miniconda/bin" >> $GITHUB_PATH
+        conda config --set always_yes yes
+
+    - name: Install conda-build and anaconda-client
+      run: conda install conda-build anaconda-client -y
+
+    - name: Build Conda package
+      run: conda build -c conda-forge conda/ --output-folder conda-out
+
+    - name: Upload Conda package to Anaconda Cloud
+      run: |
+        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload -u xdatbus conda-out/noarch/xdatbus-*.tar.bz2
+
+    - name: Build package
+      run: python -m build
+
+    - name: Publish package to PyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_TOKEN }}

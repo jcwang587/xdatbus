@@ -62,4 +62,5 @@ jobs:
 
     - name: Upload Conda package to Anaconda Cloud
       run: |
-        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload conda-out/noarch/xdatbus-*.tar.bz2
+        anaconda -t ${{ secrets.ANACONDA_TOKEN }} upload -u xdatbus conda-out/noarch/xdatbus-*.tar.bz2
+

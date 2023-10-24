@@ -56,6 +56,10 @@ jobs:
         conda config --set always_yes yes --set changeps1 no
         conda update -q conda
 
+    - name: Install Conda-build
+      run: |
+        conda install conda-build -y
+
     - name: Build Conda package from PyPI
       run: |
         conda skeleton pypi xdatbus

@@ -40,7 +40,7 @@ LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VAS
 
 setup(
     name="xdatbus",
-    version="0.0.97",
+    version="0.0.98",
     author="Jiacheng Wang",
     author_email="jiachengwang@umass.edu",
     maintainer="Jiacheng Wang",

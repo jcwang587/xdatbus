@@ -31,6 +31,8 @@ test:
 
 about:
   home: https://xdatbus.readthedocs.io/en/latest/
+  development: https://github.com/jcwang587/xdatbus
+  documentation: https://xdatbus.readthedocs.io/en/latest/
   license: MIT
   license_file: ../LICENSE.md
   summary: 'A python toolkit for analyzing XDATCAR'

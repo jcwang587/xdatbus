@@ -60,6 +60,9 @@ jobs:
       run: |
         conda install conda-build -y
 
+    - name: Remove existing skeleton directory
+      run: rm -rf xdatbus
+
     - name: Build Conda package from PyPI
       run: |
         conda skeleton pypi xdatbus

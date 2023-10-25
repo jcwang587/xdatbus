@@ -8,7 +8,7 @@ Check out the :doc:`installation` section to get started, and :doc:`usage` secti
 
 .. note::
 
-   This project is under active development.
+   This project is actively under development. We welcome feedback on its usage, as well as reports of defects or suggestions for expected functions. You can directly post any issues in the `GitHub repository <https://github.com/jcwang587/xdatbus>`_ or the `discussion forumn <https://github.com/jcwang587/xdatbus/discussions>`_.
 
 .. toctree::
    :maxdepth: 2

@@ -40,7 +40,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 
    Conda installation will be made available with an option to install `xdatbus` bundled with `plumed2` in the coming version.
 
-Download and install the version of conda for your operating system from `Miniconda <https://docs.conda.io/projects/miniconda/en/latest/>`_. If you are working with many python packages, it is generally recommended you create a separate environment for each of your packages. For example:
+Download and install the version of conda for your operating system from `Miniconda <https://docs.conda.io/projects/miniconda/en/latest/>`_. It is generally recommended you create a separate environment for `xdatbus`. For example:
 
 .. code-block:: console
 

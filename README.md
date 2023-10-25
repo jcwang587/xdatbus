@@ -36,7 +36,7 @@ xdc_dir = "./data"
 output_path = os.path.dirname(xdc_dir)
 
 xdc_aggregate(xdc_dir=xdc_dir, output_path=output_path)
-xdc_unwrap(xdatcar_path=output_path)
+xdc_unwrap(xdc_path=output_path)
 ```
 
 ## Update log

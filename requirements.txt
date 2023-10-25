@@ -1,4 +1,4 @@
-xdatbus~=0.0.88
+xdatbus~=0.0.99
 numpy~=1.26.1
 ase~=3.22.1
 pymatgen~=2023.10.11

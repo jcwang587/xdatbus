@@ -16,7 +16,8 @@ def xyz_unwrap(xyz_path, lattice):
     unwrapped_coords.append(previous_unwrapped_coords.copy())  # Store the first set of coordinates
 
     for i in range(1, len(xyz.all_molecules)):  # Start from the second frame
-        print('Processing frame ' + str(i + 1) + ' ...')
+        if (i + 1) % 1000 == 0:
+            print('Processing frame ' + str(i + 1) + ' ...')
 
         # initialize an empty array for the current structure's unwrapped coordinates
         current_unwrapped_coords = np.zeros_like(xyz.all_molecules[i].cart_coords)

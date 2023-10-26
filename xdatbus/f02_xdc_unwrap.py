@@ -15,7 +15,8 @@ def xdc_unwrap(xdc_path):
     unwrapped_coords.append(previous_unwrapped_coords.copy())  # Store the first set of coordinates
 
     for i in range(1, len(xdatcar.structures)):  # Start from the second frame
-        print('Processing frame ' + str(i + 1) + ' ...')
+        if (i + 1) % 1000 == 0:
+            print('Processing frame ' + str(i + 1) + ' ...')
 
         # initialize an empty array for the current structure's unwrapped coordinates
         current_unwrapped_coords = np.zeros_like(xdatcar.structures[i].frac_coords)

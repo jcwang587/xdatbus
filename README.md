@@ -24,6 +24,11 @@ The package is also availabe from conda-based installation. It is generally reco
 conda install --channel xdatbus xdatbus
 ```
 
+If you plan to use PLUMED to analyze biased MD sampling results, you can also install the Conda version of PLUMED together:
+```bash
+conda install -c xdatbus -c conda-forge xdatbus plumed
+```
+
 ## Get Started
 
 This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file:

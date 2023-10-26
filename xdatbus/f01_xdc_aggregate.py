@@ -90,7 +90,7 @@ def main():
 
     args = parser.parse_args()
 
-    xdc_aggregate(args.aimd_path, args.output_path, args.min_frames, args.delete_temp_files)
+    xdc_aggregate(args.xdc_dir, args.output_path, args.min_frames, args.delete_temp_files)
 
 
 if __name__ == "__main__":

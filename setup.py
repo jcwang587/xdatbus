@@ -40,7 +40,7 @@ LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VAS
 
 setup(
     name="xdatbus",
-    version="0.0.99",
+    version="0.0.100",
     author="Jiacheng Wang",
     author_email="jiachengwang@umass.edu",
     maintainer="Jiacheng Wang",
@@ -57,5 +57,10 @@ setup(
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
         "Operating System :: OS Independent",
-    ]
+    ],
+    entry_points={
+        'console_scripts': [
+            'xdc_aggregate = xdatbus.f01_xdc_aggregate:main',
+        ],
+    }
 )

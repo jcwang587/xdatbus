@@ -12,6 +12,7 @@ def xdc_unwrap(xdc_path):
 
     # Initialize a variable to store the previously unwrapped coordinates
     previous_unwrapped_coords = xdatcar.structures[0].frac_coords
+
     unwrapped_coords.append(previous_unwrapped_coords.copy())  # Store the first set of coordinates
 
     for i in range(1, len(xdatcar.structures)):  # Start from the second frame
@@ -24,8 +25,9 @@ def xdc_unwrap(xdc_path):
         for j in range(len(xdatcar.structures[i].frac_coords)):
             for k in range(3):
                 # update the current coordinates
+                current_wrapped_coords = xdatcar.structures[i].frac_coords[j][k]
                 displacement = unwrap_pbc_dis(previous_unwrapped_coords[j][k],
-                                              xdatcar.structures[i].frac_coords[j][k], 1)
+                                              current_wrapped_coords, 1)
                 current_unwrapped_coords[j][k] = previous_unwrapped_coords[j][k] + displacement
 
         # update the previous unwrapped coordinates for next frame

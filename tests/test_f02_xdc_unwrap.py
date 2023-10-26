@@ -2,6 +2,7 @@ from xdatbus import xdc_unwrap
 import pytest
 import os
 import shutil
+import time
 
 
 @pytest.fixture
@@ -34,6 +35,8 @@ def test_f02_xdc_unwrap(setup_test_environment):
     main_tmp_dir = os.path.dirname(xdc_path)
 
     xdc_unwrap(xdc_path=xdc_path)
+
+    time.sleep(5)
 
     # Assertions
     xyz_unwrap_path = os.path.join(main_tmp_dir, "XDATCAR_01_unwrapped.xyz")

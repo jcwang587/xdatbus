@@ -8,7 +8,7 @@
 
 ## Installation
 
-Make sure you have a Python interpreter, preferably version 3.10 or higher. Then, you can simply install `xdatbus` from pypi using `pip`:
+Make sure you have a Python interpreter, preferably version 3.10 or higher. Then, you can simply install xdatbus from pypi using `pip`:
 
 ```bash
 pip install xdatbus
@@ -19,7 +19,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 ```bash
 pip install -U git+https://https://github.com/jcwang587/xdatbus
 ```
-The package is also availabe from conda-based installation. It is generally recommended you first create a separate environment, then you can install `xdatbus` via conda as well via the xdatbus channel on Anaconda cloud:
+The package is also availabe from conda-based installation. It is generally recommended you first create a separate environment, then you can install xdatbus via conda as well via the xdatbus channel on Anaconda cloud:
 ```bash
 conda install --channel xdatbus xdatbus
 ```
@@ -31,7 +31,7 @@ conda install -c xdatbus -c conda-forge xdatbus plumed
 
 ## Get Started
 
-This is a brief example demonstrating how to use the basic function of `xdatbus` to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file:
+This is a brief example demonstrating how to use the basic function of xdatbus to aggregate multiple xdatcar files into one and unwrap the coordinates into an .xyz file:
 
 ```python
 import os

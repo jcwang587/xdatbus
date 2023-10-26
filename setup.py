@@ -35,6 +35,11 @@ with codecs.open(readme_path, encoding="utf-8") as fh:
 with open(requirements_path) as f:
     required = f.read().splitlines()
 
+# These are the optional requirements
+extras = {
+    'blender': ['bpy', 'molecularnodes'],
+}
+
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
 
@@ -49,6 +54,7 @@ setup(
     long_description=long_description,
     packages=find_packages(),
     install_requires=required,
+    extras_require=extras,
     keywords=['python', 'vasp', 'xdatcar', 'aimd'],
     classifiers=[
         "Development Status :: 1 - Planning",

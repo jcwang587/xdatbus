@@ -1,21 +1,33 @@
 from ase.io import read
-import pybel
+from rdkit import Chem
 
 
 def pos2bpdb(poscar_path, output_path):
     # Load the POSCAR file with ASE
     atoms = read(poscar_path)
 
-    # Convert the ASE atoms object to an XYZ format (string)
-    xyz_data = atoms.write('-',
-                           format='xyz',
-                           return_data=True)
+    # Convert ASE atoms to RDKit molecule
+    atomic_numbers = atoms.get_atomic_numbers()
+    positions = atoms.get_positions()
 
-    # Use Pybel to read the XYZ string
-    mol = pybel.readstring('xyz', xyz_data)
+    # Create an empty RWMol object
+    rwmol = Chem.RWMol()
 
-    # Write the molecule to a PDB file
-    mol.write('pdb', output_path, overwrite=True)
+    for atomic_num, pos in zip(atomic_numbers, positions):
+        atom = Chem.Atom(int(atomic_num))  # Explicitly convert to int
+        rwmol.AddAtom(atom)
+
+    # Add a conformer to the RWMol object
+    conf = Chem.Conformer(len(atomic_numbers))
+    for idx, pos in enumerate(positions):
+        conf.SetAtomPosition(idx, tuple(pos))
+    rwmol.AddConformer(conf)
+
+    # Convert RWMol back to Mol
+    mol = rwmol.GetMol()
+
+    # Convert RDKit molecule to PDB format and save
+    Chem.MolToPDBFile(mol, output_path)
 
 
 

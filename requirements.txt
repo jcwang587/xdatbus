@@ -5,4 +5,3 @@ pymatgen~=2023.10.11
 pandas~=2.1.1
 mdanalysis~=2.6.1
 ovito~=3.9.2
-pybel~=0.15.5

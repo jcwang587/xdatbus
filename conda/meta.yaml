@@ -24,6 +24,8 @@ requirements:
     - mdanalysis
     - ovito
     - plumed
+    - rdkit
+    - biotite
 
 test:
   imports:

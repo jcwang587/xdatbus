@@ -37,7 +37,7 @@ with open(requirements_path) as f:
 
 # These are the optional requirements
 extras = {
-    'blender': ['bpy', 'molecularnodes', 'rdkit'],
+    'blender': ['bpy', 'molecularnodes'],
 }
 
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'

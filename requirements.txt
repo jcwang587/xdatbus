@@ -6,4 +6,4 @@ pandas~=2.1.2
 mdanalysis~=2.6.1
 ovito~=3.9.2
 rdkit~=2023.9.1
-biotite~=0.37.0
+biotite~=0.38.0

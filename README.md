@@ -1,3 +1,7 @@
+<p align="center"> 
+<img src="https://github.com/jcwang587/xdatbus/blob/main/docs/xdatbus.png"/>
+</p>
+
 # xdatbus
 
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml)

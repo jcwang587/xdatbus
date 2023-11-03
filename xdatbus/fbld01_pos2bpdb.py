@@ -6,6 +6,16 @@ from biotite.structure.io import load_structure
 
 
 def pos2bpdb(poscar_path, output_path):
+    """
+    Convert the POSCAR file to a PDB file.
+
+        Parameters
+        ----------
+        poscar_path : str
+            Input path of the POSCAR file
+        output_path : str
+            Output path of the PDB file
+    """
     # Load the POSCAR file with ASE
     atoms = read(poscar_path)
 

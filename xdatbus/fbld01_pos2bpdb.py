@@ -1,8 +1,20 @@
 import numpy as np
-from rdkit import Chem
 from ase.io import read
 from ase.data import covalent_radii
-from biotite.structure.io import load_structure
+
+try:
+    from rdkit import Chem
+    RDKIT_AVAILABLE = True
+except ImportError:
+    Chem = None
+    RDKIT_AVAILABLE = False
+
+try:
+    from biotite.structure.io import load_structure
+    BIOTITE_AVAILABLE = True
+except ImportError:
+    load_structure = None
+    BIOTITE_AVAILABLE = False
 
 
 def pos2bpdb(poscar_path, output_path):
@@ -16,6 +28,12 @@ def pos2bpdb(poscar_path, output_path):
         output_path : str
             Output path of the PDB file
     """
+    if not RDKIT_AVAILABLE:
+        raise ImportError("The function `pos2bpdb` requires RDKit. Please install RDKit to use this function.")
+
+    if not BIOTITE_AVAILABLE:
+        raise ImportError("The function `pos2bpdb` requires biotite. Please install biotite to use this function.")
+
     # Load the POSCAR file with ASE
     atoms = read(poscar_path)
 

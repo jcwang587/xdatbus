@@ -73,7 +73,7 @@ def xdc_aggregate(
         shutil.rmtree(xdatcar_wrap_path)
         os.remove(log_path)
 
-    print("xdatbus-func: f01_xdc_aggregate: Done!")
+    print("xdatbus-func: xdc_aggregate: Done!")
 
 
 def main():

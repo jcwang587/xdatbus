@@ -5,7 +5,14 @@ from .utils import unwrap_pbc_dis
 
 
 def xdc_unwrap(xdc_path):
-    print('Loading the XDATCAR file ...')
+    """
+    Unwrap the coordinates in the XDATCAR file. The unwrapped coordinates will be written to a xyz file.
+
+        Parameters
+        ----------
+        xdc_path : str
+            Input path of the XDATCAR file
+    """
     xdatcar = Xdatcar(xdc_path)
     # initialize an empty list to store unwrapped fractional coordinates
     unwrapped_coords = []
@@ -46,4 +53,4 @@ def xdc_unwrap(xdc_path):
             for atom, coord in zip(xdatcar.structures[i].species, coords):
                 xyz_file.write('{} {:.8f} {:.8f} {:.8f}\n'.format(atom.symbol, *coord))
 
-    print('Finished writing the unwrapped coordinates to the xyz file.')
+    print("xdatbus-func: xdc_unwrap: Done!")

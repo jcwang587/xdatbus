@@ -5,7 +5,16 @@ from .utils import unwrap_pbc_dis
 
 
 def xyz_unwrap(xyz_path, lattice):
-    print('Loading the XYZ file ...')
+    """
+    Unwrap the coordinates in the xyz file. The unwrapped coordinates will be written to a new xyz file.
+
+        Parameters
+        ----------
+        xyz_path : str
+            Input path of the xyz file
+        lattice : list
+            Lattice vectors of the system
+    """
     xyz = XYZ.from_file(xyz_path)
     # initialize an empty list to store unwrapped fractional coordinates
     unwrapped_coords = []
@@ -46,4 +55,4 @@ def xyz_unwrap(xyz_path, lattice):
             for atom, coord in zip(xyz.all_molecules[i].species, coords):
                 xyz_file.write('{} {:.8f} {:.8f} {:.8f}\n'.format(atom.symbol, *coord))
 
-    print('Finished writing the unwrapped coordinates to the xyz file.')
+    print('xdatbus-func: xyz_unwrap: Done!')

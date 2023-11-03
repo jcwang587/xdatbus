@@ -14,13 +14,13 @@ Make sure you have a Python interpreter, preferably version 3.10 or higher:
    Python 3.11.4
 
 
-To use ``xdatbus``, install it from the PyPI repository using ``pip``, which will also ensure that all requirements are obtained in the meantime:
+To use `xdatbus`, install it from the PyPI repository using ``pip``, which will also ensure that all requirements are obtained in the meantime:
 
 .. code-block:: console
 
    $ pip install xdatbus
 
-To get the latest version of ``xdatbus``, if you have it already installed, please run the command with the ``upgrade`` option:
+To get the latest version of `xdatbus`, if you have it already installed, please run the command with the ``--upgrade`` option:
 
 .. code-block:: console
 
@@ -38,7 +38,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 
 .. note::
 
-   Conda installation will be made available with an option to install ``xdatbus`` bundled with ``plumed2`` in the coming version.
+   Conda installation will be made available with an option to install `xdatbus` bundled with `plumed2` in the coming version.
 
 Download and install the version of conda for your operating system from `Miniconda <https://docs.conda.io/projects/miniconda/en/latest/>`_. It is generally recommended you create a separate environment for `xdatbus`. For example:
 
@@ -47,7 +47,7 @@ Download and install the version of conda for your operating system from `Minico
    $ conda create --name my_xdatbus
    $ conda activate my_xdatbus
 
-You can install ``xdatbus`` via conda as well via the xdatbus channel on Anaconda cloud:
+You can install `xdatbus` via conda as well via the xdatbus channel on Anaconda cloud:
 
 .. code-block:: console
 
@@ -57,7 +57,7 @@ You can install ``xdatbus`` via conda as well via the xdatbus channel on Anacond
 3. Advanced installation
 ----------------
 
-For users who want to use ``xdatbus`` for 3D visualization, please install the ``opt_bpy`` extra:
+For users who want to use `xdatbus` for 3D visualization, please install the ``opt_bpy`` extra:
 
 .. code-block:: console
 

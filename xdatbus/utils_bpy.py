@@ -1,6 +1,5 @@
 try:
     import bpy
-
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None

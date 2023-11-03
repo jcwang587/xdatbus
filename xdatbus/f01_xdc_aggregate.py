@@ -10,7 +10,6 @@ from .utils import update_folder
 def xdc_aggregate(
         xdc_dir,
         output_path="./",
-        min_frames=1,
         delete_temp_files=True
 ):
     """
@@ -22,8 +21,6 @@ def xdc_aggregate(
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_path : str (optional)
             Output path of the XDATBUS file
-        min_frames : int (optional)
-            Minimum number of frames in each XDATCAR file, which will be used to be appended to the trajectory
         delete_temp_files : bool (optional)
             If ``True``, the intermediate folders will be deleted
     """
@@ -49,9 +46,8 @@ def xdc_aggregate(
         print("Wrapping " + xdatcar_raw + " ...")
         xdatcar = read(xdc_dir + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
         print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
-        if len(xdatcar) > min_frames:
-            write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
-            log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
+        write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
+        log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
     log_file.close()
 
     # Get the number of files in wrap directory
@@ -82,15 +78,12 @@ def main():
                         help="Input path of the AIMD simulation, which contains the XDATCAR files")
     parser.add_argument("--output_path", type=str, default="./",
                         help="Output path of the XDATBUS file (default: current directory)")
-    parser.add_argument("--min_frames", type=int, default=1,
-                        help="Minimum number of frames in each XDATCAR file, which will be used to be appended to the "
-                             "trajectory (default: 1)")
     parser.add_argument("--delete_temp_files", action="store_true",
                         help="If set, the intermediate folders will be deleted (default: False)")
 
     args = parser.parse_args()
 
-    xdc_aggregate(args.xdc_dir, args.output_path, args.min_frames, args.delete_temp_files)
+    xdc_aggregate(args.xdc_dir, args.output_path, args.delete_temp_files)
 
 
 if __name__ == "__main__":

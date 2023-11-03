@@ -52,3 +52,13 @@ You can install xdatbus via conda as well via the xdatbus channel on Anaconda cl
 .. code-block:: console
 
    $ conda install --channel xdatbus xdatbus
+
+
+3. Advanced installation
+----------------
+
+For users who want to use xdatbus with blender for 3D visualization, please install the `blender` extra:
+
+.. code-block:: console
+
+   $ pip install xdatbus[blender]

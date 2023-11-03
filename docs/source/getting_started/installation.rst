@@ -54,7 +54,7 @@ You can install `xdatbus` via conda as well via the xdatbus channel on Anaconda 
    $ conda install --channel xdatbus xdatbus
 
 
-3. Advanced installation
+3. Optional installation
 ----------------
 
 For users who want to use `xdatbus` for 3D visualization, please install the ``opt_bpy`` extra:

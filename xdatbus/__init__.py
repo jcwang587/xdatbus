@@ -2,6 +2,7 @@ from .f01_xdc_aggregate import *
 from .f02_xdc_unwrap import *
 from .f03_xyz_unwarp import *
 from .fbld01_pos2bpdb import *
+from .fbld02_rmbond import *
 from .fcom01_drift import *
 from .fcom02_hillspot import *
 from .fcom03_contcar import *

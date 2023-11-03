@@ -17,11 +17,11 @@ def unwrap_pbc_dis(coord_1, coord_2, box_length):
 
         Parameters
         ----------
-        coord_1 : float
+        coord_1 : ndarray
             The first coordinate
-        coord_2 : float
+        coord_2 : ndarray
             The second coordinate
-        box_length : float
+        box_length :
             The length of the box
 
         Returns

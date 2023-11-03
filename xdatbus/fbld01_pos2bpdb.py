@@ -7,7 +7,7 @@ from biotite.structure.io import load_structure
 
 def pos2bpdb(poscar_path, output_path):
     """
-    Convert the POSCAR file to a PDB file.
+    Convert the POSCAR file to a PDB file which can be read by biotite.
 
         Parameters
         ----------

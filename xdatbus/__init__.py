@@ -9,3 +9,4 @@ from .fmtd01_xdc2xtc import *
 from .fmtd02_hillspot2hills import *
 from .fmtd03_report_loader import *
 from .utils import *
+from .utils_bpy import *

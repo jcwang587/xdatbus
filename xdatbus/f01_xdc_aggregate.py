@@ -4,7 +4,7 @@ import shutil
 import argparse
 from ase.io import read, write
 from pymatgen.io.vasp.outputs import Xdatcar
-from .utils import update_folder
+from .utils import update_folder, remove_file
 
 
 def xdc_aggregate(
@@ -28,18 +28,16 @@ def xdc_aggregate(
     raw_list = os.listdir(xdc_dir)
     raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
 
-    xdatcar_wrap_path = output_path + "/xdatcar_wrap"
-    xdatbus_path = output_path + "/XDATBUS"
-    log_path = output_path + "/XDATBUS.log"
+    xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
+    xdatbus_path = os.path.join(output_path, "XDATBUS")
+    log_path = os.path.join(output_path, "xdc_aggregate.log")
 
     # Clear the directory
     update_folder(xdatcar_wrap_path)
 
     # Remove the XDATBUS and log files
-    if os.path.exists(xdatbus_path):
-        os.remove(xdatbus_path)
-    if os.path.exists(log_path):
-        os.remove(log_path)
+    remove_file(xdatbus_path)
+    remove_file(log_path)
 
     log_file = open(log_path, "w")
     for xdatcar_raw in raw_list_sort:

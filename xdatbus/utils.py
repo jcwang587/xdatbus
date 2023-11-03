@@ -12,14 +12,50 @@ def read_lat_vec(xdatcar_dir):
 
 
 def unwrap_pbc_dis(coord_1, coord_2, box_length):
-    """Unwrap the periodic boundary condition displacement between two coordinates."""
+    """
+    Unwrap the distance between two coordinates.
+
+        Parameters
+        ----------
+        coord_1 : float
+            The first coordinate
+        coord_2 : float
+            The second coordinate
+        box_length : float
+            The length of the box
+
+        Returns
+        -------
+        float
+            The unwrapped distance between the two coordinates
+    """
     displacement = coord_2 - coord_1
     nearest_int = round(displacement / box_length)
     return displacement - nearest_int * box_length
 
 
 def update_folder(folder):
-    """Delete and recreate a folder."""
+    """
+    Delete the folder and create a new one.
+
+        Parameters
+        ----------
+        folder : str
+            The path of the folder
+    """
     if os.path.exists(folder):
         shutil.rmtree(folder)
     os.mkdir(folder)
+
+
+def remove_file(file_path):
+    """
+    Delete the file.
+
+        Parameters
+        ----------
+        file_path : str
+            The path of the file
+    """
+    if os.path.exists(file_path):
+        os.remove(file_path)

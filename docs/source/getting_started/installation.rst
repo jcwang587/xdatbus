@@ -61,4 +61,4 @@ For users who want to use `xdatbus` for 3D visualization, please install the ``o
 
 .. code-block:: console
 
-   $ pip install xdatbus[opt_bpy]
+   $ pip install xdatbus[vis]

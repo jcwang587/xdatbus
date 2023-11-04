@@ -1,7 +1,7 @@
 import molecularnodes as mn
 import bpy
 import os
-from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond
+from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond, yaml_gen
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
@@ -45,3 +45,6 @@ output_fbx_path = os.path.join(current_dir, 'output.fbx')
 bpy.ops.export_scene.fbx(filepath=output_fbx_path,
                          use_selection=True,
                          path_mode='COPY')
+
+# generate yaml file
+yaml_gen('config_template.yaml')

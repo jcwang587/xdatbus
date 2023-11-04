@@ -1,12 +1,18 @@
 import molecularnodes as mn
 import bpy
 import os
-from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image
+from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
 pdb_path = os.path.join(current_dir, 'llto.pdb')
 pos2bpdb(poscar_path, pdb_path)
+
+rm_bond('llto.pdb', "LI", "TI", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "TI", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "O", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "LA", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 
 # Set render engine to CYCLES and device to GPU
 bpy.context.scene.render.engine = 'CYCLES'
@@ -19,7 +25,7 @@ bpy.ops.object.delete()
 
 # Load the molecule
 clear_scene()
-mol = mn.load.molecule_local(pdb_path, default_style='ball_and_stick')
+mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
 mol.rotation_euler = (0, 3.14 / 2, 0)
 mol.select_set(True)
 bpy.ops.view3d.camera_to_view_selected()

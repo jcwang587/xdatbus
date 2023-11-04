@@ -47,22 +47,26 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
             atom_serial_number = connected_atoms[0]
             connected_serial_numbers = connected_atoms[1:]
 
-            # Check if the bond should be removed
-            should_remove_bond = any(
-                atom_elements.get(atom_serial_number) == element1 and
-                atom_elements.get(s) == element2
-                for s in connected_serial_numbers
-            ) or any(
-                atom_elements.get(atom_serial_number) == element2 and
-                atom_elements.get(s) == element1
-                for s in connected_serial_numbers
-            )
+            # Iterate through connected serial numbers and remove only the specified bonds
+            connected_serial_numbers = [
+                s for s in connected_serial_numbers
+                if not (
+                        (atom_elements.get(atom_serial_number) == element1 and atom_elements.get(s) == element2) or
+                        (atom_elements.get(atom_serial_number) == element2 and atom_elements.get(s) == element1)
+                )
+            ]
 
-            # If the bond should be removed, do not add the CONECT record to new_lines
-            if should_remove_bond:
+            # If there are no connected serial numbers left, skip adding this line
+            if not connected_serial_numbers:
                 continue
 
-        # Add the line to the new_lines list if it's not a bond we want to remove
+            # Construct a new CONECT line with the remaining connections
+            new_conect_line = f"CONECT{atom_serial_number:>5}" + "".join(
+                f"{s:>5}" for s in connected_serial_numbers) + "\n"
+            new_lines.append(new_conect_line)
+            continue
+
+        # Add the line to the new_lines list if it's not a CONECT line
         new_lines.append(line)
 
     # Write the new PDB content to the output file

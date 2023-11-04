@@ -5,6 +5,13 @@ except ImportError:
     bpy = None
     BPY_AVAILABLE = False
 
+try:
+    import molecularnodes
+    MN_AVAILABLE = True
+except ImportError:
+    molecularnodes = None
+    MN_AVAILABLE = False
+
 
 def realize_instances(obj):
     """
@@ -66,7 +73,7 @@ def realize_instances(obj):
 
 def set_color(obj, color):
     """
-    Set the color of the given object. This function requires bpy.
+    Set the color of the given object. This function requires bpy and molecularnodes.
 
         Parameters
         ----------
@@ -75,8 +82,9 @@ def set_color(obj, color):
         color : list
             The color to set the object to
     """
-    if not BPY_AVAILABLE:
-        raise ImportError("The function `set_color` requires bpy. Please install bpy to use this function.")
+    if not BPY_AVAILABLE or not MN_AVAILABLE:
+        raise ImportError("The function `set_color` requires bpy and molecularnodes. Please install bpy and "
+                          "molecularnodes to use this function.")
 
     if obj.type == 'MESH':
         # Set the material color

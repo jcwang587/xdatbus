@@ -64,6 +64,30 @@ def realize_instances(obj):
             bpy.context.view_layer.update()
 
 
+def set_color(obj, color):
+    """
+    Set the color of the given object. This function requires bpy.
+
+        Parameters
+        ----------
+        obj : bpy.types.Object
+            The object to set the color of
+        color : list
+            The color to set the object to
+    """
+    if not BPY_AVAILABLE:
+        raise ImportError("The function `set_color` requires bpy. Please install bpy to use this function.")
+
+    if obj.type == 'MESH':
+        # Set the material color
+        material = obj.active_material
+        material.use_nodes = True
+        material.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = color
+    elif obj.type == 'LIGHT':
+        # Set the light color
+        obj.data.color = color
+
+
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):
     """
     Clear the scene of all objects. This function requires bpy.

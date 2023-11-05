@@ -1,5 +1,8 @@
+import os
+
 try:
     import bpy
+
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -7,6 +10,7 @@ except ImportError:
 
 try:
     import molecularnodes as mn
+
     MN_AVAILABLE = True
 except ImportError:
     mn = None
@@ -127,24 +131,28 @@ def set_color4element(obj, atomic_number, color):
         color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
 
         if color_set_node:
-            # Create a 'atomic_number' node
-            atomic_number_node = nodes.new(type='MN_color_set')
+            # Get current directory
+            current_dir = os.getcwd()
 
+            # Get the MN_color_atomic_number node from the blend template
+            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
+                    data_from, data_to):
+                data_to.node_groups = ['MN_color_atomic_number']
 
-        # # Get the target node by its name
-        # target_node = nodes.get(target_node_name)
-        # if not target_node:
-        #     print(f"Target node '{target_node_name}' not found.")
-        #     return
-        #
-        # # Find the input socket on the target node
-        # target_socket = target_node.inputs.get(target_input_name)
-        # if not target_socket:
-        #     print(f"Input '{target_input_name}' not found on target node '{target_node_name}'.")
-        #     return
-        #
-        # # Connect the 'Color' output of the custom node to the input of the target node
-        # node_group.links.new(atomic_number_node.outputs['Color'], target_socket)
+            # Put the node in the node tree
+            atomic_number_node_group = data_to.node_groups[0]
+
+            atomic_number_node = nodes.new(type='GeometryNodeGroup')
+            atomic_number_node.node_tree = atomic_number_node_group
+
+            # Set the atomic number
+            atomic_number_node.inputs['atomic_number'].default_value = atomic_number
+
+            # Set the color
+            atomic_number_node.inputs['Color'].default_value = color
+
+            # link the node to the color_set_node
+            node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
 
         # Update the node tree to reflect changes
         node_group.update_tag()

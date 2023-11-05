@@ -1,0 +1,5 @@
+rdkit~=2021.09.1
+biotite~=0.24.0
+bpy~=2.93.5
+molecularnodes~=0.1.0
+pyyaml~=6.0

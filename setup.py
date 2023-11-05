@@ -36,8 +36,16 @@ with open(requirements_path) as f:
     required = f.read().splitlines()
 
 # These are the optional requirements
-vis = {
-    'vis': ['rdkit', 'biotite', 'bpy', 'molecularnodes', 'pyyaml'],
+vis_required = {
+    'rdkit', 'biotite', 'bpy', 'molecularnodes', 'pyyaml',
+}
+
+package_data = {
+    'mn': ['resources/*.blend'],
+}
+
+extras_require = {
+    'vis': vis_required,
 }
 
 DESCRIPTION = 'A python package to analyze XDATCAR files generated from VASP'
@@ -54,11 +62,9 @@ setup(
     long_description=long_description,
     packages=find_packages(),
     include_package_data=True,
-    package_data={
-        'mn': ['resources/*.blend'],
-    },
+    package_data=package_data,
     install_requires=required,
-    extras_require=vis,
+    extras_require=extras_require,
     keywords=['python', 'vasp', 'xdatcar', 'aimd'],
     classifiers=[
         "Development Status :: 1 - Planning",

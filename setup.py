@@ -28,6 +28,7 @@ repo_root = find_repo_root(setup_dir)
 # Construct the paths to README.md and requirements.txt
 readme_path = os.path.join(repo_root, "README.md")
 requirements_path = os.path.join(repo_root, 'requirements.txt')
+requirements_vis_path = os.path.join(repo_root, 'requirements_vis.txt')
 
 with codecs.open(readme_path, encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
@@ -35,11 +36,10 @@ with codecs.open(readme_path, encoding="utf-8") as fh:
 with open(requirements_path) as f:
     required = f.read().splitlines()
 
-# These are the optional requirements
-vis_required = {
-    'rdkit', 'biotite', 'bpy', 'molecularnodes', 'pyyaml',
-}
+with open(requirements_vis_path) as f:
+    vis_required = f.read().splitlines()
 
+# These are the optional requirements
 package_data = {
     'mn': ['resources/*.blend'],
 }

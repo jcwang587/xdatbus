@@ -1,2 +1,4 @@
 include requirements.txt
+include requirements_vis.txt
+include resources/*
 prune xdatbus-dev

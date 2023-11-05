@@ -69,7 +69,7 @@ setup(
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Science/Research",
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
         "Operating System :: OS Independent",

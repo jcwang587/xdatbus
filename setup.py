@@ -53,6 +53,10 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
+    include_package_data=True,
+    package_data={
+        'mn': ['resources/*.blend'],
+    },
     install_requires=required,
     extras_require=vis,
     keywords=['python', 'vasp', 'xdatcar', 'aimd'],

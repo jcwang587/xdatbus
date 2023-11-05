@@ -1,17 +1,15 @@
 try:
     import bpy
-
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
     BPY_AVAILABLE = False
 
 try:
-    import molecularnodes
-
+    import molecularnodes as mn
     MN_AVAILABLE = True
 except ImportError:
-    molecularnodes = None
+    mn = None
     MN_AVAILABLE = False
 
 
@@ -129,18 +127,9 @@ def set_color4element(obj, atomic_number, color):
         color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
 
         if color_set_node:
-            # Create custom node group giving a color based on atomic_number field
-            atomic_number_node = bpy.data.node_groups.new(name="MN_color_atomic_number", type="GeometryNodeTree")
+            # Create a 'atomic_number' node
+            atomic_number_node = nodes.new(type='MN_color_set')
 
-            # Set the atomic number
-            atomic_number_node.inputs.new("NodeSocketInt", "Atomic Number")
-            atomic_number_node.inputs["Atomic Number"].default_value = atomic_number
-
-            # Set the color
-            node_group.outputs.new('NodeSocketColor', 'Color')
-
-            # Connect the 'Color' output of the custom node to the input of the target node
-            node_group.links.new(atomic_number_node.outputs[0], color_set_node.inputs[0])
 
         # # Get the target node by its name
         # target_node = nodes.get(target_node_name)

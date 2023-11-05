@@ -145,17 +145,19 @@ def set_color4element(obj, atomic_number, color):
             atomic_number_node = nodes.new(type='GeometryNodeGroup')
             atomic_number_node.node_tree = atomic_number_node_group
 
-            # Set the atomic number
+            # Set the atomic number and color
             atomic_number_node.inputs['atomic_number'].default_value = atomic_number
-
-            # Set the color
             atomic_number_node.inputs['Color'].default_value = color
+
+            # Rename the node to include the atomic number
+            atomic_number_node.name = f'MN_color_atomic_number_{atomic_number}'
+            atomic_number_node.label = f'MN_color_atomic_number_{atomic_number}'
 
             # link the node to the color_set_node
             node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
 
-        # Update the node tree to reflect changes
-        node_group.update_tag()
+            # Update the node tree to reflect changes
+            node_group.update_tag()
 
 
 def apply_yaml(obj, color):

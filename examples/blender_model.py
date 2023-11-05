@@ -36,13 +36,13 @@ apply_yaml(mol, (255, 255, 255))
 realize_instances(mol)
 
 # Export the scene to a blender file
-# output_blend_path = os.path.join(current_dir, 'output.blend')
-# bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
+output_blend_path = os.path.join(current_dir, 'output.blend')
+bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
 
 # Apply modifiers if the object is a mesh
 apply_modifiers_to_mesh(mol)
 #
-# # Render and save the image
+# Render and save the image
 # render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
 # render_image(output_path=render_image_path)  # Call the render function with the path
 #

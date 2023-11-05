@@ -1,5 +1,6 @@
 try:
     import bpy
+
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -7,6 +8,7 @@ except ImportError:
 
 try:
     import molecularnodes
+
     MN_AVAILABLE = True
 except ImportError:
     molecularnodes = None
@@ -71,6 +73,35 @@ def realize_instances(obj):
             bpy.context.view_layer.update()
 
 
+def remove_nodes(obj, node_names):
+    """
+    Remove nodes with given names from the object's node tree.
+
+        Parameters
+        ----------
+        obj : bpy.types.Object
+            The object from which to remove nodes.
+        node_names : list of str
+            The names of the nodes to remove.
+    """
+    # Get the Geometry Nodes modifier from the object
+    geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
+    if geo_node_mod:
+        # Get the node group (node tree) used by this modifier
+        node_group = geo_node_mod.node_group
+        nodes = node_group.nodes
+
+        # Loop through all provided node names and remove them
+        for node_name in node_names:
+            node_to_remove = nodes.get(node_name)
+            if node_to_remove:
+                # Use nodes.remove() to delete the node
+                nodes.remove(node_to_remove)
+                print(f"Removed node: {node_name}")
+            else:
+                print(f"Node {node_name} not found.")
+
+
 def set_color(obj, color):
     """
     Set the color of the given object. This function requires bpy and molecularnodes.
@@ -79,21 +110,27 @@ def set_color(obj, color):
         ----------
         obj : bpy.types.Object
             The object to set the color of
-        color : list
+        color : tuple
             The color to set the object to
     """
     if not BPY_AVAILABLE or not MN_AVAILABLE:
         raise ImportError("The function `set_color` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")
 
-    if obj.type == 'MESH':
-        # Set the material color
-        material = obj.active_material
-        material.use_nodes = True
-        material.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value = color
-    elif obj.type == 'LIGHT':
-        # Set the light color
-        obj.data.color = color
+    # Find the GeometryNodes modifier
+    geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
+    if geo_node_mod:
+        # Get the node group (node tree) used by this modifier
+        node_group = geo_node_mod.node_group
+        nodes = node_group.nodes
+
+        for node in nodes:
+            print(node.name, node.bl_idname)
+
+        # Check if 'MN_color_set' node already exists
+        color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
+
+        remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random'])
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

@@ -1,6 +1,5 @@
 try:
     import bpy
-
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -8,7 +7,6 @@ except ImportError:
 
 try:
     import molecularnodes
-
     MN_AVAILABLE = True
 except ImportError:
     molecularnodes = None

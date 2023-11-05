@@ -1,6 +1,5 @@
 try:
     import biotite
-
     BIOTITE_AVAILABLE = True
 except ImportError:
     load_structure = None

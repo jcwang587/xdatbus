@@ -57,6 +57,10 @@ You can install `xdatbus` via conda as well via the xdatbus channel on Anaconda 
 3. Optional installation
 ----------------
 
+.. note::
+
+   Currently, I have ongoing support for POSCAR files, development of the NEB pathway is underway, and planning for AIMD trajectory simulations is in progress.
+
 For users who want to use `xdatbus` for 3D visualization, please install the ``opt_bpy`` extra:
 
 .. code-block:: console

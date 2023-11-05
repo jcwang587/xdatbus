@@ -1,5 +1,6 @@
 try:
     import bpy
+
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -7,6 +8,7 @@ except ImportError:
 
 try:
     import molecularnodes
+
     MN_AVAILABLE = True
 except ImportError:
     molecularnodes = None
@@ -84,6 +86,7 @@ def remove_nodes(obj, node_names):
     """
     # Get the Geometry Nodes modifier from the object
     geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
+
     if geo_node_mod:
         # Get the node group (node tree) used by this modifier
         node_group = geo_node_mod.node_group
@@ -100,7 +103,65 @@ def remove_nodes(obj, node_names):
                 print(f"Node {node_name} not found.")
 
 
-def set_color(obj, color):
+def set_color4element(obj, atomic_number, color):
+    """
+    Add a custom node and connect it to the specified input of the target node.
+
+        Parameters
+        ----------
+        obj : bpy.types.Object
+            The object with the Geometry Nodes modifier whose node tree we're editing.
+        atomic_number : int
+            The atomic number of the element to set the color of.
+        color : tuple
+            The color to set the node to.
+    """
+
+    # Get the Geometry Nodes modifier from the object
+    geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
+
+    if geo_node_mod:
+        # Get the node group (node tree) used by this modifier
+        node_group = geo_node_mod.node_group
+        nodes = node_group.nodes
+
+        # Check if 'MN_color_set' node already exists
+        color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
+
+        if color_set_node:
+            # Create custom node group giving a color based on atomic_number field
+            atomic_number_node = bpy.data.node_groups.new(name="MN_color_atomic_number", type="GeometryNodeTree")
+
+            # Set the atomic number
+            atomic_number_node.inputs.new("NodeSocketInt", "Atomic Number")
+            atomic_number_node.inputs["Atomic Number"].default_value = atomic_number
+
+            # Set the color
+            node_group.outputs.new('NodeSocketColor', 'Color')
+
+            # Connect the 'Color' output of the custom node to the input of the target node
+            node_group.links.new(atomic_number_node.outputs[0], color_set_node.inputs[0])
+
+        # # Get the target node by its name
+        # target_node = nodes.get(target_node_name)
+        # if not target_node:
+        #     print(f"Target node '{target_node_name}' not found.")
+        #     return
+        #
+        # # Find the input socket on the target node
+        # target_socket = target_node.inputs.get(target_input_name)
+        # if not target_socket:
+        #     print(f"Input '{target_input_name}' not found on target node '{target_node_name}'.")
+        #     return
+        #
+        # # Connect the 'Color' output of the custom node to the input of the target node
+        # node_group.links.new(atomic_number_node.outputs['Color'], target_socket)
+
+        # Update the node tree to reflect changes
+        node_group.update_tag()
+
+
+def apply_yaml(obj, color):
     """
     Set the color of the given object. This function requires bpy and molecularnodes.
 
@@ -125,10 +186,9 @@ def set_color(obj, color):
         for node in nodes:
             print(node.name, node.bl_idname)
 
-        # Check if 'MN_color_set' node already exists
-        color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
-
         remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random'])
+
+        set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1))
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

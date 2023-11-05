@@ -1,7 +1,7 @@
 import molecularnodes as mn
 import bpy
 import os
-from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond, yaml_gen
+from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond, yaml_gen, apply_yaml
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
@@ -30,21 +30,27 @@ mol.rotation_euler = (0, 3.14 / 2, 0)
 mol.select_set(True)
 bpy.ops.view3d.camera_to_view_selected()
 
+apply_yaml(mol, (255, 255, 255))
+
 # Realize instances
 realize_instances(mol)
 
+# Export the scene to a blender file
+output_blend_path = os.path.join(current_dir, 'output.blend')
+bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
+
 # Apply modifiers if the object is a mesh
-apply_modifiers_to_mesh(mol)
-
-# Render and save the image
-render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
-render_image(output_path=render_image_path)  # Call the render function with the path
-
-# Export the scene to an FBX file
-output_fbx_path = os.path.join(current_dir, 'output.fbx')
-bpy.ops.export_scene.fbx(filepath=output_fbx_path,
-                         use_selection=True,
-                         path_mode='COPY')
-
-# generate yaml file
-yaml_gen('config_template.yaml')
+# apply_modifiers_to_mesh(mol)
+#
+# # Render and save the image
+# render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
+# render_image(output_path=render_image_path)  # Call the render function with the path
+#
+# # Export the scene to an FBX file
+# output_fbx_path = os.path.join(current_dir, 'output.fbx')
+# bpy.ops.export_scene.fbx(filepath=output_fbx_path,
+#                          use_selection=True,
+#                          path_mode='COPY')
+#
+# # generate yaml file
+# yaml_gen('config_template.yaml')

@@ -160,12 +160,15 @@ def set_color4element(obj, atomic_number, color):
         node_group = geo_node_mod.node_group
         nodes = node_group.nodes
 
-        # Get the MN_color_set node from the blend template
-        color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
-
         # Find the Group Input node
         group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
         join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry'), None)
+
+        # Get the MN_color_set node from the blend template
+        color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
+
+        # Set the color
+        color_set_node.inputs[0].default_value = color
 
         # Connect the Group Input node to the Color Set node
         node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
@@ -175,6 +178,7 @@ def set_color4element(obj, atomic_number, color):
 
         # Set the Eevee render engine
         style_atoms_node.inputs[2].default_value = True
+        style_atoms_node.inputs[6].default_value = bpy.data.materials["MN_atomic_material"]
 
         # link the node to the color_set_node
         node_group.links.new(color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])

@@ -41,7 +41,7 @@ with open(requirements_vis_path) as f:
 
 # These are the optional requirements
 package_data = {
-    'mn': ['resources/*.blend'],
+    'xdatbus': ['resources/*.blend'],
 }
 
 extras_require = {
@@ -53,7 +53,7 @@ LONG_DESCRIPTION = 'A python package to analyze XDATCAR files generated from VAS
 
 setup(
     name="xdatbus",
-    version="0.0.110",
+    version="0.0.111",
     author="Jiacheng Wang",
     author_email="jiachengwang@umass.edu",
     maintainer="Jiacheng Wang",

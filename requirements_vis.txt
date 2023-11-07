@@ -1,5 +1,5 @@
 rdkit-pypi~=2022.9.5
-biotite==0.37.0
+biotite==0.38.0
 bpy~=3.6.0
 molecularnodes~=2.11.0
 pyyaml~=6.0.1

@@ -178,6 +178,7 @@ def set_color4element(obj, atomic_number, color):
 
         # Set the Eevee render engine
         style_atoms_node.inputs[2].default_value = True
+        style_atoms_node.inputs[3].default_value = 0.8
         style_atoms_node.inputs[6].default_value = bpy.data.materials["MN_atomic_material"]
 
         # link the node to the color_set_node

@@ -59,13 +59,12 @@ def realize_instances(obj):
                 node_group.links.remove(next((link for link in node_group.links if
                                               link.from_socket == from_socket and link.to_socket == to_socket), None))
 
-            # Connect the Realize Instances node to the Group Output node
-            node_group.links.new(realize_node.outputs[0], group_output.inputs[0])
+            # Add a join geometry node
+            join_node = nodes.new(type='GeometryNodeJoinGeometry')
 
-            # Ensure the Realize Instances node gets inputs from the previous node in the tree
-            if stored_sockets:
-                # Connect the stored 'from socket' to the input of the 'Realize Instances' node
-                node_group.links.new(stored_sockets[0][0], realize_node.inputs[0])
+            node_group.links.new(stored_sockets[0][0], join_node.inputs[0])
+            node_group.links.new(join_node.outputs[0], realize_node.inputs[0])
+            node_group.links.new(realize_node.outputs[0], group_output.inputs[0])
 
             # Trigger update
             geo_node_mod.node_group = None
@@ -124,7 +123,7 @@ def get_template_node(template_path, node_name, nodes):
             The node from the template blend file.
     """
     # Get the template blend file
-    blend_path = pkg_resources.path('xdatbus.resources', template_path)
+    blend_path = str(pkg_resources.path('xdatbus.resources', template_path))
 
     # Get the node from the blend template
     with bpy.data.libraries.load(blend_path, link=False) as (data_from, data_to):
@@ -162,36 +161,34 @@ def set_color4element(obj, atomic_number, color):
         nodes = node_group.nodes
 
         # Get the MN_color_set node from the blend template
-        color_set_node = get_template_node('resources/h2o.blend', 'MN_color_set', nodes)
-
-        # Rename the node to include the atomic number
-        color_set_node.name = f'MN_color_set_{atomic_number}'
-        color_set_node.label = f'MN_color_set_{atomic_number}'
+        color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
 
         # Find the Group Input node
         group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
-        if group_input is None:
-            print("Group Input node not found.")
-            return
+        join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry'), None)
 
         # Connect the Group Input node to the Color Set node
         node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
-        node_group.links.new(color_set_node.outputs['Atoms'],
-                             node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
 
         # Get the MN_color_atomic_number node from the blend template
-        atomic_number_node = get_template_node('resources/h2o.blend', 'MN_color_atomic_number', nodes)
+        style_atoms_node = get_template_node('h2o.blend', 'MN_style_atoms', nodes)
 
-        # Set the atomic number and color
-        atomic_number_node.inputs['atomic_number'].default_value = atomic_number
-        atomic_number_node.inputs['Color'].default_value = color
-
-        # Rename the node to include the atomic number
-        atomic_number_node.name = f'MN_color_atomic_number_{atomic_number}'
-        atomic_number_node.label = f'MN_color_atomic_number_{atomic_number}'
+        # Set the Eevee render engine
+        style_atoms_node.inputs[2].default_value = True
 
         # link the node to the color_set_node
-        node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
+        node_group.links.new(color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])
+        node_group.links.new(style_atoms_node.outputs['Geometry'], join_node.inputs['Geometry'])
+
+        # Get the MN_select_atomic_number node from the blend template
+        select_atomic_number_node = get_template_node('h2o.blend', 'MN_select_atomic_number', nodes)
+
+        # Set the atomic number
+        select_atomic_number_node.inputs[0].default_value = atomic_number
+
+        # Connect the Group Input node to the Select node
+        node_group.links.new(select_atomic_number_node.outputs['Selection'], color_set_node.inputs['Selection'])
+        node_group.links.new(select_atomic_number_node.outputs['Selection'], style_atoms_node.inputs['Selection'])
 
         # Update the node tree to reflect changes
         node_group.update_tag()

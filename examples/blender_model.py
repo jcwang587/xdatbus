@@ -30,10 +30,12 @@ mol.rotation_euler = (0, 3.14 / 2, 0)
 mol.select_set(True)
 bpy.ops.view3d.camera_to_view_selected()
 
+
+realize_instances(mol)
 apply_yaml(mol, (255, 255, 255))
 
 # Realize instances
-realize_instances(mol)
+
 
 # Export the scene to a blender file
 output_blend_path = os.path.join(current_dir, 'output.blend')

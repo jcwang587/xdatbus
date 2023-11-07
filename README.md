@@ -1,5 +1,5 @@
 <p align="center"> 
-<img src="https://github.com/jcwang587/xdatbus/blob/f7bc8411032e4aa1b3f47fc0ee7a0d56a053d857/docs/logo.png"/>
+<img src="https://raw.githubusercontent.com/jcwang587/xdatbus/main/docs/logo.png"/>
 </p>
 
 # xdatbus

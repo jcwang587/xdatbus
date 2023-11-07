@@ -1,5 +1,6 @@
 import os
 
+
 try:
     import bpy
 
@@ -105,6 +106,36 @@ def remove_nodes(obj, node_names):
                 print(f"Node {node_name} not found.")
 
 
+def get_template_node(template_path, node_name):
+    """
+    Get a node from a template blend file.
+
+        Parameters
+        ----------
+        template_path : str
+            The path to the template blend file.
+        node_name : str
+            The name of the node to get.
+
+        Returns
+        -------
+        node : bpy.types.Node
+            The node from the template blend file.
+    """
+    # Get the current directory
+    current_dir = os.getcwd()
+
+    # Get the node from the blend template
+    with bpy.data.libraries.load(os.path.join(current_dir, template_path), link=False) as (data_from, data_to):
+        data_to.node_groups = [node_name]
+
+    # Put the node in the node tree
+    node_group = data_to.node_groups[0]
+    node = node_group.nodes.new(type=node_name)
+
+    return node
+
+
 def set_color4element(obj, atomic_number, color):
     """
     Add a custom node and connect it to the specified input of the target node.
@@ -127,116 +158,59 @@ def set_color4element(obj, atomic_number, color):
         node_group = geo_node_mod.node_group
         nodes = node_group.nodes
 
-        # Check if any node's name contains 'MN_color_set'
-        color_set_node = next((node for node in nodes if 'MN_color_set' in node.name), None)
-
         # Get current directory
         current_dir = os.getcwd()
 
-        if not color_set_node:
-            # Get the MN_color_set node from the blend template
-            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                    data_from, data_to):
-                data_to.node_groups = ['MN_color_set']
+        # Get the MN_color_set node from the blend template
+        with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
+                data_from, data_to):
+            data_to.node_groups = ['MN_color_set']
 
-            # Put the node in the node tree
-            color_set_node_group = data_to.node_groups[0]
+        # Put the node in the node tree
+        color_set_node_group = data_to.node_groups[0]
 
-            color_set_node = nodes.new(type='GeometryNodeGroup')
-            color_set_node.node_tree = color_set_node_group
+        color_set_node = nodes.new(type='GeometryNodeGroup')
+        color_set_node.node_tree = color_set_node_group
 
-            # Rename the node to include the atomic number
-            color_set_node.name = f'MN_color_set_{atomic_number}'
-            color_set_node.label = f'MN_color_set_{atomic_number}'
+        # Rename the node to include the atomic number
+        color_set_node.name = f'MN_color_set_{atomic_number}'
+        color_set_node.label = f'MN_color_set_{atomic_number}'
 
-            # Find the Group Input node
-            group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
-            if group_input is None:
-                print("Group Input node not found.")
-                return
+        # Find the Group Input node
+        group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
+        if group_input is None:
+            print("Group Input node not found.")
+            return
 
-            # Connect the Group Input node to the Color Set node
-            node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
-            node_group.links.new(color_set_node.outputs['Atoms'],
-                                 node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
+        # Connect the Group Input node to the Color Set node
+        node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
+        node_group.links.new(color_set_node.outputs['Atoms'],
+                             node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
 
-            # Get the MN_color_atomic_number node from the blend template
-            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                    data_from, data_to):
-                data_to.node_groups = ['MN_color_atomic_number']
+        # Get the MN_color_atomic_number node from the blend template
+        with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
+                data_from, data_to):
+            data_to.node_groups = ['MN_color_atomic_number']
 
-            # Put the node in the node tree
-            atomic_number_node_group = data_to.node_groups[0]
+        # Put the node in the node tree
+        atomic_number_node_group = data_to.node_groups[0]
 
-            atomic_number_node = nodes.new(type='GeometryNodeGroup')
-            atomic_number_node.node_tree = atomic_number_node_group
+        atomic_number_node = nodes.new(type='GeometryNodeGroup')
+        atomic_number_node.node_tree = atomic_number_node_group
 
-            # Set the atomic number and color
-            atomic_number_node.inputs['atomic_number'].default_value = atomic_number
-            atomic_number_node.inputs['Color'].default_value = color
+        # Set the atomic number and color
+        atomic_number_node.inputs['atomic_number'].default_value = atomic_number
+        atomic_number_node.inputs['Color'].default_value = color
 
-            # Rename the node to include the atomic number
-            atomic_number_node.name = f'MN_color_atomic_number_{atomic_number}'
-            atomic_number_node.label = f'MN_color_atomic_number_{atomic_number}'
+        # Rename the node to include the atomic number
+        atomic_number_node.name = f'MN_color_atomic_number_{atomic_number}'
+        atomic_number_node.label = f'MN_color_atomic_number_{atomic_number}'
 
-            # link the node to the color_set_node
-            node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
+        # link the node to the color_set_node
+        node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
 
-            # Update the node tree to reflect changes
-            node_group.update_tag()
-
-        else:
-            # Get the MN_color_set node from the blend template
-            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                    data_from, data_to):
-                data_to.node_groups = ['MN_color_set']
-
-            # Put the node in the node tree
-            color_set_node_group = data_to.node_groups[0]
-
-            color_set_node = nodes.new(type='GeometryNodeGroup')
-            color_set_node.node_tree = color_set_node_group
-
-            # Rename the node to include the atomic number
-            color_set_node.name = f'MN_color_set_{atomic_number}'
-            color_set_node.label = f'MN_color_set_{atomic_number}'
-
-            # Find the Group Input node
-            group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
-            if group_input is None:
-                print("Group Input node not found.")
-                return
-
-            # Connect the Group Input node to the Color Set node
-            node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
-            node_group.links.new(color_set_node.outputs['Atoms'],
-                                 node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
-
-            # Get the MN_color_atomic_number node from the blend template
-            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                    data_from, data_to):
-                data_to.node_groups = ['MN_color_atomic_number']
-
-            # Put the node in the node tree
-            atomic_number_node_group = data_to.node_groups[0]
-
-            atomic_number_node = nodes.new(type='GeometryNodeGroup')
-            atomic_number_node.node_tree = atomic_number_node_group
-
-            # Set the atomic number and color
-            atomic_number_node.inputs['atomic_number'].default_value = atomic_number
-            atomic_number_node.inputs['Color'].default_value = color
-
-            # Rename the node to include the atomic number
-            atomic_number_node.name = f'MN_color_atomic_number_{atomic_number}'
-            atomic_number_node.label = f'MN_color_atomic_number_{atomic_number}'
-
-            # link the node to the color_set_node
-            node_group.links.new(atomic_number_node.outputs['Color'], color_set_node.inputs['Color'])
-
-            # Update the node tree to reflect changes
-            node_group.update_tag()
-
+        # Update the node tree to reflect changes
+        node_group.update_tag()
 
 
 def apply_yaml(obj, color):

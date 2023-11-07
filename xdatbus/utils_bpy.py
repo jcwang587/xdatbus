@@ -169,19 +169,22 @@ def set_color4element(obj, atomic_number, color, size=0.8):
         # Get the MN_color_set node from the blend template
         color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
 
+        for i, inputt in enumerate(color_set_node.inputs):
+            print(f"Input {i}: {inputt.name}, type: {type(inputt)}")
+
         # Set the color
-        color_set_node.inputs[0].default_value = color
+        color_set_node.inputs['Color'].default_value = color
 
         # Connect the Group Input node to the Color Set node
-        node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
+        node_group.links.new(group_input.outputs['Geometry'], color_set_node.inputs['Atoms'])
 
         # Get the MN_color_atomic_number node from the blend template
         style_atoms_node = get_template_node('h2o.blend', 'MN_style_atoms', nodes)
 
         # Set the Eevee render engine
-        style_atoms_node.inputs[2].default_value = True
-        style_atoms_node.inputs[3].default_value = size
-        style_atoms_node.inputs[6].default_value = bpy.data.materials["MN_atomic_material"]
+        style_atoms_node.inputs['[ ] Cycles / [x] Eevee '].default_value = True
+        style_atoms_node.inputs['Scale Radii'].default_value = size
+        style_atoms_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
 
         # link the node to the color_set_node
         node_group.links.new(color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])
@@ -191,7 +194,7 @@ def set_color4element(obj, atomic_number, color, size=0.8):
         select_atomic_number_node = get_template_node('h2o.blend', 'MN_select_atomic_number', nodes)
 
         # Set the atomic number
-        select_atomic_number_node.inputs[0].default_value = atomic_number
+        select_atomic_number_node.inputs['atomic_number'].default_value = atomic_number
 
         # Connect the Group Input node to the Select node
         node_group.links.new(select_atomic_number_node.outputs['Selection'], color_set_node.inputs['Selection'])

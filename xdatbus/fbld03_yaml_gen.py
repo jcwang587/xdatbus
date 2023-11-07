@@ -1,40 +1,34 @@
+import biotite.structure.io.pdb as pdb
 import yaml
 
+def yaml_gen(pdb_file_path):
+    # Create a PDBFile object
+    pdb_file = pdb.PDBFile.read(pdb_file_path)
 
-# Function to generate the YAML template file
-def yaml_gen(filepath):
-    # Define your configuration template with comments
-    config_template = {
-        '# service_host': 'The host of the service in the format host:port',
-        'service_host': 'localhost:8080',
+    # Convert PDB file to an AtomArray
+    atom_array = pdb.get_structure(pdb_file)[0]  # [0] to get the first model if multiple models are present
 
-        '# logging_level': 'Logging level. Options: DEBUG, INFO, WARNING, ERROR, CRITICAL',
-        'logging_level': 'INFO',
+    # Extract the PDB ID from the file name for naming the YAML file
+    pdb_id = pdb_file_path.split('/')[-1].split('.')[0]
 
-        '# database': 'Database configuration section',
-        'database': {
-            '# host': 'Database host address',
-            'host': 'localhost',
+    # Get unique elements from the atom array
+    unique_elements = set(atom_array.element.astype(str))  # Convert elements to Python strings
 
-            '# port': 'Database port number',
-            'port': 3306,
-
-            '# username': 'Username for the database',
-            'username': 'user',
-
-            '# password': 'Password for the database',
-            'password': 'pass',
-        },
-
-        '# server': 'Server configuration section',
-        'server': {
-            '# host': 'Server host address',
-            'host': '0.0.0.0',
-
-            '# port': 'Server port number',
-            'port': 8080,
+    # Create a dictionary for elements with default color and size scale
+    elements_dict = {
+        str(element): {  # Ensure that element is a Python string
+            'color': [0, 0, 0, 1],  # RGBA for black with full opacity as a list
+            'size_scale': 0.8
         }
+        for element in unique_elements
     }
 
-    with open(filepath, 'w') as file:
-        yaml.dump(config_template, file, default_flow_style=False, sort_keys=False)
+    # Generate YAML string from dictionary
+    # Use default_flow_style=False to output a traditional YAML format
+    yaml_str = yaml.safe_dump(elements_dict, sort_keys=True, default_flow_style=False)
+
+    # Write YAML string to file
+    with open(f'{pdb_id}_elements.yaml', 'w') as file:
+        file.write(yaml_str)
+
+    print(f"YAML file '{pdb_id}_elements.yaml' has been created.")

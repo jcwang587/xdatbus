@@ -1,7 +1,10 @@
 import molecularnodes as mn
 import bpy
 import os
-from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image, rm_bond, yaml_gen, apply_yaml
+from xdatbus.fbld01_pos2bpdb import pos2bpdb
+from xdatbus.fbld02_rm_bond import rm_bond
+from xdatbus.fbld03_yaml_gen import yaml_gen
+from xdatbus.utils_bpy import realize_instances, clear_scene, apply_modifiers_to_mesh, apply_yaml
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
@@ -14,28 +17,17 @@ rm_bond("llto_rm_bond.pdb", "LA", "O", "llto_rm_bond.pdb")
 rm_bond("llto_rm_bond.pdb", "LA", "LA", "llto_rm_bond.pdb")
 rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 
-# Set render engine to CYCLES and device to GPU
-bpy.context.scene.render.engine = 'CYCLES'
-bpy.context.scene.cycles.device = "GPU"
-
-# Clear existing mesh objects
-bpy.ops.object.select_all(action='DESELECT')
-bpy.ops.object.select_by_type(type='MESH')
-bpy.ops.object.delete()
-
 # Load the molecule
 clear_scene()
 mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
-mol.rotation_euler = (0, 3.14 / 2, 0)
-mol.select_set(True)
-bpy.ops.view3d.camera_to_view_selected()
-
-
-realize_instances(mol)
-apply_yaml(mol, (255, 255, 255))
 
 # Realize instances
+realize_instances(mol)
 
+# Generate YAML file
+yaml_gen('llto_rm_bond.pdb')
+
+apply_yaml(mol, (255, 255, 255))
 
 # Export the scene to a blender file
 output_blend_path = os.path.join(current_dir, 'output.blend')
@@ -53,6 +45,4 @@ bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
 # bpy.ops.export_scene.fbx(filepath=output_fbx_path,
 #                          use_selection=True,
 #                          path_mode='COPY')
-#
-# # generate yaml file
-# yaml_gen('config_template.yaml')
+

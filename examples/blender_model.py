@@ -4,7 +4,7 @@ import os
 from xdatbus.fbld01_pos2bpdb import pos2bpdb
 from xdatbus.fbld02_rm_bond import rm_bond
 from xdatbus.fbld03_yaml_gen import yaml_gen
-from xdatbus.utils_bpy import realize_instances, clear_scene, apply_modifiers_to_mesh, apply_yaml
+from xdatbus.utils_bpy import clear_scene, apply_modifiers_to_mesh, apply_yaml
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
@@ -17,16 +17,12 @@ rm_bond("llto_rm_bond.pdb", "LA", "O", "llto_rm_bond.pdb")
 rm_bond("llto_rm_bond.pdb", "LA", "LA", "llto_rm_bond.pdb")
 rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 
-# Load the molecule
-clear_scene()
-mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
-
-# Realize instances
-realize_instances(mol)
-
 # Generate YAML file
 yaml_gen('llto_rm_bond.pdb')
 
+# Load the molecule and apply the style
+clear_scene()
+mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
 apply_yaml(mol, (255, 255, 255))
 
 # Export the scene to a blender file
@@ -34,15 +30,11 @@ output_blend_path = os.path.join(current_dir, 'output.blend')
 bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
 
 # Apply modifiers if the object is a mesh
-# apply_modifiers_to_mesh(mol)
-#
-# Render and save the image
-# render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
-# render_image(output_path=render_image_path)  # Call the render function with the path
-#
+apply_modifiers_to_mesh(mol)
+
 # Export the scene to an FBX file
-# output_fbx_path = os.path.join(current_dir, 'output.fbx')
-# bpy.ops.export_scene.fbx(filepath=output_fbx_path,
-#                          use_selection=True,
-#                          path_mode='COPY')
+output_fbx_path = os.path.join(current_dir, 'output.fbx')
+bpy.ops.export_scene.fbx(filepath=output_fbx_path,
+                         use_selection=True,
+                         path_mode='COPY')
 

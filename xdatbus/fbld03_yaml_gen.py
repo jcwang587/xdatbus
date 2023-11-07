@@ -1,6 +1,7 @@
 import biotite.structure.io.pdb as pdb
 import yaml
 
+
 def yaml_gen(pdb_file_path):
     # Create a PDBFile object
     pdb_file = pdb.PDBFile.read(pdb_file_path)
@@ -28,7 +29,7 @@ def yaml_gen(pdb_file_path):
     yaml_str = yaml.safe_dump(elements_dict, sort_keys=True, default_flow_style=False)
 
     # Write YAML string to file
-    with open(f'{pdb_id}_elements.yaml', 'w') as file:
+    with open(f'{pdb_id}_style.yaml', 'w') as file:
         file.write(yaml_str)
 
-    print(f"YAML file '{pdb_id}_elements.yaml' has been created.")
+    print(f"YAML file '{pdb_id}_style.yaml' has been created.")

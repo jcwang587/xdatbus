@@ -221,18 +221,20 @@ def apply_yaml(obj, color):
 
     # Find the GeometryNodes modifier
     geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
-    if geo_node_mod:
-        # Get the node group (node tree) used by this modifier
-        node_group = geo_node_mod.node_group
-        nodes = node_group.nodes
 
-        for node in nodes:
-            print(node.name, node.bl_idname)
+    # Get the node group (node tree) used by this modifier
+    node_group = geo_node_mod.node_group
+    nodes = node_group.nodes
 
-        remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
+    for node in nodes:
+        print(node.name, node.bl_idname)
 
-        set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1), 0.8)
-        set_color4element(obj, 8, (0.8, 0.0, 0.0, 1), 0.8)
+    remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
+
+    set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1), 0.8)
+    set_color4element(obj, 8, (0.8, 0.0, 0.0, 1), 0.8)
+
+    realize_instances(obj)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

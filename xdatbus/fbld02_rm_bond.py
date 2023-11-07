@@ -2,7 +2,7 @@ try:
     import biotite
     BIOTITE_AVAILABLE = True
 except ImportError:
-    load_structure = None
+    biotite = None
     BIOTITE_AVAILABLE = False
 
 
@@ -21,6 +21,9 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
         output_file_path : str
             Output path of the PDB file
     """
+    if not BIOTITE_AVAILABLE:
+        raise ImportError("The function `rm_bond` requires biotite. Please install biotite to use this function.")
+
     # Load the PDB file into a list of lines
     with open(pdb_file_path, 'r') as file:
         lines = file.readlines()

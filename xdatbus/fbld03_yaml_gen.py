@@ -1,13 +1,37 @@
-import biotite.structure.io.pdb as pdb
-import yaml
+try:
+    import biotite.structure.io.pdb as pdb
+    PDB_AVAILABLE = True
+except ImportError:
+    pdb = None
+    PDB_AVAILABLE = False
+
+try:
+    import yaml
+    YAML_AVAILABLE = True
+except ImportError:
+    yaml = None
+    YAML_AVAILABLE = False
 
 
 def yaml_gen(pdb_file_path):
+    """
+    This function generates a YAML file for the elements in the PDB file.
+
+        Parameters
+        ----------
+        pdb_file_path : str
+            Input path of the PDB file
+    """
+    if not PDB_AVAILABLE:
+        raise ImportError("The function `yaml_gen` requires biotite. Please install biotite to use this function.")
+    if not YAML_AVAILABLE:
+        raise ImportError("The function `yaml_gen` requires yaml. Please install yaml to use this function.")
+
     # Create a PDBFile object
     pdb_file = pdb.PDBFile.read(pdb_file_path)
 
     # Convert PDB file to an AtomArray
-    atom_array = pdb.get_structure(pdb_file)[0]  # [0] to get the first model if multiple models are present
+    atom_array = pdb.get_structure(pdb_file)[0]
 
     # Extract the PDB ID from the file name for naming the YAML file
     pdb_id = pdb_file_path.split('/')[-1].split('.')[0]

@@ -3,4 +3,3 @@ biotite==0.37.0
 bpy~=3.6.0
 molecularnodes~=2.11.0
 pyyaml~=6.0.1
-setuptools~=68.2.2

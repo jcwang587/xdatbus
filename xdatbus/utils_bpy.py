@@ -1,5 +1,4 @@
-import os
-
+import importlib.resources as pkg_resources
 
 try:
     import bpy
@@ -106,7 +105,7 @@ def remove_nodes(obj, node_names):
                 print(f"Node {node_name} not found.")
 
 
-def get_template_node(template_path, node_name):
+def get_template_node(template_path, node_name, nodes):
     """
     Get a node from a template blend file.
 
@@ -116,22 +115,26 @@ def get_template_node(template_path, node_name):
             The path to the template blend file.
         node_name : str
             The name of the node to get.
+        nodes : bpy.types.NodeTree.nodes
+            The nodes from the node tree to add the node to.
 
         Returns
         -------
         node : bpy.types.Node
             The node from the template blend file.
     """
-    # Get the current directory
-    current_dir = os.getcwd()
+    # Get the template blend file
+    blend_path = pkg_resources.path('xdatbus.resources', template_path)
 
     # Get the node from the blend template
-    with bpy.data.libraries.load(os.path.join(current_dir, template_path), link=False) as (data_from, data_to):
+    with bpy.data.libraries.load(blend_path, link=False) as (data_from, data_to):
         data_to.node_groups = [node_name]
 
     # Put the node in the node tree
     node_group = data_to.node_groups[0]
-    node = node_group.nodes.new(type=node_name)
+
+    node = nodes.new(type='GeometryNodeGroup')
+    node.node_tree = node_group
 
     return node
 
@@ -158,19 +161,8 @@ def set_color4element(obj, atomic_number, color):
         node_group = geo_node_mod.node_group
         nodes = node_group.nodes
 
-        # Get current directory
-        current_dir = os.getcwd()
-
         # Get the MN_color_set node from the blend template
-        with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                data_from, data_to):
-            data_to.node_groups = ['MN_color_set']
-
-        # Put the node in the node tree
-        color_set_node_group = data_to.node_groups[0]
-
-        color_set_node = nodes.new(type='GeometryNodeGroup')
-        color_set_node.node_tree = color_set_node_group
+        color_set_node = get_template_node('resources/h2o.blend', 'MN_color_set', nodes)
 
         # Rename the node to include the atomic number
         color_set_node.name = f'MN_color_set_{atomic_number}'
@@ -188,15 +180,7 @@ def set_color4element(obj, atomic_number, color):
                              node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
 
         # Get the MN_color_atomic_number node from the blend template
-        with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
-                data_from, data_to):
-            data_to.node_groups = ['MN_color_atomic_number']
-
-        # Put the node in the node tree
-        atomic_number_node_group = data_to.node_groups[0]
-
-        atomic_number_node = nodes.new(type='GeometryNodeGroup')
-        atomic_number_node.node_tree = atomic_number_node_group
+        atomic_number_node = get_template_node('resources/h2o.blend', 'MN_color_atomic_number', nodes)
 
         # Set the atomic number and color
         atomic_number_node.inputs['atomic_number'].default_value = atomic_number

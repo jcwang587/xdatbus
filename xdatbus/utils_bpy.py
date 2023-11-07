@@ -138,7 +138,7 @@ def get_template_node(template_path, node_name, nodes):
     return node
 
 
-def set_color4element(obj, atomic_number, color):
+def set_color4element(obj, atomic_number, color, size=0.8):
     """
     Add a custom node and connect it to the specified input of the target node.
 
@@ -150,6 +150,8 @@ def set_color4element(obj, atomic_number, color):
             The atomic number of the element to set the color of.
         color : tuple
             The color to set the node to.
+        size : float
+            The size of the atoms.
     """
 
     # Get the Geometry Nodes modifier from the object
@@ -178,7 +180,7 @@ def set_color4element(obj, atomic_number, color):
 
         # Set the Eevee render engine
         style_atoms_node.inputs[2].default_value = True
-        style_atoms_node.inputs[3].default_value = 0.8
+        style_atoms_node.inputs[3].default_value = size
         style_atoms_node.inputs[6].default_value = bpy.data.materials["MN_atomic_material"]
 
         # link the node to the color_set_node

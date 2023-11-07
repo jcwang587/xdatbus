@@ -228,8 +228,8 @@ def apply_yaml(obj, color):
 
         remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
 
-        set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1))
-        set_color4element(obj, 8, (0.8, 0.0, 0.0, 1))
+        set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1), 0.8)
+        set_color4element(obj, 8, (0.8, 0.0, 0.0, 1), 0.8)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

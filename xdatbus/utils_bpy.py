@@ -130,9 +130,34 @@ def set_color4element(obj, atomic_number, color):
         # Check if 'MN_color_set' node already exists
         color_set_node = next((node for node in nodes if node.name == 'MN_color_set'), None)
 
-        if color_set_node:
+        if not color_set_node:
             # Get current directory
             current_dir = os.getcwd()
+
+            # Get the MN_color_set node from the blend template
+            with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
+                    data_from, data_to):
+                data_to.node_groups = ['MN_color_set']
+
+            # Put the node in the node tree
+            color_set_node_group = data_to.node_groups[0]
+
+            color_set_node = nodes.new(type='GeometryNodeGroup')
+            color_set_node.node_tree = color_set_node_group
+
+            # Rename the node to include the atomic number
+            color_set_node.name = f'MN_color_set_{atomic_number}'
+            color_set_node.label = f'MN_color_set_{atomic_number}'
+
+            # Find the Group Input node
+            group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
+            if group_input is None:
+                print("Group Input node not found.")
+                return
+
+            # Connect the Group Input node to the Color Set node
+            node_group.links.new(group_input.outputs[0], color_set_node.inputs['Atoms'])
+            node_group.links.new(color_set_node.outputs['Atoms'], node_group.nodes['MN_style_ball_and_stick'].inputs['Atoms'])
 
             # Get the MN_color_atomic_number node from the blend template
             with bpy.data.libraries.load(os.path.join(current_dir, '../resources/h2o.blend'), link=False) as (
@@ -185,7 +210,7 @@ def apply_yaml(obj, color):
         for node in nodes:
             print(node.name, node.bl_idname)
 
-        remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random'])
+        remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
 
         set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1))
 

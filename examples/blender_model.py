@@ -40,17 +40,17 @@ output_blend_path = os.path.join(current_dir, 'output.blend')
 bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
 
 # Apply modifiers if the object is a mesh
-apply_modifiers_to_mesh(mol)
+# apply_modifiers_to_mesh(mol)
 #
 # Render and save the image
 # render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
 # render_image(output_path=render_image_path)  # Call the render function with the path
 #
 # Export the scene to an FBX file
-output_fbx_path = os.path.join(current_dir, 'output.fbx')
-bpy.ops.export_scene.fbx(filepath=output_fbx_path,
-                         use_selection=True,
-                         path_mode='COPY')
+# output_fbx_path = os.path.join(current_dir, 'output.fbx')
+# bpy.ops.export_scene.fbx(filepath=output_fbx_path,
+#                          use_selection=True,
+#                          path_mode='COPY')
 #
 # # generate yaml file
 # yaml_gen('config_template.yaml')

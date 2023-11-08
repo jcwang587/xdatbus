@@ -76,7 +76,12 @@ def realize_instances(obj):
             # Add a join geometry node
             join_node = nodes.new(type='GeometryNodeJoinGeometry')
 
-            node_group.links.new(stored_sockets[0][0], join_node.inputs[0])
+            # Get the MN_style_sticks node from the blend template
+            style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
+
+            # Connect the Group Input node to the Style Sticks node
+            node_group.links.new(stored_sockets[0][0], style_sticks_node.inputs['Atoms'])
+            node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
             node_group.links.new(join_node.outputs[0], realize_node.inputs[0])
             node_group.links.new(realize_node.outputs[0], group_output.inputs[0])
 

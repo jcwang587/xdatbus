@@ -23,7 +23,7 @@ yaml_gen('llto_rm_bond.pdb')
 # Load the molecule and apply the style
 clear_scene()
 mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
-apply_yaml(mol, (255, 255, 255))
+apply_yaml(mol, 'llto_rm_bond_style.yaml')
 
 # Export the scene to a blender file
 output_blend_path = os.path.join(current_dir, 'output.blend')

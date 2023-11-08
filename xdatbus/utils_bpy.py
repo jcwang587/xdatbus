@@ -167,9 +167,6 @@ def set_color4element(obj, atomic_number, color, size=0.8):
         # Get the MN_color_set node from the blend template
         color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
 
-        for i, inputt in enumerate(color_set_node.inputs):
-            print(f"Input {i}: {inputt.name}, type: {type(inputt)}")
-
         # Set the color
         color_set_node.inputs['Color'].default_value = color
 
@@ -202,7 +199,7 @@ def set_color4element(obj, atomic_number, color, size=0.8):
         node_group.update_tag()
 
 
-def apply_yaml(obj, color):
+def apply_yaml(obj, yaml_path):
     """
     Set the color of the given object. This function requires bpy and molecularnodes.
 
@@ -210,8 +207,8 @@ def apply_yaml(obj, color):
         ----------
         obj : bpy.types.Object
             The object to set the color of
-        color : tuple
-            The color to set the object to
+        yaml_path : str
+            The path to the YAML file to use
     """
     if not BPY_AVAILABLE or not MN_AVAILABLE:
         raise ImportError("The function `set_color` requires bpy and molecularnodes. Please install bpy and "
@@ -228,11 +225,12 @@ def apply_yaml(obj, color):
         print(node.name, node.bl_idname)
 
     remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
+    realize_instances(obj)
 
     set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1), 0.8)
     set_color4element(obj, 8, (0.8, 0.0, 0.0, 1), 0.8)
 
-    realize_instances(obj)
+
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

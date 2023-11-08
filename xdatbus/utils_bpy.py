@@ -1,4 +1,6 @@
 import importlib.resources as pkg_resources
+from ase.io import read
+from ase.data import atomic_numbers
 
 try:
     import bpy
@@ -228,21 +230,16 @@ def apply_yaml(obj, yaml_path):
         raise ImportError("The function `set_color` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")
 
-    # Find the GeometryNodes modifier
-    geo_node_mod = next((mod for mod in obj.modifiers if mod.type == 'NODES'), None)
-
-    # Get the node group (node tree) used by this modifier
-    node_group = geo_node_mod.node_group
-    nodes = node_group.nodes
-
-    for node in nodes:
-        print(node.name, node.bl_idname)
-
+    # Prepare the object for editing
     remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
     realize_instances(obj)
 
-    set_color4element(obj, 3, (0.155483, 0.204112, 0.8, 1), 0.8)
-    set_color4element(obj, 8, (0.8, 0.0, 0.0, 1), 0.8)
+    # Set the properties for each element in the YAML file
+    for element, attributes in yaml_loader(yaml_path).items():
+        atomic_number = int(attributes['atomic_number'])
+        color = tuple(attributes['color'])
+        size = float(attributes['size'])
+        set_color4element(obj, atomic_number, color, size)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):
@@ -347,43 +344,74 @@ def yaml_gen(pdb_file_path):
     """
     This function generates a YAML file for the elements in the PDB file.
 
-        Parameters
-        ----------
-        pdb_file_path : str
-            Input path of the PDB file
+    Parameters
+    ----------
+    pdb_file_path : str
+        Input path of the PDB file
     """
-    if not PDB_AVAILABLE:
-        raise ImportError("The function `yaml_gen` requires biotite. Please install biotite to use this function.")
     if not YAML_AVAILABLE:
-        raise ImportError("The function `yaml_gen` requires yaml. Please install yaml to use this function.")
+        raise ImportError("The function `yaml_gen` requires PyYAML. Please install PyYAML to use this function.")
 
-    # Create a PDBFile object
-    pdb_file = pdb.PDBFile.read(pdb_file_path)
+    # Read the PDB file using ASE
+    atoms = read(pdb_file_path)
 
-    # Convert PDB file to an AtomArray
-    atom_array = pdb.get_structure(pdb_file)[0]
+    # Get unique elements from the atoms
+    unique_elements = set(atom.symbol for atom in atoms)
 
-    # Extract the PDB ID from the file name for naming the YAML file
-    pdb_id = pdb_file_path.split('/')[-1].split('.')[0]
-
-    # Get unique elements from the atom array
-    unique_elements = set(atom_array.element.astype(str))  # Convert elements to Python strings
-
-    # Create a dictionary for elements with default color and size scale
+    # Create a dictionary for elements with default color, size scale, and atomic number
     elements_dict = {
-        str(element): {  # Ensure that element is a Python string
-            'color': [0, 0, 0, 1],  # RGBA for black with full opacity as a list
-            'size_scale': 0.8
+        element: {
+            'atomic_number': atomic_numbers[element],
+            'color': [0, 0, 0, 1],  # RGBA for black with full opacity
+            'atomic_scale': 0.8,
+            'bonded': True
         }
         for element in unique_elements
     }
 
+    # Extract the PDB ID from the file name for naming the YAML file
+    pdb_id = pdb_file_path.split('/')[-1].split('.')[0]
+
     # Generate YAML string from dictionary
-    # Use default_flow_style=False to output a traditional YAML format
     yaml_str = yaml.safe_dump(elements_dict, sort_keys=True, default_flow_style=False)
 
     # Write YAML string to file
-    with open(f'{pdb_id}_style.yaml', 'w') as file:
+    yaml_file_path = f'{pdb_id}_style.yaml'
+    with open(yaml_file_path, 'w') as file:
         file.write(yaml_str)
 
-    print(f"YAML file '{pdb_id}_style.yaml' has been created.")
+    print(f"YAML file '{yaml_file_path}' has been created.")
+
+
+def yaml_loader(yaml_path):
+    """
+    This function loads a YAML file.
+
+        Parameters
+        ----------
+        yaml_path : str
+            Input path of the YAML file
+
+        Returns
+        -------
+        elements_dict : dict
+            A dictionary containing the elements and their corresponding color and size scale
+    """
+    if not YAML_AVAILABLE:
+        raise ImportError("The function `yaml_loader` requires yaml. Please install yaml to use this function.")
+
+    with open(yaml_path, 'r') as file:
+        data = yaml.safe_load(file)
+
+    # Extract color and size
+    elements_data = {}
+    for element, attributes in data.items():
+        atomic_number = int(attributes['atomic_number'])
+        color = tuple(attributes['color'])
+        atomic_scale = float(attributes['atomic_scale'])
+        bonded = bool(attributes['bonded'])
+        elements_data[element] = {'atomic_number': atomic_number,
+                                  'color': color,
+                                  'atomic_scale': atomic_scale,
+                                  'bonded': bonded}
+    return elements_data

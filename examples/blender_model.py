@@ -3,8 +3,7 @@ import bpy
 import os
 from xdatbus.fbld01_pos2bpdb import pos2bpdb
 from xdatbus.fbld02_rm_bond import rm_bond
-from xdatbus.fbld03_yaml_gen import yaml_gen
-from xdatbus.utils_bpy import clear_scene, apply_modifiers_to_mesh, apply_yaml
+from xdatbus.utils_bpy import clear_scene, apply_modifiers_to_mesh, apply_yaml, yaml_gen
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
@@ -22,7 +21,7 @@ yaml_gen('llto_rm_bond.pdb')
 
 # Load the molecule and apply the style
 clear_scene()
-mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
+mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='stick')
 apply_yaml(mol, 'llto_rm_bond_style.yaml')
 
 # Export the scene to a blender file

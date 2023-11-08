@@ -292,9 +292,9 @@ def render_image(engine='eevee', x=1000, y=500, output_path='render.png'):
         bpy.context.scene.render.engine = "BLENDER_EEVEE"
     elif engine == "cycles":
         bpy.context.scene.render.engine = "CYCLES"
-        try:
+        if "GPU" in bpy.context.scene.cycles.available_devices:
             bpy.context.scene.cycles.device = "GPU"
-        except:
+        else:
             bpy.context.scene.cycles.device = "CPU"
 
     # Render

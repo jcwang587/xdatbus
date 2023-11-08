@@ -1,6 +1,6 @@
-import molecularnodes as mn
-import bpy
 import os
+import bpy
+import molecularnodes as mn
 from xdatbus.fbld01_pos2bpdb import pos2bpdb
 from xdatbus.fbld02_rm_bond import rm_bond
 from xdatbus.utils_bpy import clear_scene, apply_modifiers_to_mesh, apply_yaml, yaml_gen

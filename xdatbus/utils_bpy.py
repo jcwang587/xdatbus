@@ -2,7 +2,6 @@ import importlib.resources as pkg_resources
 
 try:
     import bpy
-
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -10,7 +9,6 @@ except ImportError:
 
 try:
     import molecularnodes as mn
-
     MN_AVAILABLE = True
 except ImportError:
     mn = None

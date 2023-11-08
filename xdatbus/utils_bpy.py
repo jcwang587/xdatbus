@@ -152,7 +152,7 @@ def get_template_node(template_path, node_name, nodes):
     return node
 
 
-def set_color4element(obj, atomic_number, color, size=0.8):
+def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
     """
     Add a custom node and connect it to the specified input of the target node.
 
@@ -164,8 +164,10 @@ def set_color4element(obj, atomic_number, color, size=0.8):
             The atomic number of the element to set the color of.
         color : tuple
             The color to set the node to.
-        size : float
+        atomic_scale : float
             The size of the atoms.
+        bonded : bool
+            Whether the atoms are bonded.
     """
 
     # Get the Geometry Nodes modifier from the object
@@ -194,7 +196,7 @@ def set_color4element(obj, atomic_number, color, size=0.8):
 
         # Set the Eevee render engine
         style_atoms_node.inputs['[ ] Cycles / [x] Eevee '].default_value = True
-        style_atoms_node.inputs['Scale Radii'].default_value = size
+        style_atoms_node.inputs['Scale Radii'].default_value = atomic_scale
         style_atoms_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
 
         # link the node to the color_set_node
@@ -210,6 +212,14 @@ def set_color4element(obj, atomic_number, color, size=0.8):
         # Connect the Group Input node to the Select node
         node_group.links.new(select_atomic_number_node.outputs['Selection'], color_set_node.inputs['Selection'])
         node_group.links.new(select_atomic_number_node.outputs['Selection'], style_atoms_node.inputs['Selection'])
+
+        if bonded:
+            # Get the MN_style_sticks node from the blend template
+            style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
+
+            # Connect the Group Input node to the Style Sticks node
+            node_group.links.new(group_input.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
+            node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
 
         # Update the node tree to reflect changes
         node_group.update_tag()
@@ -231,15 +241,19 @@ def apply_yaml(obj, yaml_path):
                           "molecularnodes to use this function.")
 
     # Prepare the object for editing
-    remove_nodes(obj, ['MN_color_common', 'MN_color_attribute_random', 'MN_color_set'])
     realize_instances(obj)
+    remove_nodes(obj, ['MN_color_common',
+                       'MN_color_attribute_random',
+                       'MN_color_set',
+                       'MN_style_ball_and_stick'])
 
     # Set the properties for each element in the YAML file
     for element, attributes in yaml_loader(yaml_path).items():
         atomic_number = int(attributes['atomic_number'])
         color = tuple(attributes['color'])
-        size = float(attributes['size'])
-        set_color4element(obj, atomic_number, color, size)
+        atomic_scale = float(attributes['atomic_scale'])
+        bonded = bool(attributes['bonded'])
+        set_color4element(obj, atomic_number, color, atomic_scale, bonded)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):
@@ -363,7 +377,7 @@ def yaml_gen(pdb_file_path):
         element: {
             'atomic_number': atomic_numbers[element],
             'color': [0, 0, 0, 1],  # RGBA for black with full opacity
-            'atomic_scale': 0.8,
+            'atomic_scale': 0.5,
             'bonded': True
         }
         for element in unique_elements

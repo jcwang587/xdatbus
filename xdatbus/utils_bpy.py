@@ -218,13 +218,13 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
         node_group.links.new(select_atomic_number_node.outputs['Selection'], color_set_node.inputs['Selection'])
         node_group.links.new(select_atomic_number_node.outputs['Selection'], style_atoms_node.inputs['Selection'])
 
-        if bonded:
-            # Get the MN_style_sticks node from the blend template
-            style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
-
-            # Connect the Group Input node to the Style Sticks node
-            node_group.links.new(group_input.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
-            node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
+        # if bonded:
+        #     # Get the MN_color_set node from the blend template
+        #     style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
+        #
+        #     # Connect the Group Input node to the Style Sticks node
+        #     node_group.links.new(group_input.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
+        #     node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
 
         # Update the node tree to reflect changes
         node_group.update_tag()

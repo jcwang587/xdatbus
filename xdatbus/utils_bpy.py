@@ -4,6 +4,7 @@ from ase.data import atomic_numbers
 
 try:
     import bpy
+
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -11,6 +12,7 @@ except ImportError:
 
 try:
     import biotite.structure.io.pdb as pdb
+
     PDB_AVAILABLE = True
 except ImportError:
     pdb = None
@@ -18,6 +20,7 @@ except ImportError:
 
 try:
     import molecularnodes as mn
+
     MN_AVAILABLE = True
 except ImportError:
     mn = None
@@ -25,6 +28,7 @@ except ImportError:
 
 try:
     import yaml
+
     YAML_AVAILABLE = True
 except ImportError:
     yaml = None
@@ -131,14 +135,12 @@ def remove_nodes(obj, node_names):
                 print(f"Node {node_name} not found.")
 
 
-def get_template_node(template_path, node_name, nodes):
+def get_template_node(node_name, nodes):
     """
     Get a node from a template blend file.
 
         Parameters
         ----------
-        template_path : str
-            The path to the template blend file.
         node_name : str
             The name of the node to get.
         nodes : bpy.types.NodeTree.nodes
@@ -149,16 +151,9 @@ def get_template_node(template_path, node_name, nodes):
         node : bpy.types.Node
             The node from the template blend file.
     """
-    # Get the template blend file
-    blend_path = str(pkg_resources.path('xdatbus.resources', template_path))
-
-    # Get the node from the blend template
-    with bpy.data.libraries.load(blend_path, link=False) as (data_from, data_to):
-        data_to.node_groups = [node_name]
-
-    # Put the node in the node tree
-    node_group = data_to.node_groups[0]
-
+    blend_path = str(pkg_resources.path('xdatbus.resources', 'MN_data_file.blend'))
+    bpy.ops.wm.append(filename=node_name, directory=blend_path + '\\NodeTree\\')
+    node_group = bpy.data.node_groups[node_name]
     node = nodes.new(type='GeometryNodeGroup')
     node.node_tree = node_group
 
@@ -191,68 +186,45 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
         node_group = geo_node_mod.node_group
         nodes = node_group.nodes
 
-        # Find the Group Input node
+        # Find necessary nodes
         group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
         join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry'), None)
+        bond_join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry' and
+                               node.name == 'Join Geometry.001'), None)
         style_sticks_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeGroup' and
                                   node.node_tree.name == 'MN_style_sticks'), None)
 
-        # Get the MN_color_set node from the blend template
-        color_set_node = get_template_node('h2o.blend', 'MN_color_set', nodes)
-
-        # Set the color
-        color_set_node.inputs['Color'].default_value = color
-
-        # Connect the Group Input node to the Color Set node
-        node_group.links.new(group_input.outputs['Geometry'], color_set_node.inputs['Atoms'])
-
-        # Get the MN_color_atomic_number node from the blend template
-        style_atoms_node = get_template_node('h2o.blend', 'MN_style_atoms', nodes)
+        # Set color for atoms and link the nodes
+        atom_color_set_node = get_template_node('MN_color_set', nodes)
+        atom_color_set_node.inputs['Color'].default_value = color
+        node_group.links.new(group_input.outputs['Geometry'], atom_color_set_node.inputs['Atoms'])
 
         # Set the Eevee render engine
+        style_atoms_node = get_template_node('MN_style_atoms', nodes)
         style_atoms_node.inputs['[ ] Cycles / [x] Eevee '].default_value = True
         style_atoms_node.inputs['Scale Radii'].default_value = atomic_scale
+        style_atoms_node.inputs[4].default_value = 4
         style_atoms_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
-
-        # link the node to the color_set_node
-        node_group.links.new(color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])
+        node_group.links.new(atom_color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])
         node_group.links.new(style_atoms_node.outputs['Geometry'], join_node.inputs['Geometry'])
 
         # Get the MN_select_atomic_number node from the blend template
-        select_atomic_number_node = get_template_node('h2o.blend', 'MN_select_atomic_number', nodes)
-
-        # Set the atomic number
+        select_atomic_number_node = get_template_node('MN_select_atomic_number', nodes)
         select_atomic_number_node.inputs['atomic_number'].default_value = atomic_number
-
-        # Connect the Group Input node to the Select node
-        node_group.links.new(select_atomic_number_node.outputs['Selection'], color_set_node.inputs['Selection'])
+        node_group.links.new(select_atomic_number_node.outputs['Selection'], atom_color_set_node.inputs['Selection'])
         node_group.links.new(select_atomic_number_node.outputs['Selection'], style_atoms_node.inputs['Selection'])
 
         # Get the MN_color_attribute_random node from the blend template
         if bonded:
-            blend_path = str(pkg_resources.path('xdatbus.resources', 'MN_data_file.blend'))
-            bpy.ops.wm.append(filename='MN_color_set', directory=blend_path + '\\NodeTree\\')
-            sticks_color_set_node_group = bpy.data.node_groups['MN_color_set']
-            sticks_color_set_node = nodes.new(type='GeometryNodeGroup')
-            sticks_color_set_node.node_tree = sticks_color_set_node_group
+            bond_color_set_node = get_template_node('MN_color_set', nodes)
+            bond_color_set_node.inputs['Color'].default_value = color
+            node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
+            node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
 
-            # Set the name of the node
-            sticks_color_set_node.name = 'MN_color_set_sticks'
-            sticks_color_set_node.inputs['Color'].default_value = color
-
-            bpy.ops.wm.append(filename='MN_select_atomic_number', directory=blend_path + '\\NodeTree\\')
-            sticks_select_atomic_number_node_group = bpy.data.node_groups['MN_select_atomic_number']
-            sticks_select_atomic_number_node = nodes.new(type='GeometryNodeGroup')
-            sticks_select_atomic_number_node.node_tree = sticks_select_atomic_number_node_group
-
-            # Set the name of the node
-            sticks_select_atomic_number_node.name = 'MN_select_atomic_number_sticks'
-
-            node_group.links.new(group_input.outputs['Geometry'], sticks_color_set_node.inputs['Atoms'])
-            node_group.links.new(sticks_select_atomic_number_node.outputs['Selection'], sticks_color_set_node.inputs['Selection'])
-            node_group.links.new(sticks_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
-
-        node_group.update_tag()
+            bond_select_atomic_number_node = get_template_node('MN_select_atomic_number', nodes)
+            bond_select_atomic_number_node.inputs['atomic_number'].default_value = atomic_number
+            node_group.links.new(bond_select_atomic_number_node.outputs['Selection'],
+                                 bond_color_set_node.inputs['Selection'])
 
 
 def apply_yaml(obj, yaml_path):

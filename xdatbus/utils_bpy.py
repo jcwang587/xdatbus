@@ -408,7 +408,8 @@ def yaml_gen(pdb_file_path):
             'atomic_number': atomic_numbers[element],
             'color': [0, 0, 0, 1],  # RGBA for black with full opacity
             'atomic_scale': 0.5,
-            'bonded': True
+            'bonded': True,
+            'bond_radius': 0.3,
         }
         for element in unique_elements
     }

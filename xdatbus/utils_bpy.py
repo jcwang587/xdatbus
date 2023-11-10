@@ -358,7 +358,7 @@ def apply_modifiers_to_mesh(obj):
 
 def yaml_gen(pdb_file_path):
     """
-    This function generates a YAML file for the elements in the PDB file.
+    This function generates a YAML file for the elements in the PDB file, with a common bond_radius.
 
     Parameters
     ----------
@@ -376,14 +376,16 @@ def yaml_gen(pdb_file_path):
 
     # Create a dictionary for elements with default color, size scale, and atomic number
     elements_dict = {
-        element: {
-            'atomic_number': atomic_numbers[element],
-            'color': [0, 0, 0, 1],  # RGBA for black with full opacity
-            'atomic_scale': 0.5,
-            'bonded': True,
-            'bond_radius': 0.25,
-        }
-        for element in unique_elements
+        'elements': {
+            element: {
+                'atomic_number': atomic_numbers[element],
+                'color': [0, 0, 0, 1],  # RGBA for black with full opacity
+                'atomic_scale': 0.5,
+                'bonded': True,
+            }
+            for element in unique_elements
+        },
+        'bond_radius': 0.25  # Common bond radius for all elements
     }
 
     # Extract the PDB ID from the file name for naming the YAML file
@@ -402,17 +404,17 @@ def yaml_gen(pdb_file_path):
 
 def yaml_loader(yaml_path):
     """
-    This function loads a YAML file.
+    This function loads a YAML file and returns element data and bond radius.
 
-        Parameters
-        ----------
-        yaml_path : str
-            Input path of the YAML file
+    Parameters
+    ----------
+    yaml_path : str
+        Input path of the YAML file
 
-        Returns
-        -------
-        elements_dict : dict
-            A dictionary containing the elements and their corresponding color and size scale
+    Returns
+    -------
+    tuple
+        A tuple containing a dictionary of elements with their properties and the common bond radius.
     """
     if not YAML_AVAILABLE:
         raise ImportError("The function `yaml_loader` requires yaml. Please install yaml to use this function.")
@@ -420,17 +422,20 @@ def yaml_loader(yaml_path):
     with open(yaml_path, 'r') as file:
         data = yaml.safe_load(file)
 
-    # Extract color and size
     elements_data = {}
-    for element, attributes in data.items():
+    # Extract the bond_radius from the root level of the data
+    bond_radius = data.get('bond_radius')
+
+    # Process each element's attributes
+    for element, attributes in data.get('elements', {}).items():
         atomic_number = int(attributes['atomic_number'])
         color = tuple(attributes['color'])
         atomic_scale = float(attributes['atomic_scale'])
         bonded = bool(attributes['bonded'])
-        bond_radius = float(attributes['bond_radius'])
         elements_data[element] = {'atomic_number': atomic_number,
                                   'color': color,
                                   'atomic_scale': atomic_scale,
-                                  'bonded': bonded,
-                                  'bond_radius': bond_radius}
-    return elements_data
+                                  'bonded': bonded}
+
+    return elements_data, bond_radius
+

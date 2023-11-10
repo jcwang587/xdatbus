@@ -261,7 +261,6 @@ def apply_yaml(obj, yaml_path):
         set_color4element(obj, atomic_number, color, atomic_scale, bonded)
 
 
-
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):
     """
     Clear the scene of all objects. This function requires bpy.
@@ -442,4 +441,3 @@ def yaml_loader(yaml_path):
                                   'bonded': bonded}
 
     return elements_data, bond_radius
-

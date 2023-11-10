@@ -231,15 +231,15 @@ def apply_yaml(obj, yaml_path):
     """
     Set the color of the given object. This function requires bpy and molecularnodes.
 
-        Parameters
-        ----------
-        obj : bpy.types.Object
-            The object to set the color of
-        yaml_path : str
-            The path to the YAML file to use
+    Parameters
+    ----------
+    obj : bpy.types.Object
+        The object to set the color of
+    yaml_path : str
+        The path to the YAML file to use
     """
     if not BPY_AVAILABLE or not MN_AVAILABLE:
-        raise ImportError("The function `set_color` requires bpy and molecularnodes. Please install bpy and "
+        raise ImportError("The function `apply_yaml` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")
 
     # Prepare the object for editing
@@ -249,13 +249,17 @@ def apply_yaml(obj, yaml_path):
                        'MN_color_set',
                        'MN_style_ball_and_stick'])
 
-    # Set the properties for each element in the YAML file
-    for element, attributes in yaml_loader(yaml_path).items():
+    # Load the YAML file and extract only the elements data
+    elements_data, bond_radius = yaml_loader(yaml_path)
+
+    # Set the properties for each element
+    for element, attributes in elements_data.items():
         atomic_number = int(attributes['atomic_number'])
         color = tuple(attributes['color'])
         atomic_scale = float(attributes['atomic_scale'])
         bonded = bool(attributes['bonded'])
         set_color4element(obj, atomic_number, color, atomic_scale, bonded)
+
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

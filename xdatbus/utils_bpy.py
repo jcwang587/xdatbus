@@ -77,7 +77,6 @@ def realize_instances(obj):
             join_node = nodes.new(type='GeometryNodeJoinGeometry')
 
             # Get the MN_style_sticks node from the blend template
-            # style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
             blend_path = str(pkg_resources.path('xdatbus.resources', 'MN_data_file.blend'))
             bpy.ops.wm.append(filename='MN_style_sticks', directory=blend_path + '\\NodeTree\\')
             style_sticks_node_group = bpy.data.node_groups['MN_style_sticks']
@@ -85,8 +84,11 @@ def realize_instances(obj):
             style_sticks_node.node_tree = style_sticks_node_group
             style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
 
+            # Add a join geometry node for sticks
+            join_node_sticks = nodes.new(type='GeometryNodeJoinGeometry')
+
             # Connect the Group Input node to the Style Sticks node
-            node_group.links.new(stored_sockets[0][0], style_sticks_node.inputs['Atoms'])
+            node_group.links.new(join_node_sticks.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
             node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
             node_group.links.new(join_node.outputs[0], realize_node.inputs[0])
             node_group.links.new(realize_node.outputs[0], group_output.inputs[0])
@@ -234,18 +236,22 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
             sticks_color_set_node = nodes.new(type='GeometryNodeGroup')
             sticks_color_set_node.node_tree = sticks_color_set_node_group
 
-            node_group.links.new(sticks_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
+            # Set the name of the node
+            sticks_color_set_node.name = 'MN_color_set_sticks'
+            sticks_color_set_node.inputs['Color'].default_value = color
+
+            bpy.ops.wm.append(filename='MN_select_atomic_number', directory=blend_path + '\\NodeTree\\')
+            sticks_select_atomic_number_node_group = bpy.data.node_groups['MN_select_atomic_number']
+            sticks_select_atomic_number_node = nodes.new(type='GeometryNodeGroup')
+            sticks_select_atomic_number_node.node_tree = sticks_select_atomic_number_node_group
+
+            # Set the name of the node
+            sticks_select_atomic_number_node.name = 'MN_select_atomic_number_sticks'
+
             node_group.links.new(group_input.outputs['Geometry'], sticks_color_set_node.inputs['Atoms'])
+            node_group.links.new(sticks_select_atomic_number_node.outputs['Selection'], sticks_color_set_node.inputs['Selection'])
+            node_group.links.new(sticks_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
 
-        # if bonded:
-        #     # Get the MN_color_set node from the blend template
-        #     style_sticks_node = get_template_node('h2o.blend', 'MN_style_sticks', nodes)
-        #
-        #     # Connect the Group Input node to the Style Sticks node
-        #     node_group.links.new(group_input.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
-        #     node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
-
-        # Update the node tree to reflect changes
         node_group.update_tag()
 
 

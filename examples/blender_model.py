@@ -17,7 +17,7 @@ rm_bond("llto_rm_bond.pdb", "LA", "LA", "llto_rm_bond.pdb")
 rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 
 # Generate YAML file
-# yaml_gen('llto_rm_bond.pdb')
+yaml_gen('llto_rm_bond.pdb')
 
 # Load the molecule and apply the style
 clear_scene()

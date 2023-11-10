@@ -381,7 +381,7 @@ def yaml_gen(pdb_file_path):
             'color': [0, 0, 0, 1],  # RGBA for black with full opacity
             'atomic_scale': 0.5,
             'bonded': True,
-            'bond_radius': 0.3,
+            'bond_radius': 0.25,
         }
         for element in unique_elements
     }
@@ -427,8 +427,10 @@ def yaml_loader(yaml_path):
         color = tuple(attributes['color'])
         atomic_scale = float(attributes['atomic_scale'])
         bonded = bool(attributes['bonded'])
+        bond_radius = float(attributes['bond_radius'])
         elements_data[element] = {'atomic_number': atomic_number,
                                   'color': color,
                                   'atomic_scale': atomic_scale,
-                                  'bonded': bonded}
+                                  'bonded': bonded,
+                                  'bond_radius': bond_radius}
     return elements_data

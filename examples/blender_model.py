@@ -1,5 +1,6 @@
 import os
 import bpy
+import time
 import molecularnodes as mn
 from xdatbus.fbld01_pos2bpdb import pos2bpdb
 from xdatbus.fbld02_rm_bond import rm_bond
@@ -19,6 +20,9 @@ rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 # Generate YAML file
 yaml_gen('llto_rm_bond.pdb')
 
+# Start timer
+start_time = time.time()
+
 # Load the molecule and apply the style
 clear_scene()
 mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
@@ -36,4 +40,10 @@ output_fbx_path = os.path.join(current_dir, 'output.fbx')
 bpy.ops.export_scene.fbx(filepath=output_fbx_path,
                          use_selection=True,
                          path_mode='COPY')
+
+# End timer
+end_time = time.time()
+
+# Print the time taken
+print("Time taken: {} seconds".format(end_time - start_time))
 

@@ -223,13 +223,13 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
 
             if bond_count == 0:
                 node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
-                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Geometry'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
             else:
                 # find the node with the highest bond_count
                 bond_color_set_node_prev = next((node for node in nodes if node.name == 'MN_color_set_bond_{}'
                                                  .format(bond_count - 1)), None)
                 node_group.links.new(bond_color_set_node_prev.outputs['Atoms'], bond_color_set_node.inputs['Atoms'])
-                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Geometry'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
 
             bond_count += 1
 

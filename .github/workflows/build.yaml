@@ -30,6 +30,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install build pytest coverage pytest-cov
 
+    - name: Install package and dependencies
+      run: |
+        pip install . 
+
     - name: Run tests
       run: pytest --cov=xdatbus
 

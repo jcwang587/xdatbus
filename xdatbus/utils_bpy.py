@@ -210,7 +210,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
         # Get the MN_color_attribute_random node from the blend template
         if bonded:
             bond_color_set_node = get_template_node('MN_color_set', nodes)
-            bond_color_set_node.inputs['Color'].default_value = color
+            bond_color_set_node.inputs['Color'].default_value = (r / 255, g / 255, b / 255, alpha)
             node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
             node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
 

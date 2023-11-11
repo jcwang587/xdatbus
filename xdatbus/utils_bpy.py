@@ -199,7 +199,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
         style_atoms_node = get_template_node('MN_style_atoms', nodes)
         style_atoms_node.inputs['[ ] Cycles / [x] Eevee '].default_value = True
         style_atoms_node.inputs['Scale Radii'].default_value = atomic_scale
-        style_atoms_node.inputs[4].default_value = 4
+        style_atoms_node.inputs[4].default_value = 5
         style_atoms_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
         node_group.links.new(atom_color_set_node.outputs['Atoms'], style_atoms_node.inputs['Atoms'])
         node_group.links.new(style_atoms_node.outputs['Geometry'], join_node.inputs['Geometry'])

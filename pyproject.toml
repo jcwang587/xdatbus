@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68.2.2", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xdatbus"
+version = "0.0.119"
+authors = [
+    {name = "Jiacheng Wang", email = "jiachengwang@umass.edu"}
+]
+maintainers = [
+    {name = "Jiacheng Wang"}
+]
+description = "A python package to analyze XDATCAR files generated from VASP"
+readme = "README.md"
+keywords = ["python", "vasp", "xdatcar", "aimd"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+license = {file = "LICENSE.md"}
+
+[project.urls]
+Homepage = "https://xdatbus.readthedocs.io/en/latest/"
+
+[tool.setuptools]
+include_package_data = true
+long_description_content_type = "text/markdown"
+
+[tool.setuptools.package_data]
+xdatbus = ["resources/*.blend"]
+
+[project.scripts]
+xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"
+
+[project.optional-dependencies]
+vis = ["<list of packages from requirements_vis.txt>"]
+
+[project.dependencies]
+# List your dependencies here
+# Example: "requests >= 2.20"
+# You'll need to manually add the contents of requirements.txt here

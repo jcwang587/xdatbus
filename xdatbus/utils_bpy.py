@@ -4,6 +4,7 @@ from ase.data import atomic_numbers
 
 try:
     import bpy
+
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -11,6 +12,7 @@ except ImportError:
 
 try:
     import biotite.structure.io.pdb as pdb
+
     PDB_AVAILABLE = True
 except ImportError:
     pdb = None
@@ -18,6 +20,7 @@ except ImportError:
 
 try:
     import molecularnodes as mn
+
     MN_AVAILABLE = True
 except ImportError:
     mn = None
@@ -25,10 +28,13 @@ except ImportError:
 
 try:
     import yaml
+
     YAML_AVAILABLE = True
 except ImportError:
     yaml = None
     YAML_AVAILABLE = False
+
+bond_count = 0
 
 
 def realize_instances(obj):
@@ -79,6 +85,7 @@ def realize_instances(obj):
             # Get the MN_style_sticks node from the blend template
             style_sticks_node = get_template_node('MN_style_sticks', nodes)
             style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
+            style_sticks_node.inputs['Resolution'].default_value = 20
 
             # Add a join geometry node for sticks
             join_node_sticks = nodes.new(type='GeometryNodeJoinGeometry')
@@ -152,7 +159,7 @@ def get_template_node(node_name, nodes):
     return node
 
 
-def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
+def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_count=0):
     """
     Add a custom node and connect it to the specified input of the target node.
 
@@ -168,6 +175,8 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
             The size of the atoms.
         bonded : bool
             Whether the atoms are bonded.
+        bond_count : int
+            The number of elements forming a bond.
     """
 
     # Get the Geometry Nodes modifier from the object
@@ -210,14 +219,27 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
         # Get the MN_color_attribute_random node from the blend template
         if bonded:
             bond_color_set_node = get_template_node('MN_color_set', nodes)
+            bond_color_set_node.bl_idname = 'MN_color_set_bond_{}'.format(bond_count)
             bond_color_set_node.inputs['Color'].default_value = (r / 255, g / 255, b / 255, alpha)
-            node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
-            node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
 
             bond_select_atomic_number_node = get_template_node('MN_select_atomic_number', nodes)
             bond_select_atomic_number_node.inputs['atomic_number'].default_value = atomic_number
             node_group.links.new(bond_select_atomic_number_node.outputs['Selection'],
                                  bond_color_set_node.inputs['Selection'])
+
+            if bond_count == 0:
+                node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
+            else:
+                # find the node with the highest bond_count
+                bond_color_set_node_prev = next((node for node in nodes if node.bl_idname == 'MN_color_set_bond_{}'
+                                                 .format(bond_count - 1)), None)
+                node_group.links.new(bond_color_set_node_prev.outputs['Atoms'], bond_color_set_node.inputs['Atoms'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
+
+            bond_count += 1
+
+    return bond_count
 
 
 def apply_yaml(obj, yaml_path):
@@ -231,6 +253,7 @@ def apply_yaml(obj, yaml_path):
     yaml_path : str
         The path to the YAML file to use
     """
+    global bond_count
     if not BPY_AVAILABLE or not MN_AVAILABLE:
         raise ImportError("The function `apply_yaml` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")
@@ -251,7 +274,7 @@ def apply_yaml(obj, yaml_path):
         color = tuple(attributes['color'])
         atomic_scale = float(attributes['atomic_scale'])
         bonded = bool(attributes['bonded'])
-        set_color4element(obj, atomic_number, color, atomic_scale, bonded)
+        bond_count = set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_count)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

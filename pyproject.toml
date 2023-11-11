@@ -36,10 +36,6 @@ homepage = "https://xdatbus.readthedocs.io/en/latest/"
 documentation = "https://xdatbus.readthedocs.io/en/latest/"
 repository = "https://github.com/jcwang587/xdatbus"
 
-[tool.setuptools]
-include_package_data = true
-long_description_content_type = "text/markdown"
-
 [tool.setuptools.package_data]
 xdatbus = ["resources/*.blend"]
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xdatbus"
-version = "0.0.124"
+version = "0.0.125"
 authors = [
     {name = "Jiacheng Wang", email = "jiachengwang@umass.edu"}
 ]
@@ -35,9 +35,6 @@ dependencies = [
 homepage = "https://xdatbus.readthedocs.io/en/latest/"
 documentation = "https://xdatbus.readthedocs.io/en/latest/"
 repository = "https://github.com/jcwang587/xdatbus"
-
-[tool.setuptools.package_data]
-xdatbus = ["resources/*.blend"]
 
 [project.scripts]
 xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"

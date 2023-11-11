@@ -12,10 +12,10 @@ elements:
         - 255
         - 1
     Li:
-        color:
-        - 204
-        - 128
-        - 255
+        color: #A392A2
+        - 215
+        - 22
+        - 163
         - 1
     Be:
         color:

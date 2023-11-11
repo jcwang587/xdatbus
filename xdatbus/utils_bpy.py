@@ -388,9 +388,11 @@ def yaml_gen(pdb_file_path):
     # Find if the element is in the color_data.yaml file and update the color
     with open(color_path, 'r') as file:
         color_data = yaml.safe_load(file)
+        print(color_data)
         for element, attributes in elements_dict['elements'].items():
-            if element in color_data:
-                elements_dict['elements'][element]['color'] = color_data[element]['color']
+            if element in color_data['elements']:
+                elements_dict['elements'][element]['color'] = color_data['elements'][element]['color']
+                print(f"Color for element {element} updated to {color_data['elements'][element]['color']}")
 
     # Extract the PDB ID from the file name for naming the YAML file
     pdb_id = pdb_file_path.split('/')[-1].split('.')[0]

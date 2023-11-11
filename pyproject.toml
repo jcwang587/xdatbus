@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xdatbus"
-version = "0.0.123"
+version = "0.0.124"
 authors = [
     {name = "Jiacheng Wang", email = "jiachengwang@umass.edu"}
 ]

@@ -77,11 +77,7 @@ def realize_instances(obj):
             join_node = nodes.new(type='GeometryNodeJoinGeometry')
 
             # Get the MN_style_sticks node from the blend template
-            blend_path = str(pkg_resources.path('xdatbus.resources', 'MN_data_file.blend'))
-            bpy.ops.wm.append(filename='MN_style_sticks', directory=blend_path + '\\NodeTree\\')
-            style_sticks_node_group = bpy.data.node_groups['MN_style_sticks']
-            style_sticks_node = nodes.new(type='GeometryNodeGroup')
-            style_sticks_node.node_tree = style_sticks_node_group
+            style_sticks_node = get_template_node('MN_style_sticks', nodes)
             style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
 
             # Add a join geometry node for sticks
@@ -147,7 +143,7 @@ def get_template_node(node_name, nodes):
         node : bpy.types.Node
             The node from the template blend file.
     """
-    blend_path = str(pkg_resources.path('xdatbus.resources', 'MN_data_file.blend'))
+    blend_path = str(pkg_resources.path('xdatbus.resources', 'node_data.blend'))
     bpy.ops.wm.append(filename=node_name, directory=blend_path + '\\NodeTree\\')
     node_group = bpy.data.node_groups[node_name]
     node = nodes.new(type='GeometryNodeGroup')

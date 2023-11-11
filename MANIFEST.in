@@ -1,2 +1,3 @@
-include xdatbus/resources/MN_data_file.blend
+include xdatbus/resources/node_data.blend
+include xdatbus/resources/color_data.yaml
 prune xdatbus-dev

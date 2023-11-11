@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xdatbus"
-version = "0.0.125"
+version = "0.0.126"
 authors = [
     {name = "Jiacheng Wang", email = "jiachengwang@umass.edu"}
 ]
@@ -30,6 +30,9 @@ dependencies = [
     "pymatgen~=2023.10.11",
     "mdanalysis~=2.5.1",
 ]
+
+[tool.setuptools]
+packages = ["xdatbus"]
 
 [project.urls]
 homepage = "https://xdatbus.readthedocs.io/en/latest/"

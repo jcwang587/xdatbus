@@ -87,11 +87,7 @@ def realize_instances(obj):
             style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
             style_sticks_node.inputs['Resolution'].default_value = 20
 
-            # Add a join geometry node for sticks
-            join_node_sticks = nodes.new(type='GeometryNodeJoinGeometry')
-
             # Connect the Group Input node to the Style Sticks node
-            node_group.links.new(join_node_sticks.outputs['Geometry'], style_sticks_node.inputs['Atoms'])
             node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
             node_group.links.new(join_node.outputs[0], realize_node.inputs[0])
             node_group.links.new(realize_node.outputs[0], group_output.inputs[0])
@@ -190,8 +186,6 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
         # Find necessary nodes
         group_input = next((node for node in nodes if node.bl_idname == 'NodeGroupInput'), None)
         join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry'), None)
-        bond_join_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeJoinGeometry' and
-                               node.name == 'Join Geometry.001'), None)
         style_sticks_node = next((node for node in nodes if node.bl_idname == 'GeometryNodeGroup' and
                                   node.node_tree.name == 'MN_style_sticks'), None)
 
@@ -219,7 +213,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
         # Get the MN_color_attribute_random node from the blend template
         if bonded:
             bond_color_set_node = get_template_node('MN_color_set', nodes)
-            bond_color_set_node.bl_idname = 'MN_color_set_bond_{}'.format(bond_count)
+            bond_color_set_node.name = 'MN_color_set_bond_{}'.format(bond_count)
             bond_color_set_node.inputs['Color'].default_value = (r / 255, g / 255, b / 255, alpha)
 
             bond_select_atomic_number_node = get_template_node('MN_select_atomic_number', nodes)
@@ -229,13 +223,13 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
 
             if bond_count == 0:
                 node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
-                node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Geometry'])
             else:
                 # find the node with the highest bond_count
-                bond_color_set_node_prev = next((node for node in nodes if node.bl_idname == 'MN_color_set_bond_{}'
+                bond_color_set_node_prev = next((node for node in nodes if node.name == 'MN_color_set_bond_{}'
                                                  .format(bond_count - 1)), None)
                 node_group.links.new(bond_color_set_node_prev.outputs['Atoms'], bond_color_set_node.inputs['Atoms'])
-                node_group.links.new(bond_color_set_node.outputs['Atoms'], bond_join_node.inputs['Geometry'])
+                node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Geometry'])
 
             bond_count += 1
 

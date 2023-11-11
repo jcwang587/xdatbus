@@ -188,7 +188,8 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded):
 
         # Set color for atoms and link the nodes
         atom_color_set_node = get_template_node('MN_color_set', nodes)
-        atom_color_set_node.inputs['Color'].default_value = color
+        r, g, b, alpha = color
+        atom_color_set_node.inputs['Color'].default_value = (r / 255, g / 255, b / 255, alpha)
         node_group.links.new(group_input.outputs['Geometry'], atom_color_set_node.inputs['Atoms'])
 
         # Set the Eevee render engine
@@ -388,11 +389,9 @@ def yaml_gen(pdb_file_path):
     # Find if the element is in the color_data.yaml file and update the color
     with open(color_path, 'r') as file:
         color_data = yaml.safe_load(file)
-        print(color_data)
         for element, attributes in elements_dict['elements'].items():
             if element in color_data['elements']:
                 elements_dict['elements'][element]['color'] = color_data['elements'][element]['color']
-                print(f"Color for element {element} updated to {color_data['elements'][element]['color']}")
 
     # Extract the PDB ID from the file name for naming the YAML file
     pdb_id = pdb_file_path.split('/')[-1].split('.')[0]

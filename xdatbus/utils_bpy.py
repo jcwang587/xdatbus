@@ -383,6 +383,15 @@ def yaml_gen(pdb_file_path):
         'bond_radius': 0.25  # Common bond radius for all elements
     }
 
+    color_path = str(pkg_resources.path('xdatbus.resources', 'color_data.yaml'))
+
+    # Find if the element is in the color_data.yaml file and update the color
+    with open(color_path, 'r') as file:
+        color_data = yaml.safe_load(file)
+        for element, attributes in elements_dict['elements'].items():
+            if element in color_data:
+                elements_dict['elements'][element]['color'] = color_data[element]['color']
+
     # Extract the PDB ID from the file name for naming the YAML file
     pdb_id = pdb_file_path.split('/')[-1].split('.')[0]
 

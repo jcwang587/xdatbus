@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xdatbus"
-version = "0.0.122"
+version = "0.0.123"
 authors = [
     {name = "Jiacheng Wang", email = "jiachengwang@umass.edu"}
 ]
@@ -23,9 +23,18 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 license = {file = "LICENSE.md"}
+dependencies = [
+    "numpy~=1.26.1",
+    "pandas~=2.1.2",
+    "ase~=3.22.1",
+    "pymatgen~=2023.10.11",
+    "mdanalysis~=2.5.1",
+]
 
 [project.urls]
-Homepage = "https://xdatbus.readthedocs.io/en/latest/"
+homepage = "https://xdatbus.readthedocs.io/en/latest/"
+documentation = "https://xdatbus.readthedocs.io/en/latest/"
+repository = "https://github.com/jcwang587/xdatbus"
 
 [tool.setuptools]
 include_package_data = true
@@ -47,9 +56,4 @@ vis = [
     "ovito~=3.9.4",
 ]
 
-[project.dependencies]
-numpy = "~=1.26.1"
-pandas = "~=2.1.2"
-ase = "~=3.22.1"
-pymatgen = "~=2023.10.11"
-mdanalysis = "~=2.6.1"
+

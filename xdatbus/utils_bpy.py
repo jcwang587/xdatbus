@@ -4,7 +4,6 @@ from ase.data import atomic_numbers
 
 try:
     import bpy
-
     BPY_AVAILABLE = True
 except ImportError:
     bpy = None
@@ -12,7 +11,6 @@ except ImportError:
 
 try:
     import biotite.structure.io.pdb as pdb
-
     PDB_AVAILABLE = True
 except ImportError:
     pdb = None
@@ -20,7 +18,6 @@ except ImportError:
 
 try:
     import molecularnodes as mn
-
     MN_AVAILABLE = True
 except ImportError:
     mn = None
@@ -28,7 +25,6 @@ except ImportError:
 
 try:
     import yaml
-
     YAML_AVAILABLE = True
 except ImportError:
     yaml = None

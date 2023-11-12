@@ -3,7 +3,7 @@
 # -- Project information
 
 import os
-impor toml
+import toml
 import setuptools
 import subprocess
 

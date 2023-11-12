@@ -32,6 +32,9 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Install Poetry
+      run: pip install poetry
+
     - name: Setup Miniconda
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh

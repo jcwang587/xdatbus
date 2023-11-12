@@ -1,11 +1,6 @@
 # Configuration file for the Sphinx documentation builder.
-
-# -- Project information
-
 import os
 import toml
-import setuptools
-import subprocess
 
 
 # Function to extract project metadata from pyproject.toml
@@ -26,15 +21,13 @@ def get_project_metadata():
 metadata, repo_dir = get_project_metadata()
 
 # -- Project information
-
 project = metadata['name']
-copyright = f"2023, {metadata['author']}"
-author = metadata['author']
+copyright = f"2023, {', '.join(metadata['authors'])}"
+author = ', '.join(metadata['authors'])
 release = metadata['version']
 version = '.'.join(release.split('.')[:2])
 
 # -- General configuration
-
 extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.doctest',
@@ -52,7 +45,6 @@ intersphinx_disabled_domains = ['std']
 templates_path = ['_templates']
 
 # -- autoapi configuration
-
 autoapi_dirs = os.path.join(repo_dir, 'xdatbus')
 autoapi_add_toctree_entry = True
 autoapi_type = 'python'
@@ -60,9 +52,7 @@ autoapi_keep_files = True
 autoapi_root = 'api_reference'
 
 # -- Options for HTML output
-
 html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
-
 epub_show_urls = 'footnote'

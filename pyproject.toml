@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.143"
+version = "0.0.144"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
@@ -23,7 +23,7 @@ classifiers = [
 keywords = ["python", "vasp", "xdatcar", "aimd"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.13"
 numpy = "~1.26.1"
 pandas = "~2.1.2"
 ase = "~3.22.1"

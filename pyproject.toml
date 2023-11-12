@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.144"
+version = "0.0.145"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
@@ -31,10 +31,12 @@ pymatgen = "~2023.10.11"
 mdanalysis = "~2.6.1"
 
 [tool.poetry.group.dev.dependencies]
-sphinx = "^7.2.6"
-sphinx-rtd-theme = "^2.0.0rc4"
-sphinx-autoapi = "^3.0.0"
-toml = "^0.10.2"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+sphinx-autoapi = "*"
+pytest = "*"
+pytest-cov = "*"
+toml = "*"
 ovito = "^3.9.4"
 
 rdkit = {version = "^2023.9.1", optional = true}

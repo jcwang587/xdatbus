@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.134"
+version = "0.0.135"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
-license = "MIT" # Adjust this according to your LICENSE.md content
+license = "MIT"
 
 readme = "README.md"
 homepage = "https://xdatbus.readthedocs.io/en/latest/"
@@ -38,12 +38,12 @@ toml = "0.10.2"
 
 [tool.poetry.extras]
 vis = [
-    "rdkit-pypi~=2022.9.5",
-    "biotite==0.37.0",
-    "bpy~=3.6.0",
-    "molecularnodes~=2.11.0",
-    "pyyaml~=6.0.1",
-    "ovito~=3.9.4",
+    "rdkit-pypi^2022.9.5",
+    "biotite^0.37.0",
+    "bpy^3.6.0",
+    "molecularnodes^2.11.0",
+    "pyyaml^6.0.1",
+    "ovito^3.9.4",
 ]
 
 [tool.poetry.scripts]

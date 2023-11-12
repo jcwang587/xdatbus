@@ -1,0 +1,4 @@
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0rc4
+sphinx-autoapi
+toml==0.10.2

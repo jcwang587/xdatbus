@@ -33,7 +33,7 @@ jobs:
         python-version: '3.11'
 
     - name: Install Poetry
-      run: pip install poetry
+      run: pipx install poetry
 
     - name: Setup Miniconda
       run: |

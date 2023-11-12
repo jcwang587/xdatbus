@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.139"
+version = "0.0.140"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
@@ -35,15 +35,15 @@ sphinx = "7.2.6"
 sphinx-rtd-theme = "2.0.0rc4"
 sphinx-autoapi = "3.0.0"
 toml = "0.10.2"
+ovito = "3.9.4"
 
 [tool.poetry.extras]
 vis = [
     "rdkit",
-    "biotite^0.37.0",
-    "bpy^3.6.0",
-    "molecularnodes^2.11.0",
-    "pyyaml^6.0.1",
-    "ovito^3.9.4"
+    "biotite==0.37.0",
+    "bpy",
+    "molecularnodes",
+    "pyyaml"
 ]
 
 [tool.poetry.scripts]

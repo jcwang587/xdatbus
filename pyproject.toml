@@ -38,7 +38,7 @@ toml = "0.10.2"
 
 [tool.poetry.extras]
 vis = [
-    "rdkit^2023.9.1",
+    "rdkit",
     "biotite^0.37.0",
     "bpy^3.6.0",
     "molecularnodes^2.11.0",

@@ -249,6 +249,7 @@ def apply_yaml(obj, yaml_path):
         The path to the YAML file to use
     """
     global bonded_element
+    bonded_element = 0
 
     if not BPY_AVAILABLE or not MN_AVAILABLE:
         raise ImportError("The function `apply_yaml` requires bpy and molecularnodes. Please install bpy and "

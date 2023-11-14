@@ -34,6 +34,7 @@ except ImportError:
     yaml = None
     YAML_AVAILABLE = False
 
+
 global bonded_element
 
 
@@ -247,7 +248,8 @@ def apply_yaml(obj, yaml_path):
     yaml_path : str
         The path to the YAML file to use
     """
-    global bond_count
+    global bonded_element
+
     if not BPY_AVAILABLE or not MN_AVAILABLE:
         raise ImportError("The function `apply_yaml` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")

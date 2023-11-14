@@ -34,7 +34,7 @@ except ImportError:
     yaml = None
     YAML_AVAILABLE = False
 
-bond_count = 0
+global bonded_element
 
 
 def realize_instances(obj):
@@ -155,7 +155,7 @@ def get_template_node(node_name, nodes):
     return node
 
 
-def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_count=0):
+def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bonded_count=0):
     """
     Add a custom node and connect it to the specified input of the target node.
 
@@ -171,7 +171,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
             The size of the atoms.
         bonded : bool
             Whether the atoms are bonded.
-        bond_count : int
+        bonded_count : int
             The number of elements forming a bond.
     """
 
@@ -213,7 +213,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
         # Get the MN_color_attribute_random node from the blend template
         if bonded:
             bond_color_set_node = get_template_node('MN_color_set', nodes)
-            bond_color_set_node.name = 'MN_color_set_bond_{}'.format(bond_count)
+            bond_color_set_node.name = 'MN_color_set_bond_{}'.format(bonded_count)
             bond_color_set_node.inputs['Color'].default_value = (r / 255, g / 255, b / 255, alpha)
 
             bond_select_atomic_number_node = get_template_node('MN_select_atomic_number', nodes)
@@ -221,19 +221,19 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_coun
             node_group.links.new(bond_select_atomic_number_node.outputs['Selection'],
                                  bond_color_set_node.inputs['Selection'])
 
-            if bond_count == 0:
+            if bonded_count == 0:
                 node_group.links.new(group_input.outputs['Geometry'], bond_color_set_node.inputs['Atoms'])
                 node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
             else:
                 # find the node with the highest bond_count
                 bond_color_set_node_prev = next((node for node in nodes if node.name == 'MN_color_set_bond_{}'
-                                                 .format(bond_count - 1)), None)
+                                                 .format(bonded_count - 1)), None)
                 node_group.links.new(bond_color_set_node_prev.outputs['Atoms'], bond_color_set_node.inputs['Atoms'])
                 node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
 
-            bond_count += 1
+            bonded_count += 1
 
-    return bond_count
+    return bonded_count
 
 
 def apply_yaml(obj, yaml_path):
@@ -268,7 +268,7 @@ def apply_yaml(obj, yaml_path):
         color = tuple(attributes['color'])
         atomic_scale = float(attributes['atomic_scale'])
         bonded = bool(attributes['bonded'])
-        bond_count = set_color4element(obj, atomic_number, color, atomic_scale, bonded, bond_count)
+        bonded_element = set_color4element(obj, atomic_number, color, atomic_scale, bonded, bonded_element)
 
 
 def clear_scene(mesh=True, lights=True, geometry_nodes=True):

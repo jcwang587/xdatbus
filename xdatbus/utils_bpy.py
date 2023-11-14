@@ -34,11 +34,10 @@ except ImportError:
     yaml = None
     YAML_AVAILABLE = False
 
-
 global bonded_element
 
 
-def realize_instances(obj):
+def realize_instances(obj, bond_radius):
     """
     Realize instances of the given object. This function requires bpy.
 
@@ -46,6 +45,8 @@ def realize_instances(obj):
         ----------
         obj : bpy.types.Object
             The object to realize instances of
+        bond_radius : float
+            The radius of the bonds
     """
     if not BPY_AVAILABLE:
         raise ImportError("The function `realize_instances` requires bpy. Please install bpy to use this function.")
@@ -85,8 +86,9 @@ def realize_instances(obj):
 
             # Get the MN_style_sticks node from the blend template
             style_sticks_node = get_template_node('MN_style_sticks', nodes)
-            style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
+            style_sticks_node.inputs['Radius'].default_value = bond_radius
             style_sticks_node.inputs['Resolution'].default_value = 20
+            style_sticks_node.inputs['Material'].default_value = bpy.data.materials["MN_atomic_material"]
 
             # Connect the Group Input node to the Style Sticks node
             node_group.links.new(style_sticks_node.outputs['Sticks'], join_node.inputs['Geometry'])
@@ -228,7 +230,7 @@ def set_color4element(obj, atomic_number, color, atomic_scale, bonded, bonded_co
             else:
                 # find the node with the highest bond_count
                 bond_color_set_node_prev = next((node for node in nodes if node.name == 'MN_color_set_bond_{}'
-                                                 .format(bonded_count - 1)), None)
+                                                .format(bonded_count - 1)), None)
                 node_group.links.new(bond_color_set_node_prev.outputs['Atoms'], bond_color_set_node.inputs['Atoms'])
                 node_group.links.new(bond_color_set_node.outputs['Atoms'], style_sticks_node.inputs['Atoms'])
 
@@ -255,15 +257,15 @@ def apply_yaml(obj, yaml_path):
         raise ImportError("The function `apply_yaml` requires bpy and molecularnodes. Please install bpy and "
                           "molecularnodes to use this function.")
 
+    # Load the YAML file and extract only the elements data
+    elements_data, bond_radius = yaml_loader(yaml_path)
+
     # Prepare the object for editing
-    realize_instances(obj)
+    realize_instances(obj, bond_radius)
     remove_nodes(obj, ['MN_color_common',
                        'MN_color_attribute_random',
                        'MN_color_set',
                        'MN_style_ball_and_stick'])
-
-    # Load the YAML file and extract only the elements data
-    elements_data, bond_radius = yaml_loader(yaml_path)
 
     # Set the properties for each element
     for element, attributes in elements_data.items():
@@ -396,7 +398,7 @@ def yaml_gen(pdb_file_path):
             element: {
                 'atomic_number': atomic_numbers[element],
                 'color': [0, 0, 0, 1],  # RGBA for black with full opacity
-                'atomic_scale': 0.5,
+                'atomic_scale': 0.4,
                 'bonded': True,
             }
             for element in unique_elements

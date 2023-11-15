@@ -17,12 +17,12 @@ requirements:
   host:
     - python
     - pip
+    - poetry
   run:
     - python
     - ase
     - pymatgen
     - mdanalysis
-    - ovito
     - plumed
 
 test:
@@ -36,6 +36,11 @@ about:
   license: MIT
   license_file: ../LICENSE.md
   summary: 'A python toolkit for analyzing XDATCAR'
+  keywords:
+    - python
+    - vasp
+    - xdatcar
+    - aimd
 
 extra:
   recipe-maintainers:

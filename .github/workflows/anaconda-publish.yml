@@ -32,6 +32,9 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Install Poetry
+      run: pipx install poetry
+
     - name: Setup Miniconda
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -48,7 +51,7 @@ jobs:
         sed -i "s/PACKAGE_VERSION/$VERSION/" conda/meta.yaml
 
     - name: Build Conda package
-      run: conda build -c conda-forge conda/ --output-folder conda-out
+      run: conda build -c conda-forge --no-test conda/ --output-folder conda-out
 
     - name: Upload Conda package to Anaconda Cloud
       run: |

@@ -1,41 +1,49 @@
-import molecularnodes as mn
-import bpy
 import os
-from xdatbus import pos2bpdb, realize_instances, clear_scene, apply_modifiers_to_mesh, render_image
+import bpy
+import time
+import molecularnodes as mn
+from xdatbus.fbld01_pos2bpdb import pos2bpdb
+from xdatbus.fbld02_rm_bond import rm_bond
+from xdatbus.utils_bpy import clear_scene, apply_modifiers_to_mesh, apply_yaml, yaml_gen
 
 current_dir = os.getcwd()
 poscar_path = os.path.join(current_dir, '../tests/data/poscar/llto.poscar')
 pdb_path = os.path.join(current_dir, 'llto.pdb')
 pos2bpdb(poscar_path, pdb_path)
 
-# Set render engine to CYCLES and device to GPU
-bpy.context.scene.render.engine = 'CYCLES'
-bpy.context.scene.cycles.device = "GPU"
+rm_bond('llto.pdb', "LI", "TI", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "TI", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "O", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "LA", "llto_rm_bond.pdb")
+rm_bond("llto_rm_bond.pdb", "LA", "LI", "llto_rm_bond.pdb")
 
-# Clear existing mesh objects
-bpy.ops.object.select_all(action='DESELECT')
-bpy.ops.object.select_by_type(type='MESH')
-bpy.ops.object.delete()
+# Generate YAML file
+# yaml_gen('llto_rm_bond.pdb')
 
-# Load the molecule
+# Start timer
+start_time = time.time()
+
+# Load the molecule and apply the style
 clear_scene()
-mol = mn.load.molecule_local(pdb_path, default_style='ball_and_stick')
-mol.rotation_euler = (0, 3.14 / 2, 0)
-mol.select_set(True)
-bpy.ops.view3d.camera_to_view_selected()
+mol = mn.load.molecule_local("llto_rm_bond.pdb", default_style='ball_and_stick')
+apply_yaml(mol, 'llto_rm_bond_style.yaml')
 
-# Realize instances
-realize_instances(mol)
+# Export the scene to a blender file
+output_blend_path = os.path.join(current_dir, 'output.blend')
+bpy.ops.wm.save_as_mainfile(filepath=output_blend_path)
 
 # Apply modifiers if the object is a mesh
 apply_modifiers_to_mesh(mol)
-
-# Render and save the image
-render_image_path = os.path.join(current_dir, 'render.png')  # Define the path for the output image
-render_image(output_path=render_image_path)  # Call the render function with the path
 
 # Export the scene to an FBX file
 output_fbx_path = os.path.join(current_dir, 'output.fbx')
 bpy.ops.export_scene.fbx(filepath=output_fbx_path,
                          use_selection=True,
                          path_mode='COPY')
+
+# End timer
+end_time = time.time()
+
+# Print the time taken
+print("Time taken: {} seconds".format(end_time - start_time))
+

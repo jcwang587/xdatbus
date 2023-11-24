@@ -66,10 +66,11 @@ def pos2bpdb(poscar_path, output_path):
     mol = rwmol.GetMol()
     Chem.MolToPDBFile(mol, output_path)
 
-    # Check if the output file is readable by biotite
+    # Check if the output file is readable by biotite and ASE
     try:
-        load_structure(output_path)
-    except ValueError:
-        print("Output file is not readable by biotite")
+        load_structure(output_path)  # Check with biotite
+        read(output_path)  # Check with ASE
+    except ValueError as e:
+        print(f"Output file encountered an error: {e}")
     else:
-        print("Output file is readable by biotite")
+        print("Output file is readable by both biotite and ASE")

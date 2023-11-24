@@ -386,11 +386,16 @@ def yaml_gen(pdb_file_path):
     if not YAML_AVAILABLE:
         raise ImportError("The function `yaml_gen` requires PyYAML. Please install PyYAML to use this function.")
 
-    # Read the PDB file using ASE
-    atoms = read(pdb_file_path)
+    # Initialize a set to hold unique elements
+    unique_elements = set()
 
-    # Get unique elements from the atoms
-    unique_elements = set(atom.symbol for atom in atoms)
+    # Read the PDB file and extract unique elements
+    with open(pdb_file_path, 'r') as file:
+        for line in file:
+            if line.startswith("ATOM") or line.startswith("HETATM"):
+                element_symbol = line[76:78].strip()  # Extract the element symbol
+                formatted_symbol = element_symbol.capitalize()
+                unique_elements.add(formatted_symbol)
 
     # Create a dictionary for elements with default color, size scale, and atomic number
     elements_dict = {

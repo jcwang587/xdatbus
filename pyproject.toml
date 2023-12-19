@@ -27,7 +27,7 @@ python = ">=3.10,<3.13"
 numpy = "*"
 pandas = "*"
 ase = "~3.22.1"
-pymatgen = "~2023.11.12"
+pymatgen = ">=2023.11.12,<2023.13.0"
 mdanalysis = "~2.6.1"
 pyyaml = {version = "^6.0.1", optional = true}
 rdkit = {version = "^2023.9.1", optional = true}

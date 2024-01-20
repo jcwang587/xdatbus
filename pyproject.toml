@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.165"
+version = "0.0.166"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
@@ -44,7 +44,7 @@ vis = ["rdkit", "biotite", "bpy", "molecularnodes", "pyyaml", "ovito"]
 
 [tool.poetry.scripts]
 xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"
-sum_hills = "xdatbus.bash01_bias:main"
+bias = "xdatbus.bash01_bias:main"
 
 [build-system]
 requires = ["poetry-core>=1.8.1"]

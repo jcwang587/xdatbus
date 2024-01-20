@@ -22,5 +22,4 @@ else
 fi
 
 # Run Plumed
-cd "$in_dir"
 plumed sum_hills --hills HILLS --outfile ../res/fes_bias.dat --mintozero --min 0 --max 11.636 --bin 100

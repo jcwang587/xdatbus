@@ -40,7 +40,7 @@ pytest = "*"
 pytest-cov = "*"
 
 [tool.poetry.extras]
-vis = ["rdkit", "biotite", "bpy", "molecularnodes", "pyyaml"]
+vis = ["rdkit", "biotite", "bpy", "molecularnodes", "pyyaml", "ovito"]
 
 [tool.poetry.scripts]
 xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"

@@ -27,6 +27,8 @@ def main():
                         help="the lower bounds for the grid (default: 0.0)")
     parser.add_argument("--max", type=float, default=1.0,
                         help="the upper bounds for the grid (default: 1.0)")
+    parser.add_argument("--bin", type=int, default=100,
+                        help="the number of bins for the grid (default: 100)")
 
     args = parser.parse_args()
 

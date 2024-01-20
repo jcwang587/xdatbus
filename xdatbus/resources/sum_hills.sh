@@ -27,6 +27,7 @@ OUTFILE=$2
 MINTOZERO=$3
 MIN=$4
 MAX=$5
+BIN=$6
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --mintozero $MINTOZERO --min $MIN --max $MAX --bin 100
+plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --mintozero $MINTOZERO --min $MIN --max $MAX --bin $BIN

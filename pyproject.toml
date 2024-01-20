@@ -1,11 +1,10 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.156"
+version = "0.0.157"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
 license = "MIT"
-
 readme = "README.md"
 homepage = "https://xdatbus.readthedocs.io/en/latest/"
 repository = "https://github.com/jcwang587/xdatbus"

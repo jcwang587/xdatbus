@@ -3,24 +3,34 @@ import subprocess
 import argparse
 
 
-def bias():
+def bias(plumed_hills, plumed_outfile, plumed_mintozero, plumed_min, plumed_max):
     current_dir = os.path.dirname(__file__)
     script_path = os.path.join(current_dir, './resources', 'sum_hills.sh')
-    subprocess.run(['bash', script_path])
+    subprocess.run(['bash', script_path,
+                    '--hills', plumed_hills,
+                    '--outfile', plumed_outfile,
+                    '--mintozero', plumed_mintozero,
+                    '--min', plumed_min,
+                    '--max', plumed_max])
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Aggregate XDATCAR files from an AIMD simulation.")
-    parser.add_argument("--xdc_dir", type=str,
-                        help="Input path of the AIMD simulation, which contains the XDATCAR files")
-    parser.add_argument("--output_path", type=str, default="./",
-                        help="Output path of the XDATBUS file (default: current directory)")
-    parser.add_argument("--delete_temp_files", action="store_true",
-                        help="If set, the intermediate folders will be deleted (default: False)")
+    parser = argparse.ArgumentParser(description="Apply sum_hills function from plumed that allows one to to use "
+                                                 "plumed to post-process an existing hills/colvar file")
+    parser.add_argument("--hills", type=str, default="HILLS",
+                        help="Specify the name of the hills file (default: HILLS)")
+    parser.add_argument("--outfile", type=str, default="./fes/fes_bias.dat",
+                        help="specify the output file for sumhills (default: ./fes/fes_bias.dat)")
+    parser.add_argument("--mintozero", type=str, default="on",
+                        help="it translate all the minimum value in bias/histogram to zero (default: on)")
+    parser.add_argument("--min", type=float, default=0.0,
+                        help="the lower bounds for the grid (default: 0.0)")
+    parser.add_argument("--max", type=float, default=1.0,
+                        help="the upper bounds for the grid (default: 1.0)")
 
     args = parser.parse_args()
 
-    bias()
+    bias(args.hills, args.outfile, args.mintozero, args.min, args.max)
 
 
 if __name__ == "__main__":

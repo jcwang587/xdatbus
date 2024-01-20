@@ -21,5 +21,12 @@ else
     find "fes" -mindepth 1 -delete
 fi
 
-# Run Plumed
-plumed sum_hills --hills HILLS --outfile ./fes_bias.dat --mintozero --min 0 --max 11.636 --bin 100
+# Use arguments from the Python script
+HILLS_FILE=$1
+OUTFILE=$2
+MINTOZERO=$3
+MIN=$4
+MAX=$5
+
+# Run Plumed with the given arguments
+plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --mintozero $MINTOZERO --min $MIN --max $MAX --bin 100

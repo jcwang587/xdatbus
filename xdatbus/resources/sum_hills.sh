@@ -15,11 +15,11 @@ fi
 echo "Began running plumed!"
 
 # Create a clean results folder
-if [ ! -d "res" ]; then
-    mkdir "res"
+if [ ! -d "fes" ]; then
+    mkdir "fes"
 else
-    find "res" -mindepth 1 -delete
+    find "fes" -mindepth 1 -delete
 fi
 
 # Run Plumed
-plumed sum_hills --hills HILLS --outfile ../res/fes_bias.dat --mintozero --min 0 --max 11.636 --bin 100
+plumed sum_hills --hills HILLS --outfile ./fes_bias.dat --mintozero --min 0 --max 11.636 --bin 100

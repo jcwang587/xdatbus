@@ -43,3 +43,6 @@ fi
 
 # Run Plumed with the given arguments
 plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --min "$MIN" --max "$MAX" --bin "$BIN"
+
+# print the command
+echo "plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --min $MIN --max $MAX --bin $BIN"

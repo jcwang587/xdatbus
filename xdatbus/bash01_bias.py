@@ -23,11 +23,11 @@ def main():
                         help="specify the output file for sumhills (default: ./fes/fes_bias.dat)")
     parser.add_argument("--mintozero", type=str, default="on",
                         help="it translate all the minimum value in bias/histogram to zero (default: on)")
-    parser.add_argument("--min", type=float, default=0.0,
+    parser.add_argument("--min", type=str, default=0.0,
                         help="the lower bounds for the grid (default: 0.0)")
-    parser.add_argument("--max", type=float, default=1.0,
+    parser.add_argument("--max", type=str, default=1.0,
                         help="the upper bounds for the grid (default: 1.0)")
-    parser.add_argument("--bin", type=int, default=100,
+    parser.add_argument("--bin", type=str, default=100,
                         help="the number of bins for the grid (default: 100)")
 
     args = parser.parse_args()

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.0.175"
+version = "0.0.176"
 description = "A python package to analyze XDATCAR files generated from VASP"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]

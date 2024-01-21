@@ -7,7 +7,6 @@ def bias(plumed_mintozero, plumed_min, plumed_max, plumed_bin):
     current_dir = os.path.dirname(__file__)
     script_path = os.path.join(current_dir, './resources', 'sum_hills.sh')
     subprocess.run(['bash', str(script_path),
-                    ' --mintozero ', str(plumed_mintozero),
                     ' --min ', str(plumed_min),
                     ' --max ', str(plumed_max),
                     ' --bin ', str(plumed_bin)])
@@ -16,8 +15,6 @@ def bias(plumed_mintozero, plumed_min, plumed_max, plumed_bin):
 def main():
     parser = argparse.ArgumentParser(description="Apply sum_hills function from plumed that allows one to to use "
                                                  "plumed to post-process an existing hills/colvar file")
-    parser.add_argument("--mintozero", type=str, default="on",
-                        help="it translate all the minimum value in bias/histogram to zero (default: on)")
     parser.add_argument("--min", type=float, default=0.0,
                         help="the lower bounds for the grid (default: 0.0)")
     parser.add_argument("--max", type=float, default=1.0,

@@ -27,10 +27,9 @@ else
 fi
 
 # Use arguments from the Python script
-MINTOZERO="$1"
-MIN="$2"
-MAX="$3"
-BIN="$4"
+MIN="$1"
+MAX="$2"
+BIN="$3"
 
 # Define HILLS file and output file
 HILLS_FILE="${current_dir}/HILLS"
@@ -43,4 +42,4 @@ if [ ! -f "$HILLS_FILE" ]; then
 fi
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --mintozero "$MINTOZERO" --min "$MIN" --max "$MAX" --bin "$BIN"
+plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --min "$MIN" --max "$MAX" --bin "$BIN"

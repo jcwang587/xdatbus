@@ -3,7 +3,7 @@ import subprocess
 import argparse
 
 
-def bias(plumed_mintozero, plumed_min, plumed_max, plumed_bin):
+def bias(plumed_min, plumed_max, plumed_bin):
     current_dir = os.path.dirname(__file__)
     script_path = os.path.join(current_dir, './resources', 'sum_hills.sh')
     subprocess.run(['bash', str(script_path),
@@ -24,7 +24,7 @@ def main():
 
     args = parser.parse_args()
 
-    bias(args.mintozero, args.min, args.max, args.bin)
+    bias(args.min, args.max, args.bin)
 
 
 if __name__ == "__main__":

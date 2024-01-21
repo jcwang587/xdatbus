@@ -26,14 +26,20 @@ else
     find "$results_dir" -mindepth 1 -delete
 fi
 
-# Use arguments from the Python script
-MIN="$1"
-MAX="$2"
-BIN="$3"
+# Parsing arguments passed to the script
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --min) MIN="$2"; shift ;;
+        --max) MAX="$2"; shift ;;
+        --bin) BIN="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
 
 # Define HILLS file and output file
 HILLS_FILE="${current_dir}/HILLS"
-OUTFILE="${results_dir}/fes/fes_bias.dat"
+OUTFILE="${results_dir}/fes_bias.dat" # Fixed path to the outfile
 
 # Validate HILLS file exists
 if [ ! -f "$HILLS_FILE" ]; then
@@ -44,5 +50,5 @@ fi
 # Run Plumed with the given arguments
 plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --min "$MIN" --max "$MAX" --bin "$BIN"
 
-# print the command
+# Print the command
 echo "plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --min $MIN --max $MAX --bin $BIN"

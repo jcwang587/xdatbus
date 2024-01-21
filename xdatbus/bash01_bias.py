@@ -5,11 +5,11 @@ import argparse
 
 def bias(plumed_min, plumed_max, plumed_bin):
     current_dir = os.path.dirname(__file__)
-    script_path = os.path.join(current_dir, './resources', 'sum_hills.sh')
-    subprocess.run(['bash', str(script_path),
-                    ' --min ', str(plumed_min),
-                    ' --max ', str(plumed_max),
-                    ' --bin ', str(plumed_bin)])
+    script_path = os.path.join(current_dir, 'resources', 'sum_hills.sh')
+    subprocess.run(['bash', script_path,
+                    '--min', str(plumed_min),
+                    '--max', str(plumed_max),
+                    '--bin', str(plumed_bin)])
 
 
 def main():

@@ -31,7 +31,7 @@ def main():
 
     args = parser.parse_args()
 
-    bias(args.hills, args.outfile, args.mintozero, args.min, args.max)
+    bias(args.hills, args.outfile, args.mintozero, args.min, args.max, args.bin)
 
 
 if __name__ == "__main__":

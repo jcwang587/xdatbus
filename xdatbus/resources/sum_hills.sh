@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "Process ID : $$"
 
+# Save the process ID to a variable
+process_id=$$
+
 # Get the name of the current conda environment and directory
 current_env=$(conda info --envs | grep ' \*' | awk '{print $1}')
 current_dir=$(pwd)
@@ -18,8 +21,8 @@ fi
 
 echo "Began running plumed!"
 
-# Create a clean results folder
-results_dir="${current_dir}/fes"
+# Create a results folder with the process ID
+results_dir="${current_dir}/fes_${process_id}"
 if [ ! -d "$results_dir" ]; then
     mkdir "$results_dir"
 else

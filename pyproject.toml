@@ -7,7 +7,7 @@ maintainers = ["Jiacheng Wang"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://xdatbus.readthedocs.io/en/latest/"
-repository = "https://github.com/jcwang587/xdatbus"
+repository = "https://github.com/jcwang587/xdatbus/"
 documentation = "https://xdatbus.readthedocs.io/en/latest/"
 
 classifiers = [

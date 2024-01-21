@@ -54,4 +54,4 @@ fi
 plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --min "$MIN" --max "$MAX" --bin "$BIN"
 
 # Print the command
-echo "plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --min $MIN --max $MAX --bin $BIN"
+echo "plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --min $MIN --max $MAX --bin $BIN" --mintozero

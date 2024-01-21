@@ -2,7 +2,7 @@
 echo "Process ID : $$"
 
 # Get the name of the current conda environment and directory
-current_env=$(conda info --envs | grep '*' | awk '{print $1}')
+current_env=$(conda info --envs | grep ' \*' | awk '{print $1}')
 current_dir=$(pwd)
 
 echo "Current Environment: $current_env"
@@ -19,10 +19,11 @@ fi
 echo "Began running plumed!"
 
 # Create a clean results folder
-if [ ! -d "fes" ]; then
-    mkdir "fes"
+results_dir="${current_dir}/fes"
+if [ ! -d "$results_dir" ]; then
+    mkdir "$results_dir"
 else
-    find "fes" -mindepth 1 -delete
+    find "$results_dir" -mindepth 1 -delete
 fi
 
 # Use arguments from the Python script
@@ -31,12 +32,15 @@ MIN="$2"
 MAX="$3"
 BIN="$4"
 
-# Validate arguments (example for HILLS_FILE)
+# Define HILLS file and output file
+HILLS_FILE="${current_dir}/HILLS"
+OUTFILE="${results_dir}/fes/fes_bias.dat"
+
+# Validate HILLS file exists
 if [ ! -f "$HILLS_FILE" ]; then
     echo "HILLS file not found: $HILLS_FILE"
     exit 1
 fi
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills HILLS --outfile ./fes/fes_bias.dat --mintozero "$MINTOZERO" --min "$MIN" --max "$MAX" --bin "$BIN"
-
+plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --mintozero "$MINTOZERO" --min "$MIN" --max "$MAX" --bin "$BIN"

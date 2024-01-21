@@ -26,12 +26,10 @@ else
 fi
 
 # Use arguments from the Python script
-HILLS_FILE="$1"
-OUTFILE="$2"
-MINTOZERO="$3"
-MIN="$4"
-MAX="$5"
-BIN="$6"
+MINTOZERO="$1"
+MIN="$2"
+MAX="$3"
+BIN="$4"
 
 # Validate arguments (example for HILLS_FILE)
 if [ ! -f "$HILLS_FILE" ]; then
@@ -40,5 +38,5 @@ if [ ! -f "$HILLS_FILE" ]; then
 fi
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --mintozero "$MINTOZERO" --min "$MIN" --max "$MAX" --bin "$BIN"
+plumed sum_hills --hills HILLS --outfile ./fes/fes_bias.dat --mintozero "$MINTOZERO" --min "$MIN" --max "$MAX" --bin "$BIN"
 

@@ -59,3 +59,9 @@ def remove_file(file_path):
     """
     if os.path.exists(file_path):
         os.remove(file_path)
+
+
+# Define a function to skip lines starting with #!
+def skip_comments(file):
+    with open(file, 'r') as f:
+        return [i for i, line in enumerate(f) if line.startswith('#!')]

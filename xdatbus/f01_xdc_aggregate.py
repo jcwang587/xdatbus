@@ -4,7 +4,7 @@ import shutil
 import argparse
 from ase.io import read, write
 from pymatgen.io.vasp.outputs import Xdatcar
-from .utils import update_folder, remove_file
+from xdatbus.utils import update_folder, remove_file
 
 
 def xdc_aggregate(

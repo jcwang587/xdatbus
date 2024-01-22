@@ -1,15 +1,22 @@
 import pandas as pd
-from .utils import skip_comments
+import plotly.express as px
+from xdatbus.utils import skip_comments
 
 
-def plotfes():
+def plot_fes():
     # load data from .dat file
     skip_lines = skip_comments('../tests/data/plumed/dat/fes_bias.dat')
     df = pd.read_csv('../tests/data/plumed/dat/fes_bias.dat', sep='\s+', header=None, skiprows=skip_lines)
 
+    # plot with the first column to be x-axis, the second column to be y-axis
+    fig = px.line(df, x=0, y=1)
+    fig.show()
+
+
+
 
 def main():
-    plotfes()
+    plot_fes()
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from pymatgen.io.xyz import XYZ
-from .utils import unwrap_pbc_dis
+from xdatbus.utils import unwrap_pbc_dis
 
 
 def xyz_unwrap(xyz_path, lattice):

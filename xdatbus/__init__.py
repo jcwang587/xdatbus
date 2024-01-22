@@ -12,6 +12,7 @@ from .fcom03_contcar import *
 from .fmtd01_xdc2xtc import *
 from .fmtd02_hillspot2hills import *
 from .fmtd03_report_loader import *
+from .fmtd04_plot_fes import *
 
 from .bash01_bias import *
 

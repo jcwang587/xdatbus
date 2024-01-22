@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from pymatgen.io.vasp.outputs import Xdatcar
-from .utils import unwrap_pbc_dis
+from xdatbus.utils import unwrap_pbc_dis
 
 
 def xdc_unwrap(xdc_path):

@@ -44,6 +44,8 @@ done
 
 # Validate HILLS file exists
 if [ ! -f "$HILLS" ]; then
+    # Copy the HILLS file to the results folder
+    cp "$HILLS" "$results_dir"/HILLS
     echo "HILLS file not found: $HILLS"
     exit 1
 fi

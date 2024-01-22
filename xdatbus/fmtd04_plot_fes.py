@@ -44,7 +44,7 @@ def main():
     app.layout = html.Div([
         dcc.Graph(
             id='main-plot',
-            figure=plot_fes(args.dat, args.hills),
+            figure=plot_fes(args.dat, args.hills)
         ),
         html.Div(id='hover-data')
     ])
@@ -85,7 +85,7 @@ def main():
 
         return fig
 
-    app.run_server(debug=False, host='0.0.0.0')
+    app.run_server(debug=False, host='0.0.0.0', port=8000)
 
 
 if __name__ == "__main__":

@@ -32,6 +32,8 @@ fi
 # Parsing arguments passed to the script
 while [[ "$#" -gt 0 ]]; do
     case $1 in
+        --hills) HILLS="$2"; shift ;;
+        --outfile) OUTFILE="$2"; shift ;;
         --min) MIN="$2"; shift ;;
         --max) MAX="$2"; shift ;;
         --bin) BIN="$2"; shift ;;
@@ -40,18 +42,14 @@ while [[ "$#" -gt 0 ]]; do
     shift
 done
 
-# Define HILLS file and output file
-HILLS_FILE="${current_dir}/HILLS"
-OUTFILE="${results_dir}/fes_bias.dat" # Fixed path to the outfile
-
 # Validate HILLS file exists
-if [ ! -f "$HILLS_FILE" ]; then
-    echo "HILLS file not found: $HILLS_FILE"
+if [ ! -f "HILLS" ]; then
+    echo "HILLS file not found: HILLS"
     exit 1
 fi
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills "$HILLS_FILE" --outfile "$OUTFILE" --mintozero --min "$MIN" --max "$MAX" --bin "$BIN"
+plumed sum_hills --hills "$HILLS" --outfile results_dir/"$OUTFILE" --mintozero --min "$MIN" --max "$MAX" --bin "$BIN"
 
 # Print the command
-echo "plumed sum_hills --hills $HILLS_FILE --outfile $OUTFILE --mintozero --min $MIN --max $MAX --bin $BIN"
+echo "plumed sum_hills --hills $HILLS --outfile results_dir/$OUTFILE --mintozero --min $MIN --max $MAX --bin $BIN"

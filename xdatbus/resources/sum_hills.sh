@@ -43,8 +43,8 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 # Validate HILLS file exists
-if [ ! -f "HILLS" ]; then
-    echo "HILLS file not found: HILLS"
+if [ ! -f "$HILLS" ]; then
+    echo "HILLS file not found: $HILLS"
     exit 1
 fi
 

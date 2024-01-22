@@ -49,7 +49,7 @@ if [ ! -f "$HILLS" ]; then
 fi
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills "$HILLS" --outfile results_dir/"$OUTFILE" --mintozero --min "$MIN" --max "$MAX" --bin "$BIN"
+plumed sum_hills --hills "$HILLS" --outfile "$results_dir"/"$OUTFILE" --mintozero --min "$MIN" --max "$MAX" --bin "$BIN"
 
 # Print the command
-echo "plumed sum_hills --hills $HILLS --outfile results_dir/$OUTFILE --mintozero --min $MIN --max $MAX --bin $BIN"
+echo "plumed sum_hills --hills $HILLS --outfile $results_dir/$OUTFILE --mintozero --min $MIN --max $MAX --bin $BIN"

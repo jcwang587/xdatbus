@@ -32,12 +32,11 @@ def setup_test_environment(tmp_path, request):
 def test_bash01_bias(setup_test_environment):
     hills_dir = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(hills_dir)
-
-    sum_hills(plumed_hills=hills_dir, plumed_outfile="fes_bias.dat", plumed_min=0.0, plumed_max=1.0, plumed_bin=100)
-
-    # Assertions
     fes_bias_path = os.path.join(main_tmp_dir, "fes_bias.dat")
 
+    sum_hills(plumed_hills=hills_dir, plumed_outfile=fes_bias_path, plumed_min=0.0, plumed_max=11.636, plumed_bin=100)
+
+    # Assertions
     assert os.path.exists(fes_bias_path), "fes_bias.dat file not created"
 
 

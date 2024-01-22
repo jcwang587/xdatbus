@@ -28,15 +28,7 @@ def plot_fes(dat_file='fes_bias.dat', hills_file='HILLS'):
     return fig
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Plot the free energy surface from plumed output file")
-    parser.add_argument("--dat", type=str, default="fes_bias.dat",
-                        help="specify the name of the dat file (default: fes_bias.dat)")
-    parser.add_argument("--hills", type=str, default="HILLS",
-                        help="specify the name of the hills file (default: HILLS)")
-
-    args = parser.parse_args()
-
+def dash_app(dat_file='fes_bias.dat', hills_file='HILLS'):
     # Initialize the Dash app
     app = dash.Dash(__name__)
 
@@ -44,7 +36,7 @@ def main():
     app.layout = html.Div([
         dcc.Graph(
             id='main-plot',
-            figure=plot_fes(args.dat, args.hills)
+            figure=plot_fes(dat_file, hills_file)
         ),
         html.Div(id='hover-data')
     ])
@@ -86,6 +78,24 @@ def main():
         return fig
 
     app.run_server(debug=False, host='0.0.0.0', port=8000)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Plot the free energy surface from plumed output file")
+    parser.add_argument("--dat", type=str, default="fes_bias.dat",
+                        help="specify the name of the dat file (default: fes_bias.dat)")
+    parser.add_argument("--hills", type=str, default="HILLS",
+                        help="specify the name of the hills file (default: HILLS)")
+    parser.add_argument("--dash", type=bool, default=False,
+                        help="specify whether to use dash (default: False)")
+
+    args = parser.parse_args()
+
+    if args.dash:
+        dash_app(args.dat, args.hills)
+    else:
+        fig = plot_fes(args.dat, args.hills)
+        fig.write_image("fes.png")
 
 
 if __name__ == "__main__":

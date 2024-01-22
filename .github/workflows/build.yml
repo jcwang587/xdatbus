@@ -25,6 +25,18 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Install Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: myenv
+        environment-file: environment.yml
+        python-version: '3.11'
+        auto-activate-base: false
+
+    - name: Install PLUMED
+      run: |
+        conda install -c conda-forge plumed
+
     - name: Install Poetry
       run: |
         pipx install poetry

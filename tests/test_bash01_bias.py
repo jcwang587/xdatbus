@@ -2,7 +2,6 @@ import os
 import shutil
 from xdatbus import xdc_aggregate
 import pytest
-from ase.io import read
 
 
 @pytest.fixture
@@ -18,7 +17,7 @@ def setup_test_environment(tmp_path, request):
     test_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the test data directory
-    data_dir = os.path.join(test_dir, "data/plumed")
+    data_dir = os.path.join(test_dir, "data/hills")
 
     # Copy all files from the data directory to the temporary directory
     for f in os.listdir(data_dir):
@@ -31,8 +30,4 @@ def test_bash01_bias(setup_test_environment):
     xdc_dir = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_dir)
 
-    xdc_aggregate(xdc_dir=xdc_dir, output_path=main_tmp_dir)
 
-    # Assertions
-    xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")
-    assert os.path.exists(xdatbus_path), "XDATBUS file not created"

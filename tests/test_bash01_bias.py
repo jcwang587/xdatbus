@@ -1,6 +1,6 @@
 import os
 import shutil
-from xdatbus import xdc_aggregate
+from xdatbus import sum_hills
 import pytest
 
 
@@ -29,5 +29,9 @@ def setup_test_environment(tmp_path, request):
 def test_bash01_bias(setup_test_environment):
     xdc_dir = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_dir)
+
+    sum_hills(plumed_min=0.0, plumed_max=11.636, plumed_bin=100)
+
+    assert os.path.exists(os.path.join(main_tmp_dir, "fes/fes_bias.dat")), "fes_bias.dat file not created"
 
 

@@ -28,56 +28,6 @@ def plot_fes(dat_file='fes_bias.dat', hills_file='HILLS'):
     return fig
 
 
-# Initialize the Dash app
-app = dash.Dash(__name__)
-
-# App layout
-app.layout = html.Div([
-    dcc.Graph(
-        id='main-plot',
-        figure=plot_fes("../tests/data/plumed/dat/fes_bias.dat", "../tests/data/plumed/hills/HILLS")
-    ),
-    html.Div(id='hover-data')
-])
-
-
-@app.callback(
-    Output('main-plot', 'figure'),
-    [Input('main-plot', 'hoverData')],
-    [State('main-plot', 'figure')]
-)
-def update_fes_plot(hover_data, fig):
-    # Check if hoverData is available and if the hover is on the first trace (CV plot)
-    if hover_data and hover_data['points'] and hover_data['points'][0]['curveNumber'] == 0:
-        y_value = hover_data['points'][0]['y']
-
-        # Calculate the width of the rectangle as 1/100th of the x-axis range
-        x_range = fig['layout']['xaxis2']['range']
-        rect_width = (x_range[1] - x_range[0]) / 100
-
-        # Define the vertical rectangle shape
-        new_shape = dict(
-            type="rect",
-            xref="x2",
-            yref="paper",
-            x0=y_value - rect_width / 2,
-            y0=0,
-            x1=y_value + rect_width / 2,
-            y1=1,
-            fillcolor="LightSkyBlue",
-            opacity=0.5,
-            line_width=0,
-        )
-
-        # Update or add the new shape
-        fig['layout']['shapes'] = [new_shape]
-    else:
-        # Remove the line when not hovering over the CV plot
-        fig['layout']['shapes'] = []
-
-    return fig
-
-
 def main():
     parser = argparse.ArgumentParser(description="Plot the free energy surface from plumed output file")
     parser.add_argument("--dat", type=str, default="fes_bias.dat",
@@ -87,7 +37,54 @@ def main():
 
     args = parser.parse_args()
 
-    # plot_fes("../tests/data/plumed/dat/fes_bias.dat", "../tests/data/plumed/hills/HILLS")
+    # Initialize the Dash app
+    app = dash.Dash(__name__)
+
+    # App layout
+    app.layout = html.Div([
+        dcc.Graph(
+            id='main-plot',
+            figure=plot_fes(args.dat, args.hills),
+        ),
+        html.Div(id='hover-data')
+    ])
+
+    @app.callback(
+        Output('main-plot', 'figure'),
+        [Input('main-plot', 'hoverData')],
+        [State('main-plot', 'figure')]
+    )
+    def update_fes_plot(hover_data, fig):
+        # Check if hoverData is available and if the hover is on the first trace (CV plot)
+        if hover_data and hover_data['points'] and hover_data['points'][0]['curveNumber'] == 0:
+            y_value = hover_data['points'][0]['y']
+
+            # Calculate the width of the rectangle as 1/100th of the x-axis range
+            x_range = fig['layout']['xaxis2']['range']
+            rect_width = (x_range[1] - x_range[0]) / 100
+
+            # Define the vertical rectangle shape
+            new_shape = dict(
+                type="rect",
+                xref="x2",
+                yref="paper",
+                x0=y_value - rect_width / 2,
+                y0=0,
+                x1=y_value + rect_width / 2,
+                y1=1,
+                fillcolor="LightSkyBlue",
+                opacity=0.5,
+                line_width=0,
+            )
+
+            # Update or add the new shape
+            fig['layout']['shapes'] = [new_shape]
+        else:
+            # Remove the line when not hovering over the CV plot
+            fig['layout']['shapes'] = []
+
+        return fig
+
     app.run_server(debug=False)
 
 

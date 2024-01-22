@@ -85,7 +85,7 @@ def main():
 
         return fig
 
-    app.run_server(debug=False)
+    app.run_server(debug=False, host='0.0.0.0')
 
 
 if __name__ == "__main__":

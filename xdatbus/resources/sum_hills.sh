@@ -52,7 +52,14 @@ fi
 cp "$HILLS" "$results_dir"/HILLS
 
 # Run Plumed with the given arguments
-plumed sum_hills --hills "$HILLS" --outfile "$results_dir"/"$OUTFILE" --mintozero --min "$MIN" --max "$MAX" --bin "$BIN"
+plumed sum_hills \
+    --hills "$HILLS" \
+    --outfile "$results_dir"/"$OUTFILE" \
+    --mintozero \
+    --min "$MIN" \
+    --max "$MAX" \
+    --bin "$BIN" \
+    > "$results_dir/stdout.$process_id" 2> "$results_dir/stderr.$process_id"
 
 # Print the command
 echo "plumed sum_hills --hills $HILLS --outfile $results_dir/$OUTFILE --mintozero --min $MIN --max $MAX --bin $BIN"

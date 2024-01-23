@@ -27,6 +27,8 @@ def main():
                         help="the upper bounds for the grid (default: 1.0)")
     parser.add_argument("--bin", type=int, default=100,
                         help="the number of bins for the grid (default: 100)")
+    parser.add_argument("--eachstep", type=bool, default=False,
+                        help="if true, the output will be written into a separate json file for each step")
 
     args = parser.parse_args()
 

@@ -24,7 +24,6 @@ def plot_fes(dat_file='fes_bias.dat', hills_file='HILLS'):
         autosize=True,
         margin=dict(l=25, r=25, t=25, b=25),
     )
-
     return fig
 
 
@@ -68,9 +67,9 @@ def dash_app(dat_file='fes_bias.dat', hills_file='HILLS'):
                 opacity=0.5,
                 line_width=0,
             )
-
             # Update or add the new shape
             fig['layout']['shapes'] = [new_shape]
+
         else:
             # Remove the line when not hovering over the CV plot
             fig['layout']['shapes'] = []

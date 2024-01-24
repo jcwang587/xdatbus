@@ -3,15 +3,19 @@ import subprocess
 import argparse
 
 
-def sum_hills(plumed_hills, plumed_outfile, plumed_min, plumed_max, plumed_bin):
+def sum_hills(plumed_hills, plumed_outfile, plumed_min, plumed_max, plumed_bin, plumed_eachstep):
     current_dir = os.path.dirname(__file__)
     script_path = os.path.join(current_dir, 'resources', 'sum_hills.sh')
-    subprocess.run(['bash', script_path,
-                    '--hills', str(plumed_hills),
-                    '--outfile', str(plumed_outfile),
-                    '--min', str(plumed_min),
-                    '--max', str(plumed_max),
-                    '--bin', str(plumed_bin)])
+
+    if plumed_eachstep:
+        pass
+    else:
+        subprocess.run(['bash', script_path,
+                        '--hills', str(plumed_hills),
+                        '--outfile', str(plumed_outfile),
+                        '--min', str(plumed_min),
+                        '--max', str(plumed_max),
+                        '--bin', str(plumed_bin)])
 
 
 def main():
@@ -32,7 +36,7 @@ def main():
 
     args = parser.parse_args()
 
-    sum_hills(args.hills, args.outfile, args.min, args.max, args.bin)
+    sum_hills(args.hills, args.outfile, args.min, args.max, args.bin, args.eachstep)
 
 
 if __name__ == "__main__":

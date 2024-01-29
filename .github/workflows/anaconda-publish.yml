@@ -1,7 +1,6 @@
 # This workflow will upload a package to Anaconda Cloud when manually triggered.
-# For more information on publishing to Anaconda with GitHub Actions, see relevant documentation.
 
-name: publish to anaconda
+name: anaconda-publish
 
 on:
   workflow_dispatch:

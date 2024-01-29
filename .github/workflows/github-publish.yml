@@ -1,0 +1,61 @@
+name: github-publish
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  pypi-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/xdatbus/
+    permissions:
+      id-token: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-activate-base: true
+
+    - name: Install PLUMED
+      run: |
+        conda install -c conda-forge plumed
+
+    - name: Install Poetry
+      run: |
+        pipx install poetry
+
+    - name: Configure Poetry
+      run: |
+        poetry config virtualenvs.create false
+
+    - name: Install dependencies with Poetry
+      run: |
+        poetry install
+
+    - name: Run tests
+      run: poetry run pytest --cov=xdatbus
+
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+
+    - name: Build package with Poetry
+      run: poetry build
+
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1

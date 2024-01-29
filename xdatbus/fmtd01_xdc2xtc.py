@@ -15,7 +15,7 @@ def xdc2xtc(xyz_path):
 
     u = MDa.Universe(xyz_path)
 
-    output_filename = os.path.basename(xyz_path).replace('.xyz', '.xtc')
+    output_filename = os.path.basename(xyz_path).replace(".xyz", ".xtc")
     output_path = os.path.join(os.path.dirname(xyz_path), output_filename)
 
     # Write out the XTC file

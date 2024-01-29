@@ -4,6 +4,7 @@ from ase.data import covalent_radii
 
 try:
     from rdkit import Chem
+
     RDKIT_AVAILABLE = True
 except ImportError:
     Chem = None
@@ -11,6 +12,7 @@ except ImportError:
 
 try:
     from biotite.structure.io import load_structure
+
     BIOTITE_AVAILABLE = True
 except ImportError:
     load_structure = None
@@ -29,10 +31,14 @@ def pos2bpdb(poscar_path, output_path):
             Output path of the PDB file
     """
     if not RDKIT_AVAILABLE:
-        raise ImportError("The function `pos2bpdb` requires RDKit. Please install RDKit to use this function.")
+        raise ImportError(
+            "The function `pos2bpdb` requires RDKit. Please install RDKit to use this function."
+        )
 
     if not BIOTITE_AVAILABLE:
-        raise ImportError("The function `pos2bpdb` requires biotite. Please install biotite to use this function.")
+        raise ImportError(
+            "The function `pos2bpdb` requires biotite. Please install biotite to use this function."
+        )
 
     # Load the POSCAR file with ASE
     atoms = read(poscar_path)
@@ -59,8 +65,13 @@ def pos2bpdb(poscar_path, output_path):
         for j in range(i + 1, len(atomic_numbers)):
             dist = np.linalg.norm(positions[i] - positions[j])
             # Sum of covalent radii as a simple check
-            if dist < covalent_radii[atomic_numbers[i]] + covalent_radii[atomic_numbers[j]]:
-                rwmol.AddBond(i, j, Chem.BondType.SINGLE)  # Assuming single bond for simplicity
+            if (
+                dist
+                < covalent_radii[atomic_numbers[i]] + covalent_radii[atomic_numbers[j]]
+            ):
+                rwmol.AddBond(
+                    i, j, Chem.BondType.SINGLE
+                )  # Assuming single bond for simplicity
 
     # Convert RDKit molecule to PDB format and save
     mol = rwmol.GetMol()

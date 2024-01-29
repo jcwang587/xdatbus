@@ -7,11 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file
 
 
-def xdc_aggregate(
-        xdc_dir,
-        output_path="./",
-        delete_temp_files=True
-):
+def xdc_aggregate(xdc_dir, output_path="./", delete_temp_files=True):
     """
     Initialize a trajectory writer instance for *filename*.
 
@@ -26,7 +22,7 @@ def xdc_aggregate(
     """
 
     raw_list = os.listdir(xdc_dir)
-    raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
+    raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
 
     xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
     xdatbus_path = os.path.join(output_path, "XDATBUS")
@@ -42,15 +38,17 @@ def xdc_aggregate(
     log_file = open(log_path, "w")
     for xdatcar_raw in raw_list_sort:
         print("Wrapping " + xdatcar_raw + " ...")
-        xdatcar = read(xdc_dir + "/" + xdatcar_raw, format='vasp-xdatcar', index=':')
+        xdatcar = read(xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":")
         print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
-        write(xdatcar_wrap_path + "/" + xdatcar_raw, format='vasp-xdatcar', images=xdatcar)
+        write(
+            xdatcar_wrap_path + "/" + xdatcar_raw, format="vasp-xdatcar", images=xdatcar
+        )
         log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
     log_file.close()
 
     # Get the number of files in wrap directory
     wrap_list = os.listdir(xdatcar_wrap_path)
-    wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r'\d+', x)[0]))
+    wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
 
     # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
     print("Combining XDATCAR files into one XDATCAR file ...")
@@ -71,13 +69,25 @@ def xdc_aggregate(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Aggregate XDATCAR files from an AIMD simulation.")
-    parser.add_argument("--xdc_dir", type=str,
-                        help="Input path of the AIMD simulation, which contains the XDATCAR files")
-    parser.add_argument("--output_path", type=str, default="./",
-                        help="Output path of the XDATBUS file (default: current directory)")
-    parser.add_argument("--delete_temp_files", action="store_true",
-                        help="If set, the intermediate folders will be deleted (default: False)")
+    parser = argparse.ArgumentParser(
+        description="Aggregate XDATCAR files from an AIMD simulation."
+    )
+    parser.add_argument(
+        "--xdc_dir",
+        type=str,
+        help="Input path of the AIMD simulation, which contains the XDATCAR files",
+    )
+    parser.add_argument(
+        "--output_path",
+        type=str,
+        default="./",
+        help="Output path of the XDATBUS file (default: current directory)",
+    )
+    parser.add_argument(
+        "--delete_temp_files",
+        action="store_true",
+        help="If set, the intermediate folders will be deleted (default: False)",
+    )
 
     args = parser.parse_args()
 

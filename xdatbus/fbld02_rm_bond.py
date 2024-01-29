@@ -1,5 +1,6 @@
 try:
     import biotite
+
     BIOTITE_AVAILABLE = True
 except ImportError:
     biotite = None
@@ -22,10 +23,12 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
             Output path of the PDB file
     """
     if not BIOTITE_AVAILABLE:
-        raise ImportError("The function `rm_bond` requires biotite. Please install biotite to use this function.")
+        raise ImportError(
+            "The function `rm_bond` requires biotite. Please install biotite to use this function."
+        )
 
     # Load the PDB file into a list of lines
-    with open(pdb_file_path, 'r') as file:
+    with open(pdb_file_path, "r") as file:
         lines = file.readlines()
 
     # Create a dictionary that maps atom serial numbers to element types
@@ -51,10 +54,17 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
 
             # Iterate through connected serial numbers and remove only the specified bonds
             connected_serial_numbers = [
-                s for s in connected_serial_numbers
+                s
+                for s in connected_serial_numbers
                 if not (
-                        (atom_elements.get(atom_serial_number) == element1 and atom_elements.get(s) == element2) or
-                        (atom_elements.get(atom_serial_number) == element2 and atom_elements.get(s) == element1)
+                    (
+                        atom_elements.get(atom_serial_number) == element1
+                        and atom_elements.get(s) == element2
+                    )
+                    or (
+                        atom_elements.get(atom_serial_number) == element2
+                        and atom_elements.get(s) == element1
+                    )
                 )
             ]
 
@@ -63,8 +73,11 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
                 continue
 
             # Construct a new CONECT line with the remaining connections
-            new_conect_line = f"CONECT{atom_serial_number:>5}" + "".join(
-                f"{s:>5}" for s in connected_serial_numbers) + "\n"
+            new_conect_line = (
+                f"CONECT{atom_serial_number:>5}"
+                + "".join(f"{s:>5}" for s in connected_serial_numbers)
+                + "\n"
+            )
             new_lines.append(new_conect_line)
             continue
 
@@ -72,8 +85,5 @@ def rm_bond(pdb_file_path, element1, element2, output_file_path):
         new_lines.append(line)
 
     # Write the new PDB content to the output file
-    with open(output_file_path, 'w') as file:
+    with open(output_file_path, "w") as file:
         file.writelines(new_lines)
-
-
-

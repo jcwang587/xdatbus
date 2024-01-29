@@ -26,8 +26,8 @@ def com_drift(xyz_path, frame_start=0, frame_end=None, save_csv=True, timestep=1
         The COM drift velocity, represented as a 3-element numpy array.
     """
 
-    print('Loading the XYZ file ...')
-    frames = read(xyz_path, index=':')
+    print("Loading the XYZ file ...")
+    frames = read(xyz_path, index=":")
 
     if frame_end is None:
         frame_end = len(frames)
@@ -39,9 +39,9 @@ def com_drift(xyz_path, frame_start=0, frame_end=None, save_csv=True, timestep=1
 
     # save to csv file
     if save_csv:
-        print('Saving the COM to a csv file ...')
-        com_df = pd.DataFrame(com_list, columns=['x', 'y', 'z'])
-        com_df.to_csv(xyz_path[:-4] + '_com.csv', index=False)
+        print("Saving the COM to a csv file ...")
+        com_df = pd.DataFrame(com_list, columns=["x", "y", "z"])
+        com_df.to_csv(xyz_path[:-4] + "_com.csv", index=False)
 
     # calculate the drift of the COM (last COM - first COM)
     drift = np.array(com_list[-1]) - np.array(com_list[0])

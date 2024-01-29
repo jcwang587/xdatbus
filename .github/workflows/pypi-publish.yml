@@ -1,8 +1,12 @@
 name: pypi-publish
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      publishToAnaconda:
+        description: 'Publish to PyPI?'
+        required: true
+        default: 'no'
 
 permissions:
   contents: read

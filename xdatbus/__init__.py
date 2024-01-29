@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 from .f01_xdc_aggregate import *
 from .f02_xdc_unwrap import *
 from .f03_xyz_unwarp import *

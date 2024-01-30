@@ -2,7 +2,7 @@ import os
 import shutil
 import pandas as pd
 from pymatgen.io.vasp.outputs import Xdatcar
-from .fcom01_drift import com_drift
+from xdatbus import com_drift
 
 
 def com_hillspot(
@@ -26,13 +26,13 @@ def com_hillspot(
     delete_intermediate_files : bool
         Delete the intermediate files created by this function.
     """
-    com_drift = []
+    com_drift_list = []
     total_frame = len(Xdatcar(aimd_path + "XDATCAR").structures)
     for i in range(freq, total_frame + 1, freq):
-        com_drift.append(
-            fcom01_drift(xyz_path, frame_start=0, frame_end=i, save_csv=False)
+        com_drift_list.append(
+            com_drift(xyz_path, frame_start=0, frame_end=i, save_csv=False)
         )
-        print("COM drift for frames 0 to {} is {}".format(i, com_drift[-1]))
+        print("COM drift for frames 0 to {} is {}".format(i, com_drift_list[-1]))
 
     # correct the HILLS file
     # copy the HILLS file to the same directory as the XDATCAR file
@@ -52,8 +52,8 @@ def com_hillspot(
 
     # create a new diff_df with the corrected values by copying the original diff_df and replacing the first row
     diff_df_corrected = diff_df.copy()
-    for i in range(len(com_drift)):
-        diff_df_corrected.iloc[i]["cv"] += com_drift[i][2]
+    for i in range(len(com_drift_list)):
+        diff_df_corrected.iloc[i]["cv"] += com_drift_list[i][2]
 
     # append the corrected diff_df to the original penaltypot_df
     penaltypot_df_corrected = pd.concat([penaltypot_df, diff_df_corrected])

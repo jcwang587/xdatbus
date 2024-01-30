@@ -10,8 +10,7 @@ from .fbld01_pos2bpdb import *
 from .fbld02_rm_bond import *
 
 from .fcom01_drift import *
-from .fcom02_hillspot import *
-from .fcom03_contcar import *
+from .fcom02_contcar import *
 
 from .fmtd01_xdc2xtc import *
 from .fmtd02_hillspot2hills import *

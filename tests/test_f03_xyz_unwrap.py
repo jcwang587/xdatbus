@@ -24,7 +24,7 @@ def setup_test_environment(tmp_path, request):
         shutil.copy(os.path.join(data_dir, f), temp_dir)
 
     # Assuming you have only one .xyz file (or you want to test with the first one you find)
-    xyz_file = [f for f in os.listdir(temp_dir) if f.endswith('.xyz')][0]
+    xyz_file = [f for f in os.listdir(temp_dir) if f.endswith(".xyz")][0]
 
     return os.path.join(temp_dir, xyz_file)
 

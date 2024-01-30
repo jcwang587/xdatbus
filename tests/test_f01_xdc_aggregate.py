@@ -38,8 +38,9 @@ def test_f01_xdc_aggregate(setup_test_environment):
     assert os.path.exists(xdatbus_path), "XDATBUS file not created"
 
     # Load the aggregated data
-    aggregated_data = read(xdatbus_path, format='vasp-xdatcar', index=':')
+    aggregated_data = read(xdatbus_path, format="vasp-xdatcar", index=":")
 
     # Check the aggregation result against one of the files in the temporary directory
     assert len(aggregated_data) >= len(
-        read(os.path.join(xdc_dir, "XDATCAR_01"), format='vasp-xdatcar', index=':'))
+        read(os.path.join(xdc_dir, "XDATCAR_01"), format="vasp-xdatcar", index=":")
+    )

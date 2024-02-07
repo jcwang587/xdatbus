@@ -1,4 +1,4 @@
-from pymatgen.io.vasp import Vasprun
+from pymatgen.io.vasp import Vasprun, Outcar, Oszicar
 
 vasprun = Vasprun("../tests/data/vasprun/vasprun.xml")
 
@@ -10,4 +10,12 @@ print(energy)
 for i in range(len(vasprun.ionic_steps)):
     print(vasprun.ionic_steps[i]['electronic_steps'][-1]['e_wo_entrp'])
 
-# get all kinetic energies
+# get the kinetic energy
+oszicar = Oszicar("../tests/data/oszicar/oszicar")
+
+# get the kinetic energy
+print(oszicar.ionic_steps[-1])
+
+
+
+

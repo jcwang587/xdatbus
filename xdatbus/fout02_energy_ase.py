@@ -1,3 +1,3 @@
 from pymatgen.io.vasp import Vasprun
 
-vasprun = Vasprun("vasprun.xml")
+vasprun = Vasprun("../tests/data/vasprun/vasprun.xml")

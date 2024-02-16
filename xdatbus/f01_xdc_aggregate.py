@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
+def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
     """
     Initialize a trajectory writer instance for *filename*.
 
@@ -72,7 +72,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)
 
-        if delete_temp_files:
+        if keep_temp_files is False:
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
@@ -101,14 +101,14 @@ def main():
         help="Output path of the XDATBUS file (default: current directory)",
     )
     parser.add_argument(
-        "--delete_temp_files",
-        action="store_true",
-        help="If set, the intermediate folders will be deleted (default: True)",
+        "--keep_temp_files",
+        action="store_false",
+        help="If set, the intermediate folders will NOT be deleted (default behavior is to delete)",
     )
 
     args = parser.parse_args()
 
-    xdc_aggregate(args.xdc_dir, args.output_path, args.delete_temp_files)
+    xdc_aggregate(args.xdc_dir, args.output_path, args.keep_temp_files)
 
 
 if __name__ == "__main__":

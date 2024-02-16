@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.1.7"
+version = "0.1.8"
 description = "A Python package for post-analysis of VASP AIMD data"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]

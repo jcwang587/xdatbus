@@ -42,7 +42,7 @@ pytest = "8.0.0"
 pytest-cov = "4.1.0"
 
 [tool.poetry.extras]
-vis = ["rdkit", "biotite", "bpy", "molecularnodes", "pyyaml", "ovito"]
+vis = ["rdkit", "biotite", "bpy", "pyyaml", "ovito"]
 
 [tool.poetry.scripts]
 xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"

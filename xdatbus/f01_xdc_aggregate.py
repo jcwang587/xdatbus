@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir, output_path="./", delete_temp_files=True):
+def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
     """
     Initialize a trajectory writer instance for *filename*.
 
@@ -77,11 +77,11 @@ def xdc_aggregate(xdc_dir, output_path="./", delete_temp_files=True):
             os.remove(log_path)
 
         print("aggregate order: ", xdatcar_list_sort)
-        print("xdatbus-func: xdc_aggregate: Done!")
+        print("xdatbus-func | xdc_aggregate: Done!")
 
     except Exception as e:
         print(e)
-        print("xdatbus-func: xdc_aggregate: Failed!")
+        print("xdatbus-func | xdc_aggregate: Failed!")
 
 
 def main():

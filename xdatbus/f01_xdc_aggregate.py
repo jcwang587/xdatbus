@@ -4,7 +4,7 @@ import shutil
 import argparse
 from ase.io import read, write
 from pymatgen.io.vasp.outputs import Xdatcar
-from xdatbus.utils import update_folder, remove_file
+from xdatbus.utils import update_folder, remove_file, filter_files
 
 
 def xdc_aggregate(xdc_dir, output_path="./", delete_temp_files=True):
@@ -20,52 +20,67 @@ def xdc_aggregate(xdc_dir, output_path="./", delete_temp_files=True):
         delete_temp_files : bool (optional)
             If ``True``, the intermediate folders will be deleted
     """
+    try:
+        raw_list = os.listdir(xdc_dir)
+        xdatcar_list = filter_files(raw_list, "XDATCAR")
 
-    raw_list = os.listdir(xdc_dir)
-    raw_list_sort = sorted(raw_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+        if len(xdatcar_list) == 0:
+            raise ValueError("No XDATCAR file found in the directory.")
 
-    xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
-    xdatbus_path = os.path.join(output_path, "XDATBUS")
-    log_path = os.path.join(output_path, "xdc_aggregate.log")
-
-    # Clear the directory
-    update_folder(xdatcar_wrap_path)
-
-    # Remove the XDATBUS and log files
-    remove_file(xdatbus_path)
-    remove_file(log_path)
-
-    log_file = open(log_path, "w")
-    for xdatcar_raw in raw_list_sort:
-        print("Wrapping " + xdatcar_raw + " ...")
-        xdatcar = read(xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":")
-        print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
-        write(
-            xdatcar_wrap_path + "/" + xdatcar_raw, format="vasp-xdatcar", images=xdatcar
+        xdatcar_list_sort = sorted(
+            xdatcar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
         )
-        log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
-    log_file.close()
 
-    # Get the number of files in wrap directory
-    wrap_list = os.listdir(xdatcar_wrap_path)
-    wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+        xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
+        xdatbus_path = os.path.join(output_path, "XDATBUS")
+        log_path = os.path.join(output_path, "xdc_aggregate.log")
 
-    # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-    print("Combining XDATCAR files into one XDATCAR file ...")
-    # Initialize the XDATCAR bus with the first XDATCAR file
-    xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
+        # Clear the directory
+        update_folder(xdatcar_wrap_path)
 
-    for xdatcar_wrap in wrap_list_sort[1:]:
-        print("Appending " + xdatcar_wrap + " ...")
-        xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
-        xdatbus.structures.extend(xdatcar.structures)
-    xdatbus.write_file(xdatbus_path)
+        # Remove the XDATBUS and log files
+        remove_file(xdatbus_path)
+        remove_file(log_path)
 
-    if delete_temp_files:
-        shutil.rmtree(xdatcar_wrap_path)
-        os.remove(log_path)
+        log_file = open(log_path, "w")
+        for xdatcar_raw in xdatcar_list_sort:
+            print("Wrapping " + xdatcar_raw + " ...")
+            xdatcar = read(
+                xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
+            )
+            print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
+            write(
+                xdatcar_wrap_path + "/" + xdatcar_raw,
+                format="vasp-xdatcar",
+                images=xdatcar,
+            )
+            log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
+        log_file.close()
 
-    print("xdatbus-func: xdc_aggregate: Done!")
+        # Get the number of files in wrap directory
+        wrap_list = os.listdir(xdatcar_wrap_path)
+        wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+
+        # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
+        print("Combining XDATCAR files into one XDATCAR file ...")
+        # Initialize the XDATCAR bus with the first XDATCAR file
+        xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
+
+        for xdatcar_wrap in wrap_list_sort[1:]:
+            print("Appending " + xdatcar_wrap + " ...")
+            xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
+            xdatbus.structures.extend(xdatcar.structures)
+        xdatbus.write_file(xdatbus_path)
+
+        if delete_temp_files:
+            shutil.rmtree(xdatcar_wrap_path)
+            os.remove(log_path)
+
+        print("xdatbus-func: xdc_aggregate: Done!")
+
+    except Exception as e:
+        print(e)
+        print("xdatbus-func: xdc_aggregate: Failed!")
 
 
 def main():

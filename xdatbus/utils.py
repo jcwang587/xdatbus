@@ -1,4 +1,5 @@
 import os
+import re
 import shutil
 import numpy as np
 from ase.io import read
@@ -65,3 +66,9 @@ def remove_file(file_path):
 def skip_comments(file):
     with open(file, "r") as f:
         return [i for i, line in enumerate(f) if line.startswith("#!")]
+
+
+def filter_files(files, pattern):
+    pattern = re.compile(rf"{pattern}")
+    return [file for file in files if pattern.search(file)]
+

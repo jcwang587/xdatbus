@@ -27,7 +27,7 @@ numpy = "~1.26.3"
 pandas = "~2.2.0"
 ase = "~3.22.1"
 pymatgen = "==2024.2.8"
-mdanalysis = "~2.6.1"
+mdanalysis = "==2.7.0"
 plotly = "==5.19.0"
 dash = ">=2.14.2,<2.16.0"
 rdkit = {version = "~2023.9.1", optional = true}

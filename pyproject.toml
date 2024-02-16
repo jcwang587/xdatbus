@@ -46,6 +46,7 @@ vis = ["rdkit", "biotite", "bpy", "molecularnodes", "pyyaml", "ovito"]
 
 [tool.poetry.scripts]
 xdc_aggregate = "xdatbus.f01_xdc_aggregate:main"
+thermal_report = "xdatbus.fosz01_thermal_report:main"
 bias = "xdatbus.bash01_bias:main"
 plot_fes = "xdatbus.fmtd04_plot_fes:main"
 

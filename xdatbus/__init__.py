@@ -17,7 +17,7 @@ from .fmtd02_hillspot2hills import *
 from .fmtd03_report_loader import *
 from .fmtd04_plot_fes import *
 
-from .fosz01_energy import *
+from .fosz01_thermal_report import *
 
 from .bash01_bias import *
 

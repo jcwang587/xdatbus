@@ -17,8 +17,8 @@ def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_path : str (optional)
             Output path of the XDATBUS file
-        delete_temp_files : bool (optional)
-            If ``True``, the intermediate folders will be deleted
+        keep_temp_files : bool (optional)
+            If ``False``, the intermediate folders will be deleted
     """
     try:
         raw_list = os.listdir(xdc_dir)
@@ -103,7 +103,7 @@ def main():
     parser.add_argument(
         "--keep_temp_files",
         action="store_false",
-        help="If set, the intermediate folders will NOT be deleted (default behavior is to delete)",
+        help="If set, the intermediate folders will be kept (default behavior is to delete)",
     )
 
     args = parser.parse_args()

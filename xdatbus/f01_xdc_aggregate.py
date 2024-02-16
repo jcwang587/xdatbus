@@ -44,11 +44,13 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
 
         log_file = open(log_path, "w")
         for xdatcar_raw in xdatcar_list_sort:
-            print("Wrapping " + xdatcar_raw + " ...")
+            print("xdatbus-func | xdc_aggregate: Wrapping " + xdatcar_raw + " ...")
             xdatcar = read(
                 xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
             )
-            print("Number of frames in " + xdatcar_raw + ": " + str(len(xdatcar)))
+            print(
+                "xdatbus-func | xdc_aggregate: number of frames: " + str(len(xdatcar))
+            )
             write(
                 xdatcar_wrap_path + "/" + xdatcar_raw,
                 format="vasp-xdatcar",
@@ -62,12 +64,10 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
         wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
 
         # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-        print("Combining XDATCAR files into XDATBUS ...")
-        # Initialize the XDATCAR bus with the first XDATCAR file
         xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
         for xdatcar_wrap in wrap_list_sort[1:]:
-            print("Appending " + xdatcar_wrap + " ...")
+            print("xdatbus-func | xdc_aggregate: Appending " + xdatcar_wrap + " ...")
             xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)

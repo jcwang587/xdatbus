@@ -22,6 +22,7 @@ def thermal_report(osz_dir="./", output_path="./"):
         total_energy = []
         temperature = []
         for oszicar_file in oszicar_list_sort:
+            print(f"xdatbus-func | energy_report: Processing {oszicar_file}")
             oszicar_path = os.path.join(osz_dir, oszicar_file)
             oszicar = Oszicar(oszicar_path)
             for ionic_step in oszicar.ionic_steps:

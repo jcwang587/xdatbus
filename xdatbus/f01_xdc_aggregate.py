@@ -76,7 +76,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
-        print("aggregate order: ", xdatcar_list_sort)
+        print("sequence: ", xdatcar_list_sort)
         print("xdatbus-func | xdc_aggregate: Done!")
 
     except Exception as e:

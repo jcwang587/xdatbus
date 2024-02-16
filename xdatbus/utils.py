@@ -71,4 +71,3 @@ def skip_comments(file):
 def filter_files(files, pattern):
     pattern = re.compile(rf"{pattern}")
     return [file for file in files if pattern.search(file)]
-

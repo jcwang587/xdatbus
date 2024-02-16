@@ -30,7 +30,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 
 .. code-block:: console
 
-   $ pip install -U git+https://https://github.com/jcwang587/xdatbus
+   $ pip install -U git+https://github.com/jcwang587/xdatbus
 
 
 2. Installing with conda

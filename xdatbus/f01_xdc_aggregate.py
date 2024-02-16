@@ -90,6 +90,7 @@ def main():
     parser.add_argument(
         "--xdc_dir",
         type=str,
+        default="./",
         help="Input path of the AIMD simulation, which contains the XDATCAR files",
     )
     parser.add_argument(
@@ -101,7 +102,7 @@ def main():
     parser.add_argument(
         "--delete_temp_files",
         action="store_true",
-        help="If set, the intermediate folders will be deleted (default: False)",
+        help="If set, the intermediate folders will be deleted (default: True)",
     )
 
     args = parser.parse_args()

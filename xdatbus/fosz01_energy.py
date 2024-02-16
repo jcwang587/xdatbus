@@ -31,6 +31,6 @@ def energy_report(osz_dir="./", output_path="./"):
         print("xdatbus-func | energy_report: Failed!")
 
 
-energy_report()
+energy_report(
 
 

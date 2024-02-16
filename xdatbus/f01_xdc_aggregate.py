@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
+def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
     """
     Initialize a trajectory writer instance for *filename*.
 
@@ -17,7 +17,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_path : str (optional)
             Output path of the XDATBUS file
-        keep_temp_files : bool (optional)
+        delete_temp_files : bool (optional)
             If ``False``, the intermediate folders will be deleted
     """
     try:
@@ -62,7 +62,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
         wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
 
         # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-        print("Combining XDATCAR files into one XDATCAR file ...")
+        print("Combining XDATCAR files into XDATBUS ...")
         # Initialize the XDATCAR bus with the first XDATCAR file
         xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
@@ -72,7 +72,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", keep_temp_files=False):
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)
 
-        if keep_temp_files is False:
+        if delete_temp_files:
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
@@ -101,14 +101,17 @@ def main():
         help="Output path of the XDATBUS file (default: current directory)",
     )
     parser.add_argument(
-        "--keep_temp_files",
-        action="store_false",
-        help="If set, the intermediate folders will be kept (default behavior is to delete)",
+        "--delete_temp_files",
+        type=str,
+        choices=["True", "False"],
+        default="True",
+        help="Choose True (default) to delete intermediate folders, or False to keep them.",
     )
-
     args = parser.parse_args()
 
-    xdc_aggregate(args.xdc_dir, args.output_path, args.keep_temp_files)
+    args.delete_temp_files = args.delete_temp_files == "True"
+
+    xdc_aggregate(args.xdc_dir, args.output_path, args.delete_temp_files)
 
 
 if __name__ == "__main__":

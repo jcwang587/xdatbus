@@ -5,7 +5,7 @@ import numpy as np
 
 
 def gauss_pot(x, x0, h, w):
-    en = h * np.exp(-(x - x0) ** 2 / 2.0 / w ** 2)
+    en = h * np.exp(-((x - x0) ** 2) / 2.0 / w**2)
     return en
 
 
@@ -21,13 +21,13 @@ def calculate_profile_1d(server_meta_path, project_name, input_line_number):
     shutil.copy(server_hillspot_path, local_hillspot_path)
 
     f = local_hillspot_path + "/HILLSPOT"
-    ff = f + '.xyz'
+    ff = f + ".xyz"
 
     a0 = -1.0
     a1 = 2.0
     num = 1000
 
-    f = open(f, 'r')
+    f = open(f, "r")
 
     data = []
     h = []
@@ -47,7 +47,7 @@ def calculate_profile_1d(server_meta_path, project_name, input_line_number):
             break
     f.close()
 
-    ff = open(ff, 'w')
+    ff = open(ff, "w")
     step = (a1 - a0) / num
     x = a0
     for i in range(1, num):
@@ -57,7 +57,7 @@ def calculate_profile_1d(server_meta_path, project_name, input_line_number):
             x0 = data[j][0]
             en_ = gauss_pot(x, x0, h[j], w[j])
             en += en_
-        ff.write(repr(x) + '\t' + repr(-en) + '\n')
+        ff.write(repr(x) + "\t" + repr(-en) + "\n")
     ff.close()
 
     return data
@@ -71,7 +71,7 @@ def plot_profile(server_path, project_path):
 
     # get the length of hillspot file
     f = server_path + project_path + "/HILLSPOT"
-    f = open(f, 'r')
+    f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
         input_line_number += 1
@@ -87,10 +87,10 @@ def plot_profile(server_path, project_path):
     # wrap the hillspotxyz into 0-1
     third_point = len(hillspotxyz) // 3
     hillspotxyz_p1 = hillspotxyz[0:third_point, 1]
-    hillspotxyz_p2 = hillspotxyz[third_point:2 * third_point, 1]
-    hillspotxyz_p3 = hillspotxyz[2 * third_point:, 1]
+    hillspotxyz_p2 = hillspotxyz[third_point : 2 * third_point, 1]
+    hillspotxyz_p3 = hillspotxyz[2 * third_point :, 1]
     hillspotxyz_ppp = hillspotxyz_p1 + hillspotxyz_p2 + hillspotxyz_p3
-    hillspotxyz_wrap = hillspotxyz.copy()[third_point:2 * third_point, :]
+    hillspotxyz_wrap = hillspotxyz.copy()[third_point : 2 * third_point, :]
     hillspotxyz_wrap[:, 1] = hillspotxyz_ppp
 
     # Select the data for plot
@@ -109,7 +109,7 @@ def plot_cv(server_path, project_path, idx):
 
     # get the length of hillspot file
     f = server_path + project_path + "/HILLSPOT"
-    f = open(f, 'r')
+    f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
         input_line_number += 1
@@ -120,9 +120,9 @@ def plot_cv(server_path, project_path, idx):
     cv = sum(cv, [])
     print(cv)
     # plot the cv
-    plt.plot([float(x) * 200 / 1000 for x in range(len(cv))], cv, '-')
-    plt.legend([project_path], loc='upper left')
+    plt.plot([float(x) * 200 / 1000 for x in range(len(cv))], cv, "-")
+    plt.legend([project_path], loc="upper left")
     print("project_path = ", project_path)
     if idx == 3:
-        plt.xlabel('Time (ps)')
-    plt.ylabel('CV')
+        plt.xlabel("Time (ps)")
+    plt.ylabel("CV")

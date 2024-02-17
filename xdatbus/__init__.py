@@ -12,10 +12,13 @@ from .fbld02_rm_bond import *
 from .fcom01_drift import *
 from .fcom02_contcar import *
 
-from .fmtd01_xdc2xtc import *
-from .fmtd02_hillspot2hills import *
-from .fmtd03_report_loader import *
-from .fmtd04_plot_fes import *
+from .fmtd01_fes1d import *
+from .fmtd02_fes2d import *
+from .fmtd03_fes3d import *
+from .fmtd04_hillspot2hills import *
+from .fmtd05_report_loader import *
+from .fmtd06_xdc2xtc import *
+from .fmtd07_plot_fes import *
 
 from .fosz01_thermal_report import *
 

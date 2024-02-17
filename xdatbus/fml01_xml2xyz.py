@@ -54,6 +54,10 @@ def main():
         help="The directory to save the extended xyz files.",
     )
 
+    parser.add_argument(
+
+    )
+
     args = parser.parse_args()
 
     xml2xyz(args.xml_dir, args.output_path)

@@ -50,6 +50,8 @@ jobs:
         sed -i "s/PACKAGE_VERSION/$VERSION/" conda/meta.yaml
 
     - name: Build Conda package
+      env:
+        CONDA_NO_PLUGINS: true
       run: conda build -c conda-forge --no-test conda/ --output-folder conda-out
 
     - name: Upload Conda package to Anaconda Cloud

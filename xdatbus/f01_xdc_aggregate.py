@@ -44,12 +44,12 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
 
         log_file = open(log_path, "w")
         for xdatcar_raw in xdatcar_list_sort:
-            print("xdatbus-func | xdc_aggregate: Wrapping " + xdatcar_raw + " ...")
+            print("xdatbus-func | xdc_aggregate: Wrapping " + xdatcar_raw)
             xdatcar = read(
                 xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
             )
             print(
-                "xdatbus-func | xdc_aggregate: number of frames: " + str(len(xdatcar))
+                "number of frames: " + str(len(xdatcar))
             )
             write(
                 xdatcar_wrap_path + "/" + xdatcar_raw,

@@ -13,7 +13,7 @@ write("train.xyz", train_set)
 write("test.xyz", test_set)
 
 
-def xml2xyz(xml_dir="./", output_path="./"):
+def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
     try:
         raw_list = os.listdir(xml_dir)
         xml_list = filter_files(raw_list, "vasprun.xml")
@@ -27,8 +27,16 @@ def xml2xyz(xml_dir="./", output_path="./"):
             print(f"xdatbus-func | xml2xyz: Processing {xml_file}")
             xml_path = os.path.join(xml_dir, xml_file)
             xml_set = read(xml_path, index="::")
-            xyz_path = os.path.join(output_path, f"{xml_file}.xyz")
-            write(xyz_path, xml_set)
+            if train_ratio < 1.0:
+                train_set = xml_set[: int(len(xml_set) * train_ratio)]
+                test_set = xml_set[int(len(xml_set) * train_ratio) :]
+                train_path = os.path.join(output_path, f"{xml_file}_train.xyz")
+                test_path = os.path.join(output_path, f"{xml_file}_test.xyz")
+                write(train_path, train_set)
+                write(test_path, test_set)
+            else:
+                xml_path = os.path.join(output_path, f"{xml_file}.xyz")
+                write(xml_path, xml_set)
 
         print("xdatbus-func | xml2xyz: Done!")
 
@@ -55,12 +63,15 @@ def main():
     )
 
     parser.add_argument(
-
+        "--train_ratio",
+        type=float,
+        default=1.0,
+        help="The ratio of training set.",
     )
 
     args = parser.parse_args()
 
-    xml2xyz(args.xml_dir, args.output_path)
+    xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
 
 
 if __name__ == "__main__":

@@ -21,9 +21,14 @@ classifiers = [
 
 keywords = ["python", "aimd", "vasp", "xdatcar"]
 
-include = ["xdatbus/resources/node_data.blend", "xdatbus/resources/color_data.yaml"]
+include = [
+    "xdatbus/resources/node_data.blend",
+    "xdatbus/resources/color_data.yaml"
+]
 
-exclude = ["xdatbus-dev"]
+exclude = [
+    "xdatbus-dev"
+]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.13"

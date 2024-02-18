@@ -5,6 +5,7 @@
 # xdatbus
 
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml)
+[![PyPI](https://img.shields.io/pypi/v/xdatbus?logo=pypi&logoColor=white&color=0073B7)](https://pypi.org/project/xdatbus/)
 [![Conda](https://img.shields.io/conda/v/xdatbus/xdatbus?logo=anaconda&label=conda&color=rgb(67%2C%20176%2C%2042))](https://anaconda.org/xdatbus/xdatbus)
 [![codecov](https://codecov.io/gh/jcwang587/xdatbus/branch/main/graph/badge.svg?token=V27VIJZDAE)](https://codecov.io/gh/jcwang587/xdatbus)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)

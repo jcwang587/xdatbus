@@ -15,7 +15,7 @@ Xdatbus is a Python library designed specifically for Vienna Ab-initio Simulatio
 
 ## Installation
 
-Make sure you have a Python interpreter, preferably version 3.10 or higher. Then, you can simply install xdatbus from pypi using `pip`:
+Make sure you have a Python interpreter, preferably version 3.10 or higher. Then, you can simply install xdatbus from PyPI using `pip`:
 
 ```bash
 pip install xdatbus

@@ -1,4 +1,4 @@
-import os
+import argparse
 import numpy as np
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
@@ -57,10 +57,39 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
                 # write the current structure to the xyz file
                 xyz_file.write(str(len(xdatcar.structures[i].species)) + "\n\n")
                 for atom, coord in zip(xdatcar.structures[i].species, coords):
-                    xyz_file.write("{} {:.8f} {:.8f} {:.8f}\n".format(atom.symbol, *coord))
+                    xyz_file.write(
+                        "{} {:.8f} {:.8f} {:.8f}\n".format(atom.symbol, *coord)
+                    )
 
         print("xdatbus-func | xdc_unwrap: Done!")
 
     except Exception as e:
         print(e)
         print("xdatbus-func | xdc_unwrap: Failed!")
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Unwrap the coordinates in the XDATCAR file. The unwrapped coordinates will be written to a .xyz "
+        "file."
+    )
+    parser.add_argument(
+        "--xdc_path",
+        type=str,
+        default="./XDATBUS",
+        help="Input path of the XDATCAR file",
+    )
+    parser.add_argument(
+        "--output_path",
+        type=str,
+        default="./XDATBUS_unwrap.xyz",
+        help="Output path of the xyz file",
+    )
+
+    args = parser.parse_args()
+
+    xdc_unwrap(args.xdc_dir, args.output_path)
+
+
+if __name__ == "__main__":
+    main()

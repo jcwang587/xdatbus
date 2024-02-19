@@ -51,5 +51,5 @@ xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
 xdc_unwrap(xdc_path=xdb_path)
 ```
 
-## Update log
+## Changelog
 `0.2.0` Implemented the preparation of training data for [MACE](https://github.com/ACEsuit/mace) machine learning interatomic potentials.

@@ -48,7 +48,7 @@ conda install -c xdatbus -c conda-forge xdatbus plumed
 ## Get Started
 
 This is a brief example demonstrating how to use the basic function of xdatbus to aggregate multiple xdatcar files into
-one and unwrap the coordinates into an .xyz file:
+a single file and unwrap the coordinates into an .xyz file:
 
 ```python
 import os

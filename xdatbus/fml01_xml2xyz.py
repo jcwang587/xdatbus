@@ -23,7 +23,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         for xml_file in xml_list_sort:
             print(f"xdatbus-func | xml2xyz: Processing {xml_file}")
             xml_path = os.path.join(xml_dir, xml_file)
-            xml_set = read(xml_path, index="::")
+            xml_set = read(xml_path, index="::", format="vasp-xml")
             for atom in xml_set:
                 if "free_energy" in atom.calc.results:
                     del atom.calc.results["free_energy"]

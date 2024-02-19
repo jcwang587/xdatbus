@@ -12,10 +12,12 @@ def thermal_report(osz_dir="./", output_path="./"):
 
         if len(oszicar_list) == 0:
             raise ValueError("No OSZICAR file found in the directory.")
-
-        oszicar_list_sort = sorted(
-            oszicar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
-        )
+        elif len(oszicar_list) == 1:
+            oszicar_list_sort = oszicar_list
+        else:
+            oszicar_list_sort = sorted(
+                oszicar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
+            )
 
         potential_energy = []
         kinetic_energy = []

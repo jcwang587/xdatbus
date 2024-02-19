@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
+def xdc_aggregate(xdc_dir="./", output_dir="./", delete_temp_files=True):
     """
     Initialize a trajectory writer instance for *filename*.
 
@@ -15,7 +15,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
         ----------
         xdc_dir : str
             Input path of the AIMD simulation, which contains the XDATCAR files
-        output_path : str (optional)
+        output_dir : str (optional)
             Output path of the XDATBUS file
         delete_temp_files : bool (optional)
             If ``False``, the intermediate folders will be deleted
@@ -33,9 +33,9 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
                 xdatcar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
             )
 
-        xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
-        xdatbus_path = os.path.join(output_path, "XDATBUS")
-        log_path = os.path.join(output_path, "xdc_aggregate.log")
+        xdatcar_wrap_path = os.path.join(output_dir, "XDATCAR_wrap")
+        xdatbus_path = os.path.join(output_dir, "XDATBUS")
+        log_path = os.path.join(output_dir, "xdc_aggregate.log")
 
         # Clear the directory
         update_folder(xdatcar_wrap_path)
@@ -95,7 +95,7 @@ def main():
         help="Input path of the AIMD simulation, which contains the XDATCAR files",
     )
     parser.add_argument(
-        "--output_path",
+        "--output_dir",
         type=str,
         default="./",
         help="Output path of the XDATBUS file (default: current directory)",

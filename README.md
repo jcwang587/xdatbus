@@ -41,9 +41,10 @@ conda install --channel xdatbus xdatbus
 If you plan to use PLUMED to analyze biased MD sampling results, you can also install the conda version of PLUMED
 together:
 
-```console
-# conda install -c xdatbus -c conda-forge xdatbus plumed
+```bash
+$ <!-- -->conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
+
 
 ## Get Started
 

@@ -42,7 +42,7 @@ If you plan to use PLUMED to analyze biased MD sampling results, you can also in
 together:
 
 ```bash
-$ <!-- -->conda install -c xdatbus -c conda-forge xdatbus plumed
+conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
 
 
@@ -66,6 +66,7 @@ There is also entry points included with the installation for the command line i
 
 ```bash
 $ xdc_aggregate --xdc_dir ./xdatcar --output_path ./
+$ thermal_report --osz_dir ./oszicar --output_path ./
 ```
 
 ## Major Changelog

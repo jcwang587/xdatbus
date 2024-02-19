@@ -35,7 +35,7 @@ about:
   documentation: https://xdatbus.readthedocs.io/en/latest/
   license: MIT
   license_file: ../LICENSE
-  summary: 'A python toolkit for analyzing XDATCAR'
+  summary: 'A Python package for post-analysis of VASP AIMD data'
   keywords:
     - python
     - vasp

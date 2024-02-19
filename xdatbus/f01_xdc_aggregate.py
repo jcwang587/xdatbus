@@ -67,7 +67,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
         xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
         for xdatcar_wrap in wrap_list_sort[1:]:
-            print("xdatbus-func | xdc_aggregate: Appending " + xdatcar_wrap + " ...")
+            print("xdatbus-func | xdc_aggregate: Appending " + xdatcar_wrap)
             xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)

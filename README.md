@@ -54,7 +54,7 @@ a single file and unwrap the coordinates into an .xyz file:
 import os
 from xdatbus import xdc_aggregate, xdc_unwrap
 
-xdc_dir = "./xdatcar"
+xdc_dir = "./xdatcar_dir"
 xdb_dir = os.path.dirname(xdc_dir)
 xdb_path = os.path.join(xdb_dir, "XDATBUS")
 xyz_path = os.path.join(xdb_dir, "XDATBUS_unwrap.xyz")

@@ -52,8 +52,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             unwrapped_coords.append(current_unwrapped_coords)
 
         # open the output xyz file
-        output_filename = os.path.basename(xdc_path) + "_unwrap.xyz"
-        output_path = os.path.join(os.path.dirname(xdc_path), output_filename)
         with open(output_path, "w") as xyz_file:
             for i, coords in enumerate(unwrapped_coords):
                 # write the current structure to the xyz file

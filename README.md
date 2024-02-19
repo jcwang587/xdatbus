@@ -57,7 +57,7 @@ from xdatbus import xdc_aggregate, xdc_unwrap
 xdc_dir = "./xdatcar"
 xdb_dir = os.path.dirname(xdc_dir)
 xdb_path = os.path.join(xdb_dir, "XDATBUS")
-xyz_path = os.path.join(xdb_dir, "XDATCAR_unwrap.xyz")
+xyz_path = os.path.join(xdb_dir, "XDATBUS_unwrap.xyz")
 
 xdc_aggregate(xdc_dir=xdc_dir, output_dir=xdb_dir)
 xdc_unwrap(xdc_path=xdb_path, output_path=xyz_path)
@@ -67,8 +67,8 @@ There are also entry points included with the installation for the Command Line 
 tasks (do not include the `$` when copying):
 
 ```bash
-$ xdc_aggregate --xdc_dir ./xdatcar 
-$ thermal_report --osz_dir ./oszicar 
+$ xdc_aggregate --xdc_dir ./xdatcar --output_dir ./
+$ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ```
 
 ## Major Changelog

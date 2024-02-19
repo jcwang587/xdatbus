@@ -61,7 +61,7 @@ xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
 xdc_unwrap(xdc_path=xdb_path)
 ```
 
-There are also entry points included with the installation for the Command Line Interface (CLI) to perform the same
+There are also entry points included with the installation for the Command Line Interface (CLI) to perform similar
 tasks:
 
 ```bash

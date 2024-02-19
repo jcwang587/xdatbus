@@ -65,8 +65,8 @@ There are also entry points included with the installation for the Command Line 
 tasks:
 
 ```bash
-$ xdc_aggregate --xdc_dir ./xdatcar --output_path ./
-$ thermal_report --osz_dir ./oszicar --output_path ./
+$ xdc_aggregate --xdc_dir ./xdatcar 
+$ thermal_report --osz_dir ./oszicar 
 ```
 
 ## Major Changelog

@@ -54,11 +54,24 @@ one and unwrap the coordinates into an .xyz file:
 import os
 from xdatbus import xdc_aggregate, xdc_unwrap
 
-xdc_dir = "./data"
+xdc_dir = "./xdatcar"
 xdb_path = os.path.dirname(xdc_dir)
 
 xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
 xdc_unwrap(xdc_path=xdb_path)
+```
+
+There is also included entry points for the command line interface (CLI) to perform the same tasks:
+
+```bash
+$ xdc_aggregate
+xdatbus-func | xdc_aggregate: Wrapping XDATCAR0
+number of frames: 2000
+xdatbus-func | xdc_aggregate: Wrapping XDATCAR1
+number of frames: 2000
+xdatbus-func | xdc_aggregate: Appending XDATCAR1
+sequence:  ['XDATCAR0', 'XDATCAR1']
+xdatbus-func | xdc_aggregate: Done!
 ```
 
 ## Major Changelog

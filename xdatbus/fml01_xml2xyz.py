@@ -24,6 +24,9 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             print(f"xdatbus-func | xml2xyz: Processing {xml_file}")
             xml_path = os.path.join(xml_dir, xml_file)
             xml_set = read(xml_path, index="::")
+            for atom in xml_set:
+                if "free_energy" in atom.calc.results:
+                    del atom.calc.results["free_energy"]
             data_set.extend(xml_set)
 
         if train_ratio < 1.0:
@@ -67,12 +70,7 @@ def main():
 
     args = parser.parse_args()
 
-    # xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
-
-    xml2xyz(
-        xml_dir="../tests/data/vasprun",
-        output_path="./",
-    )
+    xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
 
 
 if __name__ == "__main__":

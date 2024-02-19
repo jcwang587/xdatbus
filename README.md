@@ -45,7 +45,6 @@ together:
 conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
 
-
 ## Get Started
 
 This is a brief example demonstrating how to use the basic function of xdatbus to aggregate multiple xdatcar files into
@@ -62,7 +61,8 @@ xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
 xdc_unwrap(xdc_path=xdb_path)
 ```
 
-There is also entry points included with the installation for the command line interface (CLI) to perform the same tasks:
+There are also entry points included with the installation for the Command Line Interface (CLI) to perform the same
+tasks:
 
 ```bash
 $ xdc_aggregate --xdc_dir ./xdatcar --output_path ./

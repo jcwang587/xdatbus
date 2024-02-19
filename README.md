@@ -60,7 +60,7 @@ xdb_path = os.path.join(xdb_dir, "XDATBUS")
 xyz_path = os.path.join(xdb_dir, "XDATCAR_unwrap.xyz")
 
 xdc_aggregate(xdc_dir=xdc_dir, output_dir=xdb_dir)
-xdc_unwrap(xdc_path=xdb_path, output_path=xdb_dir)
+xdc_unwrap(xdc_path=xdb_path, output_path=xyz_path)
 ```
 
 There are also entry points included with the installation for the Command Line Interface (CLI) to perform similar

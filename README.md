@@ -41,7 +41,7 @@ conda install --channel xdatbus xdatbus
 If you plan to use PLUMED to analyze biased MD sampling results, you can also install the conda version of PLUMED
 together:
 
-```bash
+```console
 conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
 
@@ -61,17 +61,10 @@ xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
 xdc_unwrap(xdc_path=xdb_path)
 ```
 
-There is also included entry points for the command line interface (CLI) to perform the same tasks:
+There is also entry points included with the installation for the command line interface (CLI) to perform the same tasks:
 
 ```bash
-$ xdc_aggregate
-xdatbus-func | xdc_aggregate: Wrapping XDATCAR0
-number of frames: 2000
-xdatbus-func | xdc_aggregate: Wrapping XDATCAR1
-number of frames: 2000
-xdatbus-func | xdc_aggregate: Appending XDATCAR1
-sequence:  ['XDATCAR0', 'XDATCAR1']
-xdatbus-func | xdc_aggregate: Done!
+$ xdc_aggregate --xdc_dir ./xdatcar --output_path ./
 ```
 
 ## Major Changelog

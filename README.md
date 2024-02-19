@@ -64,7 +64,7 @@ xdc_unwrap(xdc_path=xdb_path, output_path=xyz_path)
 ```
 
 There are also entry points included with the installation for the Command Line Interface (CLI) to perform similar
-tasks:
+tasks (do not include the `$` when copying):
 
 ```bash
 $ xdc_aggregate --xdc_dir ./xdatcar 

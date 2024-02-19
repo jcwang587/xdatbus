@@ -22,7 +22,7 @@ metadata, repo_dir = get_project_metadata()
 
 # -- Project information
 project = metadata['name']
-copyright = f"2023, {', '.join(metadata['authors'])}"
+copyright = f"2024, {', '.join(metadata['authors'])}"
 author = ', '.join(metadata['authors'])
 release = metadata['version']
 version = '.'.join(release.split('.')[:2])

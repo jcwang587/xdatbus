@@ -37,6 +37,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         else:
             write(os.path.join(output_path, "data.xyz"), data_set)
 
+        print("sequence: ", xml_list_sort)
         print("xdatbus-func | xml2xyz: Done!")
 
     except Exception as e:

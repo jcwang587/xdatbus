@@ -41,6 +41,7 @@ def thermal_report(osz_dir="./", output_path="./"):
                     f"{potential_energy[i]},{kinetic_energy[i]},{total_energy[i]},{temperature[i]}\n"
                 )
 
+        print("sequence: ", oszicar_list_sort)
         print("xdatbus-func | energy_report: Done!")
 
     except Exception as e:

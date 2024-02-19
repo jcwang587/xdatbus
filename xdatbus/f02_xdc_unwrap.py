@@ -4,7 +4,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
 
 
-def xdc_unwrap(xdc_path="./XDATBUS"):
+def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
     """
     Unwrap the coordinates in the XDATCAR file. The unwrapped coordinates will be written to a xyz file.
 
@@ -12,6 +12,8 @@ def xdc_unwrap(xdc_path="./XDATBUS"):
         ----------
         xdc_path : str
             Input path of the XDATCAR file
+        output_path : str
+            Output path of the xyz file
     """
     try:
         xdatcar = Xdatcar(xdc_path)

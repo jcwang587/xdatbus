@@ -55,9 +55,9 @@ import os
 from xdatbus import xdc_aggregate, xdc_unwrap
 
 xdc_dir = "./xdatcar"
-xdb_path = os.path.dirname(xdc_dir)
+xdb_path = os.path.dirname(xdc_dir) + "/XDATBUS"
 
-xdc_aggregate(xdc_dir=xdc_dir, output_path=xdb_path)
+xdc_aggregate(xdc_dir=xdc_dir)
 xdc_unwrap(xdc_path=xdb_path)
 ```
 

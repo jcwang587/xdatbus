@@ -4,7 +4,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
 
 
-def xdc_unwrap(xdc_path):
+def xdc_unwrap(xdc_path="./XDATBUS"):
     """
     Unwrap the coordinates in the XDATCAR file. The unwrapped coordinates will be written to a xyz file.
 
@@ -27,7 +27,7 @@ def xdc_unwrap(xdc_path):
 
         for i in range(1, len(xdatcar.structures)):  # Start from the second frame
             if (i + 1) % 1000 == 0:
-                print("Processing frame " + str(i + 1) + " ...")
+                print("xdatbus-func | xdc_unwrap: Processing step {}".format(i + 1))
 
             # initialize an empty array for the current structure's unwrapped coordinates
             current_unwrapped_coords = np.zeros_like(xdatcar.structures[i].frac_coords)

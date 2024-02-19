@@ -31,7 +31,7 @@ def test_f01_xdc_aggregate(setup_test_environment):
     xdc_dir = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_dir)
 
-    xdc_aggregate(xdc_dir=xdc_dir, output_path=main_tmp_dir)
+    xdc_aggregate(xdc_dir=xdc_dir, output_dir=main_tmp_dir)
 
     # Assertions
     xdatbus_path = os.path.join(main_tmp_dir, "XDATBUS")

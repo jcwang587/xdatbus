@@ -33,9 +33,9 @@ def test_f02_xdc_unwrap(setup_test_environment):
     xdc_path = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_path)
 
-    xdc_unwrap(xdc_path=xdc_path)
+    xdc_unwrap(xdc_path=xdc_path, output_path=main_tmp_dir + "/XDATBUS_unwrapped.xyz")
 
     # Assertions
-    xyz_unwrap_path = os.path.join(main_tmp_dir, "XDATCAR_01_unwrapped.xyz")
+    xyz_unwrap_path = os.path.join(main_tmp_dir, "XDATCAR_unwrapped.xyz")
 
     assert os.path.exists(xyz_unwrap_path), "unwrapped trj file not created"

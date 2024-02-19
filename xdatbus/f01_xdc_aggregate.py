@@ -26,10 +26,12 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
 
         if len(xdatcar_list) == 0:
             raise ValueError("No XDATCAR file found in the directory.")
-
-        xdatcar_list_sort = sorted(
-            xdatcar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
-        )
+        elif len(xdatcar_list) == 1:
+            xdatcar_list_sort = xdatcar_list
+        else:
+            xdatcar_list_sort = sorted(
+                xdatcar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
+            )
 
         xdatcar_wrap_path = os.path.join(output_path, "XDATCAR_wrap")
         xdatbus_path = os.path.join(output_path, "XDATBUS")
@@ -48,9 +50,7 @@ def xdc_aggregate(xdc_dir="./", output_path="./", delete_temp_files=True):
             xdatcar = read(
                 xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
             )
-            print(
-                "number of frames: " + str(len(xdatcar))
-            )
+            print("number of frames: " + str(len(xdatcar)))
             write(
                 xdatcar_wrap_path + "/" + xdatcar_raw,
                 format="vasp-xdatcar",

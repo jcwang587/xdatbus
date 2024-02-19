@@ -12,15 +12,19 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
         if len(xml_list) == 0:
             raise ValueError("No vasprun file found in the directory.")
-
-        xml_list_sort = sorted(xml_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+        elif len(xml_list) == 1:
+            xml_list_sort = xml_list
+        else:
+            xml_list_sort = sorted(
+                xml_list, key=lambda x: int(re.findall(r"\d+", x)[0])
+            )
 
         data_set = []
         for xml_file in xml_list_sort:
             print(f"xdatbus-func | xml2xyz: Processing {xml_file}")
             xml_path = os.path.join(xml_dir, xml_file)
             xml_set = read(xml_path, index="::")
-            data_set.append(xml_set)
+            data_set.extend(xml_set)
 
         if train_ratio < 1.0:
             train_set = data_set[: int(len(data_set) * train_ratio)]
@@ -63,7 +67,12 @@ def main():
 
     args = parser.parse_args()
 
-    xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
+    # xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
+
+    xml2xyz(
+        xml_dir="../tests/data/vasprun",
+        output_path="./",
+    )
 
 
 if __name__ == "__main__":

@@ -42,7 +42,7 @@ If you plan to use PLUMED to analyze biased MD sampling results, you can also in
 together:
 
 ```console
-conda install -c xdatbus -c conda-forge xdatbus plumed
+$ conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
 
 ## Get Started

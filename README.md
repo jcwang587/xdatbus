@@ -52,4 +52,4 @@ xdc_unwrap(xdc_path=xdb_path)
 ```
 
 ## Update log
-`0.0.6` first upload for test
+`0.2.0` Implemented the preparation of training data for [MACE](https://github.com/ACEsuit/mace) machine learning interatomic potentials.

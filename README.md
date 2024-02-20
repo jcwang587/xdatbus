@@ -68,6 +68,9 @@ tasks (do not include the `$` when copying):
 
 ```bash
 $ xdc_aggregate --xdc_dir ./xdatcar --output_dir ./
+```
+
+```bash
 $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ```
 

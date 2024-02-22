@@ -3,7 +3,7 @@ name: pypi-publish
 on:
   workflow_dispatch:
     inputs:
-      publishToAnaconda:
+      publishToPyPI:
         description: 'Publish to PyPI?'
         required: true
         default: 'no'

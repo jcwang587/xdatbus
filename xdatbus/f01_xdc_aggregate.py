@@ -7,7 +7,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir="./", output_dir="./", delete_temp_files=True):
+def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
     """
     Aggregate XDATCAR files from an AIMD simulation.
 
@@ -17,7 +17,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", delete_temp_files=True):
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_dir : str (optional)
             Output path of the XDATBUS file
-        delete_temp_files : bool (optional)
+        del_temp : bool (optional)
             If ``False``, the intermediate folders will be deleted
     """
     try:
@@ -72,7 +72,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", delete_temp_files=True):
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)
 
-        if delete_temp_files:
+        if del_temp:
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
@@ -101,7 +101,7 @@ def main():
         help="Output path of the XDATBUS file (default: current directory)",
     )
     parser.add_argument(
-        "--delete_temp_files",
+        "--del_temp",
         type=str,
         choices=["True", "False"],
         default="True",

@@ -13,7 +13,7 @@ def main():
 
     # Add rows for each command
     table.add_row("xdc_aggregate", "Aggregate XDATCAR files from an AIMD simulation.")
-    table.add_row("xdc_unwrap", "Unwrap the coordinates in the XDATCAR file (to .xyz).")
+    table.add_row("xdc_unwrap", "Unwrap the coordinates in the XDATCAR file (to xyz).")
     table.add_row("thermal_report", "Generate a thermal report from the OSZICAR files.")
     table.add_row("xml2xyz", "Convert the vasprun.xml files to extended xyz files.")
 

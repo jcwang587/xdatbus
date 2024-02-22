@@ -59,6 +59,7 @@ thermal_report = "xdatbus.fosz01_thermal_report:main"
 xml2xyz = "xdatbus.fml01_xml2xyz:main"
 bias = "xdatbus.bash01_bias:main"
 plot_fes = "xdatbus.fmtd04_plot_fes:main"
+xdatbus = "xdatbus.fcli:main"
 
 [build-system]
 requires = ["poetry-core==1.9.0"]

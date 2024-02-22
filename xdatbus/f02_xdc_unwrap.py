@@ -6,7 +6,7 @@ from xdatbus.utils import unwrap_pbc_dis
 
 def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
     """
-    Unwrap the coordinates in the XDATCAR file. The unwrapped coordinates will be written to a .xyz file.
+    Unwrap the coordinates in the XDATCAR file (to .xyz).
 
         Parameters
         ----------

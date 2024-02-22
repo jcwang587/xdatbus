@@ -9,10 +9,11 @@ def main():
         title="XDATBUS HELP MENU", show_header=True, header_style="bold magenta"
     )
     table.add_column("CLI Command")
+    table.add_column("Options")
     table.add_column("Description")
 
     # Add rows for each command
-    table.add_row("xdc_aggregate", "Aggregate XDATCAR files from an AIMD simulation.")
+    table.add_row("xdc_aggregate", "--xdc_dir, --output_dir","Aggregate XDATCAR files from an AIMD simulation.")
     table.add_row("xdc_unwrap", "Unwrap the coordinates in the XDATCAR file (to xyz).")
     table.add_row("thermal_report", "Generate a thermal report from the OSZICAR files.")
     table.add_row("xml2xyz", "Convert the vasprun.xml files to extended xyz files.")

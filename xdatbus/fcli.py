@@ -8,7 +8,7 @@ def main():
     table = Table(
         title="XDATBUS HELP MENU", show_header=True, header_style="bold magenta"
     )
-    table.add_column("Command")
+    table.add_column("CLI Command")
     table.add_column("Description")
 
     # Add rows for each command

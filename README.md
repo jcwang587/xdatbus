@@ -28,7 +28,7 @@ pip install xdatbus
 If you'd like to use the latest unreleased version on the main branch, you can install it directly from GitHub:
 
 ```bash
-pip install -U --force-reinstall git+https://github.com/jcwang587/xdatbus
+pip install -U git+https://github.com/jcwang587/xdatbus
 ```
 
 The package is also availabe from conda-based installation. It is generally recommended you first create a separate

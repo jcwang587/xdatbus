@@ -6,6 +6,16 @@ from pymatgen.io.vasp.outputs import Oszicar
 
 
 def thermal_report(osz_dir="./", output_path="./"):
+    """
+    Generate a thermal report from the OSZICAR files.
+
+        Parameters
+        ----------
+        osz_dir : str
+            Input path of the OSZICAR files
+        output_path : str
+            Output path of the thermal report
+    """
     try:
         raw_list = os.listdir(osz_dir)
         oszicar_list = filter_files(raw_list, "OSZICAR")

@@ -10,8 +10,10 @@ def main():
     table.add_column("Description")
 
     # Add rows for each command
-    table.add_row("command1", "Description of command1")
-    table.add_row("command2", "Description of command2")
+    table.add_row("xdc_aggregate", "Aggregate XDATCAR files from an AIMD simulation.")
+    table.add_row("xdc_unwrap", "Unwrap the coordinates in the XDATCAR file (to .xyz format).")
+    table.add_row("thermal_report", "Generate a thermal report from the OSZICAR files.")
+    table.add_row("xml2xyz", "Convert the vasprun.xml files to extended xyz files.")
 
     console.print(table)
 

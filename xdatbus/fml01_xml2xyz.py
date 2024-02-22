@@ -6,6 +6,18 @@ from xdatbus.utils import filter_files
 
 
 def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
+    """
+    Convert the vasprun.xml files to extended xyz files.
+
+        Parameters
+        ----------
+        xml_dir : str
+            Input path of the vasprun.xml files
+        output_path : str
+            Output path of the extended xyz files
+        train_ratio : float (optional)
+            The ratio of training set
+    """
     try:
         raw_list = os.listdir(xml_dir)
         xml_list = filter_files(raw_list, "vasprun")

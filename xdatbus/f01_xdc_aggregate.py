@@ -9,7 +9,7 @@ from xdatbus.utils import update_folder, remove_file, filter_files
 
 def xdc_aggregate(xdc_dir="./", output_dir="./", delete_temp_files=True):
     """
-    Initialize a trajectory writer instance for *filename*.
+    Aggregate XDATCAR files from an AIMD simulation.
 
         Parameters
         ----------

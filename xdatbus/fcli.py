@@ -15,7 +15,7 @@ def main():
     # Add rows for each command
     table.add_row(
         "xdc_aggregate",
-        "[--xdc_dir] [--output_dir], [--del_temp]",
+        "[--xdc_dir] [--output_dir] [--del_temp]",
         "Aggregate XDATCAR files from an AIMD simulation.",
     )
     table.add_row(

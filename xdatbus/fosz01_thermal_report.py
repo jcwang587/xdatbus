@@ -46,7 +46,7 @@ def thermal_report(osz_dir="./", output_path="./", show_progress=False):
             task = progress.add_task("🚌 xdatbus thermal_report", total=len(oszicar_list_sort))
 
             for oszicar_file in oszicar_list_sort:
-                console.log(f"xdatbus | thermal_report: Processing {oszicar_file}")
+                console.log(f"thermal_report: Processing {oszicar_file}")
                 oszicar_path = os.path.join(osz_dir, oszicar_file)
                 oszicar = Oszicar(oszicar_path)
                 for ionic_step in oszicar.ionic_steps:

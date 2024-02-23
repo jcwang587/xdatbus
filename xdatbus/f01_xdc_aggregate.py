@@ -4,7 +4,7 @@ import shutil
 import argparse
 from ase.io import read, write
 from rich.console import Console
-from rich.progress import Progress
+from rich.progress import Progress, SpinnerColumn
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
@@ -53,7 +53,9 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         log_file = open(log_path, "w")
 
-        with Progress(console=console) as progress:
+        with Progress(
+            SpinnerColumn(), *Progress.get_default_columns(), console=console
+        ) as progress:
             task = progress.add_task(
                 "xdatbus🚌xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
             )
@@ -99,7 +101,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus 🚌 xdc_aggregate: Failed!")
+        console.log("xdatbus🚌xdc_aggregate: Failed!")
 
 
 def main():

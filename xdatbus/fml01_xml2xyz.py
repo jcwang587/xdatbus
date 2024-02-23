@@ -3,6 +3,7 @@ import re
 import argparse
 from ase.io import read, write
 from rich.console import Console
+from rich.progress import track
 from xdatbus.utils import filter_files
 
 
@@ -36,8 +37,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             )
 
         data_set = []
-        for xml_file in xml_list_sort:
-            console.log(f"xdatbus-func | xml2xyz: Processing {xml_file}")
+        for xml_file in track(xml_list_sort):
+            console.log(f"xdatbus | xml2xyz: Processing {xml_file}")
             xml_path = os.path.join(xml_dir, xml_file)
             xml_set = read(xml_path, index="::", format="vasp-xml")
             for atom in xml_set:
@@ -54,7 +55,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             write(os.path.join(output_path, "data.xyz"), data_set)
 
         print("sequence: ", xml_list_sort)
-        print("xdatbus | xml2xyz: Done!")
+        console.log(f"xdatbus | sequence: {xml_list_sort}")
         console.log(f"xdatbus | xml2xyz: Done!")
 
     except Exception as e:

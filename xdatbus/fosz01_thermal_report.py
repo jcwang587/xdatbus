@@ -2,6 +2,7 @@ import os
 import re
 import argparse
 from rich.console import Console
+from rich.progress import Progress
 from xdatbus.utils import filter_files
 from pymatgen.io.vasp.outputs import Oszicar
 
@@ -37,15 +38,20 @@ def thermal_report(osz_dir="./", output_path="./"):
         kinetic_energy = []
         total_energy = []
         temperature = []
-        for oszicar_file in oszicar_list_sort:
-            console.log(f"xdatbus | energy_report: Processing {oszicar_file}")
-            oszicar_path = os.path.join(osz_dir, oszicar_file)
-            oszicar = Oszicar(oszicar_path)
-            for ionic_step in oszicar.ionic_steps:
-                potential_energy.append(ionic_step["E0"])
-                kinetic_energy.append(ionic_step["EK"])
-                total_energy.append(ionic_step["E"])
-                temperature.append(ionic_step["T"])
+        with Progress(console=console) as progress:
+            task = progress.add_task("🚌 xdatbus xml2xyz", total=len(oszicar_list_sort))
+
+            for oszicar_file in oszicar_list_sort:
+                console.log(f"xdatbus | energy_report: Processing {oszicar_file}")
+                oszicar_path = os.path.join(osz_dir, oszicar_file)
+                oszicar = Oszicar(oszicar_path)
+                for ionic_step in oszicar.ionic_steps:
+                    potential_energy.append(ionic_step["E0"])
+                    kinetic_energy.append(ionic_step["EK"])
+                    total_energy.append(ionic_step["E"])
+                    temperature.append(ionic_step["T"])
+
+                progress.update(task, advance=1)
 
         csv_path = os.path.join(output_path, "thermal_report.csv")
         with open(csv_path, "w") as f:

@@ -103,7 +103,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus🚌xdc_aggregate: Failed!")
+        console.log("xdatbus 🚌 xdc_aggregate: Failed!")
 
 
 def main():

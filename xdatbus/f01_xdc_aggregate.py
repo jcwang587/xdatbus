@@ -55,7 +55,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         with Progress(console=console) as progress:
             task = progress.add_task(
-                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort)*2-1
+                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort) * 2
             )
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(
@@ -75,10 +75,14 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
             # Get the number of files in wrap directory
             wrap_list = os.listdir(xdatcar_wrap_path)
-            wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+            wrap_list_sort = sorted(
+                wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0])
+            )
 
             # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
             xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
+
+            progress.update(task, advance=1)
 
             for xdatcar_wrap in wrap_list_sort[1:]:
                 console.log(f"xdc_aggregate: Appending {xdatcar_wrap}")

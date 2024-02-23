@@ -3,6 +3,7 @@ import re
 import shutil
 import argparse
 from ase.io import read, write
+from rich.console import Console
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
@@ -20,6 +21,8 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         del_temp : bool (optional)
             If ``False``, the intermediate folders will be deleted
     """
+    console = Console()
+
     try:
         raw_list = os.listdir(xdc_dir)
         xdatcar_list = filter_files(raw_list, "XDATCAR")
@@ -45,12 +48,13 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         remove_file(log_path)
 
         log_file = open(log_path, "w")
+
         for xdatcar_raw in xdatcar_list_sort:
-            print("xdatbus-func | xdc_aggregate: Wrapping " + xdatcar_raw)
+            console.log(f"xdatbus | xdc_aggregate: Wrapping {xdatcar_raw}")
             xdatcar = read(
                 xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
             )
-            print("number of frames: " + str(len(xdatcar)))
+            console.log(f"number of frames:  + {len(xdatcar)}")
             write(
                 xdatcar_wrap_path + "/" + xdatcar_raw,
                 format="vasp-xdatcar",
@@ -67,7 +71,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
         for xdatcar_wrap in wrap_list_sort[1:]:
-            print("xdatbus-func | xdc_aggregate: Appending " + xdatcar_wrap)
+            console.log(f"xdatbus | xdc_aggregate: Appending {xdatcar_wrap}")
             xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)
@@ -76,12 +80,12 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
-        print("sequence: ", xdatcar_list_sort)
-        print("xdatbus-func | xdc_aggregate: Done!")
+        console.log("sequence: ", xdatcar_list_sort)
+        console.log("xdatbus | xdc_aggregate: Done!")
 
     except Exception as e:
-        print(e)
-        print("xdatbus-func | xdc_aggregate: Failed!")
+        console.log(e)
+        console.log("xdatbus | xdc_aggregate: Failed!")
 
 
 def main():

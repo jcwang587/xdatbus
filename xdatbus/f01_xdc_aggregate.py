@@ -9,18 +9,20 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 
 
-def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
+def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True, show_progress=False):
     """
     Aggregate XDATCAR files from an AIMD simulation.
 
         Parameters
         ----------
-        xdc_dir : str
+        xdc_dir : str (optional)
             Input path of the AIMD simulation, which contains the XDATCAR files
         output_dir : str (optional)
             Output path of the XDATBUS file
         del_temp : bool (optional)
             If ``False``, the intermediate folders will be deleted
+        show_progress : bool (optional)
+            Whether to show the progress bar
     """
 
     console = Console(log_path=False)

@@ -41,10 +41,10 @@ def thermal_report(osz_dir="./", output_path="./"):
         total_energy = []
         temperature = []
         with Progress(console=console) as progress:
-            task = progress.add_task("🚌 xdatbus xml2xyz", total=len(oszicar_list_sort))
+            task = progress.add_task("🚌 xdatbus thermal_report", total=len(oszicar_list_sort))
 
             for oszicar_file in oszicar_list_sort:
-                console.log(f"xdatbus | energy_report: Processing {oszicar_file}")
+                console.log(f"xdatbus | thermal_report: Processing {oszicar_file}")
                 oszicar_path = os.path.join(osz_dir, oszicar_file)
                 oszicar = Oszicar(oszicar_path)
                 for ionic_step in oszicar.ionic_steps:
@@ -65,7 +65,7 @@ def thermal_report(osz_dir="./", output_path="./"):
 
     except Exception as e:
         console.log(e)
-        console.log("🚌 xdatbus energy_report: Failed!")
+        console.log("🚌 xdatbus thermal_report: Failed!")
 
 
 def main():

@@ -7,7 +7,7 @@ from xdatbus.utils import filter_files
 from pymatgen.io.vasp.outputs import Oszicar
 
 
-def thermal_report(osz_dir="./", output_path="./"):
+def thermal_report(osz_dir="./", output_path="./", show_progress=False):
     """
     Generate a thermal report from the OSZICAR files.
 
@@ -17,6 +17,8 @@ def thermal_report(osz_dir="./", output_path="./"):
             Input path of the OSZICAR files
         output_path : str
             Output path of the thermal report
+        show_progress : bool
+            Whether to show the progress bar
     """
 
     console = Console(log_path=False)

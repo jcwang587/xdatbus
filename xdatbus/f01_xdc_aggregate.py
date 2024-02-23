@@ -55,7 +55,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         with Progress(console=console) as progress:
             task = progress.add_task(
-                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort)
+                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort)*2-1
             )
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(
@@ -70,27 +70,26 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                     images=xdatcar,
                 )
                 log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
-                progress.advance(task)
+                progress.update(task, advance=1)
             log_file.close()
 
-        # Get the number of files in wrap directory
-        wrap_list = os.listdir(xdatcar_wrap_path)
-        wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
+            # Get the number of files in wrap directory
+            wrap_list = os.listdir(xdatcar_wrap_path)
+            wrap_list_sort = sorted(wrap_list, key=lambda x: int(re.findall(r"\d+", x)[0]))
 
-        # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
-        xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
+            # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
+            xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
-        for xdatcar_wrap in wrap_list_sort[1:]:
-            console.log(f" xdc_aggregate: Appending {xdatcar_wrap}")
-            xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
-            xdatbus.structures.extend(xdatcar.structures)
-        xdatbus.write_file(xdatbus_path)
+            for xdatcar_wrap in wrap_list_sort[1:]:
+                console.log(f" xdc_aggregate: Appending {xdatcar_wrap}")
+                xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
+                xdatbus.structures.extend(xdatcar.structures)
+                progress.update(task, advance=1)
+            xdatbus.write_file(xdatbus_path)
 
         if del_temp:
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
-
-        console.log("xdatbus | xdc_aggregate: Done!")
 
     except Exception as e:
         console.log(e)

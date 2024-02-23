@@ -39,7 +39,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         console.log(f"xdatbus | sequence: {xml_list_sort}")
 
         data_set = []
-        with Progress() as progress:
+        with Progress(console=console) as progress:
             task = progress.add_task("xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
                 progress.console.log(f"xdatbus | xml2xyz: Processing {xml_file}")

@@ -115,7 +115,7 @@ def main():
 
     args.del_temp = args.del_temp == "True"
 
-    xdc_aggregate(args.xdc_dir, args.output_path, args.del_temp)
+    xdc_aggregate(args.xdc_dir, args.output_dir, args.del_temp)
 
 
 if __name__ == "__main__":

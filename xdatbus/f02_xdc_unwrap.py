@@ -29,7 +29,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             console=console,
         ) as progress:
             task = progress.add_task(
-                "xdatbus🚌xdc_unwrap", total=len(xdatcar.structures) // 1000 + 2
+                "xdatbus🚌xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
             )
 
             # initialize an empty list to store unwrapped fractional coordinates
@@ -41,8 +41,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             unwrapped_coords.append(
                 previous_unwrapped_coords.copy()
             )  # Store the first set of coordinates
-
-            progress.update(task, advance=1)
 
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
                 # initialize an empty array for the current structure's unwrapped coordinates

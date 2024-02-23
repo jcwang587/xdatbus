@@ -36,6 +36,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
         data_set = []
         with Progress() as progress:
+            task = progress.add_task("xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
                 progress.console.print(f"xdatbus | xml2xyz: Processing {xml_file}")
                 xml_path = os.path.join(xml_dir, xml_file)
@@ -44,6 +45,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
                     if "free_energy" in atom.calc.results:
                         del atom.calc.results["free_energy"]
                 data_set.extend(xml_set)
+                progress.update(task, advance=1)
 
         if train_ratio < 1.0:
             train_set = data_set[: int(len(data_set) * train_ratio)]

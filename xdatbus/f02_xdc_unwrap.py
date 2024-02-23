@@ -38,7 +38,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             console=console,
         ) as progress:
             task = progress.add_task(
-                "xdatbus🚌xml2xyz", total=len(xdatcar.structures) % 1000 + 1
+                "xdatbus🚌xml2xyz", total=len(xdatcar.structures) // 1000 + 1
             )
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
                 if (i + 1) % 1000 == 0:

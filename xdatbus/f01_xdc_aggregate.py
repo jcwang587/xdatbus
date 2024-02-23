@@ -21,7 +21,8 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         del_temp : bool (optional)
             If ``False``, the intermediate folders will be deleted
     """
-    console = Console()
+
+    console = Console(log_path=False)
 
     try:
         raw_list = os.listdir(xdc_dir)
@@ -35,6 +36,8 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             xdatcar_list_sort = sorted(
                 xdatcar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
             )
+
+        console.log(f"sequence: {xdatcar_list_sort}")
 
         xdatcar_wrap_path = os.path.join(output_dir, "XDATCAR_wrap")
         xdatbus_path = os.path.join(output_dir, "XDATBUS")
@@ -81,7 +84,6 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             os.remove(log_path)
 
         console.log("xdatbus | xdc_aggregate: Done!")
-        console.log(f"sequence: {xdatcar_list_sort}")
 
     except Exception as e:
         console.log(e)

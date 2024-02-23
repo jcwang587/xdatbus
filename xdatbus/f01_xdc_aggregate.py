@@ -70,7 +70,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                     images=xdatcar,
                 )
                 log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
-                progress.update(task, advance=1)
+                progress.advance(task)
             log_file.close()
 
         # Get the number of files in wrap directory

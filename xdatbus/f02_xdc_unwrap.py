@@ -33,7 +33,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
 
         for i in range(1, len(xdatcar.structures)):  # Start from the second frame
             if (i + 1) % 1000 == 0:
-                console.log(f"xdatbus 🚌 xdc_unwrap: Processing step {i + 1}")
+                console.log(f"xdc_unwrap: Processing step {i + 1}")
 
             # initialize an empty array for the current structure's unwrapped coordinates
             current_unwrapped_coords = np.zeros_like(xdatcar.structures[i].frac_coords)

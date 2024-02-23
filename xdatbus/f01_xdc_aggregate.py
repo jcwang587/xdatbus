@@ -81,7 +81,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
             for xdatcar_wrap in wrap_list_sort[1:]:
-                console.log(f" xdc_aggregate: Appending {xdatcar_wrap}")
+                console.log(f"xdc_aggregate: Appending {xdatcar_wrap}")
                 xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
                 xdatbus.structures.extend(xdatcar.structures)
                 progress.update(task, advance=1)
@@ -93,7 +93,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus | xdc_aggregate: Failed!")
+        console.log("xdatbus 🚌 xdc_aggregate: Failed!")
 
 
 def main():

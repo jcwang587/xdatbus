@@ -60,8 +60,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             write(os.path.join(output_path, "data.xyz"), data_set)
 
     except Exception as e:
-        print(e)
-        print("xdatbus 🚌 xml2xyz: Failed!")
+        console.log(e)
+        console.log("xdatbus 🚌 xml2xyz: Failed!")
 
 
 def main():

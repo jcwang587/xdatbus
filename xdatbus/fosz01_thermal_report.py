@@ -34,6 +34,8 @@ def thermal_report(osz_dir="./", output_path="./"):
                 oszicar_list, key=lambda x: int(re.findall(r"\d+", x)[0])
             )
 
+        console.log(f"sequence: {oszicar_list_sort}")
+
         potential_energy = []
         kinetic_energy = []
         total_energy = []
@@ -61,12 +63,9 @@ def thermal_report(osz_dir="./", output_path="./"):
                     f"{potential_energy[i]},{kinetic_energy[i]},{total_energy[i]},{temperature[i]}\n"
                 )
 
-        console.log(f"xdatbus | energy_report: Done!")
-        console.log(f"sequence: {oszicar_list_sort}")
-
     except Exception as e:
         console.log(e)
-        console.log("xdatbus | energy_report: Failed!")
+        console.log("🚌 xdatbus energy_report: Failed!")
 
 
 def main():

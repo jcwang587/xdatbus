@@ -43,6 +43,10 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             )  # Store the first set of coordinates
 
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
+                if (i + 1) % 1000 == 0:
+                    console.log(f"xdc_unwrap: Processing step {i + 1}")
+                    progress.update(task, advance=1)
+
                 # initialize an empty array for the current structure's unwrapped coordinates
                 current_unwrapped_coords = np.zeros_like(
                     xdatcar.structures[i].frac_coords
@@ -64,10 +68,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
 
                 # append the current structure's unwrapped coordinates to the list
                 unwrapped_coords.append(current_unwrapped_coords)
-
-                if (i + 1) % 1000 == 0:
-                    console.log(f"xdc_unwrap: Processing step {i + 1}")
-                    progress.update(task, advance=1)
 
             # open the output xyz file
             with open(output_path, "w") as xyz_file:

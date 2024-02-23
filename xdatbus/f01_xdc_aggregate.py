@@ -42,16 +42,12 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         xdatcar_wrap_path = os.path.join(output_dir, "XDATCAR_wrap")
         xdatbus_path = os.path.join(output_dir, "XDATBUS")
-        log_path = os.path.join(output_dir, "xdc_aggregate.log")
 
         # Clear the directory
         update_folder(xdatcar_wrap_path)
 
         # Remove the XDATBUS and log files
         remove_file(xdatbus_path)
-        remove_file(log_path)
-
-        log_file = open(log_path, "w")
 
         with Progress(console=console) as progress:
             task = progress.add_task(
@@ -66,12 +62,10 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                     format="vasp-xdatcar",
                     images=xdatcar,
                 )
-                log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
                 progress.console.log(
                     f"xdc_aggregate: wrapping {xdatcar_raw} | number of frames: {len(xdatcar)}"
                 )
                 progress.update(task, advance=1)
-            log_file.close()
 
             # Get the number of files in wrap directory
             wrap_list = os.listdir(xdatcar_wrap_path)
@@ -96,7 +90,6 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         if del_temp:
             shutil.rmtree(xdatcar_wrap_path)
-            os.remove(log_path)
 
     except Exception as e:
         console.log(e)

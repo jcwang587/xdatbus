@@ -54,12 +54,12 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         log_file = open(log_path, "w")
 
         with Progress(
-            SpinnerColumn(spinner_name="dots", style="bold cyan"),
+            SpinnerColumn(spinner_name="point", style="bold cyan"),
             *Progress.get_default_columns(),
             console=console,
         ) as progress:
             task = progress.add_task(
-                "xdatbus🚌xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
+                "xdatbus xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
             )
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(
@@ -104,7 +104,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus 🚌 xdc_aggregate: Failed!")
+        console.log("xdatbus | xdc_aggregate: Failed!")
 
 
 def main():

@@ -21,6 +21,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             The ratio of training set
     """
 
+    console = Console(log_path=False)
+
     try:
         raw_list = os.listdir(xml_dir)
         xml_list = filter_files(raw_list, "vasprun")
@@ -33,6 +35,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             xml_list_sort = sorted(
                 xml_list, key=lambda x: int(re.findall(r"\d+", x)[0])
             )
+
+        console.log(f"xdatbus | sequence: {xml_list_sort}")
 
         data_set = []
         with Progress() as progress:
@@ -54,10 +58,6 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             write(os.path.join(output_path, "test.xyz"), test_set)
         else:
             write(os.path.join(output_path, "data.xyz"), data_set)
-
-        print("sequence: ", xml_list_sort)
-        # console.log(f"xdatbus | sequence: {xml_list_sort}")
-
 
     except Exception as e:
         print(e)

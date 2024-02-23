@@ -53,19 +53,25 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         log_file = open(log_path, "w")
 
-        for xdatcar_raw in xdatcar_list_sort:
-            console.log(f"xdatbus | xdc_aggregate: Wrapping {xdatcar_raw}")
-            xdatcar = read(
-                xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
+        with Progress(console=console) as progress:
+            task = progress.add_task(
+                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort)
             )
-            console.log(f"number of frames: {len(xdatcar)}")
-            write(
-                xdatcar_wrap_path + "/" + xdatcar_raw,
-                format="vasp-xdatcar",
-                images=xdatcar,
-            )
-            log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
-        log_file.close()
+            for xdatcar_raw in xdatcar_list_sort:
+                xdatcar = read(
+                    xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
+                )
+                progress.console.log(
+                    f"xdc_aggregate: Wrapping {xdatcar_raw} | number of frames: {len(xdatcar)}"
+                )
+                write(
+                    xdatcar_wrap_path + "/" + xdatcar_raw,
+                    format="vasp-xdatcar",
+                    images=xdatcar,
+                )
+                log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
+                progress.update(task, advance=1)
+            log_file.close()
 
         # Get the number of files in wrap directory
         wrap_list = os.listdir(xdatcar_wrap_path)
@@ -75,7 +81,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
         for xdatcar_wrap in wrap_list_sort[1:]:
-            console.log(f"xdatbus | xdc_aggregate: Appending {xdatcar_wrap}")
+            console.log(f" xdc_aggregate: Appending {xdatcar_wrap}")
             xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
             xdatbus.structures.extend(xdatcar.structures)
         xdatbus.write_file(xdatbus_path)

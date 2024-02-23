@@ -3,7 +3,7 @@ import re
 import argparse
 from ase.io import read, write
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn
+from rich.progress import Progress
 from xdatbus.utils import filter_files
 
 
@@ -39,12 +39,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         console.log(f"sequence: {xml_list_sort}")
 
         data_set = []
-        with Progress(
-            SpinnerColumn(spinner_name="dots", style="bold cyan"),
-            *Progress.get_default_columns(),
-            console=console,
-        ) as progress:
-            task = progress.add_task("xdatbus🚌xml2xyz", total=len(xml_list_sort))
+        with Progress(console=console) as progress:
+            task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
                 progress.console.log(f"xml2xyz: processing {xml_file}")
                 xml_path = os.path.join(xml_dir, xml_file)
@@ -65,7 +61,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus 🚌 xml2xyz: Failed!")
+        console.log("🚌 xdatbus xml2xyz: Failed!")
 
 
 def main():

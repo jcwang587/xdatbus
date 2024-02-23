@@ -1,7 +1,7 @@
 import argparse
 import numpy as np
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn
+from rich.progress import Progress
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
 
@@ -23,13 +23,9 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
     try:
         xdatcar = Xdatcar(xdc_path)
 
-        with Progress(
-            SpinnerColumn(spinner_name="dots", style="bold cyan"),
-            *Progress.get_default_columns(),
-            console=console,
-        ) as progress:
+        with Progress(console=console) as progress:
             task = progress.add_task(
-                "xdatbus🚌xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
+                "🚌 xdatbus xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
             )
 
             # initialize an empty list to store unwrapped fractional coordinates
@@ -82,7 +78,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
 
     except Exception as e:
         console.log(e)
-        console.log("xdatbus 🚌 xdc_unwrap: Failed!")
+        console.log("🚌 xdatbus xdc_unwrap: Failed!")
 
 
 def main():

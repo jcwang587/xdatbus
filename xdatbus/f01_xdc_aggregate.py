@@ -113,9 +113,9 @@ def main():
     )
     args = parser.parse_args()
 
-    args.delete_temp_files = args.delete_temp_files == "True"
+    args.del_temp = args.del_temp == "True"
 
-    xdc_aggregate(args.xdc_dir, args.output_path, args.delete_temp_files)
+    xdc_aggregate(args.xdc_dir, args.output_path, args.del_temp)
 
 
 if __name__ == "__main__":

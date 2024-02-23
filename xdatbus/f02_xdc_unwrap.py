@@ -92,7 +92,7 @@ def main():
 
     args = parser.parse_args()
 
-    xdc_unwrap(args.xdc_dir, args.output_path)
+    xdc_unwrap(args.xdc_path, args.output_path)
 
 
 if __name__ == "__main__":

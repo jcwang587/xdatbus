@@ -22,15 +22,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
 
     try:
         xdatcar = Xdatcar(xdc_path)
-        # initialize an empty list to store unwrapped fractional coordinates
-        unwrapped_coords = []
-
-        # Initialize a variable to store the previously unwrapped coordinates
-        previous_unwrapped_coords = xdatcar.structures[0].frac_coords
-
-        unwrapped_coords.append(
-            previous_unwrapped_coords.copy()
-        )  # Store the first set of coordinates
 
         with Progress(
             SpinnerColumn(spinner_name="dots", style="bold cyan"),
@@ -40,6 +31,18 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             task = progress.add_task(
                 "xdatbus🚌xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
             )
+            progress.update(task, advance=1)
+
+            # initialize an empty list to store unwrapped fractional coordinates
+            unwrapped_coords = []
+
+            # Initialize a variable to store the previously unwrapped coordinates
+            previous_unwrapped_coords = xdatcar.structures[0].frac_coords
+
+            unwrapped_coords.append(
+                previous_unwrapped_coords.copy()
+            )  # Store the first set of coordinates
+
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
                 if (i + 1) % 1000 == 0:
                     console.log(f"xdc_unwrap: Processing step {i + 1}")

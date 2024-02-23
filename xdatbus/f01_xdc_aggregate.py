@@ -54,7 +54,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             xdatcar = read(
                 xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
             )
-            console.log(f"number of frames:  + {len(xdatcar)}")
+            console.log(f"number of frames: {len(xdatcar)}")
             write(
                 xdatcar_wrap_path + "/" + xdatcar_raw,
                 format="vasp-xdatcar",

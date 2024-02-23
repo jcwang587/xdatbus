@@ -19,7 +19,7 @@ def thermal_report(osz_dir="./", output_path="./"):
             Output path of the thermal report
     """
 
-    console = Console()
+    console = Console(log_path=False)
 
     try:
         raw_list = os.listdir(osz_dir)

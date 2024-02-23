@@ -80,7 +80,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             shutil.rmtree(xdatcar_wrap_path)
             os.remove(log_path)
 
-        console.log("sequence: ", xdatcar_list_sort)
+        console.log(f"sequence: {xdatcar_list_sort}")
         console.log("xdatbus | xdc_aggregate: Done!")
 
     except Exception as e:

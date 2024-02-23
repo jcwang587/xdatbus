@@ -1,6 +1,7 @@
 import argparse
 import numpy as np
 from rich.console import Console
+from rich.progress import Progress, SpinnerColumn
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
 
@@ -31,29 +32,41 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             previous_unwrapped_coords.copy()
         )  # Store the first set of coordinates
 
-        for i in range(1, len(xdatcar.structures)):  # Start from the second frame
-            if (i + 1) % 1000 == 0:
-                console.log(f"xdc_unwrap: Processing step {i + 1}")
+        with Progress(
+            SpinnerColumn(spinner_name="dots", style="bold cyan"),
+            *Progress.get_default_columns(),
+            console=console,
+        ) as progress:
+            task = progress.add_task(
+                "xdatbus🚌xml2xyz", total=len(xdatcar.structures) % 1000 + 1
+            )
+            for i in range(1, len(xdatcar.structures)):  # Start from the second frame
+                if (i + 1) % 1000 == 0:
+                    console.log(f"xdc_unwrap: Processing step {i + 1}")
 
-            # initialize an empty array for the current structure's unwrapped coordinates
-            current_unwrapped_coords = np.zeros_like(xdatcar.structures[i].frac_coords)
+                # initialize an empty array for the current structure's unwrapped coordinates
+                current_unwrapped_coords = np.zeros_like(
+                    xdatcar.structures[i].frac_coords
+                )
 
-            for j in range(len(xdatcar.structures[i].frac_coords)):
-                for k in range(3):
-                    # update the current coordinates
-                    current_wrapped_coords = xdatcar.structures[i].frac_coords[j][k]
-                    displacement = unwrap_pbc_dis(
-                        previous_unwrapped_coords[j][k], current_wrapped_coords, 1
-                    )
-                    current_unwrapped_coords[j][k] = (
-                        previous_unwrapped_coords[j][k] + displacement
-                    )
+                for j in range(len(xdatcar.structures[i].frac_coords)):
+                    for k in range(3):
+                        # update the current coordinates
+                        current_wrapped_coords = xdatcar.structures[i].frac_coords[j][k]
+                        displacement = unwrap_pbc_dis(
+                            previous_unwrapped_coords[j][k], current_wrapped_coords, 1
+                        )
+                        current_unwrapped_coords[j][k] = (
+                            previous_unwrapped_coords[j][k] + displacement
+                        )
 
-            # update the previous unwrapped coordinates for next frame
-            previous_unwrapped_coords = current_unwrapped_coords.copy()
+                # update the previous unwrapped coordinates for next frame
+                previous_unwrapped_coords = current_unwrapped_coords.copy()
 
-            # append the current structure's unwrapped coordinates to the list
-            unwrapped_coords.append(current_unwrapped_coords)
+                # append the current structure's unwrapped coordinates to the list
+                unwrapped_coords.append(current_unwrapped_coords)
+
+                progress.update(task, advance=1)
 
         # open the output xyz file
         with open(output_path, "w") as xyz_file:
@@ -64,6 +77,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
                     xyz_file.write(
                         "{} {:.8f} {:.8f} {:.8f}\n".format(atom.symbol, *coord)
                     )
+        progress.update(task, advance=1)
 
         console.log(f"xdatbus 🚌 xdc_unwrap: Done!")
 

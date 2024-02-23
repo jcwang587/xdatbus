@@ -86,12 +86,13 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             # Combine the wrapped XDATCAR files into one XDATCAR file (XDATBUS) using pymatgen
             xdatbus = Xdatcar(xdatcar_wrap_path + "/" + wrap_list_sort[0])
 
+            progress.console.log(f"xdc_aggregate: initializing XDATBUS")
             progress.update(task, advance=1)
 
             for xdatcar_wrap in wrap_list_sort[1:]:
                 xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
                 xdatbus.structures.extend(xdatcar.structures)
-                console.log(f"xdc_aggregate: appending {xdatcar_wrap}")
+                progress.console.log(f"xdc_aggregate: appending {xdatcar_wrap}")
                 progress.update(task, advance=1)
 
             xdatbus.write_file(xdatbus_path)

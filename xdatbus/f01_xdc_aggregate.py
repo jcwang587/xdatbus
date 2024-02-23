@@ -55,7 +55,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
 
         with Progress(console=console) as progress:
             task = progress.add_task(
-                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort) * 2
+                "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
             )
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(
@@ -90,6 +90,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                 xdatbus.structures.extend(xdatcar.structures)
                 progress.update(task, advance=1)
             xdatbus.write_file(xdatbus_path)
+            progress.update(task, advance=1)
 
         if del_temp:
             shutil.rmtree(xdatcar_wrap_path)

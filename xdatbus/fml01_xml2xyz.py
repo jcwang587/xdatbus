@@ -40,7 +40,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
         data_set = []
         with Progress(console=console) as progress:
-            task = progress.add_task("xdatbus | xml2xyz", total=len(xml_list_sort))
+            task = progress.add_task("xdatbus 🚌| xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
                 progress.console.log(f"xml2xyz: Processing {xml_file}")
                 xml_path = os.path.join(xml_dir, xml_file)

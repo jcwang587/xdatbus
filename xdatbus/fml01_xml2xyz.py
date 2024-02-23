@@ -21,7 +21,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             The ratio of training set
     """
 
-    console = Console()
+    console = Console(log_path=False)
 
     try:
         raw_list = os.listdir(xml_dir)

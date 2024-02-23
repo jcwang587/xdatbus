@@ -31,7 +31,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             task = progress.add_task(
                 "xdatbus🚌xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
             )
-            progress.update(task, advance=1)
 
             # initialize an empty list to store unwrapped fractional coordinates
             unwrapped_coords = []
@@ -70,18 +69,18 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
                 # append the current structure's unwrapped coordinates to the list
                 unwrapped_coords.append(current_unwrapped_coords)
 
-        # open the output xyz file
-        with open(output_path, "w") as xyz_file:
-            for i, coords in enumerate(unwrapped_coords):
-                # write the current structure to the xyz file
-                xyz_file.write(str(len(xdatcar.structures[i].species)) + "\n\n")
-                for atom, coord in zip(xdatcar.structures[i].species, coords):
-                    xyz_file.write(
-                        "{} {:.8f} {:.8f} {:.8f}\n".format(atom.symbol, *coord)
-                    )
-        progress.update(task, advance=1)
+            # open the output xyz file
+            with open(output_path, "w") as xyz_file:
+                for i, coords in enumerate(unwrapped_coords):
+                    # write the current structure to the xyz file
+                    xyz_file.write(str(len(xdatcar.structures[i].species)) + "\n\n")
+                    for atom, coord in zip(xdatcar.structures[i].species, coords):
+                        xyz_file.write(
+                            "{} {:.8f} {:.8f} {:.8f}\n".format(atom.symbol, *coord)
+                        )
+            progress.update(task, advance=1)
 
-        console.log(f"xdatbus 🚌 xdc_unwrap: Done!")
+            console.log(f"xdatbus 🚌 xdc_unwrap: Done!")
 
     except Exception as e:
         console.log(e)

@@ -1,6 +1,7 @@
 import os
 import re
 import argparse
+from rich.console import Console
 from xdatbus.utils import filter_files
 from pymatgen.io.vasp.outputs import Oszicar
 
@@ -16,6 +17,9 @@ def thermal_report(osz_dir="./", output_path="./"):
         output_path : str
             Output path of the thermal report
     """
+
+    console = Console()
+
     try:
         raw_list = os.listdir(osz_dir)
         oszicar_list = filter_files(raw_list, "OSZICAR")
@@ -34,7 +38,7 @@ def thermal_report(osz_dir="./", output_path="./"):
         total_energy = []
         temperature = []
         for oszicar_file in oszicar_list_sort:
-            print(f"xdatbus-func | energy_report: Processing {oszicar_file}")
+            console.log(f"xdatbus | energy_report: Processing {oszicar_file}")
             oszicar_path = os.path.join(osz_dir, oszicar_file)
             oszicar = Oszicar(oszicar_path)
             for ionic_step in oszicar.ionic_steps:
@@ -51,12 +55,12 @@ def thermal_report(osz_dir="./", output_path="./"):
                     f"{potential_energy[i]},{kinetic_energy[i]},{total_energy[i]},{temperature[i]}\n"
                 )
 
-        print("sequence: ", oszicar_list_sort)
-        print("xdatbus-func | energy_report: Done!")
+        console.log(f"xdatbus | energy_report: Done!")
+        console.log(f"sequence: {oszicar_list_sort}")
 
     except Exception as e:
-        print(e)
-        print("xdatbus-func | energy_report: Failed!")
+        console.log(e)
+        console.log("xdatbus | energy_report: Failed!")
 
 
 def main():

@@ -58,11 +58,11 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                 "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
             )
             for xdatcar_raw in xdatcar_list_sort:
-                xdatcar = read(
-                    xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
-                )
                 progress.console.log(
                     f"xdc_aggregate: Wrapping {xdatcar_raw} | number of frames: {len(xdatcar)}"
+                )
+                xdatcar = read(
+                    xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
                 )
                 write(
                     xdatcar_wrap_path + "/" + xdatcar_raw,

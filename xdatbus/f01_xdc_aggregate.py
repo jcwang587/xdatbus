@@ -54,7 +54,7 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
         log_file = open(log_path, "w")
 
         with Progress(
-            SpinnerColumn(spinner_name="point", style="bold cyan"),
+            SpinnerColumn(spinner_name="dots", style="bold cyan"),
             *Progress.get_default_columns(),
             console=console,
         ) as progress:

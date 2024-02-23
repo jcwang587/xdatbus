@@ -4,6 +4,7 @@ import shutil
 import argparse
 from ase.io import read, write
 from rich.console import Console
+from rich.progress import Progress
 from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import update_folder, remove_file, filter_files
 

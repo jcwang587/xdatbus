@@ -3,7 +3,7 @@ import re
 import argparse
 from ase.io import read, write
 from rich.console import Console
-from rich.progress import track, Progress
+from rich.progress import Progress
 from xdatbus.utils import filter_files
 
 

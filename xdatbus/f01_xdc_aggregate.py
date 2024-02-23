@@ -58,14 +58,8 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                 "xdatbus 🚌 xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
             )
             for xdatcar_raw in xdatcar_list_sort:
-                progress.console.log(
-                    f"xdc_aggregate: wrapping {xdatcar_raw}"
-                )
                 xdatcar = read(
                     xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
-                )
-                progress.console.log(
-                    f"xdc_aggregate: number of frames: {len(xdatcar)}"
                 )
                 write(
                     xdatcar_wrap_path + "/" + xdatcar_raw,
@@ -73,6 +67,9 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
                     images=xdatcar,
                 )
                 log_file.write(xdatcar_raw + " " + str(len(xdatcar)) + "\n")
+                progress.console.log(
+                    f"xdc_aggregate: wrapping {xdatcar_raw} | number of frames: {len(xdatcar)}"
+                )
                 progress.update(task, advance=1)
             log_file.close()
 
@@ -88,9 +85,9 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             progress.update(task, advance=1)
 
             for xdatcar_wrap in wrap_list_sort[1:]:
-                console.log(f"xdc_aggregate: Appending {xdatcar_wrap}")
                 xdatcar = Xdatcar(xdatcar_wrap_path + "/" + xdatcar_wrap)
                 xdatbus.structures.extend(xdatcar.structures)
+                console.log(f"xdc_aggregate: Appending {xdatcar_wrap}")
                 progress.update(task, advance=1)
 
             xdatbus.write_file(xdatbus_path)

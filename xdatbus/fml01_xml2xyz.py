@@ -59,7 +59,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
     except Exception as e:
         print(e)
-        print("xdatbus-func | xml2xyz: Failed!")
+        print("xdatbus | xml2xyz: Failed!")
 
 
 def main():

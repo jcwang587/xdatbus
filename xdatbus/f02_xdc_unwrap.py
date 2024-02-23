@@ -82,8 +82,6 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
                         )
             progress.update(task, advance=1)
 
-            console.log(f"xdatbus 🚌 xdc_unwrap: Done!")
-
     except Exception as e:
         console.log(e)
         console.log("xdatbus 🚌 xdc_unwrap: Failed!")

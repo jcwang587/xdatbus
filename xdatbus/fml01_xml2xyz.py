@@ -38,7 +38,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         with Progress() as progress:
             task = progress.add_task("xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
-                progress.console.print(f"xdatbus | xml2xyz: Processing {xml_file}")
+                progress.console.log(f"xdatbus | xml2xyz: Processing {xml_file}")
                 xml_path = os.path.join(xml_dir, xml_file)
                 xml_set = read(xml_path, index="::", format="vasp-xml")
                 for atom in xml_set:
@@ -57,7 +57,7 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
 
         print("sequence: ", xml_list_sort)
         # console.log(f"xdatbus | sequence: {xml_list_sort}")
-        # console.log(f"xdatbus | xml2xyz: Done!")
+
 
     except Exception as e:
         print(e)

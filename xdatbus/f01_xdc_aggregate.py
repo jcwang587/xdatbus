@@ -57,7 +57,10 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True):
             SpinnerColumn(), *Progress.get_default_columns(), console=console
         ) as progress:
             task = progress.add_task(
-                "xdatbus🚌xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
+                "xdatbus🚌xdc_aggregate",
+                total=len(xdatcar_list_sort) * 2 + 1,
+                spinner="growHorizontal",
+                spinner_style="bold cyan",
             )
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(

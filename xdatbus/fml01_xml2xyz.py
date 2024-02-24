@@ -8,7 +8,7 @@ from rich.progress import Progress
 from xdatbus.utils import filter_files
 
 
-def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=True):
+def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False):
     """
     Convert the vasprun.xml files to extended xyz files.
 
@@ -99,7 +99,7 @@ def main():
 
     args = parser.parse_args()
 
-    xml2xyz(args.xml_dir, args.output_path, args.train_ratio)
+    xml2xyz(args.xml_dir, args.output_path, args.train_ratio, True)
 
 
 if __name__ == "__main__":

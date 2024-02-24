@@ -1,13 +1,14 @@
 import os
 import re
 import argparse
+import contextlib
 from ase.io import read, write
 from rich.console import Console
 from rich.progress import Progress
 from xdatbus.utils import filter_files
 
 
-def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
+def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=True):
     """
     Convert the vasprun.xml files to extended xyz files.
 
@@ -19,6 +20,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
             Output path of the extended xyz files
         train_ratio : float (optional)
             The ratio of training set
+        show_progress : bool (optional)
+            Show the progress bar or not
     """
 
     console = Console(log_path=False)
@@ -39,7 +42,13 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0):
         console.log(f"sequence: {xml_list_sort}")
 
         data_set = []
-        with Progress(console=console) as progress:
+
+        if show_progress:
+            prog = Progress(console=console)
+        else:
+            prog = contextlib.nullcontext()
+
+        with prog as progress:
             task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort))
             for xml_file in xml_list_sort:
                 progress.console.log(f"xml2xyz: processing {xml_file}")

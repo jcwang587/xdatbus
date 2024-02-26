@@ -35,7 +35,7 @@ python = ">=3.10,<3.12"
 numpy = "1.26.4"
 pandas = "2.2.0"
 ase = "3.22.1"
-pymatgen = "2024.2.20"
+pymatgen = "2024.2.23"
 mdanalysis = "2.7.0"
 rich = "13.7.0"
 plotly = { version = "5.19.0", optional = true }

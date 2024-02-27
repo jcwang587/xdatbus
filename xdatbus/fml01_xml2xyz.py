@@ -101,7 +101,7 @@ def main():
 
     args = parser.parse_args()
 
-    xml2xyz(args.xml_dir, args.output_path, args.train_ratio, True)
+    xml2xyz(args.xml_dir, args.output_path, args.train_ratio, False)
 
 
 if __name__ == "__main__":

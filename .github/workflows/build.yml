@@ -45,6 +45,7 @@ jobs:
     - name: Install dependencies with Poetry
       run: |
         poetry install
+        source $(poetry env info --path)/bin/activate
 
     - name: Run tests
       run: poetry run pytest --cov=xdatbus

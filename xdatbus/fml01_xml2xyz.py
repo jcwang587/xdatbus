@@ -60,15 +60,15 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
                 data_set.extend(xml_set)
                 progress.update(task, advance=1)
 
-        if train_ratio < 1.0:
-            train_set = data_set[: int(len(data_set) * train_ratio)]
-            test_set = data_set[int(len(data_set) * train_ratio) :]
-            write(os.path.join(output_path, "train.xyz"), train_set)
-            write(os.path.join(output_path, "test.xyz"), test_set)
-        else:
-            write(os.path.join(output_path, "data.xyz"), data_set)
+            if train_ratio < 1.0:
+                train_set = data_set[: int(len(data_set) * train_ratio)]
+                test_set = data_set[int(len(data_set) * train_ratio) :]
+                write(os.path.join(output_path, "train.xyz"), train_set)
+                write(os.path.join(output_path, "test.xyz"), test_set)
+            else:
+                write(os.path.join(output_path, "data.xyz"), data_set)
 
-        progress.update(task, advance=1)
+            progress.update(task, advance=1)
 
     except Exception as e:
         console.log(e)

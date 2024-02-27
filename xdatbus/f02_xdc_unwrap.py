@@ -6,7 +6,7 @@ from pymatgen.io.vasp.outputs import Xdatcar
 from xdatbus.utils import unwrap_pbc_dis
 
 
-def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
+def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz", show_progress=False):
     """
     Unwrap the coordinates in the XDATCAR file (to .xyz).
 
@@ -16,6 +16,8 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
             Input path of the XDATCAR file
         output_path : str
             Output path of the xyz file
+        show_progress : bool (optional)
+            Show the progress bar or not
     """
 
     console = Console(log_path=False)
@@ -24,9 +26,12 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz"):
         xdatcar = Xdatcar(xdc_path)
 
         with Progress(console=console) as progress:
-            task = progress.add_task(
-                "🚌 xdatbus xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
-            )
+            if show_progress:
+                task = progress.add_task(
+                    "🚌 xdatbus xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
+                )
+            else:
+                task = progress.add_task("🚌 xdatbus xdc_unwrap", visible=False)
 
             # initialize an empty list to store unwrapped fractional coordinates
             unwrapped_coords = []
@@ -101,7 +106,7 @@ def main():
 
     args = parser.parse_args()
 
-    xdc_unwrap(args.xdc_path, args.output_path)
+    xdc_unwrap(args.xdc_path, args.output_path, show_progress=True)
 
 
 if __name__ == "__main__":

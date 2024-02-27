@@ -47,7 +47,9 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
 
         with prog as progress:
             if show_progress:
-                task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort) + 1)
+                task = progress.add_task(
+                    "🚌 xdatbus xml2xyz", total=len(xml_list_sort) + 1
+                )
             else:
                 task = progress.add_task("🚌 xdatbus xml2xyz", visible=False)
             for xml_file in xml_list_sort:
@@ -101,7 +103,7 @@ def main():
 
     args = parser.parse_args()
 
-    xml2xyz(args.xml_dir, args.output_path, args.train_ratio, False)
+    xml2xyz(args.xml_dir, args.output_path, args.train_ratio, show_progress=True)
 
 
 if __name__ == "__main__":

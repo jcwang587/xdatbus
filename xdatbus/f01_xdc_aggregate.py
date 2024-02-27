@@ -52,9 +52,12 @@ def xdc_aggregate(xdc_dir="./", output_dir="./", del_temp=True, show_progress=Fa
         remove_file(xdatbus_path)
 
         with Progress(console=console) as progress:
-            task = progress.add_task(
-                "🚌 xdatbus xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
-            )
+            if show_progress:
+                task = progress.add_task(
+                    "🚌 xdatbus xdc_aggregate", total=len(xdatcar_list_sort) * 2 + 1
+                )
+            else:
+                task = progress.add_task("🚌 xdatbus xdc_aggregate", visible=False)
             for xdatcar_raw in xdatcar_list_sort:
                 xdatcar = read(
                     xdc_dir + "/" + xdatcar_raw, format="vasp-xdatcar", index=":"
@@ -102,18 +105,21 @@ def main():
     parser = argparse.ArgumentParser(
         description="Aggregate XDATCAR files from an AIMD simulation."
     )
+
     parser.add_argument(
         "--xdc_dir",
         type=str,
         default="./",
         help="Input path of the AIMD simulation, which contains the XDATCAR files",
     )
+
     parser.add_argument(
         "--output_dir",
         type=str,
         default="./",
         help="Output path of the XDATBUS file (default: current directory)",
     )
+
     parser.add_argument(
         "--del_temp",
         type=str,
@@ -121,11 +127,12 @@ def main():
         default="True",
         help="Choose True (default) to delete intermediate folders, or False to keep them.",
     )
+
     args = parser.parse_args()
 
     args.del_temp = args.del_temp == "True"
 
-    xdc_aggregate(args.xdc_dir, args.output_dir, args.del_temp)
+    xdc_aggregate(args.xdc_dir, args.output_dir, args.del_temp, show_progress=True)
 
 
 if __name__ == "__main__":

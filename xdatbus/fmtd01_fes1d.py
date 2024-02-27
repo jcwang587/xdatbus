@@ -9,8 +9,8 @@ def gauss_pot(x, x0, h, w):
     return en
 
 
-def calculate_profile_1d(server_meta_path, project_name, input_line_number):
-    server_hillspot_path = server_meta_path + project_name + "/HILLSPOT"
+def calculate_profile_1d(hillspot_path, input_line_number):
+    server_hillspot_path = hillspot_path + "/HILLSPOT"
 
     local_hillspot_path = "./hillspot_files"
 
@@ -63,14 +63,9 @@ def calculate_profile_1d(server_meta_path, project_name, input_line_number):
     return data
 
 
-def plot_profile(server_path, project_path):
-    # clear and create output directory
-    if os.path.exists("./output_" + project_path + "_all"):
-        shutil.rmtree("./output_" + project_path + "_all")
-    os.mkdir("./output_" + project_path + "_all")
-
+def plot_profile(hillspot_path):
     # get the length of hillspot file
-    f = server_path + project_path + "/HILLSPOT"
+    f = hillspot_path + "/HILLSPOT"
     f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
@@ -78,7 +73,7 @@ def plot_profile(server_path, project_path):
     print("input_line_number = ", input_line_number)
 
     # calculate the profile
-    calculate_profile_1d(server_path, project_path, input_line_number)
+    calculate_profile_1d(hillspot_path, input_line_number)
 
     # read the hillspot.xyz file two column data
     hillspotxyz_path = "./hillspot_files/HILLSPOT.xyz"
@@ -101,14 +96,9 @@ def plot_profile(server_path, project_path):
     return hillspotxyz_plot
 
 
-def plot_cv(server_path, project_path, idx):
-    # clear and create output directory
-    if os.path.exists("./output_" + project_path + "_all"):
-        shutil.rmtree("./output_" + project_path + "_all")
-    os.mkdir("./output_" + project_path + "_all")
-
+def plot_cv(hillspot_path, idx):
     # get the length of hillspot file
-    f = server_path + project_path + "/HILLSPOT"
+    f = hillspot_path + "/HILLSPOT"
     f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
@@ -116,13 +106,11 @@ def plot_cv(server_path, project_path, idx):
     print("input_line_number = ", input_line_number)
 
     # calculate the profile
-    cv = calculate_profile_1d(server_path, project_path, input_line_number)
+    cv = calculate_profile_1d(hillspot_path, input_line_number)
     cv = sum(cv, [])
     print(cv)
     # plot the cv
     plt.plot([float(x) * 200 / 1000 for x in range(len(cv))], cv, "-")
-    plt.legend([project_path], loc="upper left")
-    print("project_path = ", project_path)
     if idx == 3:
         plt.xlabel("Time (ps)")
     plt.ylabel("CV")

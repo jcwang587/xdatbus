@@ -116,4 +116,5 @@ def plot_cv(hillspot_path, idx):
     plt.ylabel("CV")
 
 
-hillspot_path = "/home/zhengxu/Work/Projects/2020/2020-11-30-1d-fes/hillspot_files"
+hillspot_path = "../tests/data/hillspot"
+hillspotxyz_plot = plot_profile(hillspot_path)

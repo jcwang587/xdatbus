@@ -4,27 +4,32 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def gauss_pot(x, x0, h, w):
-    en = h * np.exp(-((x - x0) ** 2) / 2.0 / w**2)
+def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarray:
+    """
+    Calculate the Gaussian potential energy.
+
+    Parameters:
+    - x (np.ndarray): Array of positions at which to evaluate the potential.
+    - x0 (float): The position of the potential minimum.
+    - height (float): The height of the Gaussian potential.
+    - width (float): The standard deviation (controls the width of the Gaussian).
+
+    Returns:
+    - np.ndarray: The potential energy at each position x.
+    """
+    en = height * np.exp(-((x - x0) ** 2) / (2.0 * width**2))
     return en
 
 
-def calculate_profile_1d(hillspot_path, input_line_number):
-    server_hillspot_path = hillspot_path + "/HILLSPOT"
-
-    local_hillspot_path = "./hillspot_files"
-
-    # Copy the hillspot files to local
-    if os.path.exists(local_hillspot_path):
-        shutil.rmtree(local_hillspot_path)
-    os.mkdir(local_hillspot_path)
-    shutil.copy(server_hillspot_path, local_hillspot_path)
-
-    f = local_hillspot_path + "/HILLSPOT"
+def calculate_profile_1d(hillspot_path, input_line_number, xmin=-1.0, xmax=2.0, num=1000):
+    """
+    Calculate the 1D free energy profile from a HILLSPOT file.
+    """
+    f = hillspot_path
     ff = f + ".xyz"
 
-    a0 = -1.0
-    a1 = 2.0
+    a0 = 8
+    a1 = 10.0
     num = 1000
 
     f = open(f, "r")
@@ -65,7 +70,7 @@ def calculate_profile_1d(hillspot_path, input_line_number):
 
 def plot_profile(hillspot_path):
     # get the length of hillspot file
-    f = hillspot_path + "/HILLSPOT"
+    f = hillspot_path
     f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
@@ -73,32 +78,16 @@ def plot_profile(hillspot_path):
     print("input_line_number = ", input_line_number)
 
     # calculate the profile
-    calculate_profile_1d(hillspot_path, input_line_number)
-
-    # read the hillspot.xyz file two column data
-    hillspotxyz_path = "./hillspot_files/HILLSPOT.xyz"
-    hillspotxyz = np.loadtxt(hillspotxyz_path, usecols=(0, 1))
-
-    # wrap the hillspotxyz into 0-1
-    third_point = len(hillspotxyz) // 3
-    hillspotxyz_p1 = hillspotxyz[0:third_point, 1]
-    hillspotxyz_p2 = hillspotxyz[third_point : 2 * third_point, 1]
-    hillspotxyz_p3 = hillspotxyz[2 * third_point :, 1]
-    hillspotxyz_ppp = hillspotxyz_p1 + hillspotxyz_p2 + hillspotxyz_p3
-    hillspotxyz_wrap = hillspotxyz.copy()[third_point : 2 * third_point, :]
-    hillspotxyz_wrap[:, 1] = hillspotxyz_ppp
-
-    # Select the data for plot
-    hillspotxyz_plot = hillspotxyz_wrap.copy()
-    # Subtract the maximum value
-    hillspotxyz_plot[:, 1] = hillspotxyz_plot[:, 1] - min(hillspotxyz_plot[:, 1])
-
-    return hillspotxyz_plot
+    fes = calculate_profile_1d(hillspot_path, input_line_number)
+    fes = sum(fes, [])
+    fes = np.array(fes)
+    fes = fes.reshape(-1, 2)
+    return fes
 
 
 def plot_cv(hillspot_path, idx):
     # get the length of hillspot file
-    f = hillspot_path + "/HILLSPOT"
+    f = hillspot_path
     f = open(f, "r")
     input_line_number = 0
     for _ in f.readlines():
@@ -116,5 +105,10 @@ def plot_cv(hillspot_path, idx):
     plt.ylabel("CV")
 
 
-hillspot_path = "../tests/data/hillspot"
+hillspot_path = "../tests/data/hillspot/HILLSPOT"
 hillspotxyz_plot = plot_profile(hillspot_path)
+plt.plot(hillspotxyz_plot[:, 0], hillspotxyz_plot[:, 1], "-")
+plt.xlabel("CV")
+plt.ylabel("Free Energy (kcal/mol)")
+plt.show()
+plt.close()

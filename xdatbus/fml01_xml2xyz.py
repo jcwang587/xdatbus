@@ -43,13 +43,13 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
 
         data_set = []
 
-        if show_progress:
-            prog = Progress(console=console)
-        else:
-            prog = contextlib.nullcontext()
+        prog = Progress(console=console)
 
         with prog as progress:
-            task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort) + 1)
+            if show_progress:
+                task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort) + 1)
+            else:
+                task = progress.add_task("🚌 xdatbus xml2xyz", visible=False)
             for xml_file in xml_list_sort:
                 progress.console.log(f"xml2xyz: processing {xml_file}")
                 progress.update(task, advance=1)

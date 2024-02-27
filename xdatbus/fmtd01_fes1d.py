@@ -21,7 +21,9 @@ def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarr
     return en
 
 
-def calculate_profile_1d(hillspot_path, input_line_number, xmin=-1.0, xmax=2.0, num=1000):
+def calculate_profile_1d(
+    hillspot_path, input_line_number, xmin=-1.0, xmax=2.0, num=1000
+):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
     """
@@ -68,47 +70,4 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=-1.0, xmax=2.0, 
     return data
 
 
-def plot_profile(hillspot_path):
-    # get the length of hillspot file
-    f = hillspot_path
-    f = open(f, "r")
-    input_line_number = 0
-    for _ in f.readlines():
-        input_line_number += 1
-    print("input_line_number = ", input_line_number)
-
-    # calculate the profile
-    fes = calculate_profile_1d(hillspot_path, input_line_number)
-    fes = sum(fes, [])
-    fes = np.array(fes)
-    fes = fes.reshape(-1, 2)
-    return fes
-
-
-def plot_cv(hillspot_path, idx):
-    # get the length of hillspot file
-    f = hillspot_path
-    f = open(f, "r")
-    input_line_number = 0
-    for _ in f.readlines():
-        input_line_number += 1
-    print("input_line_number = ", input_line_number)
-
-    # calculate the profile
-    cv = calculate_profile_1d(hillspot_path, input_line_number)
-    cv = sum(cv, [])
-    print(cv)
-    # plot the cv
-    plt.plot([float(x) * 200 / 1000 for x in range(len(cv))], cv, "-")
-    if idx == 3:
-        plt.xlabel("Time (ps)")
-    plt.ylabel("CV")
-
-
 hillspot_path = "../tests/data/hillspot/HILLSPOT"
-hillspotxyz_plot = plot_profile(hillspot_path)
-plt.plot(hillspotxyz_plot[:, 0], hillspotxyz_plot[:, 1], "-")
-plt.xlabel("CV")
-plt.ylabel("Free Energy (kcal/mol)")
-plt.show()
-plt.close()

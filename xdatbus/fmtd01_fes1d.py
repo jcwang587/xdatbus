@@ -114,3 +114,6 @@ def plot_cv(hillspot_path, idx):
     if idx == 3:
         plt.xlabel("Time (ps)")
     plt.ylabel("CV")
+
+
+hillspot_path = "/home/zhengxu/Work/Projects/2020/2020-11-30-1d-fes/hillspot_files"

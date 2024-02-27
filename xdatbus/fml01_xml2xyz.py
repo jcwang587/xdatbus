@@ -52,13 +52,13 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
             task = progress.add_task("🚌 xdatbus xml2xyz", total=len(xml_list_sort) + 1)
             for xml_file in xml_list_sort:
                 progress.console.log(f"xml2xyz: processing {xml_file}")
+                progress.update(task, advance=1)
                 xml_path = os.path.join(xml_dir, xml_file)
                 xml_set = read(xml_path, index="::", format="vasp-xml")
                 for atom in xml_set:
                     if "free_energy" in atom.calc.results:
                         del atom.calc.results["free_energy"]
                 data_set.extend(xml_set)
-                progress.update(task, advance=1)
 
             if train_ratio < 1.0:
                 train_set = data_set[: int(len(data_set) * train_ratio)]

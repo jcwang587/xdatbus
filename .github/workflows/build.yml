@@ -38,18 +38,10 @@ jobs:
       run: |
         pipx install poetry
         poetry config virtualenvs.create true
-        poetry config --list # Debug: Show current Poetry configuration
-
-    - name: Debugging Python and Poetry Setup
-      run: |
-        python --version
-        which python
-        poetry --version
 
     - name: Install dependencies with Poetry
       run: |
         poetry install
-        source $(poetry env info --path)/bin/activate
 
     - name: Run tests
       run: poetry run pytest --cov=xdatbus

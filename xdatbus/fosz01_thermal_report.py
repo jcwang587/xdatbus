@@ -43,10 +43,16 @@ def thermal_report(osz_dir="./", output_path="./", show_progress=False):
         total_energy = []
         temperature = []
         with Progress(console=console) as progress:
-            task = progress.add_task("🚌 xdatbus thermal_report", total=len(oszicar_list_sort))
+            if show_progress:
+                task = progress.add_task(
+                    "🚌 xdatbus thermal_report", total=len(oszicar_list_sort)
+                )
+            else:
+                task = progress.add_task("🚌 xdatbus thermal_report", visible=False)
 
             for oszicar_file in oszicar_list_sort:
                 console.log(f"thermal_report: Processing {oszicar_file}")
+                progress.update(task, advance=1)
                 oszicar_path = os.path.join(osz_dir, oszicar_file)
                 oszicar = Oszicar(oszicar_path)
                 for ionic_step in oszicar.ionic_steps:
@@ -54,8 +60,6 @@ def thermal_report(osz_dir="./", output_path="./", show_progress=False):
                     kinetic_energy.append(ionic_step["EK"])
                     total_energy.append(ionic_step["E"])
                     temperature.append(ionic_step["T"])
-
-                progress.update(task, advance=1)
 
         csv_path = os.path.join(output_path, "thermal_report.csv")
         with open(csv_path, "w") as f:
@@ -89,7 +93,7 @@ def main():
 
     args = parser.parse_args()
 
-    thermal_report(args.osz_dir, args.output_path)
+    thermal_report(args.osz_dir, args.output_path, show_progress=True)
 
 
 if __name__ == "__main__":

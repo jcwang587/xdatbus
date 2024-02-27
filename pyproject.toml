@@ -50,7 +50,7 @@ pytest = "8.0.2"
 pytest-cov = "4.1.0"
 
 [tool.poetry.extras]
-vis = ["rdkit", "bpy", "pyyaml", "ovito"]
+meta = ["rdkit", "bpy", "pyyaml", "ovito"]
 dash = ["plotly", "dash"]
 
 [tool.poetry.scripts]

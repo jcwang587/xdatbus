@@ -1,9 +1,11 @@
+import argparse
+import pandas as pd
+from xdatbus.utils import skip_comments
+
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
-import pandas as pd
-import argparse
-from xdatbus.utils import skip_comments
+
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 

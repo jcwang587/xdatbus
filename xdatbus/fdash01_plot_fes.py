@@ -2,12 +2,24 @@ import argparse
 import pandas as pd
 from xdatbus.utils import skip_comments
 
-import dash
-from dash import dcc, html
-from dash.dependencies import Input, Output, State
+try:
+    import dash
+    from dash import dcc, html
+    from dash.dependencies import Input, Output, State
+except ImportError:
+    dash = None
+    dcc = None
+    html = None
+    Input = None
+    Output = None
+    State = None
 
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+try:
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+except ImportError:
+    go = None
+    make_subplots = None
 
 
 def plot_fes(dat_file="fes_bias.dat", hills_file="HILLS"):

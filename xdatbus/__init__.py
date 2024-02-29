@@ -9,6 +9,8 @@ from .f03_xyz_unwarp import *
 from .fcom01_drift import *
 from .fcom02_contcar import *
 
+from .fdash01_plot_fes import *
+
 from .fmeta01_pos2bpdb import *
 from .fmeta02_rm_bond import *
 
@@ -20,7 +22,6 @@ from .fmtd03_fes3d import *
 from .fmtd04_hillspot2hills import *
 from .fmtd05_report_loader import *
 from .fmtd06_xdc2xtc import *
-from .fmtd07_plot_fes import *
 
 from .fosz01_thermal_report import *
 

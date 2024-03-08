@@ -1,22 +1,5 @@
-import numpy as np
 import pandas as pd
-
-
-def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarray:
-    """
-    Calculate the Gaussian potential energy.
-
-    Parameters:
-    - x (np.ndarray): Array of positions at which to evaluate the potential.
-    - x0 (float): The position of the potential minimum.
-    - height (float): The height of the Gaussian potential.
-    - width (float): The standard deviation (controls the width of the Gaussian).
-
-    Returns:
-    - np.ndarray: The potential energy at each position x.
-    """
-    en = height * np.exp(-((x - x0) ** 2) / (2.0 * width**2))
-    return en
+from xdatbus.utils import gauss_pot
 
 
 def calculate_profile_1d(hillspot_path, hills_count, cv_min=8, cv_max=10, resolution=1000):

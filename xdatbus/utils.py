@@ -71,3 +71,20 @@ def skip_comments(file):
 def filter_files(files, pattern):
     pattern = re.compile(rf"{pattern}")
     return [file for file in files if pattern.search(file)]
+
+
+def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarray:
+    """
+    Calculate the Gaussian potential energy.
+
+    Parameters:
+    - x (np.ndarray): Array of positions at which to evaluate the potential.
+    - x0 (float): The position of the potential minimum.
+    - height (float): The height of the Gaussian potential.
+    - width (float): The standard deviation (controls the width of the Gaussian).
+
+    Returns:
+    - np.ndarray: The potential energy at each position x.
+    """
+    en = height * np.exp(-((x - x0) ** 2) / (2.0 * width**2))
+    return en

@@ -24,7 +24,6 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=
     Calculate the 1D free energy profile from a HILLSPOT file.
     """
     f = hillspot_path
-    ff = f + ".xyz"
 
     f = open(f, "r")
 
@@ -46,12 +45,11 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=
             break
     f.close()
 
-    ff = open(ff, "w")
     step = (xmax - xmin) / num
     x = xmin
 
-    # initialize a dataframe to store the potential energy with the x position
-    df = pd.DataFrame(columns=["x", "potential_energy"])
+    # Initialize a list to store dictionaries
+    data_list = []
 
     for i in range(1, num):
         en = 0.0
@@ -60,10 +58,13 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=
             x0 = data[j][0]
             en_ = gauss_pot(x, x0, h[j], w[j])
             en += en_
-        ff.write(repr(x) + "\t" + repr(-en) + "\n")
-    ff.close()
+        # Append data to the list
+        data_list.append({"x": x, "potential_energy": en})
 
-    return data
+    # Convert the list of dictionaries to a DataFrame
+    df = pd.DataFrame(data_list)
+
+    return df
 
 
 hillspot_path = "../tests/data/hillspot/HILLSPOT"

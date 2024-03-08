@@ -19,13 +19,11 @@ def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarr
     return en
 
 
-def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=1000):
+def calculate_profile_1d(hillspot_path, hills_count, cv_min=8, cv_max=10, resolution=1000):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
     """
-    f = hillspot_path
-
-    f = open(f, "r")
+    f = open(hillspot_path, "r")
 
     data = []
     h = []
@@ -41,17 +39,17 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=
             h.append(float(line[-2]))
             w.append(float(line[-1]))
         step += 1
-        if step > input_line_number:
+        if step > hills_count:
             break
     f.close()
 
-    step = (xmax - xmin) / num
-    x = xmin
+    step = (cv_max - cv_min) / resolution
+    x = cv_min
 
     # Initialize a list to store dictionaries
     data_list = []
 
-    for i in range(1, num):
+    for i in range(1, resolution):
         en = 0.0
         x = x + step
         for j in range(len(data)):
@@ -67,6 +65,5 @@ def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=
     return df
 
 
-hillspot_path = "../tests/data/hillspot/HILLSPOT"
 input_line_number = 10
-data = calculate_profile_1d(hillspot_path, input_line_number)
+fes = calculate_profile_1d("../tests/data/hillspot/HILLSPOT", input_line_number)

@@ -1,7 +1,5 @@
-import os
-import shutil
-import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 
 
 def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarray:
@@ -21,18 +19,12 @@ def gauss_pot(x: np.ndarray, x0: float, height: float, width: float) -> np.ndarr
     return en
 
 
-def calculate_profile_1d(
-    hillspot_path, input_line_number, xmin=-1.0, xmax=2.0, num=1000
-):
+def calculate_profile_1d(hillspot_path, input_line_number, xmin=8, xmax=10, num=1000):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
     """
     f = hillspot_path
     ff = f + ".xyz"
-
-    a0 = 8
-    a1 = 10.0
-    num = 1000
 
     f = open(f, "r")
 
@@ -55,8 +47,12 @@ def calculate_profile_1d(
     f.close()
 
     ff = open(ff, "w")
-    step = (a1 - a0) / num
-    x = a0
+    step = (xmax - xmin) / num
+    x = xmin
+
+    # initialize a dataframe to store the potential energy with the x position
+    df = pd.DataFrame(columns=["x", "potential_energy"])
+
     for i in range(1, num):
         en = 0.0
         x = x + step
@@ -71,3 +67,5 @@ def calculate_profile_1d(
 
 
 hillspot_path = "../tests/data/hillspot/HILLSPOT"
+input_line_number = 10
+data = calculate_profile_1d(hillspot_path, input_line_number)

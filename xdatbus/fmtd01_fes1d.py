@@ -61,9 +61,17 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_min, cv_max, resolution=
 
 input_line_number = 10
 fes = calculate_profile_1d(
-    "../tests/data/hillspot/HILLSPOT",
+    "../tests/data/hillspot/HILLSPOT_1D",
     input_line_number,
     cv_min=0,
     cv_max=10,
     resolution=1000,
 )
+# plot the free energy profile
+from matplotlib import pyplot as plt
+
+plt.plot(fes["cv"], fes["potential_energy"])
+plt.xlabel("CV")
+plt.ylabel("Potential Energy")
+
+plt.show()

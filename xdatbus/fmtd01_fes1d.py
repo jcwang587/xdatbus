@@ -57,18 +57,23 @@ def fes_1d(hillspot_path, hills_count, cv_range, resolution=1000):
     return df
 
 
-input_line_number = 10
-fes = fes_1d(
-    "../tests/data/hillspot/HILLSPOT_1D",
-    input_line_number,
-    cv_range=[6, 10],
-    resolution=1000,
-)
-# plot the free energy profile
-from matplotlib import pyplot as plt
+def main():
+    input_line_number = 10
+    fes = fes_1d(
+        "../tests/data/hillspot/HILLSPOT_1D",
+        input_line_number,
+        cv_range=[6, 10],
+        resolution=1000,
+    )
+    # plot the free energy profile
+    from matplotlib import pyplot as plt
 
-plt.plot(fes["cv"], fes["potential_energy"])
-plt.xlabel("CV")
-plt.ylabel("Potential Energy")
+    plt.plot(fes["cv"], fes["potential_energy"])
+    plt.xlabel("CV")
+    plt.ylabel("Potential Energy")
 
-plt.show()
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()

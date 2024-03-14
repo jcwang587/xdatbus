@@ -2,7 +2,7 @@ import pandas as pd
 from xdatbus.utils import gauss_pot_2d
 
 
-def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=1000):
+def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
 
@@ -43,7 +43,6 @@ def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=1000):
     step_1 = (cv_1_range[1] - cv_1_range[0]) / resolution
     step_2 = (cv_2_range[1] - cv_2_range[0]) / resolution
     cv_1 = cv_1_range[0]
-    cv_2 = cv_2_range[0]
 
     data_list = []
 
@@ -71,16 +70,15 @@ input_line_number = 10
 fes = fes_2d(
     "../tests/data/hillspot/HILLSPOT_2D",
     100,
-    [-1, 1],
-    [-1, 1],
+    [8, 10],
+    [8, 10],
+    resolution=1000,
 )
 
 from matplotlib import pyplot as plt
 
+# plot the free energy profile in 2D
 fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
-ax.plot_trisurf(fes["cv_1"], fes["cv_2"], fes["potential_energy"], cmap="viridis")
-ax.set_xlabel("CV 1")
-ax.set_ylabel("CV 2")
-ax.set_zlabel("Potential Energy")
+plt.tricontourf(fes["cv_1"], fes["cv_2"], fes["potential_energy"], 20)
+plt.colorbar()
 plt.show()

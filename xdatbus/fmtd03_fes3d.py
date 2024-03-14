@@ -55,7 +55,6 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
     for i in range(1, resolution):
         cv_1 = cv_1 + step_1
         cv_2 = cv_2_range[0]
-        cv_3 = cv_3_range[0]
         for k in range(1, resolution):
             cv_2 = cv_2 + step_2
             cv_3 = cv_3_range[0]
@@ -87,12 +86,15 @@ def main():
 
     from matplotlib import pyplot as plt
 
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection="3d")
-    ax.plot_trisurf(fes["cv_1"], fes["cv_2"], fes["potential_energy"], cmap="viridis")
-    ax.set_xlabel("CV 1")
-    ax.set_ylabel("CV 2")
-    ax.set_zlabel("Potential Energy")
+    # plot the middle slice of the free energy surface
+    fes = fes[fes["cv_3"] == 7.5]
+    fes = fes.pivot("cv_1", "cv_2", "potential_energy")
+    fes = fes.sort_index(ascending=False)
+    plt.contourf(fes.columns, fes.index, fes.values, cmap="viridis")
+    plt.colorbar()
+    plt.xlabel("cv_1")
+    plt.ylabel("cv_2")
+    plt.title("Free Energy Surface")
     plt.show()
 
 

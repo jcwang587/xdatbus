@@ -2,24 +2,24 @@ import pandas as pd
 from xdatbus.utils import gauss_pot_3d
 
 
-def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=100):
+def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=100):
     """
-    Calculate the 3D free energy profile from a HILLSPOT file.
+    Calculate the 2D free energy profile from a HILLSPOT file.
 
-    Parameters
-    ----------
-    hillspot_path : str
-        The path of the HILLSPOT file
-    hills_count : int
-        The number of hills to be read
-    cv_1_range : list
-        The range of the first collective variable
-    cv_2_range : list
-        The range of the second collective variable
-    cv_3_range : list
-        The range of the third collective variable
-    resolution : int (optional)
-        The resolution of the free energy profile
+        Parameters
+        ----------
+        hillspot_path : str
+            The path of the HILLSPOT file
+        hills_count : int
+            The number of hills to be read
+        cv_1_range : list
+            The range of the first collective variable
+        cv_2_range : list
+            The range of the second collective variable
+        cv_3_range : list
+            The range of the third collective variable
+        resolution : int (optional)
+            The resolution of the free energy profile
     """
     assert isinstance(cv_1_range, list) and len(cv_1_range) == 2, "cv_1_range must be a list of length 2"
     assert isinstance(cv_2_range, list) and len(cv_2_range) == 2, "cv_2_range must be a list of length 2"
@@ -35,7 +35,7 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
         line = line.split()
         x = []
         if len(line) > 2:
-            for i in range(len(line) - 3):
+            for i in range(len(line) - 2):
                 x.append(float(line[i]))
             data.append(x)
             h.append(float(line[-2]))
@@ -47,24 +47,22 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
 
     step_1 = (cv_1_range[1] - cv_1_range[0]) / resolution
     step_2 = (cv_2_range[1] - cv_2_range[0]) / resolution
-    step_3 = (cv_3_range[1] - cv_3_range[0]) / resolution
+    cv_1 = cv_1_range[0]
 
     data_list = []
 
-    for i in range(resolution):
-        cv_1 = cv_1_range[0] + i * step_1
-        for j in range(resolution):
-            cv_2 = cv_2_range[0] + j * step_2
-            for k in range(resolution):
-                cv_3 = cv_3_range[0] + k * step_3
-                en = 0.0
-                for l in range(len(data)):
-                    cv_1_0 = data[l][0]
-                    cv_2_0 = data[l][1]
-                    cv_3_0 = data[l][2]
-                    en_ = gauss_pot_3d(cv_1, cv_2, cv_3, cv_1_0, cv_2_0, cv_3_0, h[l], w[l])
-                    en += en_
-                data_list.append({"cv_1": cv_1, "cv_2": cv_2, "cv_3": cv_3, "potential_energy": en})
+    for i in range(1, resolution):
+        cv_1 = cv_1 + step_1
+        cv_2 = cv_2_range[0]
+        for k in range(1, resolution):
+            en = 0.0
+            cv_2 = cv_2 + step_2
+            for j in range(len(data)):
+                cv_1_0 = data[j][0]
+                cv_2_0 = data[j][1]
+                en_ = gauss_pot_3d(cv_1, cv_2, cv_1_0, cv_2_0, h[j], w[j])
+                en += en_
+            data_list.append({"cv_1": cv_1, "cv_2": cv_2, "potential_energy": en})
 
     df = pd.DataFrame(data_list)
 

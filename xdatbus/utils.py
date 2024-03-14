@@ -90,7 +90,9 @@ def gauss_pot_1d(x: np.ndarray, x0: float, height: float, width: float) -> np.nd
     return en
 
 
-def gauss_pot_2d(x: np.ndarray, y: np.ndarray, x0: float, y0: float, height: float, width: float) -> np.ndarray:
+def gauss_pot_2d(
+    x: np.ndarray, y: np.ndarray, x0: float, y0: float, height: float, width: float
+) -> np.ndarray:
     """
     Calculate the Gaussian potential energy.
 
@@ -106,4 +108,36 @@ def gauss_pot_2d(x: np.ndarray, y: np.ndarray, x0: float, y0: float, height: flo
     - np.ndarray: The potential energy at each position (x, y).
     """
     en = height * np.exp(-((x - x0) ** 2 + (y - y0) ** 2) / (2.0 * width**2))
+    return en
+
+
+def gauss_pot_3d(
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    x0: float,
+    y0: float,
+    z0: float,
+    height: float,
+    width: float,
+) -> np.ndarray:
+    """
+    Calculate the Gaussian potential energy.
+
+    Parameters:
+    - x (np.ndarray): Array of x positions at which to evaluate the potential.
+    - y (np.ndarray): Array of y positions at which to evaluate the potential.
+    - z (np.ndarray): Array of z positions at which to evaluate the potential.
+    - x0 (float): The x position of the potential minimum.
+    - y0 (float): The y position of the potential minimum.
+    - z0 (float): The z position of the potential minimum.
+    - height (float): The height of the Gaussian potential.
+    - width (float): The standard deviation (controls the width of the Gaussian).
+
+    Returns:
+    - np.ndarray: The potential energy at each position (x, y, z).
+    """
+    en = height * np.exp(
+        -((x - x0) ** 2 + (y - y0) ** 2 + (z - z0) ** 2) / (2.0 * width**2)
+    )
     return en

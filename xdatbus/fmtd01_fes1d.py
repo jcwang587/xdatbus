@@ -1,8 +1,8 @@
 import pandas as pd
-from xdatbus.utils import gauss_pot
+from xdatbus.utils import gauss_pot_1d
 
 
-def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
+def fes_1d(hillspot_path, hills_count, cv_range, resolution=1000):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
 
@@ -23,7 +23,7 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
     data = []
     h = []
     w = []
-    step = 0
+    hills_in = 0
     for line in f.readlines():
         line = line.split()
         x = []
@@ -33,8 +33,8 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
             data.append(x)
             h.append(float(line[-2]))
             w.append(float(line[-1]))
-        step += 1
-        if step > hills_count:
+        hills_in += 1
+        if hills_in > hills_count:
             break
     f.close()
 
@@ -48,7 +48,7 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
         cv = cv + step
         for j in range(len(data)):
             cv0 = data[j][0]
-            en_ = gauss_pot(cv, cv0, h[j], w[j])
+            en_ = gauss_pot_1d(cv, cv0, h[j], w[j])
             en += en_
         data_list.append({"cv": cv, "potential_energy": en})
 
@@ -58,7 +58,7 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
 
 
 input_line_number = 10
-fes = calculate_profile_1d(
+fes = fes_1d(
     "../tests/data/hillspot/HILLSPOT_1D",
     input_line_number,
     cv_range=[6, 10],

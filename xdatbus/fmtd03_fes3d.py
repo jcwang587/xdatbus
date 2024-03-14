@@ -2,7 +2,7 @@ import pandas as pd
 from xdatbus.utils import gauss_pot_3d
 
 
-def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=100):
+def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=50):
     """
     Calculate the 2D free energy profile from a HILLSPOT file.
 

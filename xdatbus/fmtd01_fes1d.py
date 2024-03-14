@@ -2,7 +2,7 @@ import pandas as pd
 from xdatbus.utils import gauss_pot
 
 
-def calculate_profile_1d(hillspot_path, hills_count, cv_min, cv_max, resolution=1000):
+def calculate_profile_1d(hillspot_path, hills_count, cv_range, resolution=1000):
     """
     Calculate the 1D free energy profile from a HILLSPOT file.
 
@@ -12,10 +12,8 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_min, cv_max, resolution=
             The path of the HILLSPOT file
         hills_count : int
             The number of hills to be read
-        cv_min : float
-            The minimum value of the collective variable
-        cv_max : float
-            The maximum value of the collective variable
+        cv_range : list
+            The range of the collective variable
         resolution : int (optional)
             The resolution of the free energy profile
     """
@@ -40,8 +38,8 @@ def calculate_profile_1d(hillspot_path, hills_count, cv_min, cv_max, resolution=
             break
     f.close()
 
-    step = (cv_max - cv_min) / resolution
-    cv = cv_min
+    step = (cv_range[1] - cv_range[0]) / resolution
+    cv = cv_range[0]
 
     data_list = []
 
@@ -63,8 +61,7 @@ input_line_number = 10
 fes = calculate_profile_1d(
     "../tests/data/hillspot/HILLSPOT_1D",
     input_line_number,
-    cv_min=0,
-    cv_max=10,
+    cv_range=[6, 10],
     resolution=1000,
 )
 # plot the free energy profile

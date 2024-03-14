@@ -19,6 +19,8 @@ def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
         resolution : int (optional)
             The resolution of the free energy profile
     """
+    assert isinstance(cv_1_range, list) and len(cv_1_range) == 2, "cv_1_range must be a list of length 2"
+    assert isinstance(cv_2_range, list) and len(cv_2_range) == 2, "cv_2_range must be a list of length 2"
 
     f = open(hillspot_path, "r")
 
@@ -52,8 +54,6 @@ def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
         for k in range(1, resolution):
             en = 0.0
             cv_2 = cv_2 + step_2
-            cv_1_ = (cv_1 + cv_2) / 2
-            cv_2_ = (cv_1 - cv_2) / 2
             for j in range(len(data)):
                 cv_1_0 = data[j][0]
                 cv_2_0 = data[j][1]
@@ -73,7 +73,7 @@ def main():
         100,
         [8, 10],
         [8, 10],
-        resolution=1000,
+        resolution=100,
     )
 
     from matplotlib import pyplot as plt

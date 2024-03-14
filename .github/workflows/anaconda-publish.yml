@@ -50,7 +50,7 @@ jobs:
         sed -i "s/PACKAGE_VERSION/$VERSION/" conda/meta.yaml
 
     - name: Build Conda package
-      run: conda build -c conda-forge --no-test conda/ --output-folder conda-out
+      run: conda build -c conda-forge --no-test conda/ --output-folder conda-out --python 3.11
 
     - name: Upload Conda package to Anaconda Cloud
       run: |

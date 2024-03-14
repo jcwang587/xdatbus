@@ -4,7 +4,7 @@ from xdatbus.utils import gauss_pot_2d
 
 def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
     """
-    Calculate the 1D free energy profile from a HILLSPOT file.
+    Calculate the 2D free energy profile from a HILLSPOT file.
 
         Parameters
         ----------

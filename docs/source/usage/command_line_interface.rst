@@ -33,14 +33,17 @@ Following is the list of available CLI commands:
      - Convert the vasprun.xml files to extended xyz files
 
 
-Aggregate XDATCAR
+Combine trajectories
 ----------------
 
-To aggregate the XDATCAR files from an AIMD simulation, run the following command:
+Copy the XDATCAR files in sequence, naming as XDATCAR01, XDATCAR02, XDATCAR10 ... or XDATCAR1, XDATCAR2, XDATCAR10...;
+both formats will work. In the same directory, run the command ``xdc_aggregate`` or use ``xdc_aggregate -h`` for help.
+The script will first wrap the coordinates within the cell and concatenate the trajectories using a naming sequence.
 
 .. code-block:: console
 
    $ aggregate_xdatcar
+
 
 Unwrap XDATCAR
 ----------------

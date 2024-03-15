@@ -42,13 +42,18 @@ The script will first wrap the coordinates within the cell and concatenate the t
 
 .. code-block:: console
 
-   $ aggregate_xdatcar
+   $ xdc_aggregate
+    [13:45:19] sequence: ['XDATCAR0', 'XDATCAR1']
+    [13:45:22] xdc_aggregate: wrapping XDATCAR0 | number of frames: 2000
+    [13:45:25] xdc_aggregate: wrapping XDATCAR1 | number of frames: 2000
+    [13:45:30] xdc_aggregate: initializing XDATBUS
+    [13:45:36] xdc_aggregate: appending XDATCAR1
 
 
 Unwrap XDATCAR
 ----------------
 
-To unwrap the coordinates in the XDATCAR file, run the following command:
+To unwrap the trajectory in the XDATCAR file, run the command ``xdc_unwrap`` or use ``xdc_unwrap -h`` for help.
 
 .. code-block:: console
 

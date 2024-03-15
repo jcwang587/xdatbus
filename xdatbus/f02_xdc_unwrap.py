@@ -28,7 +28,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz", show_pr
         with Progress(console=console) as progress:
             if show_progress:
                 task = progress.add_task(
-                    "🚌 xdatbus xdc_unwrap", total=len(xdatcar.structures) // 1000 + 1
+                    "🚌 xdatbus xdc_unwrap", total=len(xdatcar.structures) // 100 + 1
                 )
             else:
                 task = progress.add_task("🚌 xdatbus xdc_unwrap", visible=False)
@@ -44,7 +44,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz", show_pr
             )  # Store the first set of coordinates
 
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
-                if (i + 1) % 1000 == 0:
+                if (i + 1) % 100 == 0:
                     console.log(f"xdc_unwrap: Processing step {i + 1}")
                     progress.update(task, advance=1)
 

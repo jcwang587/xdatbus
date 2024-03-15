@@ -6,7 +6,7 @@ def main():
     console = Console()
 
     table = Table(
-        title="XDATBUS HELP MENU", title_style="bold magenta"
+        title="XDATBUS CLI RECIPES", title_style="bold magenta"
     )
     table.add_column("CLI Command", style="cyan")
     table.add_column("Options")

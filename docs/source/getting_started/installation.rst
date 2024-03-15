@@ -3,7 +3,7 @@ Installation
 
 .. _installation:
 
-1. Installing with pip
+Installing with pip
 ----------------
 
 Make sure you have a Python interpreter, preferably version 3.10 or higher:
@@ -33,7 +33,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
    $ pip install -U git+https://github.com/jcwang587/xdatbus
 
 
-2. Installing with conda
+Installing with conda
 ----------------
 
 .. note::
@@ -54,7 +54,7 @@ You can install `xdatbus` via conda as well via the xdatbus channel on Anaconda 
    $ conda install --channel xdatbus xdatbus
 
 
-3. Optional installation
+Optional installation
 ----------------
 
 .. note::

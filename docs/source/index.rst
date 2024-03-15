@@ -15,15 +15,13 @@ Check out the :doc:`installation` section to get started, and :doc:`usage` secti
    :caption: Getting Started
   
    getting_started/installation
-   getting_started/suppor
 
 .. toctree::
    :maxdepth: 2
-   :caption: Examples
+   :caption: Usage
   
-   examples/example1
-   examples/example2
-   examples/example3
+   usage/command_line_interface
+   usage/application_programming_interface
 
 .. toctree::
    :maxdepth: 2

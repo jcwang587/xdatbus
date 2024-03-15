@@ -55,10 +55,10 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
     for i in range(1, resolution):
         cv_1 = cv_1 + step_1
         cv_2 = cv_2_range[0]
-        for k in range(1, resolution):
+        for m in range(1, resolution):
             cv_2 = cv_2 + step_2
             cv_3 = cv_3_range[0]
-            for l in range(1, resolution):
+            for n in range(1, resolution):
                 en = 0.0
                 cv_3 = cv_3 + step_3
                 for j in range(len(data)):

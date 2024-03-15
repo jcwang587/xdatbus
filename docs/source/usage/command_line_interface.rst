@@ -8,10 +8,6 @@ List of recipes
 
 The list of the available `xdatbus` CLI recipes can be displayed by running the ``xdatbus`` command:
 
-.. code-block:: console
-
-   $ xdatbus
-
 Following is the list of available CLI commands:
 
 .. list-table::
@@ -58,7 +54,7 @@ the trajectories using a naming sequence.
 Unwrap XDATCAR
 ----------------
 
-To unwrap the trajectory in the XDATCAR file, run the command ``xdc_unwrap`` or use ``xdc_unwrap -h`` for help.
+To unwrap the trajectory in the `XDATCAR` file, run the command ``xdc_unwrap`` or use ``xdc_unwrap -h`` for help.
 
 .. code-block:: console
 
@@ -88,7 +84,7 @@ or use ``thermal_report -h`` for help. The script will export four-column .csv d
 Convert xml to xyz
 ----------------
 
-To convert the vasprun.xml files to extended .xyz files, run the command ``xml2xyz`` or use ``xml2xyz -h`` for help.
+To convert the `vasprun.xml` files to extended .xyz files, run the command ``xml2xyz`` or use ``xml2xyz -h`` for help.
 
 .. code-block:: console
 

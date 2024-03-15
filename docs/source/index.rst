@@ -21,7 +21,7 @@ Check out the :doc:`installation` section to get started, and :doc:`usage` secti
    :caption: Usage
   
    usage/command_line_interface
-   usage/code
+   usage/application_programming_interface
 
 .. toctree::
    :maxdepth: 2

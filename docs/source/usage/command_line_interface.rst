@@ -40,9 +40,10 @@ the `examples <https://github.com/jcwang587/xdatbus/tree/main/examples>`_ direct
 Combine trajectories
 ----------------
 
-Copy the XDATCAR files in sequence, naming as XDATCAR01, XDATCAR02, XDATCAR10 ... or XDATCAR1, XDATCAR2, XDATCAR10...;
-both formats will work. In the same directory, run the command ``xdc_aggregate`` or use ``xdc_aggregate -h`` for help.
-The script will first wrap the coordinates within the cell and concatenate the trajectories using a naming sequence.
+Copy the `XDATCAR` files in sequence, naming as `XDATCAR01, XDATCAR02, XDATCAR10` ... or
+`XDATCAR1, XDATCAR2, XDATCAR10`...; both formats will work. In the same directory, run the command ``xdc_aggregate``
+or use ``xdc_aggregate -h`` for help. The script will first wrap the coordinates within the cell and concatenate
+the trajectories using a naming sequence.
 
 .. code-block:: console
 
@@ -71,11 +72,17 @@ To unwrap the trajectory in the XDATCAR file, run the command ``xdc_unwrap`` or 
 Generate thermal report
 ----------------
 
-To generate a thermal report from the OSZICAR files, run the following command:
+Copy the OSZICAR files in sequence, naming as `OSZICAR01, OSZICAR02, OSZICAR10` ... or
+`OSZICAR1, OSZICAR2, OSZICAR10`...; both formats will work. In the same directory, run the command ``thermal_report``
+or use ``thermal_report -h`` for help. The script will export four-column .csv data with `potential energy`,
+`kinetic energy`, `total energy`, and `temperature` for each time step.
 
 .. code-block:: console
 
    $ thermal_report
+    [13:59:18] sequence: ['OSZICAR0', 'OSZICAR1']
+               thermal_report: Processing OSZICAR0
+               thermal_report: Processing OSZICAR1
 
 
 Convert xml to xyz

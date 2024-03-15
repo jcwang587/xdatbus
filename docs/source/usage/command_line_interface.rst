@@ -51,7 +51,7 @@ the trajectories using a naming sequence.
     [13:45:36] xdc_aggregate: appending XDATCAR1
 
 
-Unwrap XDATCAR
+Unwrap trajectory
 ----------------
 
 To unwrap the trajectory in the `XDATCAR` file, run the command ``xdc_unwrap`` or use ``xdc_unwrap -h`` for help.
@@ -65,7 +65,7 @@ To unwrap the trajectory in the `XDATCAR` file, run the command ``xdc_unwrap`` o
     [13:51:05] xdc_unwrap: Processing step 400
     [13:51:08] xdc_unwrap: Processing step 500
 
-Generate thermal report
+Check energies / temperatures
 ----------------
 
 Copy the OSZICAR files in sequence, naming as `OSZICAR01, OSZICAR02, OSZICAR10` ... or

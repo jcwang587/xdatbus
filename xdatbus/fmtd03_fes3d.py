@@ -86,19 +86,19 @@ def fes_3d(
     return df
 
 
-fes = fes_3d(
-    hillspot_path="../tests/data/hillspot/HILLSPOT_3D",
-    hills_count=9,
-    cv_1_range=[5, 10],
-    cv_2_range=[5, 10],
-    cv_3_range=[5, 10],
-    resolution=100,
-)
 from matplotlib import pyplot as plt
 import numpy as np
 
 
 def main():
+    fes = fes_3d(
+        hillspot_path="../tests/data/hillspot/HILLSPOT_3D",
+        hills_count=9,
+        cv_1_range=[5, 10],
+        cv_2_range=[5, 10],
+        cv_3_range=[5, 10],
+        resolution=100,
+    )
 
     # 1. Find the `cv_3` value closest to 7.
     unique_cv_3_values = fes["cv_3"].unique()

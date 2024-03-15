@@ -1,3 +1,6 @@
+Command line interface
+=====
+
 .. _command-line-interface:
 
 List of recipes

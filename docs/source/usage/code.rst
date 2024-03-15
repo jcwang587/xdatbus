@@ -1,4 +1,4 @@
-Example-2
+Code
 =====
 
 .. _installation:

@@ -14,7 +14,7 @@ The list of the available `xdatbus` CLI recipes can be displayed by running the 
 
 Following is the list of available CLI commands:
 
-.. list-table:: XDATBUS CLI RECIPES
+.. list-table::
    :header-rows: 1
 
    * - Command

@@ -32,6 +32,10 @@ Following is the list of available CLI commands:
    * - ``xml2xyz``
      - Convert the vasprun.xml files to extended xyz files
 
+.. note::
+
+Not all the functionalities are available in the CLI. For the detailed tutorials of the application, please refer to
+the `examples <https://github.com/jcwang587/xdatbus/tree/main/examples>`_ directory of the GitHub repository.
 
 Combine trajectories
 ----------------
@@ -58,6 +62,11 @@ To unwrap the trajectory in the XDATCAR file, run the command ``xdc_unwrap`` or 
 .. code-block:: console
 
    $ xdc_unwrap
+    [13:50:56] xdc_unwrap: Processing step 100
+    [13:50:59] xdc_unwrap: Processing step 200
+    [13:51:02] xdc_unwrap: Processing step 300
+    [13:51:05] xdc_unwrap: Processing step 400
+    [13:51:08] xdc_unwrap: Processing step 500
 
 Generate thermal report
 ----------------

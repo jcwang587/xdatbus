@@ -19,8 +19,12 @@ def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
         resolution : int (optional)
             The resolution of the free energy profile
     """
-    assert isinstance(cv_1_range, list) and len(cv_1_range) == 2, "cv_1_range must be a list of length 2"
-    assert isinstance(cv_2_range, list) and len(cv_2_range) == 2, "cv_2_range must be a list of length 2"
+    assert (
+        isinstance(cv_1_range, list) and len(cv_1_range) == 2
+    ), "cv_1_range must be a list of length 2"
+    assert (
+        isinstance(cv_2_range, list) and len(cv_2_range) == 2
+    ), "cv_2_range must be a list of length 2"
 
     f = open(hillspot_path, "r")
 

@@ -2,7 +2,9 @@ import pandas as pd
 from xdatbus.utils import gauss_pot_3d
 
 
-def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=100):
+def fes_3d(
+    hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resolution=100
+):
     """
     Calculate the 2D free energy profile from a HILLSPOT file.
 
@@ -21,9 +23,15 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
         resolution : int (optional)
             The resolution of the free energy profile
     """
-    assert isinstance(cv_1_range, list) and len(cv_1_range) == 2, "cv_1_range must be a list of length 2"
-    assert isinstance(cv_2_range, list) and len(cv_2_range) == 2, "cv_2_range must be a list of length 2"
-    assert isinstance(cv_3_range, list) and len(cv_3_range) == 2, "cv_3_range must be a list of length 2"
+    assert (
+        isinstance(cv_1_range, list) and len(cv_1_range) == 2
+    ), "cv_1_range must be a list of length 2"
+    assert (
+        isinstance(cv_2_range, list) and len(cv_2_range) == 2
+    ), "cv_2_range must be a list of length 2"
+    assert (
+        isinstance(cv_3_range, list) and len(cv_3_range) == 2
+    ), "cv_3_range must be a list of length 2"
 
     f = open(hillspot_path, "r")
 
@@ -65,37 +73,59 @@ def fes_3d(hillspot_path, hills_count, cv_1_range, cv_2_range, cv_3_range, resol
                     cv_1_0 = data[j][0]
                     cv_2_0 = data[j][1]
                     cv_3_0 = data[j][2]
-                    en_ = gauss_pot_3d(cv_1, cv_2, cv_3, cv_1_0, cv_2_0, cv_3_0, h[j], w[j])
+                    en_ = gauss_pot_3d(
+                        cv_1, cv_2, cv_3, cv_1_0, cv_2_0, cv_3_0, h[j], w[j]
+                    )
                     en += en_
-                data_list.append({"cv_1": cv_1, "cv_2": cv_2, "cv_3": cv_3, "potential_energy": en})
+                data_list.append(
+                    {"cv_1": cv_1, "cv_2": cv_2, "cv_3": cv_3, "potential_energy": en}
+                )
 
     df = pd.DataFrame(data_list)
 
     return df
 
 
+fes = fes_3d(
+    hillspot_path="../tests/data/hillspot/HILLSPOT_3D",
+    hills_count=9,
+    cv_1_range=[5, 10],
+    cv_2_range=[5, 10],
+    cv_3_range=[5, 10],
+    resolution=100,
+)
+from matplotlib import pyplot as plt
+import numpy as np
+
+
 def main():
-    fes = fes_3d(
-        hillspot_path="../tests/data/hillspot/HILLSPOT_3D",
-        hills_count=10,
-        cv_1_range=[5, 10],
-        cv_2_range=[5, 10],
-        cv_3_range=[5, 10],
-        resolution=100,
-    )
 
-    from matplotlib import pyplot as plt
+    # 1. Find the `cv_3` value closest to 7.
+    unique_cv_3_values = fes["cv_3"].unique()
+    closest_cv_3 = unique_cv_3_values[np.abs(unique_cv_3_values - 9).argmin()]
 
-    # plot the middle slice of the free energy surface
-    fes = fes[fes["cv_3"] == 7.5]
-    fes = fes.pivot("cv_1", "cv_2", "potential_energy")
-    fes = fes.sort_index(ascending=False)
-    plt.contourf(fes.columns, fes.index, fes.values, cmap="viridis")
-    plt.colorbar()
-    plt.xlabel("cv_1")
-    plt.ylabel("cv_2")
-    plt.title("Free Energy Surface")
-    plt.show()
+    # 2. Filter the DataFrame for the closest `cv_3` value.
+    fes_closest = fes[fes["cv_3"] == closest_cv_3]
+
+    # Ensure the DataFrame is not empty after filtering.
+    if not fes_closest.empty:
+        # 3. Pivot the DataFrame for plotting.
+        fes_pivot = fes_closest.pivot(
+            index="cv_1", columns="cv_2", values="potential_energy"
+        )
+
+        # Sorting the index to have a proper orientation in the plot.
+        fes_pivot = fes_pivot.sort_index(ascending=False)
+
+        # 4. Plotting
+        plt.contourf(
+            fes_pivot.columns, fes_pivot.index, fes_pivot.values, cmap="viridis"
+        )
+        plt.colorbar()
+        plt.xlabel("cv_1")
+        plt.ylabel("cv_2")
+        plt.title(f"Free Energy Surface at cv_3 ~ {closest_cv_3}")
+        plt.show()
 
 
 if __name__ == "__main__":

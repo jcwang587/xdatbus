@@ -27,7 +27,7 @@ the `discussion forumn <https://github.com/jcwang587/xdatbus/discussions>`_.
    :caption: Usage
   
    usage/command_line_interface
-   usage/application_programming_interface
+   usage/programming_interface
 
 .. toctree::
    :maxdepth: 2

@@ -3,7 +3,7 @@ Command line interface
 
 .. _command-line-interface:
 
-1. List of Recipes
+1. List of recipes
 ------------
 
 The list of the available `xdatbus` CLI recipes can be displayed by running the ``xdatbus`` command:
@@ -14,38 +14,41 @@ The list of the available `xdatbus` CLI recipes can be displayed by running the 
 
 Following is the list of available CLI commands:
 
-.. list-table:: XDATBUS CLI recipes
+.. list-table:: XDATBUS CLI RECIPES
    :header-rows: 1
 
    * - Command
-     - Options
      - Description
 
    * - ``xdc_aggregate``
-     - [--xdc_dir] [--output_dir] [--del_temp]
      - Aggregate XDATCAR files from an AIMD simulation
 
    * - ``xdc_unwrap``
-     - [--xdc_path] [--output_path]
      - Unwrap the coordinates in the XDATCAR file (to xyz)
 
-2. Creating recipes
+   * - ``thermal_report``
+     - Generate a thermal report from the OSZICAR files
+
+   * - ``xml2xyz``
+     - Convert the vasprun.xml files to extended xyz files
+
+
+2. Aggregate XDATCAR
 ----------------
 
 To retrieve a list of random ingredients,
 you can use the ``lumache.get_random_ingredients()`` function:
 
-.. autofunction:: lumache.get_random_ingredients
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
+3. Unwrap XDATCAR
+----------------
 
-.. autoexception:: lumache.InvalidKindError
 
-For example:
+4. Generate thermal report
+----------------
 
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
+
+5. Convert xml to xyz
+----------------
+
 

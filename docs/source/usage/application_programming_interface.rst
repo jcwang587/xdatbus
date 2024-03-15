@@ -1,4 +1,4 @@
-Code
+Application programming interface
 =====
 
 .. _code:

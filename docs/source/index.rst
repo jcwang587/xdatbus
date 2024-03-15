@@ -15,7 +15,6 @@ Check out the :doc:`installation` section to get started, and :doc:`usage` secti
    :caption: Getting Started
   
    getting_started/installation
-   getting_started/suppor
 
 .. toctree::
    :maxdepth: 2

@@ -1,34 +1,11 @@
 Code
 =====
 
-.. _installation:
+.. _code:
 
-1. Installation
+Usage with code
 ------------
 
-To use Lumache, first install it using pip:
+We provided tutorials on the usage of the package in the form of Jupyter notebooks. These are located in the `examples <https://github.com/jcwang587/xdatbus/tree/main/examples>`_ directory of the GitHub repository.
 
-.. code-block:: console
-
-   (.venv) $ pip install lumache
-
-2. Creating recipes
-----------------
-
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
-
-.. autofunction:: lumache.get_random_ingredients
-
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
-
-.. autoexception:: lumache.InvalidKindError
-
-For example:
-
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
 

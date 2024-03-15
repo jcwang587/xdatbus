@@ -88,9 +88,15 @@ or use ``thermal_report -h`` for help. The script will export four-column .csv d
 Convert xml to xyz
 ----------------
 
-To convert the vasprun.xml files to extended xyz files, run the following command:
+To convert the vasprun.xml files to extended .xyz files, run the command ``xml2xyz`` or use ``xml2xyz -h`` for help.
 
 .. code-block:: console
 
    $ xml2xyz
+    [14:01:53] sequence: ['vasprun01', 'vasprun02', 'vasprun03', 'vasprun04', 'vasprun05']
+               xml2xyz: processing vasprun01
+    [14:01:54] xml2xyz: processing vasprun02
+    [14:01:55] xml2xyz: processing vasprun03
+    [14:01:56] xml2xyz: processing vasprun04
+    [14:01:57] xml2xyz: processing vasprun05
 

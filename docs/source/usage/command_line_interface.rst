@@ -88,7 +88,7 @@ To convert the `vasprun.xml` files to extended .xyz files, run the command ``xml
 
 .. code-block:: console
 
-   $ xml2xyz
+   $ xml2xyz --train_ratio 0.8
     [14:01:53] sequence: ['vasprun01', 'vasprun02']
                xml2xyz: processing vasprun01
     [14:01:54] xml2xyz: processing vasprun02

@@ -1,6 +1,3 @@
-Installation
-=====
-
 .. _installation:
 
 Installing with pip

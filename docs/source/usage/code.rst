@@ -1,6 +1,3 @@
-Code
-=====
-
 .. _code:
 
 Usage with code

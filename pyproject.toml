@@ -27,7 +27,8 @@ include = [
 ]
 
 exclude = [
-    "xdatbus-dev"
+    "xdatbus-dev",
+    "misc"
 ]
 
 [tool.poetry.dependencies]

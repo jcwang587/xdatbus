@@ -45,7 +45,7 @@ def xdc_unwrap(xdc_path="./XDATBUS", output_path="./XDATBUS_unwrap.xyz", show_pr
 
             for i in range(1, len(xdatcar.structures)):  # Start from the second frame
                 if (i + 1) % 100 == 0:
-                    console.log(f"xdc_unwrap: Processing step {i + 1}")
+                    progress.console.log(f"xdc_unwrap: Processing step {i + 1}")
                     progress.update(task, advance=1)
 
                 # initialize an empty array for the current structure's unwrapped coordinates

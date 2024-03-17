@@ -94,30 +94,24 @@ def main():
     fes = fes_3d(
         hillspot_path="../tests/data/hillspot/HILLSPOT_3D",
         hills_count=9,
-        cv_1_range=[5, 10],
-        cv_2_range=[5, 10],
-        cv_3_range=[5, 10],
-        resolution=100,
+        cv_1_range=[8, 10],
+        cv_2_range=[8, 10],
+        cv_3_range=[8, 10],
+        resolution=20,
     )
 
-    # 1. Find the `cv_3` value closest to 7.
     unique_cv_3_values = fes["cv_3"].unique()
     closest_cv_3 = unique_cv_3_values[np.abs(unique_cv_3_values - 9).argmin()]
 
-    # 2. Filter the DataFrame for the closest `cv_3` value.
     fes_closest = fes[fes["cv_3"] == closest_cv_3]
 
-    # Ensure the DataFrame is not empty after filtering.
     if not fes_closest.empty:
-        # 3. Pivot the DataFrame for plotting.
         fes_pivot = fes_closest.pivot(
             index="cv_1", columns="cv_2", values="potential_energy"
         )
 
-        # Sorting the index to have a proper orientation in the plot.
         fes_pivot = fes_pivot.sort_index(ascending=False)
 
-        # 4. Plotting
         plt.contourf(
             fes_pivot.columns, fes_pivot.index, fes_pivot.values, cmap="viridis"
         )

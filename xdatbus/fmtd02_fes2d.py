@@ -68,26 +68,3 @@ def fes_2d(hillspot_path, hills_count, cv_1_range, cv_2_range, resolution=100):
     df = pd.DataFrame(data_list)
 
     return df
-
-
-def main():
-    input_line_number = 10
-    fes = fes_2d(
-        "../tests/data/hillspot/HILLSPOT_2D",
-        100,
-        [8, 10],
-        [8, 10],
-        resolution=100,
-    )
-
-    from matplotlib import pyplot as plt
-
-    # plot the free energy profile in 2D
-    fig = plt.figure()
-    plt.tricontourf(fes["cv_1"], fes["cv_2"], fes["potential_energy"], 20)
-    plt.colorbar()
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()

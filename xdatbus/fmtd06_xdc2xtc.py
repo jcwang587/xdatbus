@@ -4,19 +4,19 @@ from MDAnalysis import Universe
 from MDAnalysis.coordinates.XTC import XTCWriter
 
 
-def xdc2xtc(xdatcar_path):
+def xdc2xtc(xdc_path):
     """
     Convert a VASP XDATCAR file to an XTC trajectory file.
 
     Parameters
     ----------
-    xdatcar_path : str
+    xdc_path : str
         Path to the XDATCAR file
     """
     # Load XDATCAR using ASE and write to a temporary XYZ file
-    xdatcar = read(xdatcar_path, format="vasp-xdatcar", index=":")
-    temp_xyz_path = xdatcar_path + ".xyz"
-    xtc_path = xdatcar_path + ".xtc"
+    xdatcar = read(xdc_path, format="vasp-xdatcar", index=":")
+    temp_xyz_path = xdc_path + ".xyz"
+    xtc_path = xdc_path + ".xtc"
 
     with open(temp_xyz_path, 'w') as file:
         write(file, xdatcar, format='xyz')

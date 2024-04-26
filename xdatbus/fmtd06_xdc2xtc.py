@@ -1,27 +1,37 @@
 import os
-import MDAnalysis as MDa
+from ase.io import read, write
+from MDAnalysis import Universe
+from MDAnalysis.coordinates.XTC import XTCWriter
 
 
-def xdc2xtc(xyz_path):
+def xdc2xtc(xdc_path):
     """
-    Initialize a trajectory writer instance for *filename*.
+    Convert a VASP XDATCAR file to an XTC trajectory file.
 
-        Parameters
-        ----------
-        xyz_path : str
-            Path to the unwrapped xyz file
-
+    Parameters
+    ----------
+    xdc_path : str
+        Path to the XDATCAR file
     """
+    # Load XDATCAR using ASE and write to a temporary XYZ file
+    xdatcar = read(xdc_path, format="vasp-xdatcar", index=":")
+    temp_xyz_path = xdc_path + ".xyz"
+    xtc_path = xdc_path + ".xtc"
 
-    u = MDa.Universe(xyz_path)
+    with open(temp_xyz_path, 'w') as file:
+        write(file, xdatcar, format='xyz')
 
-    output_filename = os.path.basename(xyz_path).replace(".xyz", ".xtc")
-    output_path = os.path.join(os.path.dirname(xyz_path), output_filename)
+    # close the file
+    file.close()
+
+    # Initialize MDAnalysis Universe
+    u = Universe(temp_xyz_path)
 
     # Write out the XTC file
-    with MDa.Writer(output_path, u.atoms.n_atoms) as w:
+    with XTCWriter(xtc_path, n_atoms=u.atoms.n_atoms) as w:
         for ts in u.trajectory:
-            print("Writing frame %d" % ts.frame)
+            print(f"Writing frame {ts.frame}")
             w.write(u.atoms)
 
-    print("xdatbus-func: fm01_xdc2xtc: Done!")
+
+

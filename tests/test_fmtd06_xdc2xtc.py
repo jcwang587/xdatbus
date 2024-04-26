@@ -17,25 +17,24 @@ def setup_test_environment(tmp_path, request):
     test_dir = os.path.dirname(os.path.abspath(__file__))
 
     # Path to the test data directory
-    data_dir = os.path.join(test_dir, "data/xyz")
+    data_dir = os.path.join(test_dir, "data/xdatcar")
 
     # Copy all files from the data directory to the temporary directory
     for f in os.listdir(data_dir):
         shutil.copy(os.path.join(data_dir, f), temp_dir)
 
-    # Assuming you have only one .xyz file (or you want to test with the first one you find)
-    xyz_file = [f for f in os.listdir(temp_dir) if f.endswith(".xyz")][0]
+    xdatcar_file = [f for f in os.listdir(temp_dir) if f.endswith("01")][0]
 
-    return os.path.join(temp_dir, xyz_file)
+    return os.path.join(temp_dir, xdatcar_file)
 
 
 def test_fmtd06_xdc2xtc(setup_test_environment):
-    xyz_path = str(setup_test_environment)
-    main_tmp_dir = os.path.dirname(xyz_path)
+    xdc_path = str(setup_test_environment)
+    main_tmp_dir = os.path.dirname(xdc_path)
 
-    xdc2xtc(xyz_path=xyz_path)
+    xdc2xtc(xdc_path=xdc_path)
 
     # Assertions
-    xyz_unwrap_path = os.path.join(main_tmp_dir, "trj.xtc")
+    xyz_unwrap_path = os.path.join(main_tmp_dir, xdc_path + ".xtc")
 
     assert os.path.exists(xyz_unwrap_path), "unwrapped trj file not created"

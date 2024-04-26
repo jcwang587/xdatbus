@@ -6,3 +6,9 @@ altered the statistical weight of each frame. To remove the effect of this bias 
 of the system in the unbiased ensemble, you must reweight (unbias) your simulation."""
 
 import numpy as np
+from statsmodels.nonparametric.smoothers_lowess import lowess
+
+
+def reweighting(fes, x, y, z, t, kb):
+
+    return fes, x, y, z

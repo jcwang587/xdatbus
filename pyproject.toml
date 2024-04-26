@@ -33,19 +33,20 @@ exclude = [
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
+ase = "3.22.1"
+mdanalysis = "2.7.0"
 numpy = "1.26.4"
 pandas = "2.2.2"
 pyarrow = "16.0.0"
-ase = "3.22.1"
 pymatgen = "2024.4.13"
-mdanalysis = "2.7.0"
 rich = "13.7.1"
-plotly = { version = "5.21.0", optional = true }
-dash = { version = "2.16.1", optional = true }
-rdkit = { version = "2023.9.5", optional = true }
+statsmodels = "0.14.1"
 bpy = { version = "4.0.0", markers = "python_version == '3.10.*'", optional = true }
-pyyaml = { version = "6.0.1", optional = true }
+dash = { version = "2.16.1", optional = true }
 ovito = { version = "3.10.5", optional = true }
+plotly = { version = "5.21.0", optional = true }
+pyyaml = { version = "6.0.1", optional = true }
+rdkit = { version = "2023.9.5", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.1.1"

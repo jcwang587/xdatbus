@@ -9,6 +9,36 @@ import numpy as np
 from statsmodels.nonparametric.smoothers_lowess import lowess
 
 
-def reweighting(fes, x, y, z, t, kb):
+def reweighting(fes, cv, kb, t):
+    """Reweight a metadynamics simulation to the unbiased ensemble using histogram reweighting.
 
-    return fes, x, y, z
+        Parameters
+        ----------
+        fes : np.ndarray
+            The free energy surface calculated from the metadynamics simulation.
+        cv : np.ndarray
+            The collective variable used in the metadynamics simulation.
+        kb : float
+            The Boltzmann constant.
+        t : float
+            The temperature of the simulation.
+
+    Returns
+    -------
+    np.ndarray
+        The unbiased free energy surface.
+    """
+    # Calculate the bias potential
+    bias = -kb * t * np.log(np.exp(-fes / (kb * t)).sum())
+
+    # Calculate the unbiased free energy surface
+    fes_unbiased = fes + bias
+
+    # Calculate the unbiased probability distribution
+    prob = np.exp(-fes_unbiased / (kb * t))
+    prob /= prob.sum()
+
+    # Calculate the unbiased free energy surface
+    fes_unbiased = -kb * t * np.log(prob)
+
+    return fes_unbiased

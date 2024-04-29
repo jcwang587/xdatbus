@@ -38,7 +38,7 @@ environment, then you can install via the xdatbus channel on Anaconda cloud:
 conda install --channel xdatbus xdatbus
 ```
 
-If you plan to use PLUMED to analyze biased MD sampling results, you can also install the conda version of PLUMED
+If you plan to use PLUMED to analyze enhanced sampling AIMD results, you can also install the conda version of PLUMED
 together:
 
 ```bash

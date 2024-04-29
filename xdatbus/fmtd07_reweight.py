@@ -9,7 +9,7 @@ import numpy as np
 from statsmodels.nonparametric.smoothers_lowess import lowess
 
 
-def reweighting(fes, cv, kb, t):
+def reweight(fes, cv, nv, kb, t, grid_min, grid_max, grid_num):
     """Reweight a metadynamics simulation to the unbiased ensemble using histogram reweighting.
 
         Parameters
@@ -18,27 +18,41 @@ def reweighting(fes, cv, kb, t):
             The free energy surface calculated from the metadynamics simulation.
         cv : np.ndarray
             The collective variable used in the metadynamics simulation.
+        nv : np.ndarray
+            The new collective variable for which the potential of mean force will be calculated.
         kb : float
             The Boltzmann constant.
         t : float
             The temperature of the simulation.
+        grid_min : float
+            The minimum value of the collective variable.
+        grid_max : float
+            The maximum value of the collective variable.
+        grid_num : int
+            The number of bins in the histogram.
 
     Returns
     -------
     np.ndarray
         The unbiased free energy surface.
     """
-    # Calculate the bias potential
-    bias = -kb * t * np.log(np.exp(-fes / (kb * t)).sum())
+    fes_flat = fes.flatten()
+    cv_hist = np.exp(-fes_flat / (kb * t))
 
-    # Calculate the unbiased free energy surface
-    fes_unbiased = fes + bias
+    nv_bins = np.linspace(grid_min, grid_max, grid_num)
+    nv_hist = np.zeros(len(nv_bins) - 1)
 
-    # Calculate the unbiased probability distribution
-    prob = np.exp(-fes_unbiased / (kb * t))
-    prob /= prob.sum()
+    for i in range(len(nv)):
+        for j in range(len(cv_hist)):
+            if nv_bins[i] <= nv[j] < nv_bins[i + 1]:
+                nv_hist[i] += cv_hist[j]
 
-    # Calculate the unbiased free energy surface
-    fes_unbiased = -kb * t * np.log(prob)
+    nv_hist = nv_hist / np.sum(nv_hist)
 
-    return fes_unbiased
+    pmf = -kb * t * np.log(nv_hist)
+    pmf -= np.min(pmf)
+
+    pmf_smooth = lowess(pmf, nv_bins, frac=0.1, return_sorted=False)
+
+    return pmf_smooth
+

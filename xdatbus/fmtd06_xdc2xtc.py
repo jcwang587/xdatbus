@@ -1,4 +1,3 @@
-import os
 from ase.io import read, write
 from MDAnalysis import Universe
 from MDAnalysis.coordinates.XTC import XTCWriter

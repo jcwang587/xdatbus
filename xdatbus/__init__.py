@@ -17,6 +17,7 @@ from .fmtd03_fes3d import *
 from .fmtd04_hillspot2hills import *
 from .fmtd05_report_loader import *
 from .fmtd06_xdc2xtc import *
+from .fmtd07_reweight import *
 
 from .fosz01_thermal_report import *
 

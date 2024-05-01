@@ -30,7 +30,7 @@ If you'd like to use the latest unreleased version on the main branch, you can i
 pip install -U git+https://github.com/jcwang587/xdatbus
 ```
 
-The package is also availabe from conda-based installation. It is generally recommended you first create a separate
+The package is also available from conda-based installation. It is generally recommended you first create a separate
 environment, then you can install via the xdatbus channel on Anaconda cloud:
 
 ```bash

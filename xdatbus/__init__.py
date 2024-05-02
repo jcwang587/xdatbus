@@ -11,13 +11,12 @@ from .fcom02_contcar import *
 
 from .fml01_xml2xyz import *
 
-from .fmtd01_fes1d import *
-from .fmtd02_fes2d import *
-from .fmtd03_fes3d import *
-from .fmtd04_hillspot2hills import *
-from .fmtd05_report_loader import *
-from .fmtd06_xdc2xtc import *
-from .fmtd07_reweight import *
+from .fmtd01_fes import *
+from .fmtd02_hillspot2hills import *
+from .fmtd03_report_loader import *
+from .fmtd04_xdc2xtc import *
+from .fmtd05_reweight import *
+from .fmtd06_pmf_3d import *
 
 from .fosz01_thermal_report import *
 

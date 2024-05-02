@@ -8,7 +8,13 @@ from rich.progress import Progress
 from xdatbus.utils import filter_files
 
 
-def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False):
+def xml2xyz(
+    xml_dir="./",
+    output_path="./",
+    train_ratio=1.0,
+    free_energy=True,
+    show_progress=False,
+):
     """
     Convert the vasprun.xml files to extended xyz files.
 
@@ -20,6 +26,8 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
             Output path of the extended xyz files
         train_ratio : float (optional)
             The ratio of training set
+        free_energy : bool (optional)
+            Whether to keep the free energy from the xml files
         show_progress : bool (optional)
             Show the progress bar or not
     """
@@ -57,9 +65,10 @@ def xml2xyz(xml_dir="./", output_path="./", train_ratio=1.0, show_progress=False
                 progress.update(task, advance=1)
                 xml_path = os.path.join(xml_dir, xml_file)
                 xml_set = read(xml_path, index="::", format="vasp-xml")
-                for atom in xml_set:
-                    if "free_energy" in atom.calc.results:
-                        del atom.calc.results["free_energy"]
+                if not free_energy:
+                    for atom in xml_set:
+                        if "free_energy" in atom.calc.results:
+                            del atom.calc.results["free_energy"]
                 data_set.extend(xml_set)
 
             if train_ratio < 1.0:

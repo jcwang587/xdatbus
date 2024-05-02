@@ -38,13 +38,13 @@ mdanalysis = "2.7.0"
 numpy = "1.26.4"
 pandas = "2.2.2"
 pyarrow = "16.0.0"
-pymatgen = "2024.4.13"
+pymatgen = "2024.5.1"
 rich = "13.7.1"
 statsmodels = "0.14.2"
 bpy = { version = "4.0.0", markers = "python_version == '3.10.*'", optional = true }
 dash = { version = "2.16.1", optional = true }
 ovito = { version = "3.10.5", optional = true }
-plotly = { version = "5.21.0", optional = true }
+plotly = { version = "5.22.0", optional = true }
 pyyaml = { version = "6.0.1", optional = true }
 rdkit = { version = "2023.9.6", optional = true }
 

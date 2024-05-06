@@ -76,5 +76,5 @@ $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ## Major Changelog
 `0.2.5` Enabled CLI through the `rich` package.
 
-`0.2.0` Implemented the function to generate training data in [extxyz](https://github.com/libAtoms/extxyz) format for 
+`0.2.0` Added the function to generate input data in [extxyz](https://github.com/libAtoms/extxyz) format for training
 machine learning interatomic potentials.

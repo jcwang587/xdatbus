@@ -35,7 +35,7 @@ about:
   documentation: https://xdatbus.readthedocs.io/en/latest/
   license: MIT
   license_file: ../LICENSE
-  summary: 'A Python package for post-analysis of VASP AIMD output'
+  summary: 'A Python package enhancing VASP AIMD simulation'
   keywords:
     - python
     - vasp

@@ -7,6 +7,7 @@
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml)
 [![PyPI](https://img.shields.io/pypi/v/xdatbus?logo=pypi&logoColor=white&color=0073B7)](https://pypi.org/project/xdatbus/)
 [![Conda](https://img.shields.io/conda/v/xdatbus/xdatbus?logo=anaconda&logoColor=white&label=conda&color=43B02A)](https://anaconda.org/xdatbus/xdatbus)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/xdatbus?logo=pypi&logoColor=white&color=blue&label=PyPI)](https://pypi.org/project/xdatbus)
 [![codecov](https://codecov.io/gh/jcwang587/xdatbus/branch/main/graph/badge.svg?token=V27VIJZDAE)](https://codecov.io/gh/jcwang587/xdatbus)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 

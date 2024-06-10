@@ -47,7 +47,18 @@ conda install -c xdatbus -c conda-forge xdatbus plumed
 ## Get Started
 
 This is a brief example demonstrating how to use the basic function of xdatbus to aggregate multiple xdatcar files into
-a single file and unwrap the coordinates into an .xyz file:
+a single file and unwrap the coordinates into an .xyz file.
+
+As is the case when you have submitted a continuous AIMD job, it is likely that you would have subfolders for each 
+submission. XDATCAR files can be first gathered in a separate directory by:
+
+```bash
+for i in {1..10}; do
+  cp RUN$i/XDATCAR xdatcar_files/XDATCAR_$(printf "%02d" $i)
+done
+```
+
+Then, try aggregating and unwrapping the coordinate data from the XDATCAR files:
 
 ```python
 import os

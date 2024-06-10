@@ -53,9 +53,7 @@ As is the case when you have submitted a continuous AIMD job, it is likely that 
 submission. XDATCAR files can be first gathered in a separate directory by:
 
 ```bash
-for i in {1..10}; do
-  cp RUN$i/XDATCAR xdatcar_files/XDATCAR_$(printf "%02d" $i)
-done
+mkdir -p xdatcar_files && for i in {1..10}; do cp RUN$i/XDATCAR xdatcar_files/XDATCAR_$(printf "%02d" $i); done
 ```
 
 Then, try aggregating and unwrapping the coordinate data from the XDATCAR files:
@@ -64,7 +62,7 @@ Then, try aggregating and unwrapping the coordinate data from the XDATCAR files:
 import os
 from xdatbus import xdc_aggregate, xdc_unwrap
 
-xdc_dir = "./xdatcar_dir"
+xdc_dir = "./xdatcar_files"
 xdb_dir = os.path.dirname(xdc_dir)
 xdb_path = os.path.join(xdb_dir, "XDATBUS")
 xyz_path = os.path.join(xdb_dir, "XDATBUS_unwrap.xyz")

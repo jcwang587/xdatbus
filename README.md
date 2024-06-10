@@ -75,7 +75,7 @@ There are also entry points included with the installation for the Command Line 
 tasks:
 
 ```bash
-$ xdc_aggregate --xdc_dir ./xdatcar --output_dir ./
+$ xdc_aggregate --xdc_dir ./xdc_files --output_dir ./
 ```
 
 ```bash

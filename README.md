@@ -50,7 +50,7 @@ This is a brief example demonstrating how to use the basic function of xdatbus t
 a single file and unwrap the coordinates into an .xyz file.
 
 As is the case when you have submitted a continuous AIMD job, it is likely that you would have subfolders for each 
-submission. XDATCAR files can be first gathered in a separate directory by (do not include the `$` when copying):
+submission. XDATCAR files can be first gathered in a separate directory by:
 
 ```bash
 $ mkdir xdc_files && for i in {1..3}; do cp RUN$i/XDATCAR xdc_files/XDATCAR_$(printf %02d $i); done

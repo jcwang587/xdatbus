@@ -83,6 +83,8 @@ $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ```
 
 ## Major Changelog
+`0.3.0` Enabled the functions for locating minima and NEB.
+
 `0.2.5` Enabled CLI through the `rich` package.
 
 `0.2.0` Added a function to generate [extxyz](https://github.com/libAtoms/extxyz)-formatted data for training machine 

@@ -18,6 +18,7 @@ from .fmtd03_report_loader import *
 from .fmtd04_xdc2xtc import *
 from .fmtd05_reweight import *
 from .fmtd06_fes_project import *
+from .fmtd07_neb import *
 
 from .bash01_bias import *
 

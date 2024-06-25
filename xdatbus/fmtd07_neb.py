@@ -67,10 +67,6 @@ def neb_2d(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
     return path_coords, path_fes
 
 
-# Load your FES data
-fes = np.load("../tests/data/npy/y_fes_300k.npy")
-
-
 def find_local_minima(data):
     filtered_data = minimum_filter(data, size=3, mode="constant", cval=np.inf)
     local_minima = data == filtered_data
@@ -79,6 +75,8 @@ def find_local_minima(data):
 
 
 def main():
+    fes = np.load("../tests/data/npy/fes_2d.npy")
+
     local_minima_coords = find_local_minima(fes)
     n_images = 10
     n_steps = 10000
@@ -132,6 +130,7 @@ def main():
         plt.text(y, x, f"{i}", color="red")
     plt.colorbar()
     plt.show()
+
 
 
     # Output the FES values along the MEP

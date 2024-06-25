@@ -28,7 +28,7 @@ def setup_test_environment(tmp_path, request):
     return os.path.join(temp_dir, xdatcar_file)
 
 
-def test_fmtd06_xdc2xtc(setup_test_environment):
+def test_fmtd04_xdc2xtc(setup_test_environment):
     xdc_path = str(setup_test_environment)
     main_tmp_dir = os.path.dirname(xdc_path)
 

@@ -75,6 +75,8 @@ def find_local_minima(data):
 
 
 def main():
+    fes = np.load("../tests/data/npy/fes_2d.npy")
+
     local_minima_coords = find_local_minima(fes)
     n_images = 10
     n_steps = 10000
@@ -128,6 +130,7 @@ def main():
         plt.text(y, x, f"{i}", color="red")
     plt.colorbar()
     plt.show()
+
 
 
     # Output the FES values along the MEP

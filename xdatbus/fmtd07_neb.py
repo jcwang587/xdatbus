@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.ndimage import minimum_filter
 from scipy.interpolate import RegularGridInterpolator
+import matplotlib.pyplot as plt
 
 
 def neb_2d(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
@@ -10,27 +11,33 @@ def neb_2d(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
     interpolator = RegularGridInterpolator((x, y), fes)
 
     # Initialize path using linear interpolation between minima
-    path = np.vstack([
-        np.linspace(minima_1[0], minima_2[0], n_images),
-        np.linspace(minima_1[1], minima_2[1], n_images),
-    ]).T
+    path = np.vstack(
+        [
+            np.linspace(minima_1[0], minima_2[0], n_images),
+            np.linspace(minima_1[1], minima_2[1], n_images),
+        ]
+    ).T
 
     # Store initial positions in path coordinates
     path_coords = path.copy()
+    path_fes = interpolator(path_coords)
 
     for step in range(n_steps):
         new_path_coords = path_coords.copy()
         for i in range(1, n_images - 1):  # Exclude the first and last point
             # Compute tangential (spring) forces
-            tau = (path_coords[i + 1] - path_coords[i - 1])
+            tau = path_coords[i + 1] - path_coords[i - 1]
             tau_norm = np.linalg.norm(tau)
             if tau_norm != 0:
                 tau /= tau_norm
 
             # Calculate spring forces
             f_spring = spring_constant * (
-                    (np.linalg.norm(path_coords[i + 1] - path_coords[i]) - np.linalg.norm(
-                        path_coords[i] - path_coords[i - 1])) * tau
+                (
+                    np.linalg.norm(path_coords[i + 1] - path_coords[i])
+                    - np.linalg.norm(path_coords[i] - path_coords[i - 1])
+                )
+                * tau
             )
 
             # Evaluate the potential energy surface at current path point
@@ -49,15 +56,19 @@ def neb_2d(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
             new_path_coords[i] += -f_perp + f_spring
 
             # Ensure the new path point stays within bounds
-            new_path_coords[i] = np.clip(new_path_coords[i], [0, 0], np.array(fes.shape) - 1)
+            new_path_coords[i] = np.clip(
+                new_path_coords[i], [0, 0], np.array(fes.shape) - 1
+            )
 
         path_coords = new_path_coords
 
-    return path_coords
+        path_fes = interpolator(path_coords)
+
+    return path_coords, path_fes
 
 
 # Load your FES data
-fes = np.load("../tests/data/npy/fes_2d.npy")
+fes = np.load("../tests/data/npy/y_fes_300k.npy")
 
 
 def find_local_minima(data):
@@ -67,37 +78,38 @@ def find_local_minima(data):
     return local_minima_coords
 
 
-local_minima_coords = find_local_minima(fes)
-n_images = 10
-n_steps = 10000
-spring_constant = 0.2
+def main():
+    local_minima_coords = find_local_minima(fes)
+    n_images = 10
+    n_steps = 10000
+    spring_constant = 0.5
 
-mep = neb_2d(fes, local_minima_coords[0], local_minima_coords[1], n_images, n_steps, spring_constant)
+    mep, mep_fes = neb_2d(
+        fes,
+        local_minima_coords[1],
+        local_minima_coords[3],
+        n_images,
+        n_steps,
+        spring_constant,
+    )
 
-# plot the minimum energy path
-import matplotlib.pyplot as plt
+    # plot the minimum energy path
+    plt.imshow(fes, cmap="viridis")
+    plt.plot(mep[:, 1], mep[:, 0], "ro-")
+    plt.xlabel("Reaction coordinate 1")
+    plt.ylabel("Reaction coordinate 2")
+    for i, (x, y) in enumerate(local_minima_coords):
+        plt.text(y, x, f"{i}", color="red")
+    plt.colorbar()
+    plt.show()
 
-plt.imshow(fes, cmap="viridis")
-plt.plot(mep[:, 0], mep[:, 1], "ro-")
-plt.xlabel("Reaction coordinate 1")
-plt.ylabel("Reaction coordinate 2")
-plt.show()
+    # Output the FES values along the MEP
+    print("FES values along the MEP:", mep_fes)
 
-# Create an interpolator for the FES data
-x = np.arange(fes.shape[0])
-y = np.arange(fes.shape[1])
-interpolator = RegularGridInterpolator((x, y), fes)
-
-# Interpolate FES values at MEP coordinates
-mep_fes_values = interpolator(mep)
-
-# Output the FES values along the MEP
-print("FES values along the MEP:", mep_fes_values)
-
-plt.figure()
-plt.plot(mep_fes_values, 'r-')
-plt.xlabel('Image Number')
-plt.ylabel('FES Value (kJ/mol)')
-plt.title('FES Profile Along MEP')
-plt.grid(True)
-plt.show()
+    plt.figure()
+    plt.plot(mep_fes, "r-")
+    plt.xlabel("Image Number")
+    plt.ylabel("FES Value (kJ/mol)")
+    plt.title("FES Profile Along MEP")
+    plt.grid(True)
+    plt.show()

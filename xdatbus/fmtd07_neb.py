@@ -60,33 +60,3 @@ def neb(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
 
     return path_coords
 
-
-
-# Load your FES data
-fes = np.load("../tests/data/npy/fes_data_3d.npy")
-
-
-def find_local_minima(data):
-    filtered_data = minimum_filter(data, size=3, mode="constant", cval=np.inf)
-    local_minima = data == filtered_data
-    local_minima_coords = np.argwhere(local_minima)
-    return local_minima_coords
-
-
-local_minima_coords = find_local_minima(fes)
-n_images = 10
-n_steps = 10000
-spring_constant = 0.5
-
-mep = neb(fes, local_minima_coords[0], local_minima_coords[1], n_images, n_steps, spring_constant)
-
-# plot the minimum energy path
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-ax.plot(fes[:, 0], fes[:, 1], fes[:, 2], color='gray')
-ax.scatter(mep[:, 0], mep[:, 1], mep[:, 2], color='red')
-plt.show()
-

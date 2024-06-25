@@ -82,9 +82,9 @@ def main():
     local_minima_coords = find_local_minima(fes)
     n_images = 10
     n_steps = 10000
-    spring_constant = 0.5
+    spring_constant = 0.2
 
-    mep, mep_fes = neb_2d(
+    mep_13, mep_fes_13 = neb_2d(
         fes,
         local_minima_coords[1],
         local_minima_coords[3],
@@ -93,9 +93,39 @@ def main():
         spring_constant,
     )
 
+    mep_32, mep_fes_32 = neb_2d(
+        fes,
+        local_minima_coords[3],
+        local_minima_coords[2],
+        n_images,
+        n_steps,
+        spring_constant,
+    )
+
+    mep_20, mep_fes_20 = neb_2d(
+        fes,
+        local_minima_coords[2],
+        local_minima_coords[0],
+        n_images,
+        n_steps,
+        spring_constant,
+    )
+
+    mep_01, mep_fes_01 = neb_2d(
+        fes,
+        local_minima_coords[0],
+        local_minima_coords[1],
+        n_images,
+        n_steps,
+        spring_constant,
+    )
+
     # plot the minimum energy path
     plt.imshow(fes, cmap="viridis")
-    plt.plot(mep[:, 1], mep[:, 0], "ro-")
+    plt.plot(mep_13[:, 1], mep_13[:, 0], "ro-")
+    plt.plot(mep_32[:, 1], mep_32[:, 0], "bo-")
+    plt.plot(mep_20[:, 1], mep_20[:, 0], "go-")
+    plt.plot(mep_01[:, 1], mep_01[:, 0], "yo-")
     plt.xlabel("Reaction coordinate 1")
     plt.ylabel("Reaction coordinate 2")
     for i, (x, y) in enumerate(local_minima_coords):
@@ -103,13 +133,18 @@ def main():
     plt.colorbar()
     plt.show()
 
-    # Output the FES values along the MEP
-    print("FES values along the MEP:", mep_fes)
 
-    plt.figure()
-    plt.plot(mep_fes, "r-")
-    plt.xlabel("Image Number")
-    plt.ylabel("FES Value (kJ/mol)")
-    plt.title("FES Profile Along MEP")
-    plt.grid(True)
-    plt.show()
+    # Output the FES values along the MEP
+    # print("FES values along the MEP:", mep_fes)
+    #
+    # plt.figure()
+    # plt.plot(mep_fes, "r-")
+    # plt.xlabel("Image Number")
+    # plt.ylabel("FES Value (kJ/mol)")
+    # plt.title("FES Profile Along MEP")
+    # plt.grid(True)
+    # plt.show()
+
+
+if __name__ == "__main__":
+    main()

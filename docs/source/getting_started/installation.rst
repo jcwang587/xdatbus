@@ -59,7 +59,7 @@ Optional installation
 
 .. note::
 
-   Currently, the package has ongoing support for POSCAR files, development of the NEB pathway is underway, and planning for AIMD trajectory simulations is in progress.
+   Currently, the package supports POSCAR files, the development of the NEB pathway is underway, and there is a future plan for AIMD trajectory simulations.
 
 For users who want to use `xdatbus` for 3D visualization, please install the ``opt_bpy`` extra:
 

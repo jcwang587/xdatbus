@@ -67,8 +67,8 @@ def neb_2d(fes, minima_1, minima_2, n_images, n_steps, spring_constant):
     return path_coords, path_fes
 
 
-def local_minima(data):
-    filtered_data = minimum_filter(data, size=3, mode="constant", cval=np.inf)
+def local_minima(data, size=3):
+    filtered_data = minimum_filter(data, size=size, mode="constant", cval=np.inf)
     minima = data == filtered_data
     minima_coords = np.argwhere(minima)
     return minima_coords

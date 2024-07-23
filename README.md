@@ -83,7 +83,7 @@ $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ```
 
 ## Major Changelog
-`0.3.0` Enabled the functions for locating minima and running NEB.
+`0.3.0` Enabled the functions for locating minima and running NEB in 2D FES.
 
 `0.2.5` Enabled CLI through the `rich` package.
 

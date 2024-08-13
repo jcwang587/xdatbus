@@ -1,0 +1,1504 @@
+ELEMENTS_DEFAULT:
+  Dummy:
+    atomic_number: -1
+    name: "Dummy"
+    symbol: "Dummy"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: 1.0
+    valence: 0
+  H:
+    atomic_number: 1
+    name: "Hydrogen"
+    symbol: "H"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 0.32
+    radius_covalent: 0.32
+    radius_atomic: 0.79
+    radius_van_der_Waals: 1.20
+    charge_state_1: 0
+    radius_ionic_1: -1
+    charge_state_2: 1.54
+  He:
+    atomic_number: 2
+    name: "Helium"
+    symbol: "He"
+    color: [0.85, 1.0, 1.0, 1.0]
+    radius_single: 0.93
+    radius_covalent: 0.93
+    radius_atomic: 0.49
+    radius_van_der_Waals: 1.40
+    valence: 0
+  Li:
+    atomic_number: 3
+    name: "Lithium"
+    symbol: "Li"
+    color: [0.8, 0.50, 1.0, 1.0]
+    radius_single: 1.23
+    radius_covalent: 1.23
+    radius_atomic: 2.05
+    radius_van_der_Waals: 1.82
+    charge_state_1: 1
+    radius_ionic_1: 1
+    charge_state_2: 0.68
+  Be:
+    atomic_number: 4
+    name: "Beryllium"
+    symbol: "Be"
+    color: [0.76, 1.0, 0.0, 1.0]
+    radius_single: 0.90
+    radius_covalent: 0.90
+    radius_atomic: 1.40
+    radius_van_der_Waals: 1.53
+    charge_state_1: 1
+    radius_ionic_1: 0.44
+    charge_state_2: 2
+    radius_ionic_2: 0.35
+  B:
+    atomic_number: 5
+    name: "Boron"
+    symbol: "B"
+    color: [1.0, 0.70, 0.70, 1.0]
+    radius_single: 0.82
+    radius_covalent: 0.82
+    radius_atomic: 1.17
+    radius_van_der_Waals: 1.92
+    charge_state_1: 1
+    radius_ionic_1: 0.35
+    charge_state_2: 3
+    radius_ionic_2: 0.23
+  C:
+    atomic_number: 6
+    name: "Carbon"
+    symbol: "C"
+    color: [0.12, 0.12, 0.12, 1.0]
+    radius_single: 0.77
+    radius_covalent: 0.77
+    radius_atomic: 0.91
+    radius_van_der_Waals: 1.70
+    charge_state_1: -4
+    radius_ionic_1: 2.60
+    charge_state_2: 4
+    radius_ionic_2: 0.16
+  N:
+    atomic_number: 7
+    name: "Nitrogen"
+    symbol: "N"
+    color: [0.18, 0.31, 0.97, 1.0]
+    radius_single: 0.75
+    radius_covalent: 0.75
+    radius_atomic: 0.75
+    radius_van_der_Waals: 1.55
+    charge_state_1: -3
+    radius_ionic_1: 1.71
+    charge_state_2: 1
+    radius_ionic_2: 0.25
+    charge_state_3: 3
+    radius_ionic_3: 0.16
+    charge_state_4: 5
+    radius_ionic_4: 0.13
+  O:
+    atomic_number: 8
+    name: "Oxygen"
+    symbol: "O"
+    color: [1.0, 0.05, 0.05, 1.0]
+    radius_single: 0.73
+    radius_covalent: 0.73
+    radius_atomic: 0.65
+    radius_van_der_Waals: 1.52
+    charge_state_1: -2
+    radius_ionic_1: 1.32
+    charge_state_2: -1
+    radius_ionic_2: 1.76
+    charge_state_3: 1
+    radius_ionic_3: 0.22
+    charge_state_4: 6
+    radius_ionic_4: 0.09
+  F:
+    atomic_number: 9
+    name: "Fluorine"
+    symbol: "F"
+    color: [0.56, 0.87, 0.31, 1.0]
+    radius_single: 0.72
+    radius_covalent: 0.72
+    radius_atomic: 0.57
+    radius_van_der_Waals: 1.47
+    charge_state_1: -1
+    radius_ionic_1: 1.33
+    charge_state_2: 7
+    radius_ionic_2: 0.08
+  Ne:
+    atomic_number: 10
+    name: "Neon"
+    symbol: "Ne"
+    color: [0.70, 0.89, 0.96, 1.0]
+    radius_single: 0.71
+    radius_covalent: 0.71
+    radius_atomic: 0.51
+    radius_van_der_Waals: 1.54
+    charge_state_1: 1
+    radius_ionic_1: 1.12
+  Na:
+    atomic_number: 11
+    name: "Sodium"
+    symbol: "Na"
+    color: [0.67, 0.36, 0.94, 1.0]
+    radius_single: 1.54
+    radius_covalent: 1.54
+    radius_atomic: 2.23
+    radius_van_der_Waals: 2.27
+    charge_state_1: 1
+    radius_ionic_1: 0.97
+  Mg:
+    atomic_number: 12
+    name: "Magnesium"
+    symbol: "Mg"
+    color: [0.54, 1.0, 0.0, 1.0]
+    radius_single: 1.36
+    radius_covalent: 1.36
+    radius_atomic: 1.72
+    radius_van_der_Waals: 1.73
+    charge_state_1: 1
+    radius_ionic_1: 0.82
+    charge_state_2: 2
+    radius_ionic_2: 0.66
+  Al:
+    atomic_number: 13
+    name: "Aluminium"
+    symbol: "Al"
+    color: [0.74, 0.65, 0.65, 1.0]
+    radius_single: 1.18
+    radius_covalent: 1.18
+    radius_atomic: 1.82
+    radius_van_der_Waals: 1.84
+    charge_state_1: 3
+    radius_ionic_1: 0.51
+  Si:
+    atomic_number: 14
+    name: "Silicon"
+    symbol: "Si"
+    color: [0.94, 0.78, 0.62, 1.0]
+    radius_single: 1.11
+    radius_covalent: 1.11
+    radius_atomic: 1.46
+    radius_van_der_Waals: 2.10
+    charge_state_1: -4
+    radius_ionic_1: 2.71
+    charge_state_2: -1
+    radius_ionic_2: 3.84
+    charge_state_3: 1
+    radius_ionic_3: 0.65
+    charge_state_4: 4
+    radius_ionic_4: 0.42
+  P:
+    atomic_number: 15
+    name: "Phosphorus"
+    symbol: "P"
+    color: [1.0, 0.50, 0.0, 1.0]
+    radius_single: 1.06
+    radius_covalent: 1.06
+    radius_atomic: 1.23
+    radius_van_der_Waals: 1.80
+    charge_state_1: -3
+    radius_ionic_1: 2.12
+    charge_state_2: 3
+    radius_ionic_2: 0.44
+    charge_state_3: 5
+    radius_ionic_3: 0.35
+  S:
+    atomic_number: 16
+    name: "Sulfur"
+    symbol: "S"
+    color: [1.0, 1.0, 0.18, 1.0]
+    radius_single: 1.02
+    radius_covalent: 1.02
+    radius_atomic: 1.09
+    radius_van_der_Waals: 1.80
+    charge_state_1: -2
+    radius_ionic_1: 1.84
+    charge_state_2: 2
+    radius_ionic_2: 2.19
+    charge_state_3: 4
+    radius_ionic_3: 0.37
+    charge_state_4: 6
+    radius_ionic_4: 0.30
+  Cl:
+    atomic_number: 17
+    name: "Chlorine"
+    symbol: "Cl"
+    color: [0.12, 0.94, 0.12, 1.0]
+    radius_single: 0.99
+    radius_covalent: 0.99
+    radius_atomic: 0.97
+    radius_van_der_Waals: 1.75
+    charge_state_1: -1
+    radius_ionic_1: 1.81
+    charge_state_2: 5
+    radius_ionic_2: 0.34
+    charge_state_3: 7
+    radius_ionic_3: 0.27
+  Ar:
+    atomic_number: 18
+    name: "Argon"
+    symbol: "Ar"
+    color: [0.50, 0.81, 0.89, 1.0]
+    radius_single: 0.98
+    radius_covalent: 0.98
+    radius_atomic: 0.88
+    radius_van_der_Waals: 1.88
+    charge_state_1: 1
+    radius_ionic_1: 1.54
+  K:
+    atomic_number: 19
+    name: "Potassium"
+    symbol: "K"
+    color: [0.56, 0.25, 0.83, 1.0]
+    radius_single: 2.03
+    radius_covalent: 2.03
+    radius_atomic: 2.77
+    radius_van_der_Waals: 2.75
+    charge_state_1: 1
+    radius_ionic_1: 0.81
+  Ca:
+    atomic_number: 20
+    name: "Calcium"
+    symbol: "Ca"
+    color: [0.23, 1.0, 0.0, 1.0]
+    radius_single: 1.74
+    radius_covalent: 1.74
+    radius_atomic: 2.23
+    radius_van_der_Waals: 2.31
+    charge_state_1: 1
+    radius_ionic_1: 1.18
+    charge_state_2: 2
+    radius_ionic_2: 0.99
+  Sc:
+    atomic_number: 21
+    name: "Scandium"
+    symbol: "Sc"
+    color: [0.90, 0.90, 0.90, 1.0]
+    radius_single: 1.44
+    radius_covalent: 1.44
+    radius_atomic: 2.09
+    radius_van_der_Waals: 2.11
+    charge_state_1: 3
+    radius_ionic_1: 0.73
+  Ti:
+    atomic_number: 22
+    name: "Titanium"
+    symbol: "Ti"
+    color: [0.74, 0.76, 0.78, 1.0]
+    radius_single: 1.32
+    radius_covalent: 1.32
+    radius_atomic: 2.00
+    radius_van_der_Waals: 2.5
+    charge_state_1: 1
+    radius_ionic_1: 0.96
+    charge_state_2: 2
+    radius_ionic_2: 0.94
+    charge_state_3: 3
+    radius_ionic_3: 0.76
+    charge_state_4: 4
+    radius_ionic_4: 0.68
+  V:
+    atomic_number: 23
+    name: "Vanadium"
+    symbol: "V"
+    color: [0.65, 0.65, 0.67, 1.0]
+    radius_single: 1.22
+    radius_covalent: 1.22
+    radius_atomic: 1.92
+    radius_van_der_Waals: 2.5
+    charge_state_1: 2
+    radius_ionic_1: 0.88
+    charge_state_2: 3
+    radius_ionic_2: 0.74
+    charge_state_3: 4
+    radius_ionic_3: 0.63
+    charge_state_4: 5
+    radius_ionic_4: 0.59
+  Cr:
+    atomic_number: 24
+    name: "Chromium"
+    symbol: "Cr"
+    color: [0.54, 0.6, 0.78, 1.0]
+    radius_single: 1.18
+    radius_covalent: 1.18
+    radius_atomic: 1.85
+    radius_van_der_Waals: 2.5
+    charge_state_1: 1
+    radius_ionic_1: 0.81
+    charge_state_2: 2
+    radius_ionic_2: 0.89
+    charge_state_3: 3
+    radius_ionic_3: 0.63
+    charge_state_4: 6
+    radius_ionic_4: 0.52
+  Mn:
+    atomic_number: 25
+    name: "Manganese"
+    symbol: "Mn"
+    color: [0.61, 0.47, 0.78, 1.0]
+    radius_single: 1.17
+    radius_covalent: 1.17
+    radius_atomic: 1.79
+    radius_van_der_Waals: 2.5
+    charge_state_1: 2
+    radius_ionic_1: 0.80
+    charge_state_2: 3
+    radius_ionic_2: 0.66
+    charge_state_3: 4
+    radius_ionic_3: 0.60
+    charge_state_4: 7
+    radius_ionic_4: 0.46
+  Fe:
+    atomic_number: 26
+    name: "Iron"
+    symbol: "Fe"
+    color: [0.87, 0.4, 0.2, 1.0]
+    radius_single: 1.17
+    radius_covalent: 1.17
+    radius_atomic: 1.72
+    radius_van_der_Waals: 2.5
+    charge_state_1: 2
+    radius_ionic_1: 0.74
+    charge_state_2: 3
+    radius_ionic_2: 0.64
+  Co:
+    atomic_number: 27
+    name: "Cobalt"
+    symbol: "Co"
+    color: [0.94, 0.56, 0.62, 1.0]
+    radius_single: 1.16
+    radius_covalent: 1.16
+    radius_atomic: 1.67
+    radius_van_der_Waals: 2.5
+    charge_state_1: 2
+    radius_ionic_1: 0.72
+    charge_state_2: 3
+    radius_ionic_2: 0.63
+  Ni:
+    atomic_number: 28
+    name: "Nickel"
+    symbol: "Ni"
+    color: [0.31, 0.81, 0.31, 1.0]
+    radius_single: 1.15
+    radius_covalent: 1.15
+    radius_atomic: 1.62
+    radius_van_der_Waals: 1.63
+    charge_state_1: 2
+    radius_ionic_1: 0.69
+  Cu:
+    atomic_number: 29
+    name: "Copper"
+    symbol: "Cu"
+    color: [0.78, 0.50, 0.2, 1.0]
+    radius_single: 1.17
+    radius_covalent: 1.17
+    radius_atomic: 1.57
+    radius_van_der_Waals: 1.40
+    charge_state_1: 1
+    radius_ionic_1: 0.96
+    charge_state_2: 2
+    radius_ionic_2: 0.72
+  Zn:
+    atomic_number: 30
+    name: "Zinc"
+    symbol: "Zn"
+    color: [0.49, 0.50, 0.69, 1.0]
+    radius_single: 1.25
+    radius_covalent: 1.25
+    radius_atomic: 1.53
+    radius_van_der_Waals: 1.39
+    charge_state_1: 1
+    radius_ionic_1: 0.88
+    charge_state_2: 2
+    radius_ionic_2: 0.74
+  Ga:
+    atomic_number: 31
+    name: "Gallium"
+    symbol: "Ga"
+    color: [0.76, 0.56, 0.56, 1.0]
+    radius_single: 1.26
+    radius_covalent: 1.26
+    radius_atomic: 1.81
+    radius_van_der_Waals: 1.87
+    charge_state_1: 1
+    radius_ionic_1: 0.81
+    charge_state_2: 3
+    radius_ionic_2: 0.62
+  Ge:
+    atomic_number: 32
+    name: "Germanium"
+    symbol: "Ge"
+    color: [0.4, 0.56, 0.56, 1.0]
+    radius_single: 1.22
+    radius_covalent: 1.22
+    radius_atomic: 1.52
+    radius_van_der_Waals: 2.11
+    charge_state_1: -4
+    radius_ionic_1: 2.72
+    charge_state_2: 2
+    radius_ionic_2: 0.73
+    charge_state_3: 4
+    radius_ionic_3: 0.53
+  As:
+    atomic_number: 33
+    name: "Arsenic"
+    symbol: "As"
+    color: [0.74, 0.50, 0.89, 1.0]
+    radius_single: 1.20
+    radius_covalent: 1.20
+    radius_atomic: 1.33
+    radius_van_der_Waals: 1.85
+    charge_state_1: -3
+    radius_ionic_1: 2.22
+    charge_state_2: 3
+    radius_ionic_2: 0.58
+    charge_state_3: 5
+    radius_ionic_3: 0.46
+  Se:
+    atomic_number: 34
+    name: "Selenium"
+    symbol: "Se"
+    color: [1.0, 0.63, 0.0, 1.0]
+    radius_single: 1.16
+    radius_covalent: 1.16
+    radius_atomic: 1.22
+    radius_van_der_Waals: 1.90
+    charge_state_1: -2
+    radius_ionic_1: 1.91
+    charge_state_2: -1
+    radius_ionic_2: 2.32
+    charge_state_3: 1
+    radius_ionic_3: 0.66
+    charge_state_4: 4
+    radius_ionic_4: 0.50
+    charge_state_5: 6
+    radius_ionic_5: 0.42
+  Br:
+    atomic_number: 35
+    name: "Bromine"
+    symbol: "Br"
+    color: [0.65, 0.16, 0.16, 1.0]
+    radius_single: 1.14
+    radius_covalent: 1.14
+    radius_atomic: 1.12
+    radius_van_der_Waals: 1.85
+    charge_state_1: -1
+    radius_ionic_1: 1.96
+    charge_state_2: 5
+    radius_ionic_2: 0.47
+    charge_state_3: 7
+    radius_ionic_3: 0.39
+  Kr:
+    atomic_number: 36
+    name: "Krypton"
+    symbol: "Kr"
+    color: [0.36, 0.72, 0.81, 1.0]
+    radius_single: 1.31
+    radius_covalent: 1.31
+    radius_atomic: 1.24
+    radius_van_der_Waals: 2.02
+    valence: 0
+  Rb:
+    atomic_number: 37
+    name: "Rubidium"
+    symbol: "Rb"
+    color: [0.43, 0.18, 0.69, 1.0]
+    radius_single: 2.16
+    radius_covalent: 2.16
+    radius_atomic: 2.98
+    radius_van_der_Waals: 3.03
+    charge_state_1: 1
+    radius_ionic_1: 1.47
+  Sr:
+    atomic_number: 38
+    name: "Strontium"
+    symbol: "Sr"
+    color: [0.0, 1.0, 0.0, 1.0]
+    radius_single: 1.91
+    radius_covalent: 1.91
+    radius_atomic: 2.45
+    radius_van_der_Waals: 2.49
+    charge_state_1: 2
+    radius_ionic_1: 1.12
+  Y:
+    atomic_number: 39
+    name: "Yttrium"
+    symbol: "Y"
+    color: [0.58, 1.0, 1.0, 1.0]
+    radius_single: 1.62
+    radius_covalent: 1.62
+    radius_atomic: 2.27
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.89
+  Zr:
+    atomic_number: 40
+    name: "Zirconium"
+    symbol: "Zr"
+    color: [0.58, 0.87, 0.87, 1.0]
+    radius_single: 1.45
+    radius_covalent: 1.45
+    radius_atomic: 2.16
+    radius_van_der_Waals: []
+    charge_state_1: 1
+    radius_ionic_1: 1.09
+    charge_state_2: 4
+    radius_ionic_2: 0.79
+  Nb:
+    atomic_number: 41
+    name: "Niobium"
+    symbol: "Nb"
+    color: [0.45, 0.76, 0.78, 1.0]
+    radius_single: 1.34
+    radius_covalent: 1.34
+    radius_atomic: 2.08
+    radius_van_der_Waals: []
+    charge_state_1: 1
+    radius_ionic_1: 1.00
+    charge_state_2: 4
+    radius_ionic_2: 0.74
+    charge_state_3: 5
+    radius_ionic_3: 0.69
+  Mo:
+    atomic_number: 42
+    name: "Molybdenum"
+    symbol: "Mo"
+    color: [0.32, 0.70, 0.70, 1.0]
+    radius_single: 1.30
+    radius_covalent: 1.30
+    radius_atomic: 2.01
+    radius_van_der_Waals: []
+    charge_state_1: 1
+    radius_ionic_1: 0.93
+    charge_state_2: 4
+    radius_ionic_2: 0.70
+    charge_state_3: 6
+    radius_ionic_3: 0.62
+  Tc:
+    atomic_number: 43
+    name: "Technetium"
+    symbol: "Tc"
+    color: [0.23, 0.61, 0.61, 1.0]
+    radius_single: 1.27
+    radius_covalent: 1.27
+    radius_atomic: 1.95
+    radius_van_der_Waals: []
+    charge_state_1: 7
+    radius_ionic_1: 0.97
+  Ru:
+    atomic_number: 44
+    name: "Ruthenium"
+    symbol: "Ru"
+    color: [0.14, 0.56, 0.56, 1.0]
+    radius_single: 1.25
+    radius_covalent: 1.25
+    radius_atomic: 1.89
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.67
+  Rh:
+    atomic_number: 45
+    name: "Rhodium"
+    symbol: "Rh"
+    color: [0.03, 0.49, 0.54, 1.0]
+    radius_single: 1.25
+    radius_covalent: 1.25
+    radius_atomic: 1.83
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.68
+  Pd:
+    atomic_number: 46
+    name: "Palladium"
+    symbol: "Pd"
+    color: [0.0, 0.41, 0.52, 1.0]
+    radius_single: 1.28
+    radius_covalent: 1.28
+    radius_atomic: 1.79
+    radius_van_der_Waals: 1.63
+    charge_state_1: 2
+    radius_ionic_1: 0.80
+    charge_state_2: 4
+    radius_ionic_2: 0.65
+  Ag:
+    atomic_number: 47
+    name: "Silver"
+    symbol: "Ag"
+    color: [0.75, 0.75, 0.75, 1.0]
+    radius_single: 1.34
+    radius_covalent: 1.34
+    radius_atomic: 1.75
+    radius_van_der_Waals: 1.72
+    charge_state_1: 1
+    radius_ionic_1: 1.26
+    charge_state_2: 2
+    radius_ionic_2: 0.89
+  Cd:
+    atomic_number: 48
+    name: "Cadmium"
+    symbol: "Cd"
+    color: [1.0, 0.85, 0.56, 1.0]
+    radius_single: 1.48
+    radius_covalent: 1.48
+    radius_atomic: 1.71
+    radius_van_der_Waals: 1.58
+    charge_state_1: 1
+    radius_ionic_1: 1.14
+    charge_state_2: 2
+    radius_ionic_2: 0.97
+  In:
+    atomic_number: 49
+    name: "Indium"
+    symbol: "In"
+    color: [0.65, 0.45, 0.45, 1.0]
+    radius_single: 1.44
+    radius_covalent: 1.44
+    radius_atomic: 2.00
+    radius_van_der_Waals: 1.93
+    charge_state_1: 3
+    radius_ionic_1: 0.81
+  Sn:
+    atomic_number: 50
+    name: "Tin"
+    symbol: "Sn"
+    color: [0.4, 0.50, 0.50, 1.0]
+    radius_single: 1.41
+    radius_covalent: 1.41
+    radius_atomic: 1.72
+    radius_van_der_Waals: 2.17
+    charge_state_1: -4
+    radius_ionic_1: 2.94
+    charge_state_2: -1
+    radius_ionic_2: 3.70
+    charge_state_3: 2
+    radius_ionic_3: 0.93
+    charge_state_4: 4
+    radius_ionic_4: 0.71
+  Sb:
+    atomic_number: 51
+    name: "Antimony"
+    symbol: "Sb"
+    color: [0.61, 0.38, 0.70, 1.0]
+    radius_single: 1.40
+    radius_covalent: 1.40
+    radius_atomic: 1.53
+    radius_van_der_Waals: 2.06
+    charge_state_1: -3
+    radius_ionic_1: 2.45
+    charge_state_2: 3
+    radius_ionic_2: 0.76
+    charge_state_3: 5
+    radius_ionic_3: 0.62
+  Te:
+    atomic_number: 52
+    name: "Tellurium"
+    symbol: "Te"
+    color: [0.83, 0.47, 0.0, 1.0]
+    radius_single: 1.36
+    radius_covalent: 1.36
+    radius_atomic: 1.42
+    radius_van_der_Waals: 2.06
+    charge_state_1: -2
+    radius_ionic_1: 2.11
+    charge_state_2: -1
+    radius_ionic_2: 2.50
+    charge_state_3: 1
+    radius_ionic_3: 0.82
+    charge_state_4: 4
+    radius_ionic_4: 0.70
+    charge_state_5: 6
+    radius_ionic_5: 0.56
+  I:
+    atomic_number: 53
+    name: "Iodine"
+    symbol: "I"
+    color: [0.58, 0.0, 0.58, 1.0]
+    radius_single: 1.33
+    radius_covalent: 1.33
+    radius_atomic: 1.32
+    radius_van_der_Waals: 1.98
+    charge_state_1: -1
+    radius_ionic_1: 2.20
+    charge_state_2: 5
+    radius_ionic_2: 0.62
+    charge_state_3: 7
+    radius_ionic_3: 0.50
+  Xe:
+    atomic_number: 54
+    name: "Xenon"
+    symbol: "Xe"
+    color: [0.25, 0.61, 0.69, 1.0]
+    radius_single: 1.31
+    radius_covalent: 1.31
+    radius_atomic: 1.24
+    radius_van_der_Waals: 2.16
+    valence: 0
+  Cs:
+    atomic_number: 55
+    name: "Caesium"
+    symbol: "Cs"
+    color: [0.34, 0.09, 0.56, 1.0]
+    radius_single: 2.35
+    radius_covalent: 2.35
+    radius_atomic: 3.35
+    radius_van_der_Waals: 3.43
+    charge_state_1: 1
+    radius_ionic_1: 1.67
+  Ba:
+    atomic_number: 56
+    name: "Barium"
+    symbol: "Ba"
+    color: [0.0, 0.78, 0.0, 1.0]
+    radius_single: 1.98
+    radius_covalent: 1.98
+    radius_atomic: 2.78
+    radius_van_der_Waals: 2.68
+    charge_state_1: 1
+    radius_ionic_1: 1.53
+    charge_state_2: 2
+    radius_ionic_2: 1.34
+  La:
+    atomic_number: 57
+    name: "Lanthanum"
+    symbol: "La"
+    color: [0.43, 0.83, 1.0, 1.0]
+    radius_single: 1.69
+    radius_covalent: 1.69
+    radius_atomic: 2.74
+    radius_van_der_Waals: []
+    charge_state_1: 1
+    radius_ionic_1: 1.39
+    charge_state_2: 3
+    radius_ionic_2: 1.06
+  Ce:
+    atomic_number: 58
+    name: "Cerium"
+    symbol: "Ce"
+    color: [1.0, 1.0, 0.78, 1.0]
+    radius_single: 1.65
+    radius_covalent: 1.65
+    radius_atomic: 2.70
+    radius_van_der_Waals: []
+    charge_state_1: 1
+    radius_ionic_1: 1.27
+    charge_state_2: 3
+    radius_ionic_2: 1.03
+    charge_state_3: 4
+    radius_ionic_3: 0.92
+  Pr:
+    atomic_number: 59
+    name: "Praseodymium"
+    symbol: "Pr"
+    color: [0.85, 1.0, 0.78, 1.0]
+    radius_single: 1.65
+    radius_covalent: 1.65
+    radius_atomic: 2.67
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.01
+    charge_state_2: 4
+    radius_ionic_2: 0.90
+  Nd:
+    atomic_number: 60
+    name: "Neodymium"
+    symbol: "Nd"
+    color: [0.78, 1.0, 0.78, 1.0]
+    radius_single: 1.64
+    radius_covalent: 1.64
+    radius_atomic: 2.64
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.99
+  Pm:
+    atomic_number: 61
+    name: "Promethium"
+    symbol: "Pm"
+    color: [0.63, 1.0, 0.78, 1.0]
+    radius_single: 1.63
+    radius_covalent: 1.63
+    radius_atomic: 2.62
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.97
+  Sm:
+    atomic_number: 62
+    name: "Samarium"
+    symbol: "Sm"
+    color: [0.56, 1.0, 0.78, 1.0]
+    radius_single: 1.62
+    radius_covalent: 1.62
+    radius_atomic: 2.59
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.96
+  Eu:
+    atomic_number: 63
+    name: "Europium"
+    symbol: "Eu"
+    color: [0.38, 1.0, 0.78, 1.0]
+    radius_single: 1.85
+    radius_covalent: 1.85
+    radius_atomic: 2.56
+    radius_van_der_Waals: []
+    charge_state_1: 2
+    radius_ionic_1: 1.09
+    charge_state_2: 3
+    radius_ionic_2: 0.95
+  Gd:
+    atomic_number: 64
+    name: "Gadolinium"
+    symbol: "Gd"
+    color: [0.27, 1.0, 0.78, 1.0]
+    radius_single: 1.61
+    radius_covalent: 1.61
+    radius_atomic: 2.54
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.93
+  Tb:
+    atomic_number: 65
+    name: "Terbium"
+    symbol: "Tb"
+    color: [0.18, 1.0, 0.78, 1.0]
+    radius_single: 1.59
+    radius_covalent: 1.59
+    radius_atomic: 2.51
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.92
+    charge_state_2: 4
+    radius_ionic_2: 0.84
+  Dy:
+    atomic_number: 66
+    name: "Dysprosium"
+    symbol: "Dy"
+    color: [0.12, 1.0, 0.78, 1.0]
+    radius_single: 1.59
+    radius_covalent: 1.59
+    radius_atomic: 2.49
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.90
+  Ho:
+    atomic_number: 67
+    name: "Holmium"
+    symbol: "Ho"
+    color: [0.0, 1.0, 0.61, 1.0]
+    radius_single: 1.58
+    radius_covalent: 1.58
+    radius_atomic: 2.47
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.89
+  Er:
+    atomic_number: 68
+    name: "Erbium"
+    symbol: "Er"
+    color: [0.0, 0.90, 0.45, 1.0]
+    radius_single: 1.57
+    radius_covalent: 1.57
+    radius_atomic: 2.45
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.88
+  Tm:
+    atomic_number: 69
+    name: "Thulium"
+    symbol: "Tm"
+    color: [0.0, 0.83, 0.32, 1.0]
+    radius_single: 1.56
+    radius_covalent: 1.56
+    radius_atomic: 2.42
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.87
+  Yb:
+    atomic_number: 70
+    name: "Ytterbium"
+    symbol: "Yb"
+    color: [0.0, 0.74, 0.21, 1.0]
+    radius_single: 1.74
+    radius_covalent: 1.74
+    radius_atomic: 2.40
+    radius_van_der_Waals: []
+    charge_state_1: 2
+    radius_ionic_1: 0.93
+    charge_state_2: 3
+    radius_ionic_2: 0.85
+  Lu:
+    atomic_number: 71
+    name: "Lutetium"
+    symbol: "Lu"
+    color: [0.0, 0.67, 0.14, 1.0]
+    radius_single: 1.56
+    radius_covalent: 1.56
+    radius_atomic: 2.25
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 0.85
+  Hf:
+    atomic_number: 72
+    name: "Hafnium"
+    symbol: "Hf"
+    color: [0.30, 0.76, 1.0, 1.0]
+    radius_single: 1.44
+    radius_covalent: 1.44
+    radius_atomic: 2.16
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.78
+  Ta:
+    atomic_number: 73
+    name: "Tantalum"
+    symbol: "Ta"
+    color: [0.30, 0.65, 1.0, 1.0]
+    radius_single: 1.34
+    radius_covalent: 1.34
+    radius_atomic: 2.09
+    radius_van_der_Waals: []
+    charge_state_1: 5
+    radius_ionic_1: 0.68
+  W:
+    atomic_number: 74
+    name: "Tungsten"
+    symbol: "W"
+    color: [0.12, 0.58, 0.83, 1.0]
+    radius_single: 1.30
+    radius_covalent: 1.30
+    radius_atomic: 2.02
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.70
+    charge_state_2: 6
+    radius_ionic_2: 0.62
+  Re:
+    atomic_number: 75
+    name: "Rhenium"
+    symbol: "Re"
+    color: [0.14, 0.49, 0.67, 1.0]
+    radius_single: 1.28
+    radius_covalent: 1.28
+    radius_atomic: 1.97
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.72
+    charge_state_2: 7
+    radius_ionic_2: 0.56
+  Os:
+    atomic_number: 76
+    name: "Osmium"
+    symbol: "Os"
+    color: [0.14, 0.4, 0.58, 1.0]
+    radius_single: 1.26
+    radius_covalent: 1.26
+    radius_atomic: 1.92
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.88
+    charge_state_2: 6
+    radius_ionic_2: 0.69
+  Ir:
+    atomic_number: 77
+    name: "Iridium"
+    symbol: "Ir"
+    color: [0.09, 0.32, 0.52, 1.0]
+    radius_single: 1.27
+    radius_covalent: 1.27
+    radius_atomic: 1.87
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 0.68
+  Pt:
+    atomic_number: 78
+    name: "Platinum"
+    symbol: "Pt"
+    color: [0.81, 0.81, 0.87, 1.0]
+    radius_single: 1.30
+    radius_covalent: 1.30
+    radius_atomic: 1.83
+    radius_van_der_Waals: 1.75
+    charge_state_1: 2
+    radius_ionic_1: 0.80
+    charge_state_2: 4
+    radius_ionic_2: 0.65
+  Au:
+    atomic_number: 79
+    name: "Gold"
+    symbol: "Au"
+    color: [1.0, 0.81, 0.13, 1.0]
+    radius_single: 1.34
+    radius_covalent: 1.34
+    radius_atomic: 1.79
+    radius_van_der_Waals: 1.66
+    charge_state_1: 1
+    radius_ionic_1: 1.37
+    charge_state_2: 3
+    radius_ionic_2: 0.85
+  Hg:
+    atomic_number: 80
+    name: "Mercury"
+    symbol: "Hg"
+    color: [0.72, 0.72, 0.81, 1.0]
+    radius_single: 1.49
+    radius_covalent: 1.49
+    radius_atomic: 1.76
+    radius_van_der_Waals: 1.55
+    charge_state_1: 1
+    radius_ionic_1: 1.27
+    charge_state_2: 2
+    radius_ionic_2: 1.10
+  Tl:
+    atomic_number: 81
+    name: "Thallium"
+    symbol: "Tl"
+    color: [0.65, 0.32, 0.30, 1.0]
+    radius_single: 1.48
+    radius_covalent: 1.48
+    radius_atomic: 2.08
+    radius_van_der_Waals: 1.96
+    charge_state_1: 1
+    radius_ionic_1: 1.47
+    charge_state_2: 3
+    radius_ionic_2: 0.95
+  Pb:
+    atomic_number: 82
+    name: "Lead"
+    symbol: "Pb"
+    color: [0.34, 0.34, 0.38, 1.0]
+    radius_single: 1.47
+    radius_covalent: 1.47
+    radius_atomic: 1.81
+    radius_van_der_Waals: 2.02
+    charge_state_1: 2
+    radius_ionic_1: 1.20
+    charge_state_2: 4
+    radius_ionic_2: 0.84
+  Bi:
+    atomic_number: 83
+    name: "Bismuth"
+    symbol: "Bi"
+    color: [0.61, 0.30, 0.70, 1.0]
+    radius_single: 1.46
+    radius_covalent: 1.46
+    radius_atomic: 1.63
+    radius_van_der_Waals: 2.07
+    charge_state_1: 1
+    radius_ionic_1: 0.98
+    charge_state_2: 3
+    radius_ionic_2: 0.96
+    charge_state_3: 5
+    radius_ionic_3: 0.74
+  Po:
+    atomic_number: 84
+    name: "Polonium"
+    symbol: "Po"
+    color: [0.67, 0.36, 0.0, 1.0]
+    radius_single: 1.46
+    radius_covalent: 1.46
+    radius_atomic: 1.53
+    radius_van_der_Waals: 1.97
+    charge_state_1: 6
+    radius_ionic_1: 0.67
+  At:
+    atomic_number: 85
+    name: "Astatine"
+    symbol: "At"
+    color: [0.45, 0.30, 0.27, 1.0]
+    radius_single: 1.45
+    radius_covalent: 1.45
+    radius_atomic: 1.43
+    radius_van_der_Waals: 2.02
+    charge_state_1: -3
+    radius_ionic_1: 2.22
+    charge_state_2: 3
+    radius_ionic_2: 0.85
+    charge_state_3: 5
+    radius_ionic_3: 0.46
+  Rn:
+    atomic_number: 86
+    name: "Radon"
+    symbol: "Rn"
+    color: [0.25, 0.50, 0.58, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.34
+    radius_van_der_Waals: 2.20
+    valence: 0
+  Fr:
+    atomic_number: 87
+    name: "Francium"
+    symbol: "Fr"
+    color: [0.25, 0.0, 0.4, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: 3.48
+    charge_state_1: 1
+    radius_ionic_1: 1.80
+  Ra:
+    atomic_number: 88
+    name: "Radium"
+    symbol: "Ra"
+    color: [0.0, 0.49, 0.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: 2.83
+    charge_state_1: 2
+    radius_ionic_1: 1.43
+  Ac:
+    atomic_number: 89
+    name: "Actinium"
+    symbol: "Ac"
+    color: [0.43, 0.67, 0.98, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.18
+  Th:
+    atomic_number: 90
+    name: "Thorium"
+    symbol: "Th"
+    color: [0.0, 0.72, 1.0, 1.0]
+    radius_single: 1.65
+    radius_covalent: 1.65
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 4
+    radius_ionic_1: 1.02
+  Pa:
+    atomic_number: 91
+    name: "Protactinium"
+    symbol: "Pa"
+    color: [0.0, 0.63, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.13
+    charge_state_2: 4
+    radius_ionic_2: 0.98
+    charge_state_3: 5
+    radius_ionic_3: 0.89
+  U:
+    atomic_number: 92
+    name: "Uranium"
+    symbol: "U"
+    color: [0.0, 0.56, 1.0, 1.0]
+    radius_single: 1.42
+    radius_covalent: 1.42
+    radius_atomic: 1.00
+    radius_van_der_Waals: 1.86
+    charge_state_1: 4
+    radius_ionic_1: 0.97
+    charge_state_2: 6
+    radius_ionic_2: 0.80
+  Np:
+    atomic_number: 93
+    name: "Neptunium"
+    symbol: "Np"
+    color: [0.0, 0.50, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.10
+    charge_state_2: 4
+    radius_ionic_2: 0.95
+    charge_state_3: 7
+    radius_ionic_3: 0.71
+  Pu:
+    atomic_number: 94
+    name: "Plutonium"
+    symbol: "Pu"
+    color: [0.0, 0.41, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.08
+    charge_state_2: 4
+    radius_ionic_2: 0.93
+  Am:
+    atomic_number: 95
+    name: "Americium"
+    symbol: "Am"
+    color: [0.32, 0.36, 0.94, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    charge_state_1: 3
+    radius_ionic_1: 1.07
+    charge_state_2: 4
+    radius_ionic_2: 0.92
+  Cm:
+    atomic_number: 96
+    name: "Curium"
+    symbol: "Cm"
+    color: [0.47, 0.36, 0.89, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Bk:
+    atomic_number: 97
+    name: "Berkelium"
+    symbol: "Bk"
+    color: [0.54, 0.30, 0.89, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Cf:
+    atomic_number: 98
+    name: "Californium"
+    symbol: "Cf"
+    color: [0.63, 0.21, 0.83, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Es:
+    atomic_number: 99
+    name: "Einsteinium"
+    symbol: "Es"
+    color: [0.70, 0.12, 0.83, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Fm:
+    atomic_number: 100
+    name: "Fermium"
+    symbol: "Fm"
+    color: [0.70, 0.12, 0.72, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Md:
+    atomic_number: 101
+    name: "Mendelevium"
+    symbol: "Md"
+    color: [0.70, 0.05, 0.65, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  No:
+    atomic_number: 102
+    name: "Nobelium"
+    symbol: "No"
+    color: [0.74, 0.05, 0.52, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Lr:
+    atomic_number: 103
+    name: "Lawrencium"
+    symbol: "Lr"
+    color: [0.78, 0.0, 0.4, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Rf:
+    atomic_number: 104
+    name: "Rutherfordium"
+    symbol: "Rf"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Db:
+    atomic_number: 105
+    name: "Dubnium"
+    symbol: "Db"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Sg:
+    atomic_number: 106
+    name: "Seaborgium"
+    symbol: "Sg"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Bh:
+    atomic_number: 107
+    name: "Bohrium"
+    symbol: "Bh"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Hs:
+    atomic_number: 108
+    name: "Hassium"
+    symbol: "Hs"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Mt:
+    atomic_number: 109
+    name: "Roentgenuim"
+    symbol: "Mt"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Ds:
+    atomic_number: 110
+    name: "Darmstadtium"
+    symbol: "Ds"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Rg:
+    atomic_number: 111
+    name: "Roentgenium"
+    symbol: "Rg"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Cn:
+    atomic_number: 112
+    name: "Copernicum"
+    symbol: "Cn"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Nh:
+    atomic_number: 113
+    name: "Nihonium"
+    symbol: "Nh"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Fl:
+    atomic_number: 114
+    name: "Flerovium"
+    symbol: "Fl"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Mc:
+    atomic_number: 115
+    name: "Moscovium"
+    symbol: "Mc"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Lv:
+    atomic_number: 116
+    name: "Livermorium"
+    symbol: "Lv"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Ts:
+    atomic_number: 117
+    name: "Tennessine"
+    symbol: "Ts"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Og:
+    atomic_number: 118
+    name: "Oganesson"
+    symbol: "Og"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Vac:
+    atomic_number: 119
+    name: "Vacancy"
+    symbol: "Vac"
+    color: [0.5, 0.5, 0.5, 0.5]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0
+  Default:
+    atomic_number: 120
+    name: "Default"
+    symbol: "Default"
+    color: [1.0, 1.0, 1.0, 1.0]
+    radius_single: 1.00
+    radius_covalent: 1.00
+    radius_atomic: 1.00
+    radius_van_der_Waals: 1.0
+    valence: 0
+  Bond:
+    atomic_number: 121
+    name: "Bond"
+    symbol: "Bond"
+    color: [0.5, 0.5, 0.5, 1.0]
+    radius_single: 0.1
+    radius_covalent: 0.03
+    radius_atomic: 1.00
+    radius_van_der_Waals: []
+    valence: 0

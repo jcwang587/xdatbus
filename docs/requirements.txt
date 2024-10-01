@@ -1,4 +1,4 @@
 sphinx==8.0.2
 sphinx-rtd-theme==2.0.0
-sphinx-autoapi==3.3.0
+sphinx-autoapi==3.3.2
 toml==0.10.2

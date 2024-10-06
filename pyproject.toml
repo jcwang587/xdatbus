@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xdatbus"
-version = "0.3.3"
+version = "0.3.4"
 description = "A Python package enhancing VASP AIMD simulation"
 authors = ["Jiacheng Wang <jiachengwang@umass.edu>"]
 maintainers = ["Jiacheng Wang"]
@@ -40,7 +40,7 @@ pandas = "*"
 pyarrow = "*"
 pymatgen = "2024.9.17.1"
 rich = "*"
-statsmodels = "0.14.3"
+statsmodels = "*"
 bpy = { version = "4.2.0", markers = "python_version == '3.11.*'", optional = true }
 dash = { version = "2.17.1", optional = true }
 ovito = { version = "3.10.6.post2", optional = true }

@@ -50,7 +50,7 @@ rdkit = { version = "2024.3.5", optional = true }
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.3"
-pytest-cov = "5.0.0"
+pytest-cov = "6.0.0"
 
 [tool.poetry.extras]
 meta = ["rdkit", "bpy", "pyyaml", "ovito"]

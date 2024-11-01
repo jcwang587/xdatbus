@@ -38,7 +38,7 @@ mdanalysis = "2.7.0"
 numpy = "*"
 pandas = "*"
 pyarrow = "*"
-pymatgen = "2024.9.17.1"
+pymatgen = "^2024.10.0"
 rich = "*"
 statsmodels = "*"
 bpy = { version = "4.2.0", markers = "python_version == '3.11.*'", optional = true }

@@ -32,7 +32,7 @@ exclude = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.12"
+python = ">=3.10,<3.14"
 ase = "3.23.0"
 mdanalysis = "2.7.0"
 numpy = "*"

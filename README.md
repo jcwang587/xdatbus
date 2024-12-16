@@ -53,7 +53,7 @@ As is the case when you have submitted a continuous AIMD job, it is likely that 
 submission. `XDATCAR` files can be first gathered in a separate directory by:
 
 ```bash
-$ mkdir xdc_files && for i in {1..10}; do cp RUN$i/XDATCAR xdc_files/XDATCAR_$(printf %02d $i); done
+$ mkdir xdc_files && for i in {01..10}; do cp RUN$i/XDATCAR xdc_files/XDATCAR_$i; done
 ```
 
 Then, try aggregating and unwrapping the coordinate data from the `XDATCAR` files:

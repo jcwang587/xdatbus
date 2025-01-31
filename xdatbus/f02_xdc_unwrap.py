@@ -95,13 +95,13 @@ def main():
         "--xdc_path",
         type=str,
         default="./XDATBUS",
-        help="Input path of the XDATCAR file",
+        help='Input path of the XDATCAR file, default is "./XDATBUS"',
     )
     parser.add_argument(
         "--output_path",
         type=str,
         default="./XDATBUS_unwrap.xyz",
-        help="Output path of the xyz file",
+        help='Output path of the xyz file, default is "./XDATBUS_unwrap.xyz"',
     )
 
     args = parser.parse_args()

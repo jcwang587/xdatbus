@@ -22,8 +22,8 @@ def pmf_321(fes3d, axis1, axis2):
     """
 
     fes2d = np.sum(fes3d, axis=axis1)
-    fes2d = np.sum(fes2d, axis=axis2)
+    fes1d = np.sum(fes2d, axis=axis2)
 
-    return fes2d
+    return fes1d
 
 

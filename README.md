@@ -50,6 +50,7 @@ conda install -c xdatbus -c conda-forge xdatbus plumed
 ## Visualization with Blender
 
 [![Powered by MolecularNodes](https://img.shields.io/badge/powered%20by-MolecularNodes-blue.svg)](https://github.com/BradyAJohnston/MolecularNodes)
+[![Powered by bpy](https://img.shields.io/badge/powered%20by-bpy-blue.svg)](https://docs.blender.org/api/current/)
 
 This is testing functionality for visualizing the molecular dynamics trajectory with Blender. 
 

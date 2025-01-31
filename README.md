@@ -1,8 +1,10 @@
+<!--
 <p class="center-content"> 
   <img src="https://raw.githubusercontent.com/jcwang587/xdatbus/main/docs/logo.png" alt=""/>
 </p>
+-->
 
-# xdatbus
+# xdatbus 🚌
 
 [![Build](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml/badge.svg)](https://github.com/jcwang587/xdatbus/actions/workflows/build.yml)
 [![Release](https://img.shields.io/github/v/release/jcwang587/xdatbus)](https://github.com/jcwang587/xdatbus/releases)

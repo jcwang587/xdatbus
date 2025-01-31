@@ -47,6 +47,16 @@ together:
 conda install -c xdatbus -c conda-forge xdatbus plumed
 ```
 
+## Visualization with Blender
+
+[![Powered by MolecularNodes](https://img.shields.io/badge/powered%20by-MolecularNodes-blue.svg)](https://github.com/BradyAJohnston/MolecularNodes)
+
+This is testing functionality for visualizing the molecular dynamics trajectory with Blender. 
+
+```bash
+pip install molecularnodes
+```
+
 ## Get Started
 
 This is a brief example demonstrating how to use the basic function of xdatbus to aggregate multiple xdatcar files into

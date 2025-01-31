@@ -110,14 +110,14 @@ def main():
         "--xdc_dir",
         type=str,
         default="./",
-        help='Input path of the AIMD simulation, which contains the XDATCAR files, default is the current directory',
+        help="Input path of the AIMD simulation, which contains the XDATCAR files, default is the current directory",
     )
 
     parser.add_argument(
         "--output_dir",
         type=str,
         default="./",
-        help='Output path of the XDATBUS file, default is the current directory',
+        help="Output path of the XDATBUS file, default is the current directory",
     )
 
     parser.add_argument(
@@ -125,7 +125,7 @@ def main():
         type=str,
         choices=["True", "False"],
         default="True",
-        help='Choose True (default) to delete intermediate folders, or False to keep them.',
+        help="Choose True (default) to delete intermediate folders, or False to keep them.",
     )
 
     args = parser.parse_args()

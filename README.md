@@ -54,7 +54,7 @@ conda install -c xdatbus -c conda-forge xdatbus plumed
 This is testing functionality for visualizing the molecular dynamics trajectory with Blender. 
 
 ```bash
-pip install molecularnodes
+pip install molecularnodes bpy
 ```
 
 ## Get Started

@@ -90,7 +90,7 @@ $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 [![Powered by MolecularNodes](https://img.shields.io/badge/powered%20by-MolecularNodes-blue.svg)](https://github.com/BradyAJohnston/MolecularNodes)
 [![Powered by bpy](https://img.shields.io/badge/powered%20by-bpy-blue.svg)](https://docs.blender.org/api/current/)
 
-This is testing functionality for visualizing the molecular dynamics trajectory with Blender. 
+This is testing functionality for visualizing the molecular dynamics trajectory with Blender. There is a mostly strict Python version required for compatibility with Blender. Please check the compatible version of Python for `bpy` to ensure there are no conflicts in your environment.
 
 ```bash
 pip install molecularnodes bpy

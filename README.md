@@ -99,7 +99,7 @@ pip install molecularnodes bpy
 ## Major Changelog
 `0.3.0` Enabled the functions for locating minima and running NEB in 2D FES.
 
-`0.2.5` Enabled CLI through the `rich` package.
+`0.2.5` Enabled a command-line interface that runs through the `rich` package.
 
 `0.2.0` Added a function to generate [extxyz](https://github.com/libAtoms/extxyz)-formatted data for training machine 
 learning interatomic potentials.

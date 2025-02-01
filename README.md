@@ -85,7 +85,7 @@ $ xdc_aggregate --xdc_dir ./xdc_files --output_dir ./
 $ xdc_unwrap --xdc_path ./XDATBUS --output_path ./XDATBUS_unwrap.xyz
 ```
 
-## Visualization with Blender
+## Visualization
 
 [![Powered by MolecularNodes](https://img.shields.io/badge/powered%20by-MolecularNodes-blue.svg)](https://github.com/BradyAJohnston/MolecularNodes)
 [![Powered by bpy](https://img.shields.io/badge/powered%20by-bpy-blue.svg)](https://docs.blender.org/api/current/)

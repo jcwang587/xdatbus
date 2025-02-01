@@ -101,5 +101,4 @@ pip install molecularnodes bpy
 
 `0.2.5` Enabled a command-line interface that runs through the `rich` package.
 
-`0.2.0` Added a function to generate [extxyz](https://github.com/libAtoms/extxyz)-formatted data for training machine 
-learning interatomic potentials.
+`0.2.0` Added a function to generate [extxyz](https://github.com/libAtoms/extxyz) data for training machine learning interatomic potentials.

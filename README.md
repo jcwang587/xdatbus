@@ -97,7 +97,7 @@ pip install molecularnodes bpy
 ```
 
 ## Major Changelog
-`0.3.0` Added functions for locating minima and running NEB in a 2D FES.
+`0.3.8` Added functions for locating minima and running NEB in a 2D FES.
 
 `0.2.5` Enabled a command-line interface that runs through the `rich` package.
 
